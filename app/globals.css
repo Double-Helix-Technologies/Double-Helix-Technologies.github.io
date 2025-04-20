@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #1B2A41;       /* Deep Baltic Blue */
+  --primary-dark: #141f30;  /* Darker Baltic Blue */
+  --text-primary: #2F2F2F;  /* Graphite */
+  --text-secondary: #5A5F73; /* Slate Grey */
+  --background: #FDFCF9;    /* Soft Ivory White */
+  --background-alt: #E9ECEF; /* Fog Grey */
+  --border: #5A5F73;        /* Slate Grey */
+  --accent-yellow: #F6C700; /* Citrine Yellow */
+  --accent-green: #3C9D84;  /* Emerald Green */
+}
+
+.dark {
+  --primary: #3C9D84;       /* Emerald Green as primary in dark mode */
+  --primary-dark: #2d8a73;  /* Darker Emerald Green */
+  --text-primary: #FDFCF9;  /* Soft Ivory White */
+  --text-secondary: #E9ECEF; /* Fog Grey */
+  --background: #1B2A41;    /* Deep Baltic Blue */
+  --background-alt: #141f30; /* Darker Baltic Blue */
+  --border: #5A5F73;        /* Slate Grey */
+  --accent-yellow: #F6C700; /* Citrine Yellow */
+  --accent-green: #3C9D84;  /* Emerald Green */
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    color: var(--text-primary);
+    background: var(--background);
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+  }
+
+  p, li, a, button, input, textarea {
+    font-family: 'IBM Plex Sans', sans-serif;
+    line-height: 1.5;
+  }
+
+  /* For smooth transitions when switching themes */
+  * {
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-[var(--primary)] text-white py-3 px-6 rounded-full font-medium transition-all duration-300 hover:bg-[var(--primary-dark)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)] focus:ring-opacity-50;
+  }
+  
+  .btn-secondary {
+    @apply bg-[var(--background-alt)] text-[var(--text-primary)] py-3 px-6 rounded-full font-medium transition-all duration-300 hover:bg-[var(--border)] focus:outline-none focus:ring-2 focus:ring-[var(--border)] focus:ring-opacity-50;
+  }
+
+  .btn-accent {
+    @apply bg-[var(--accent-yellow)] text-[var(--text-primary)] py-3 px-6 rounded-full font-medium transition-all duration-300 hover:brightness-95 focus:outline-none focus:ring-2 focus:ring-[var(--accent-yellow)] focus:ring-opacity-50;
+  }
+
+  .section {
+    @apply py-24 lg:py-32;
+  }
+
+  .container-tight {
+    @apply mx-auto max-w-5xl px-6 lg:px-8;
+  }
+  
+  .container-wide {
+    @apply mx-auto max-w-7xl px-6 lg:px-8;
+  }
+
+  /* Animation classes */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.8s ease-out forwards;
+  }
+} 
