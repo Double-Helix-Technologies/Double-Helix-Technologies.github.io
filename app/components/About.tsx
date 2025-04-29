@@ -5,27 +5,27 @@ export default function About() {
     {
       name: 'Armands',
       role: 'CEO',
-      description: 'Dude',
+      description: '',
     },
     {
       name: 'Māris',
       role: 'CTO',
-      description: 'Dude',
+      description: '',
     },
     {
       name: 'Aleksandrs',
       role: 'CBDO',
-      description: 'Dude',
+      description: '',
     },
     {
       name: 'Valts',
       role: 'CIO',
-      description: 'Dude',
+      description: '',
     },
     {
       name: 'Aleksandra',
       role: 'COO',
-      description: 'Dudette',
+      description: '',
     }
   ];
 
