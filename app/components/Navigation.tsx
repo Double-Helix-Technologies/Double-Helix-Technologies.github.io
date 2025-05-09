@@ -42,8 +42,8 @@ export default function Navigation() {
               className="w-8 h-auto"
             />
             <div className="flex flex-col">
-              <span className="text-lg font-medium tracking-wide text-text-primary font-heading">DOUBLE HELIX</span>
-              <span className="text-md font-light tracking-wide text-text-secondary font-heading">TECHNOLOGIES</span>
+              <span className="text-lg font-bold tracking-wide text-text-primary font-heading">DOUBLE HELIX</span>
+              <span className="text-md font-medium tracking-wide text-text-secondary font-heading">TECHNOLOGIES</span>
             </div>
           </Link>
         </div>

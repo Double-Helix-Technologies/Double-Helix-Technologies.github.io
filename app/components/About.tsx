@@ -137,7 +137,7 @@ export default function About() {
           <span className="text-sm font-medium text-primary mb-2 inline-block">About Us</span>
           <h2 className="text-4xl md:text-5xl font-semibold text-text-primary mb-6">Meet our team</h2>
           <p className="text-lg text-text-secondary max-w-2xl mx-auto">
-            We are a newly formed IT consultancy company based in Latvia, bringing together experienced professionals across engineering, business development, and strategic operations.
+            We are a newly formed IT consultancy company based in Latvia, bringing together experienced professionals across the whole software development life cycle, starting from discovery and design, through development and deployment, to maintenance and support.
           </p>
         </div>
         

@@ -9,11 +9,12 @@ export default function Footer() {
       <div className="container-wide">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           <div>
-            <div className="flex items-center">
-              <span className="text-2xl font-semibold text-primary">Double Helix Technologies</span>
+            <div className="flex flex-col">
+              <span className="text-2xl font-semibold text-primary">DOUBLE HELIX</span>
+              <span className="text-2xl font-semibold text-primary">TECHNOLOGIES</span>
             </div>
             <p className="mt-4 text-text-secondary text-sm max-w-xs">
-              Strategic Technology Partner helping businesses scale through innovative solutions and expert consulting.
+              We break down problems and map out business-smart, tech-driven paths to results. We own the full process—from discovery to implementation and maintenance—delivering only what's essential. No bloat, no reinvention. Just a surgical approach to IT, creating simple, secure, and adaptable solutions for a positive impact.
             </p>
           </div>
           <div className="md:col-span-2 grid grid-cols-2 md:grid-cols-3 gap-8">
