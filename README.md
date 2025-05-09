@@ -13,34 +13,6 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Deployment to GitHub Pages
-
-This project is configured to deploy to GitHub Pages automatically using GitHub Actions.
-
-### Setup Instructions
-
-1. **Enable GitHub Pages in your repository settings**:
-   - Go to your repository settings
-   - Navigate to the "Pages" section
-   - Under "Source", select "GitHub Actions"
-
-2. **Create the correct repository**:
-   - For root-level deployment, your repository should be named `[username].github.io`
-   - This will make your site available at `https://[username].github.io/`
-
-3. **Push to main branch**:
-   - The GitHub Actions workflow will automatically build and deploy your site
-   - Your site will be available at `https://[username].github.io/`
-
-### Manual Deployment
-
-If you need to deploy manually:
-
-```bash
-npm run build
-# Deploy the "dist" folder to GitHub Pages
-```
-
 ### Local Testing
 
 To test the static build locally:

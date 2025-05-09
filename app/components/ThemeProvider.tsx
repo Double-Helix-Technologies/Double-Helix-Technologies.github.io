@@ -15,7 +15,6 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>(null)
 
   useEffect(() => {
-    // Initialize theme only on the client side
     const storedTheme = localStorage.getItem('theme') as Theme
     const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
     
@@ -23,21 +22,17 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   }, [])
 
   useEffect(() => {
-    // Only apply theme after initialization
     if (theme === null) return
 
-    // Apply theme to document
     if (theme === 'dark') {
       document.documentElement.classList.add('dark')
     } else {
       document.documentElement.classList.remove('dark')
     }
     
-    // Store theme preference
     localStorage.setItem('theme', theme)
   }, [theme])
 
-  // Provide a stable context value
   const value = {
     theme,
     setTheme: (newTheme: 'light' | 'dark') => setTheme(newTheme)
@@ -50,7 +45,6 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   )
 }
 
-// Custom hook to use the theme context
 export function useTheme() {
   const context = useContext(ThemeContext)
   

@@ -9,7 +9,6 @@ export default function ThemeToggle() {
 
   useEffect(() => {
     setMounted(true)
-    // On mount, read the theme from localStorage or system preference
     const storedTheme = localStorage.getItem('theme')
     if (storedTheme) {
       setTheme(storedTheme)
@@ -19,7 +18,6 @@ export default function ThemeToggle() {
   }, [])
 
   useEffect(() => {
-    // Update the class on the document when theme changes
     if (!mounted) return
     
     if (theme === 'dark') {
@@ -35,7 +33,6 @@ export default function ThemeToggle() {
   }
 
   if (!mounted) {
-    // Return a placeholder to avoid hydration mismatch
     return (
       <button
         className="p-2 rounded-full bg-background-alt hover:bg-border transition-colors"

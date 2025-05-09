@@ -13,7 +13,7 @@ export default function Footer() {
               <span className="text-2xl font-semibold text-primary">Double Helix Technologies</span>
             </div>
             <p className="mt-4 text-text-secondary text-sm max-w-xs">
-              Strategic technology partner helping businesses scale through innovative solutions and expert consulting.
+              Strategic Technology Partner helping businesses scale through innovative solutions and expert consulting.
             </p>
           </div>
           <div className="md:col-span-2 grid grid-cols-2 md:grid-cols-3 gap-8">
@@ -56,7 +56,7 @@ export default function Footer() {
         </div>
         <div className="mt-12 pt-8 border-t border-border">
           <p className="text-xs text-text-secondary">
-            &copy; {new Date().getFullYear()} Double Helix Technologies. All rights reserved.
+            &copy; {new Date().getFullYear()} Double Helix Technologies SIA. All rights reserved.
           </p>
         </div>
       </div>

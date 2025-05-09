@@ -9,22 +9,22 @@ export default function About() {
   const leadershipTeam = [
     {
       name: 'Armands',
-      role: 'CEO',
+      role: 'Chief Executive Officer',
       description: 'Keeps us aligned, focused, and moving in the right direction.',
     },
     {
       name: 'Māris',
-      role: 'CTO',
+      role: 'Chief Technology Officer',
       description: 'Builds reliable, purposeful tech that solves meaningful problems.',
     },
     {
       name: 'Alex',
-      role: 'CBDO',
-      description: 'Shapes collaborations that align with what we are good at and what clients truly need.',
+      role: 'Chief Strategy & Business Development Officer',
+      description: 'Drives growth through strategy, partnerships, and meaningful client relationships.',
     },
     {
       name: 'Valts',
-      role: 'CIO',
+      role: 'Chief Information Officer',
       description: 'Connects the dots between business needs and smart tech choices.',
     }
   ];
@@ -147,7 +147,7 @@ export default function About() {
           ))}
         </div>
 
-        <div className="mt-12">
+        <div className="mt-12" hidden>
           <button
             onClick={() => setIsExpanded(!isExpanded)}
             className="mx-auto flex items-center gap-2 px-6 py-3 rounded-full bg-background hover:bg-background-alt transition-colors"
