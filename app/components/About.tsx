@@ -6,43 +6,39 @@ import { ChevronDown, ChevronUp } from 'lucide-react';
 export default function About() {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const coreTeam = [
+  const leadershipTeam = [
     {
       name: 'Armands',
       role: 'CEO',
-      description: '',
+      description: 'Keeps us aligned, focused, and moving in the right direction.',
     },
     {
       name: 'Māris',
       role: 'CTO',
-      description: '',
+      description: 'Builds reliable, purposeful tech that solves meaningful problems.',
     },
     {
-      name: 'Aleksandrs',
+      name: 'Alex',
       role: 'CBDO',
-      description: '',
+      description: 'Shapes collaborations that align with what we are good at and what clients truly need.',
     },
     {
       name: 'Valts',
       role: 'CIO',
-      description: '',
-    },
-    {
-      name: 'Aleksandra',
-      role: 'COO',
-      description: '',
+      description: 'Connects the dots between business needs and smart tech choices.',
     }
   ];
+  
 
-  const extendedTeam = [
+  const coreTeam = [
     {
       name: 'Jānis',
-      role: 'Senior Software Engineer',
+      role: 'Software Engineer',
       description: 'Full-stack developer with expertise in cloud architecture',
     },
     {
       name: 'Lauris',
-      role: 'Senior Software Engineer',
+      role: 'Software Engineer',
       description: 'Full-stack developer with expertise in complex systems',
     },
     {
@@ -62,12 +58,62 @@ export default function About() {
     },
     {
       name: 'Santa',
-      role: 'Project Manager',
+      role: 'Business Analyst',
       description: 'Bridging business needs with technical solutions',
+    },
+    {
+      name: 'Agnis',
+      role: 'Software Engineer',
+      description: '',
+    },
+    {
+      name: 'Agris',
+      role: 'Software Engineer',
+      description: '',
+    },
+    {
+      name: 'Dmitrijs',
+      role: 'Software Engineer',
+      description: '',
+    },
+    {
+      name: 'Gvido',
+      role: 'Software Engineer',
+      description: '',
+    },
+    {
+      name: 'Tamāra',
+      role: 'Solution Architect',
+      description: '',
+    },
+    {
+      name: 'Anastasia',
+      role: 'Software Engineer',
+      description: '',
+    },
+    {
+      name: 'Guntis',
+      role: 'Software Engineer',
+      description: '',
+    },
+    {
+      name: 'Andrejs',
+      role: 'System Administrator',
+      description: '',
+    },
+    {
+      name: 'Marts',
+      role: 'Software Reliability Engineer',
+      description: '',
+    },
+    {
+      name: 'Harijs',
+      role: 'Software Engineer',
+      description: '',
     }
   ];
 
-  const TeamMemberCard = ({ person }: { person: typeof coreTeam[0] }) => (
+  const TeamMemberCard = ({ person }: { person: typeof leadershipTeam[0] }) => (
     <div 
       className="bg-background p-6 rounded-2xl transition-all hover:shadow-lg"
     >
@@ -95,8 +141,8 @@ export default function About() {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {coreTeam.map((person) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
+          {leadershipTeam.map((person) => (
             <TeamMemberCard key={person.name} person={person} />
           ))}
         </div>
@@ -118,7 +164,7 @@ export default function About() {
 
           {isExpanded && (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-8 animate-fade-in">
-              {extendedTeam.map((person) => (
+              {coreTeam.map((person) => (
                 <TeamMemberCard key={person.name} person={person} />
               ))}
             </div>

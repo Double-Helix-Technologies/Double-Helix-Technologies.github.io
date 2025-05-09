@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import ThemeToggle from './ThemeToggle';
 
 export default function Navigation() {
@@ -32,8 +33,18 @@ export default function Navigation() {
     >
       <nav className="container-wide flex items-center justify-between h-20" aria-label="Global">
         <div className="flex">
-          <Link href="/" className="flex items-center">
-            <span className="text-2xl font-semibold tracking-tight text-primary font-heading">Double Helix Technologies</span>
+          <Link href="/" className="flex items-center gap-3">
+            <Image
+              src="/images/logo.png"
+              alt="Double Helix Technologies Logo"
+              width={32}
+              height={0}
+              className="w-8 h-auto"
+            />
+            <div className="flex flex-col">
+              <span className="text-lg font-medium tracking-wide text-text-primary font-heading">DOUBLE HELIX</span>
+              <span className="text-md font-light tracking-wide text-text-secondary font-heading">TECHNOLOGIES</span>
+            </div>
           </Link>
         </div>
         <div className="flex md:hidden items-center gap-4">
@@ -75,8 +86,18 @@ export default function Navigation() {
           <div className="fixed inset-0 bg-black/20 dark:bg-black/50 backdrop-blur-sm" onClick={() => setMobileMenuOpen(false)} />
           <div className="fixed inset-y-0 right-0 z-50 w-full max-w-sm overflow-y-auto bg-background p-6 shadow-lg dark:shadow-2xl">
             <div className="flex items-center justify-between mb-8">
-              <Link href="/" className="flex items-center" onClick={() => setMobileMenuOpen(false)}>
-                <span className="text-2xl font-semibold tracking-tight text-primary font-heading">Double Helix Technologies</span>
+              <Link href="/" className="flex items-center gap-3" onClick={() => setMobileMenuOpen(false)}>
+                <Image
+                  src="/images/logo.png"
+                  alt="Double Helix Technologies Logo"
+                  width={32}
+                  height={0}
+                  className="w-8 h-auto"
+                />
+                <div className="flex flex-col">
+                  <span className="text-lg font-medium tracking-wide text-text-primary font-heading">DOUBLE HELIX</span>
+                  <span className="text-md font-light tracking-wide text-text-secondary font-heading">TECHNOLOGIES</span>
+                </div>
               </Link>
               <button
                 type="button"
