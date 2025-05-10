@@ -118,12 +118,12 @@ export default function About() {
       className="bg-background p-6 rounded-2xl transition-all hover:shadow-lg"
     >
       <div className="flex items-center mb-5">
-        <div className="h-16 w-16 rounded-full bg-primary flex items-center justify-center">
+        <div className="h-16 w-16 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
           <span className="text-2xl font-semibold text-white">{person.name[0]}</span>
         </div>
-        <div className="ml-4">
+        <div className="ml-4 min-w-0">
           <h3 className="text-xl font-semibold text-text-primary">{person.name}</h3>
-          <p className="text-primary text-sm font-medium">{person.role}</p>
+          <p className="text-primary text-sm font-medium break-words">{person.role}</p>
         </div>
       </div>
       <p className="text-text-secondary">{person.description}</p>
