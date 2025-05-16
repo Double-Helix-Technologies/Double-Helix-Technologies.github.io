@@ -7,10 +7,11 @@
   --primary-dark: #141f30;  /* Darker Baltic Blue */
   --text-primary: #2F2F2F;  /* Graphite */
   --text-secondary: #5A5F73; /* Slate Grey */
+  --text-button: #FDFCF9; /* Soft Ivory White */
   --background: #FDFCF9;    /* Soft Ivory White */
   --background-alt: #E9ECEF; /* Fog Grey */
   --border: #5A5F73;        /* Slate Grey */
-  --accent-yellow: #F6C700; /* Citrine Yellow */
+  --accent-primary: #5A5F73; /* Comet Grey */
   --accent-green: #3C9D84;  /* Emerald Green */
 }
 
@@ -22,7 +23,7 @@
   --background: #1B2A41;    /* Deep Baltic Blue */
   --background-alt: #141f30; /* Darker Baltic Blue */
   --border: #5A5F73;        /* Slate Grey */
-  --accent-yellow: #F6C700; /* Citrine Yellow */
+  --accent-primary: #5A5F73; /* Comet Grey */
   --accent-green: #3C9D84;  /* Emerald Green */
 }
 
@@ -69,7 +70,7 @@
   }
 
   .btn-accent {
-    @apply bg-[var(--accent-yellow)] text-[var(--text-primary)] py-3 px-6 rounded-full font-medium transition-all duration-300 hover:brightness-95 focus:outline-none focus:ring-2 focus:ring-[var(--accent-yellow)] focus:ring-opacity-50;
+    @apply bg-[var(--accent-primary)] text-[var(--text-button)] py-3 px-6 rounded-full font-medium transition-all duration-300 hover:brightness-95 focus:outline-none focus:ring-2 focus:ring-[var(--accent-primary)] focus:ring-opacity-50;
   }
 
   .section {

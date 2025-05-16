@@ -21,7 +21,7 @@ const config: Config = {
         'background': 'var(--background)',
         'background-alt': 'var(--background-alt)',
         border: 'var(--border)',
-        'accent-yellow': 'var(--accent-yellow)',
+        'accent-primary': 'var(--accent-primary)',
         'accent-green': 'var(--accent-green)',
       },
       animation: {
