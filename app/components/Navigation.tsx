@@ -33,17 +33,17 @@ export default function Navigation() {
     >
       <nav className="container-wide flex items-center justify-between h-20" aria-label="Global">
         <div className="flex">
-          <Link href="/" className="flex items-center gap-3">
+          <Link href="/" className="flex items-center gap-0">
             <Image
               src="/images/logo.png"
               alt="Double Helix Technologies Logo"
-              width={32}
+              width={100}
               height={0}
-              className="w-8 h-auto"
+              className="w-100 h-auto"
             />
             <div className="flex flex-col">
-              <span className="text-lg font-bold tracking-wide text-text-primary font-heading">DOUBLE HELIX</span>
-              <span className="text-md font-medium tracking-wide text-text-secondary font-heading">TECHNOLOGIES</span>
+              <span className="text-lg font-bold tracking-wide text-text-primary font-heading ml-[-15px] tracking-wider">double helix</span>
+              <span className="text-md font-medium tracking-wide text-text-secondary font-heading ml-[-15px] mt-[-8px] tracking-widest">technologies</span>
             </div>
           </Link>
         </div>
