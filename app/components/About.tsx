@@ -8,22 +8,22 @@ export default function About() {
 
   const leadershipTeam = [
     {
-      name: 'Armands',
+      name: 'Armands Baranovskis',
       role: 'Chief Executive Officer',
       description: 'Keeps us aligned, focused, and moving in the right direction.',
     },
     {
-      name: 'Māris',
+      name: 'Māris Mekšs',
       role: 'Chief Technology Officer',
       description: 'Builds reliable, purposeful tech that solves meaningful problems.',
     },
     {
-      name: 'Alex',
+      name: 'Aleksandrs Gusevs',
       role: 'Chief Strategy & Business Development Officer',
       description: 'Drives growth through strategy, partnerships, and meaningful client relationships.',
     },
     {
-      name: 'Valts',
+      name: 'Valts Mazurs',
       role: 'Chief Information Officer',
       description: 'Connects the dots between business needs and smart tech choices.',
     }

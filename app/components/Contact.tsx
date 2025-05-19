@@ -15,7 +15,7 @@ export default function Contact() {
         <div className="max-w-3xl mx-auto">
           <div className="bg-background-alt p-8 md:p-10 rounded-2xl text-center">
             <a
-              href="mailto:aleksandrs.gusevs@doublehelix.dev"
+              href="mailto:hello@doublehelix.dev"
               className="btn-primary inline-flex justify-center px-8 py-4"
             >
               Send us an email
@@ -23,10 +23,10 @@ export default function Contact() {
             <p className="mt-6 text-text-secondary">
               Or email us directly at:{" "}
               <a 
-                href="mailto:aleksandrs.gusevs@doublehelix.dev"
+                href="mailto:hello@doublehelix.dev"
                 className="text-primary hover:underline"
               >
-                aleksandrs.gusevs@doublehelix.dev
+                hello@doublehelix.dev
               </a>
             </p>
           </div>
