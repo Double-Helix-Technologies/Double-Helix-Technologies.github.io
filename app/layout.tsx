@@ -27,6 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
         {/* Script to avoid FOUC (Flash of Unstyled Content) when switching themes */}
         <script dangerouslySetInnerHTML={{
           __html: `
