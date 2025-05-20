@@ -21,7 +21,6 @@ export default function Contact() {
               Send us an email
             </a>
             <p className="mt-6 text-text-secondary">
-              Or email us directly at:{" "}
               <a 
                 href="mailto:hello@doublehelix.dev"
                 className="text-primary hover:underline"
