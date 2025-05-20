@@ -22,17 +22,17 @@ export default function Footer() {
               <h3 className="text-sm font-medium text-text-primary mb-4">Company</h3>
               <ul className="space-y-3">
                 <li>
-                  <a href="#about" className="text-sm text-text-secondary hover:text-primary transition-colors">
+                  <a href="/#about" className="text-sm text-text-secondary hover:text-primary transition-colors">
                     About
                   </a>
                 </li>
                 <li>
-                  <a href="#services" className="text-sm text-text-secondary hover:text-primary transition-colors">
+                  <a href="/#services" className="text-sm text-text-secondary hover:text-primary transition-colors">
                     Services
                   </a>
                 </li>
                 <li>
-                  <a href="#contact" className="text-sm text-text-secondary hover:text-primary transition-colors">
+                  <a href="/#contact" className="text-sm text-text-secondary hover:text-primary transition-colors">
                     Contact
                   </a>
                 </li>
@@ -42,12 +42,12 @@ export default function Footer() {
               <h3 className="text-sm font-medium text-text-primary mb-4">Legal</h3>
               <ul className="space-y-3">
                 <li>
-                  <a href="#" className="text-sm text-text-secondary hover:text-primary transition-colors">
+                  <a href="/privacy" className="text-sm text-text-secondary hover:text-primary transition-colors">
                     Privacy
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-sm text-text-secondary hover:text-primary transition-colors">
+                  <a href="/terms" className="text-sm text-text-secondary hover:text-primary transition-colors">
                     Terms
                   </a>
                 </li>

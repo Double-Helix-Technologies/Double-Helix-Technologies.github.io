@@ -18,9 +18,9 @@ export default function Navigation() {
   }, []);
 
   const navigation = [
-    { name: 'About', href: '#about' },
-    { name: 'Services', href: '#services' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'About', href: '/#about' },
+    { name: 'Services', href: '/#services' },
+    { name: 'Contact', href: '/#contact' },
   ];
 
   return (
@@ -72,7 +72,7 @@ export default function Navigation() {
           ))}
           <ThemeToggle />
           <Link
-            href="#contact"
+            href="/#contact"
             className="btn-accent ml-4"
           >
             Get Started
@@ -123,7 +123,7 @@ export default function Navigation() {
                   </Link>
                 ))}
                 <Link
-                  href="#contact"
+                  href="/#contact"
                   className="btn-accent mt-8 block w-full text-center"
                   onClick={() => setMobileMenuOpen(false)}
                 >
