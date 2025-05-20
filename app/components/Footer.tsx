@@ -19,7 +19,7 @@ export default function Footer() {
           </div>
           <div className="md:col-span-2 grid grid-cols-2 md:grid-cols-3 gap-8">
             <div>
-              <h3 className="text-sm font-medium text-text-primary mb-4">Company</h3>
+              <h3 className="text-sm font-bold text-text-primary mb-4">Company</h3>
               <ul className="space-y-3">
                 <li>
                   <a href="/#about" className="text-sm text-text-secondary hover:text-primary transition-colors">
@@ -39,7 +39,7 @@ export default function Footer() {
               </ul>
             </div>
             <div>
-              <h3 className="text-sm font-medium text-text-primary mb-4">Legal</h3>
+              <h3 className="text-sm font-bold text-text-primary mb-4">Legal</h3>
               <ul className="space-y-3">
                 <li>
                   <a href="/privacy" className="text-sm text-text-secondary hover:text-primary transition-colors">
