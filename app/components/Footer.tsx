@@ -51,6 +51,11 @@ export default function Footer() {
                     Terms
                   </a>
                 </li>
+                <li>
+                  <a href="/notice" className="text-sm text-text-secondary hover:text-primary transition-colors">
+                    Legal Notice
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
@@ -63,4 +68,4 @@ export default function Footer() {
       </div>
     </footer>
   );
-} 
+}

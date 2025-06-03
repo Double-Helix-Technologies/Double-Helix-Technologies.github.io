@@ -46,13 +46,6 @@ export default function TermsOfUse() {
               <p className="text-text-secondary mb-6">
                 These terms are governed by the laws of the Republic of Latvia.
               </p>
-
-              <p className="text-text-secondary mt-12">
-                If you have questions, contact us at{" "}
-                <a href="mailto:hello@doublehelix.dev" className="text-primary hover:underline">
-                  hello@doublehelix.dev
-                </a>
-              </p>
             </div>
           </div>
         </div>
