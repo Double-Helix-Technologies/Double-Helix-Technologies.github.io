@@ -16,7 +16,7 @@ export default function About() {
     },
     {
       name: 'Māris Mekšs',
-      role: 'Chief Technology Officer',
+      role: 'Chief Infrastructure Officer',
       description: 'Builds reliable, purposeful tech that solves meaningful problems.',
       image: '/images/team/maris.jpg',
     },
