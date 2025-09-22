@@ -46,7 +46,7 @@ export default function About() {
       name: 'Aleksandra Romanovska',
       role: 'Chief Operating Officer',
       description: 'Ensures smooth operations and delivery across teams and engagements.',
-      //image: '/images/team/valts.jpg',
+      image: '/images/team/aleksandra.png',
     }
   ];
   
