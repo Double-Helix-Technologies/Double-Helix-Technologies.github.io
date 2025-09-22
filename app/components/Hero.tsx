@@ -21,7 +21,7 @@ export default function Hero() {
               Book an intro call
             </Link>
             <Link
-              href="#services"
+              href="#how-we-work"
               className="btn-secondary"
             >
               See how we work

@@ -63,7 +63,7 @@ export default function WhoWeServe() {
   ];
 
   return (
-    <div id="audience" className="section bg-background">
+    <div id="industries" className="section bg-background">
       <div className="container-tight">
         <div className="text-center mb-20">
           <h2 className="text-4xl md:text-5xl font-semibold text-text-primary mb-6">

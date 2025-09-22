@@ -19,8 +19,9 @@ export default function Navigation() {
   }, []);
 
   const navigation = [
-    { name: 'About', href: '/#about' },
     { name: 'Services', href: '/#services' },
+    { name: 'Industries', href: '/#industries' },
+    { name: 'About', href: '/#about' },
     { name: 'Contact', href: '/#contact' },
   ];
 
