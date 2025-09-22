@@ -5,7 +5,7 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
     key?: React.Key;
 }
 export const Card: React.FC<CardProps> = ({ key, className, ...props }) => (
-  <div key={key} className={cn("bg-background-alt p-8 rounded-2xl transition-all hover:shadow-lg", className)} {...props} />
+  <div key={key} className={cn("p-8 rounded-2xl transition-all hover:shadow-lg", className)} {...props} />
 );
 
 export interface CardHeaderProps extends React.HTMLAttributes<HTMLDivElement> {}

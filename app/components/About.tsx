@@ -1,7 +1,17 @@
 "use client"
 
 import { useState } from 'react';
-import { ChevronDown, ChevronUp } from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle, Icon } from "./ui/Card";
+import { Badge } from "./ui/Badge";
+import {
+  ChevronDown,
+  ChevronUp,
+  Eye,
+  HeartHandshake,
+  BriefcaseBusiness,
+  CheckCircle2,
+  Sparkles,
+} from 'lucide-react';
 import Image from 'next/image';
 
 export default function About() {
@@ -31,6 +41,12 @@ export default function About() {
       role: 'Chief Information Officer',
       description: 'Connects the dots between business needs and smart tech choices.',
       image: '/images/team/valts.jpg',
+    },
+    {
+      name: 'Aleksandra Romanovska',
+      role: 'Chief Operating Officer',
+      description: 'Ensures smooth operations and delivery across teams and engagements.',
+      //image: '/images/team/valts.jpg',
     }
   ];
   
@@ -173,17 +189,76 @@ export default function About() {
     <div id="about" className="section bg-background-alt">
       <div className="container-tight">
         <div className="mb-16 text-center">
-          <span className="text-sm font-medium text-primary mb-2 inline-block">About Us</span>
-          <h2 className="text-4xl md:text-5xl font-semibold text-text-primary mb-6">Meet our team</h2>
-          <p className="text-lg text-text-secondary max-w-2xl mx-auto">
-            We are a newly formed IT consultancy company based in Latvia, bringing together experienced professionals across the whole software development life cycle, starting from discovery and design, through development and deployment, to maintenance and support.
-          </p>
+          <h2 className="text-4xl md:text-5xl font-semibold text-text-primary mb-6">About Us</h2>
+
+          <div className="grid gap-8 md:grid-cols-1">
+            <Card className="bg-background">
+              <CardHeader className="">
+                <Icon><BriefcaseBusiness/></Icon>
+                <CardTitle>Company overview</CardTitle>
+              </CardHeader>
+              <CardContent className="text-justify">
+                  Double Helix is a senior, lean engineering team based in Latvia. We start with discovery to map your bottlenecks and risks, then deliver right‑sized software, integrations, and automation. We prioritize reuse over reinvention, reliability over novelty, and audit‑readiness by default. With partners in BI, compliance, and security, we cover the full path from problem to production—and we stay to operate it.
+              </CardContent>
+            </Card>
+
+            <Card className="bg-background">
+              <CardHeader>
+                <Icon><Eye/></Icon>
+                <CardTitle >Mission & Vision</CardTitle>
+              </CardHeader>
+              <CardContent className="text-justify">
+                <div><span className="font-medium text-slate-900">Mission: </span>We help businesses transform complexity into clarity through tailored IT solutions—guided by technical excellence, empathy, and strategic thinking.</div>
+                <div><span className="font-medium text-slate-900">Vision: </span>We create a healthier, safer & better organized world by solving IT challenges for companies making a positive impact.</div>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-background">
+              <CardHeader>
+                <Icon><HeartHandshake/></Icon>
+                <CardTitle>Values</CardTitle>
+              </CardHeader>
+              <CardContent className="text-justify">
+                <p>How we show up with clients and each other.</p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {["Sustainability","Adaptability","Competence","Empathy","Collaboration","Autonomy","Reliability"].map((v) => (
+                    <Badge key={v} variant="secondary" className="rounded-xl">{v}</Badge>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-background">
+              <CardHeader>
+                <Icon><Sparkles/></Icon>
+                <CardTitle>Skilled Talent Pool</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-2">
+                  {[
+                      "Multilingual engineers proficient in modern frameworks.",
+                      "Business‑minded, proactive problem solvers with ownership.",
+                      "Agile teams that integrate seamlessly with client stakeholders."
+                    ].map((v) => (
+                      <li className="flex gap-2"><CheckCircle2 className="h-4 w-4 text-accent-green flex-shrink-0 mt-1" />{v}</li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
+          </div>
         </div>
         
+        <h3 className="text-3xl md:text-4xl font-semibold text-text-primary mb-6 text-center">Founders</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
           {leadershipTeam.map((person) => (
             <TeamMemberCard key={person.name} person={person} />
           ))}
+        </div>
+
+        <div className="mb-16 text-center">
+          <div className="grid gap-8 md:grid-cols-1">
+        
+        </div>
         </div>
 
         <div className="mt-12" hidden>

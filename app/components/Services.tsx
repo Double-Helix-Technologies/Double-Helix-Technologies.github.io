@@ -58,7 +58,7 @@ export default function Services() {
         
         <div className="grid gap-8 md:grid-cols-2">
           {cardContents.map(({ icon, title, description }) => (
-            <Card key={title}>
+            <Card key={title} className="bg-background-alt">
               <CardHeader>
                 <Icon>{React.createElement(icon)}</Icon>
                 <CardTitle>{title}</CardTitle>

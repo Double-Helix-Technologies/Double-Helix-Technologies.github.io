@@ -56,7 +56,7 @@ export default function HowWeWork() {
         
         <div className="grid gap-8 md:grid-cols-2 mb-8">
           {cardContents.map(({ icon, title, description }) => (
-            <Card key={title}>
+            <Card key={title} className="bg-background-alt">
               <CardHeader>
                 <Icon>{React.createElement(icon)}</Icon>
                 <CardTitle>{title}</CardTitle>
@@ -66,7 +66,7 @@ export default function HowWeWork() {
           ))}
         </div>
         <div className="grid gap-8 md:grid-cols-1">
-          <Card key="collaboration-principles">
+          <Card key="collaboration-principles" className="bg-background-alt">
             <CardHeader>
               <Icon><Users /></Icon>
               <CardTitle>Collaboration principles</CardTitle>

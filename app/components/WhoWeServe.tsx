@@ -76,7 +76,7 @@ export default function WhoWeServe() {
         
         <div className="grid gap-8 md:grid-cols-2">
           {cardContents.map(({ icon, title, listItems }) => (
-            <Card key={title}>
+            <Card key={title} className="bg-background-alt">
               <CardHeader>
                 <Icon>{React.createElement(icon)}</Icon>
                 <CardTitle>{title}</CardTitle>
