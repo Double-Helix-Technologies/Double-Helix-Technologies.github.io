@@ -8,22 +8,24 @@ export default function Testimonials() {
   
   const testimonials = [
     {
-      quote: "Double Helix Technologies transformed our outdated systems into a streamlined digital solution. Their expertise and approach to collaboration made the entire process smooth and effective.",
-      author: "Maria Johnson",
-      position: "CTO, Nordic Innovations",
-      image: "/images/testimonial1.jpg"
+      quote: "Collaborating with Double Helix Technologies has greatly enhanced the efficiency and reliability of our IT integration projects. Their strong technical expertise and proactive, customer-focused approach enabled us to address potential issues early and implement solutions perfectly aligned with our user needs. The team’s ability to listen carefully and anticipate challenges ensured a smooth and efficient integration that supports our business objectives. Double Helix Technologies is a dependable partner for any organization seeking innovative and client-centered IT integration services.",
+      author: "Reynald Vidili",
+      position: "Sales Director, Eurofins Genomics France SAS",
     },
     {
-      quote: "Working with Double Helix has been game-changing for our startup. Their MVP development accelerated our go-to-market strategy and helped us secure additional funding.",
-      author: "Tomas Bergman",
-      position: "Founder, Altura",
-      image: "/images/testimonial2.jpg"
+      quote: "Working with this team was a game-changer. They don’t just code—they dive deep into your business, challenge assumptions, and co-create solutions that are both innovative and intuitive. I was impressed about their ability to translate very complex business processes into elegant, user-friendly solutions.",
+      author: "Annika Schott",
+      position: "Eurofins Genomics Europe Project Management Team Lead NGS",
     },
     {
-      quote: "The team's technical expertise is matched only by their ability to truly understand our business needs. They delivered exactly what we needed, when we needed it.",
-      author: "Laura Smith",
-      position: "VP of Operations, TechVantage",
-      image: "/images/testimonial3.jpg"
+      quote: "The IT team consistently demonstrates a solution-oriented approach and a commitment to building sustainable structures that enhance our workflow. Their valuable interactions and willingness to share knowledge significantly impact our projects. Their hard work and dedication are truly commendable, and I look forward to seeing our collective continued success.",
+      author: "Nadine Tappe",
+      position: "Eurofins Genomics Europe Head of Oligonucleotides",
+    },
+    {
+      quote: "Working with this team has been an exceptional experience. They delivered our project management application for multiple laboratories with remarkable speed and precision, all while maintaining the highest standards of quality. What truly impressed us was their communication: always clear, responsive, and collaborative. They didn’t just build software, they took the time to understand our entire business ecosystem, not just the immediate requirements. Their approach went beyond solving surface-level problems, they actively sought out root causes and designed solutions that support both current operations and future growth. Their dedication, insight, and professionalism make them a standout partner for any organization looking to build impactful, scalable digital solutions.",
+      author: "Andreas Feldl",
+      position: "Eurofins Genomics Europe Global Business Product Owner",
     }
   ];
 
