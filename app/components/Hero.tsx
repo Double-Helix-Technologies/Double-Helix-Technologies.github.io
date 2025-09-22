@@ -8,8 +8,7 @@ export default function Hero() {
       <div className="container-tight">
         <div className="text-center animate-fade-in">
           <h1 className="text-5xl md:text-6xl lg:text-7xl tracking-tight font-semibold text-text-primary font-heading">
-            <span className="block">Strategic</span>
-            <span className="block text-primary">Technology Partner</span>
+            <span className="block">Transform complexity into clarity</span>
           </h1>
           <p className="mt-6 text-lg md:text-xl text-text-secondary max-w-2xl mx-auto">
             We help businesses create a healthier, safer, and better organized world by solving IT challenges that matter. We grow businesses by building simple, secure, and adaptable solutions that scale as you go.
@@ -19,13 +18,13 @@ export default function Hero() {
               href="#contact"
               className="btn-accent"
             >
-              Get a Consultation
+              Book an intro call
             </Link>
             <Link
               href="#services"
               className="btn-secondary"
             >
-              Our Services
+              See how we work
             </Link>
           </div>
         </div>
