@@ -5,10 +5,9 @@ export default function Contact() {
     <div id="contact" className="section bg-background">
       <div className="container-tight">
         <div className="mb-16 text-center">
-          <span className="text-sm font-medium text-primary mb-2 inline-block">Contact Us</span>
-          <h2 className="text-4xl md:text-5xl font-semibold text-text-primary mb-6">Get in touch</h2>
+          <h2 className="text-3xl md:text-4xl font-semibold text-text-primary mb-6">Ready to move from ideas to outcomes?</h2>
           <p className="text-lg text-text-secondary max-w-2xl mx-auto">
-            We'd love to hear from you. <br/>Click the button below to send us an email and we'll respond as soon as possible.
+            Tell us where it hurts. We’ll suggest a right‑sized way forward.
           </p>
         </div>
         
@@ -18,15 +17,10 @@ export default function Contact() {
               href="mailto:hello@doublehelix.dev"
               className="btn-primary inline-flex justify-center px-8 py-4"
             >
-              Send us an email
+              Book an intro call
             </a>
             <p className="mt-6 text-text-secondary">
-              <a 
-                href="mailto:hello@doublehelix.dev"
-                className="text-primary hover:underline"
-              >
-                hello@doublehelix.dev
-              </a>
+              Intro call (15–30 min)
             </p>
           </div>
         </div>
