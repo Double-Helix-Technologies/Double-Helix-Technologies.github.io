@@ -10,8 +10,8 @@ import {
   Users
 } from "lucide-react";
 
-export default function Services() {
-  const services = [
+export default function WhoWeServe() {
+  const cardContents = [
     {
       title: 'Molecular Labs',
       listItems: ['Delivered a multi‑lab project management application in Eurofins Genomics (role‑based workflows, status visibility)',
@@ -75,7 +75,7 @@ export default function Services() {
         </div>
         
         <div className="grid gap-8 md:grid-cols-2">
-          {services.map(({ icon, title, listItems }) => (
+          {cardContents.map(({ icon, title, listItems }) => (
             <Card key={title}>
               <CardHeader>
                 <Icon>{React.createElement(icon)}</Icon>

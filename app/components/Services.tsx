@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 
 export default function Services() {
-  const services = [
+  const cardContents = [
     {
       title: 'IT Consultancy',
       description: 'Strategic technology consulting to help you make informed decisions. We break down problems and map out business-smart, tech-driven paths to results.',
@@ -57,7 +57,7 @@ export default function Services() {
         </div>
         
         <div className="grid gap-8 md:grid-cols-2">
-          {services.map(({ icon, title, description }) => (
+          {cardContents.map(({ icon, title, description }) => (
             <Card key={title}>
               <CardHeader>
                 <Icon>{React.createElement(icon)}</Icon>
