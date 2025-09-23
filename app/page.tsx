@@ -8,6 +8,7 @@ import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import { ThemeProvider } from './components/ThemeProvider';
+import DiscoveryWorkshop from './components/DiscoveryWorkshop';
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
         <HowWeWork />
         <About />
         <Testimonials />
+        <DiscoveryWorkshop />
         <Contact />
         <Footer />
       </main>
