@@ -61,7 +61,7 @@ export default function Hero() {
                     <LineChart className="h-5 w-5" /> Discovery Workshop
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="text-sm text-slate-600">
+                <CardContent className="text-sm">
                   <ul className="space-y-2">
                     {workshopItems.map((item, idx) => (
                       <li key={idx} className="flex gap-2">
