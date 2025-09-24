@@ -1,12 +1,21 @@
 "use client"
 
 import Link from 'next/link';
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/Card";
+import { CheckCircle2, LineChart } from 'lucide-react';
 
 export default function Hero() {
+  const workshopItems = [
+    "Stakeholder interviews & goals",
+    "Systems & data flow map",
+    "Risks & controls (incl. compliance)",
+    "Target architecture & options",
+    "90‑day plan with priorities",
+  ];
   return (
     <div className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden bg-background-alt">
-      <div className="container-tight">
-        <div className="text-center animate-fade-in">
+      <div className="container-tight md:grid md:grid-cols-12 md:gap-16 animate-fade-in">
+        <div className="text-center md:col-span-7">
           <h1 className="text-5xl md:text-6xl lg:text-7xl tracking-tight font-semibold text-text-primary font-heading">
             <span className="block">Transform complexity into clarity</span>
           </h1>
@@ -26,6 +35,37 @@ export default function Hero() {
             >
               See how we work
             </Link>
+          </div>
+        </div>
+        <div className="md:col-span-5">
+            <div className="relative h-full flex flex-col justify-end">
+            <div className="absolute -inset-6 rounded-3xl bg-gradient-to-tr from-indigo-500/10 via-sky-500/10 to-emerald-400/10 blur-2xl" />
+            <Card className="relative rounded-3xl shadow-xl">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <LineChart className="h-5 w-5" /> Discovery Workshop
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="text-sm text-slate-600">
+                <ul className="space-y-2">
+                  {workshopItems.map((item, idx) => (
+                    <li key={idx} className="flex gap-2">
+                      <CheckCircle2 className="h-4 w-4 text-accent-green mt-1" /> {item}
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-4 flex items-center justify-between">
+                  <div className="text-xs">Timeline: 1–2 weeks</div>
+                  <a
+                    href="mailto:hello@doublehelix.dev?subject=Book%20a%20workshop"
+                    className="btn-accent"
+                  >
+                    Book a workshop
+                  </a>
+                </div>
+                <div className="mt-2 text-xs">Discovery Workshop (structured 1–2 week engagement)</div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </div>
