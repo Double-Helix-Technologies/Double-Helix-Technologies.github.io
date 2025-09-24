@@ -14,7 +14,7 @@ export default function Contact() {
         <div className="max-w-3xl mx-auto">
           <div className="bg-background-alt p-8 md:p-10 rounded-2xl text-center">
             <a
-              href="mailto:hello@doublehelix.dev"
+              href="mailto:hello@doublehelix.dev?subject=Book%20an%20intro%20call"
               className="btn-primary inline-flex justify-center px-8 py-4"
             >
               Book an intro call

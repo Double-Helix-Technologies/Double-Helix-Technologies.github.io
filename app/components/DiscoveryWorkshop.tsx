@@ -9,7 +9,7 @@ const DiscoveryWorkshop: React.FC = () => (
       </div>
       <div className="md:col-span-4 flex flex-col items-center">
         <a
-            href="mailto:hello@doublehelix.dev"
+            href="mailto:hello@doublehelix.dev?subject=Book%20a%20workshop"
             className="btn-primary inline-flex justify-center px-8 py-4"
         >
             Start a discovery workshop
