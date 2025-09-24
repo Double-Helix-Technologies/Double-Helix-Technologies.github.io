@@ -208,8 +208,8 @@ export default function About() {
                 <CardTitle >Mission & Vision</CardTitle>
               </CardHeader>
               <CardContent className="text-justify">
-                <div><span className="font-medium text-slate-900">Mission: </span>We help businesses transform complexity into clarity through tailored IT solutions—guided by technical excellence, empathy, and strategic thinking.</div>
-                <div><span className="font-medium text-slate-900">Vision: </span>We create a healthier, safer & better organized world by solving IT challenges for companies making a positive impact.</div>
+                <div><span className="text-primary">Mission: </span>We help businesses transform complexity into clarity through tailored IT solutions—guided by technical excellence, empathy, and strategic thinking.</div>
+                <div><span className="text-primary">Vision: </span>We create a healthier, safer & better organized world by solving IT challenges for companies making a positive impact.</div>
               </CardContent>
             </Card>
 
