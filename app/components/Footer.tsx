@@ -14,7 +14,7 @@ export default function Footer() {
               <span className="text-2xl font-semibold text-primary">TECHNOLOGIES</span>
             </div>
             <p className="mt-4 text-text-secondary text-sm max-w-xs">
-              We break down problems and map out business-smart, tech-driven paths to results. We own the full process—from discovery to implementation and maintenance—delivering only what's essential. No bloat, no reinvention. Just a surgical approach to IT, creating simple, secure, and adaptable solutions for a positive impact.
+              Simple, secure, adaptable systems for regulated and quality‑driven businesses.
             </p>
           </div>
           <div className="md:col-span-2 grid grid-cols-2 md:grid-cols-3 gap-8">
@@ -22,13 +22,18 @@ export default function Footer() {
               <h3 className="text-sm font-bold text-text-primary mb-4">Company</h3>
               <ul className="space-y-3">
                 <li>
-                  <a href="/#about" className="text-sm text-text-secondary hover:text-primary transition-colors">
-                    About
+                  <a href="/#services" className="text-sm text-text-secondary hover:text-primary transition-colors">
+                    Services
                   </a>
                 </li>
                 <li>
-                  <a href="/#services" className="text-sm text-text-secondary hover:text-primary transition-colors">
-                    Services
+                  <a href="/#industries" className="text-sm text-text-secondary hover:text-primary transition-colors">
+                    Industries
+                  </a>
+                </li>
+                <li>
+                  <a href="/#about" className="text-sm text-text-secondary hover:text-primary transition-colors">
+                    About
                   </a>
                 </li>
                 <li>
