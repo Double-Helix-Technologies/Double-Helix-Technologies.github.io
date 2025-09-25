@@ -81,7 +81,7 @@ export default function Testimonials() {
                         "{testimonial.quote}"
                       </p>
                       <div className="mt-4 flex items-center">
-                        <div className="h-12 w-12 rounded-full bg-primary flex items-center justify-center text-white font-medium text-lg">
+                        <div className="w-12 aspect-square rounded-full bg-primary flex items-center justify-center text-white font-medium text-lg">
                           {testimonial.author[0]}
                         </div>
                         <div className="ml-4 text-left">
