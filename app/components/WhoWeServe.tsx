@@ -48,7 +48,7 @@ export default function WhoWeServe() {
       title: 'Clinics & Health Service Providers',
       listItems: ['Connected clinic ordering/results with partner labs via secure portal & system interfaces (fewer emails, fewer errors)',
         'Role‑based access for physicians and lab staff with full audit trail',
-        'Automated intake→report status tracking to shorten TATs'
+        'Automated intake to report status tracking to shorten TATs'
       ],
       icon: Users,
     },
