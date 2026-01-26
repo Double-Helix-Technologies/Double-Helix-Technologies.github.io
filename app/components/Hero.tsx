@@ -19,14 +19,13 @@ export default function Hero() {
     "90‑day plan with priorities",
   ];
   return (
-    <div className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden bg-background-alt">
+    <div className="relative py-20 md:py-32 overflow-hidden bg-background-alt">
       <div className="container-tight animate-fade-in">
-        <h1 className="text-5xl md:text-6xl lg:text-7xl tracking-tight font-semibold text-text-primary font-heading text-center mb-5">
-          <span className="block">Transform complexity into clarity</span>
-        </h1>
+        <h2 className="text-4xl md:text-5xl font-semibold text-text-primary mb-12 text-center">
+          Your Strategic Technology Partner
+        </h2>
         <div className="md:grid md:grid-cols-12 md:gap-16">
           <div className="text-center md:col-span-7">
-            
             <p className="mt-6 text-lg md:text-xl text-text-secondary max-w-2xl mx-auto text-justify">
               We help businesses create a healthier, safer, and better organized world by solving IT challenges that matter. We grow businesses by building simple, secure, and adaptable solutions that scale as you go.
             </p>
