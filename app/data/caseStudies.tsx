@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 
 export interface CaseStudy {
+  slug: string;
   caseTitle: string;
   stat: number;
   statFrom?: number;
@@ -24,6 +25,7 @@ export interface ColorClass {
 
 export const caseStudies: CaseStudy[] = [
   {
+    slug: "process-automation",
     caseTitle: "Process Automation",
     stat: 75,
     statSuffix: "%",
@@ -45,6 +47,7 @@ export const caseStudies: CaseStudy[] = [
     }
   },
   {
+    slug: "rapid-development",
     caseTitle: "Rapid Development",
     stat: 1,
     statFrom: 10,
@@ -62,6 +65,7 @@ export const caseStudies: CaseStudy[] = [
     }
   },
   {
+    slug: "observability-improvement",
     caseTitle: "Observability Improvement",
     stat: 4,
     statSuffix: "X",
@@ -81,6 +85,7 @@ export const caseStudies: CaseStudy[] = [
     }
   },
   {
+    slug: "reorganization-of-it",
     caseTitle: "Reorganization of IT",
     stat: 95,
     statSuffix: "%",
