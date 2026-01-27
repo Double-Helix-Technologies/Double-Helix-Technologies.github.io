@@ -3,10 +3,6 @@ import { ReactNode } from "react";
 export interface CaseStudy {
   slug: string;
   caseTitle: string;
-  stat: number;
-  statFrom?: number;
-  statSuffix: string;
-  statLabel: string;
   subtitle: ReactNode;
   color: "sky" | "amber" | "emerald" | "violet";
   details: {
@@ -14,6 +10,12 @@ export interface CaseStudy {
     solution: string;
     outcomes: string[];
   };
+  stats: {
+    stat: number;
+    statFrom?: number,
+    statSuffix: string;
+    statLabel: string;
+  }[];
 }
 
 export interface ColorClass {
@@ -27,9 +29,6 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: "process-automation",
     caseTitle: "Process Automation",
-    stat: 75,
-    statSuffix: "%",
-    statLabel: "DECREASE IN SEQUENCING PROJECT SETUP TIME",
     subtitle: <>by reducing data entry points <span className="text-sky-400 font-semibold">from 7 to 1</span></>,
     color: "sky",
     details: {
@@ -44,15 +43,33 @@ export const caseStudies: CaseStudy[] = [
         "50% of project management and customer care teams capacity freed up for other revenue bringing activities",
         "Implementation done in 10 months from 1st developer hired to MVP go-live"
       ]
-    }
+    },
+    stats: [
+      {
+        stat: 75,
+        statSuffix: "%",
+        statLabel: "project management and customer care teams capacity freed up",
+      },
+      {
+        stat: 50,
+        statSuffix: "%",
+        statLabel: "decrease in sequencing project setup time",
+      },
+      {
+        stat: 92,
+        statSuffix: "%",
+        statLabel: "reduction in sequencing data delivery time"
+      },
+      {
+        stat: 10,
+        statSuffix: " months",
+        statLabel: "until working MVP from the time first developer was hired"
+      }
+    ]
   },
   {
     slug: "rapid-development",
     caseTitle: "Rapid Development",
-    stat: 1,
-    statFrom: 10,
-    statSuffix: "WEEK",
-    statLabel: "FROM IDEA TO MARKET VALIDATION",
     subtitle: <>to production launch in <span className="text-amber-400 font-semibold">1 month</span></>,
     color: "amber",
     details: {
@@ -62,14 +79,18 @@ export const caseStudies: CaseStudy[] = [
         "First MVP iteration ready for pilot in under a week from idea to functional product to validate market fit",
         "Pilot is live in two months time being field tested with no disruption to the existing processes"
       ]
-    }
+    },
+    stats: [
+      {
+        stat: 1,
+        statSuffix: " week",
+        statLabel: "from idea to market validation",
+      }
+    ]
   },
   {
     slug: "observability-improvement",
     caseTitle: "Observability Improvement",
-    stat: 4,
-    statSuffix: "X",
-    statLabel: "FASTER INCIDENT RESPONSE",
     subtitle: <>and false positive alerts reduced by <span className="text-emerald-400 font-semibold">90%</span></>,
     color: "emerald",
     details: {
@@ -82,14 +103,28 @@ export const caseStudies: CaseStudy[] = [
         "Incident response times improved 4 times",
         "Number of incidents decreased by 40%"
       ]
-    }
+    },
+    stats: [
+      {
+        stat: 4,
+        statSuffix: "X",
+        statLabel: "increase in incident response times",
+      },
+      {
+        stat: 80,
+        statSuffix: "%",
+        statLabel: "reduction in alert volume, enabling focus on true critical issues"
+      },
+      {
+        stat: 40,
+        statSuffix: "%",
+        statLabel: "decrease in number of incidents",
+      },
+    ]
   },
   {
     slug: "reorganization-of-it",
     caseTitle: "Reorganization of IT",
-    stat: 95,
-    statSuffix: "%",
-    statLabel: "REDUCTION IN REPEAT INCIDENTS",
     subtitle: <>and <span className="text-violet-400 font-semibold">37%</span> annual cost savings</>,
     color: "violet",
     details: {
@@ -104,7 +139,24 @@ export const caseStudies: CaseStudy[] = [
         "Internal IT Net Promoter Score (NPS) improved from -25 to +72",
         "IT organization's annual costs reduced by 37%"
       ]
-    }
+    },
+    stats: [
+      {
+        stat: 95,
+        statSuffix: "%",
+        statLabel: "reduction in repeat incidents",
+      },
+      {
+        stat: 7,
+        statSuffix: "x",
+        statLabel: "faster issue resolution lead time",
+      },
+      {
+        stat: 37,
+        statSuffix: "%",
+        statLabel: "reduced in IT organization's annual costs",
+      }
+    ]
   },
 ];
 

@@ -1,73 +1,90 @@
-"use client"
-import React from "react";
-import { Card, CardContent, CardHeader, CardTitle, Icon } from "./ui/Card";
-import {
-  Database,
-  FlaskConical,
-  LineChart,
-  Server,
-  ShieldCheck,
-  Users
-} from "lucide-react";
+'use client';
+import React from 'react';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion';
+import { Asterisk, ChevronsRight } from 'lucide-react';
 
 export default function Services() {
-  const cardContents = [
+  const servicesContents = [
     {
-      title: 'IT Consultancy',
-      description: 'Strategic technology consulting to help you make informed decisions. We break down problems and map out business-smart, tech-driven paths to results.',
-      icon: LineChart,
+      title: 'End-to-end integration design & implementation',
+      key: 'integration',
+      description: 'We ensure that data is reliable, complete, and consistent across your entire application landscape. ' +
+        'By implementing integrations end-to-end, we eliminate gaps between systems, establish a single source of truth, ' +
+        'and provide a unified, auditable view of operations. Built-in observability ensures that issues ' +
+        'are detected early - often before users or customers notice, ensuring stable day-to-day operations in regulated environments.',
+      pricing: '€9000 *'
     },
     {
-      title: 'Integrations & Process Automation',
-      description: 'Streamline your business operations through intelligent automation and system integration. Transform your workflows to prepare for the digital future. Get the most out of your resources.',
-      icon: Database,
+      title: 'Software architecture assessment & future-readiness advisory',
+      key: 'architecture',
+      description: 'We assess your current software architecture with a focus on scalability, maintainability, security, ' +
+        'and regulatory fit. We identify structural risks, technical debt, and growth blockers, then provide clear, ' +
+        'pragmatic recommendations to evolve the system without unnecessary rewrites. ' +
+        'The goal is a future-ready architecture that supports business change, integrations, and long-term operations.',
+      pricing: '€10 000 *'
     },
     {
-      title: 'Software Development',
-      description: 'Custom IT solutions tailored to your business needs, built with modern technologies and best practices. Secure, scalable, and simple.',
-      icon: Server,
-    },
-    {
-      title: 'MVP Development',
-      description: 'Rapid development of minimum viable products to validate your business ideas quickly. Get return on investment faster.',
-      icon: FlaskConical,
-    },
-    {
-      title: 'Reliable Operations & Monitoring',
-      description: 'Keep systems stable and fast. Predictable releases, clear alerts, and response playbooks—so issues are found and fixed early.',
-      icon: ShieldCheck,
+      title: 'System observability setup or improvement',
+      key: 'system',
+      description: 'We design or improve system observability to give teams clear, actionable insight into workflows, ' +
+        'integrations, and system health. By making data flows, failures, and bottlenecks visible end-to-end, ' +
+        'we help laboratories detect issues earlier, reduce downtime, and improve traceability.',
+      pricing: '€9000 *'
     },
     {
       title: 'Compliance & Security',
-      description: 'Gap analysis and security posture reviews; implement safeguards (access control, logging) with certified partners.',
-      icon: Users,
-    },
+      key: 'security',
+      description: 'A pragmatic cyber-security risk assessment focused on real operational impact. ' +
+        'We identify and classify risks across machines, systems, data flows, and integrations, then deliver clear, ' +
+        'prioritized recommendations that are practical to implement. The result is improved security posture, ' +
+        'audit readiness, and confidence in everyday operations. Each step is a deliverable.',
+      pricing: '€8000 *'
+    }
   ];
 
   return (
-    <div id="services" className="section bg-background">
-      <div className="container-tight">
-        <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-5xl font-semibold text-text-primary mb-6">
-            What We Do
+    <div className="bg-gradient-to-t from-background-alt to-background">
+      <section className="section container-tight text-left">
+        <div className="mb-10">
+          <h2 className="text-5xl text-text-primary text-left">
+            What we do
           </h2>
-          <p className="text-lg text-text-secondary max-w-2xl mx-auto">
-            We provide comprehensive solutions to help you streamline your business process and get the most out of your resources.
+          <p className="text-text-secondary max-w-2xl py-4">
+            We provide comprehensive solutions to help you streamline your business process and get the most out of your
+            resources.
           </p>
         </div>
-        
-        <div className="grid gap-8 md:grid-cols-2">
-          {cardContents.map(({ icon, title, description }) => (
-            <Card key={title} className="bg-background-alt">
-              <CardHeader>
-                <Icon>{React.createElement(icon)}</Icon>
-                <CardTitle>{title}</CardTitle>
-              </CardHeader>
-              <CardContent>{description}</CardContent>
-            </Card>
+
+        <Accordion
+          type="single"
+          collapsible
+          defaultValue="integration"
+          className="w-full mx-auto border-b border-b-gray-700"
+        >
+          {servicesContents.map(({ key, title, description, pricing }) => (
+
+            <AccordionItem key={key} value={key} className="w-full">
+              <AccordionTrigger>
+                <div className="flex gap-2">
+                  <Asterisk className="w-8 h-8"/>
+                  {title}
+                </div>
+              </AccordionTrigger>
+              <AccordionContent className="flex flex-col gap-8 justify-between">
+                <p>{description}</p>
+                <div className="flex justify-between text-sm opacity-70">
+                  <span>Estimated at <strong>{pricing}</strong></span>
+                  <a href={'/'} target="_blank">
+                    <div className="flex flex-row gap-1">
+                      learn more <ChevronsRight className="h-6 w-6"/>
+                    </div>
+                  </a>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
           ))}
-        </div>
-      </div>
+        </Accordion>
+      </section>
     </div>
   );
 } 

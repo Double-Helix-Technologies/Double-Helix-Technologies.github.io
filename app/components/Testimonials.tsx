@@ -52,9 +52,8 @@ export default function Testimonials() {
     <div id="testimonials" className="section bg-background-alt">
       <div className="container-tight">
         <div className="text-center mb-16">
-          <span className="text-sm font-medium text-primary mb-2 inline-block">Testimonials</span>
-          <h2 className="text-4xl md:text-5xl font-semibold text-text-primary mb-6">What clients say</h2>
-          <p className="text-lg text-text-secondary max-w-2xl mx-auto">
+          <h2 className="text-5xl text-center text-text-primary mb-5">What clients say</h2>
+          <p className="text-text-secondary max-w-2xl mx-auto">
             Don't just take our word for it. Hear what our clients have to say about their experience working with us.
           </p>
         </div>
@@ -68,7 +67,7 @@ export default function Testimonials() {
             >
               {testimonials.map((testimonial, index) => (
                 <div
-                  key={index}
+                  key={testimonial.author}
                   className="w-full flex-shrink-0 transition-opacity duration-500"
                   style={{ opacity: activeIndex === index ? 1 : 0.5 }}
                 >

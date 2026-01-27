@@ -66,10 +66,10 @@ export default function WhoWeServe() {
     <div id="industries" className="section bg-background">
       <div className="container-tight">
         <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-5xl font-semibold text-text-primary mb-6">
+          <h2 className="text-4xl md:text-5xl text-text-primary mb-6">
             Who we serve
           </h2>
-          <p className="text-lg text-text-secondary max-w-2xl mx-auto">
+          <p className="text-text-secondary max-w-2xl mx-auto">
             We primarily work with mid‑sized, quality‑driven companies and analytical or molecular labs. We also support early‑stage startups that need to move from idea to MVP, and help large enterprises accelerate proofs of concept and integration work.
           </p>
         </div>
@@ -83,8 +83,8 @@ export default function WhoWeServe() {
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2">
-                  {listItems.map((item, idx) => (
-                    <li key={idx} className="flex items-top gap-2">
+                  {listItems.map((item) => (
+                    <li key={item} className="flex items-top gap-2">
                       <CheckCircle2 className="h-4 w-4 text-accent-green flex-shrink-0 mt-1" />
                       {item}
                     </li>

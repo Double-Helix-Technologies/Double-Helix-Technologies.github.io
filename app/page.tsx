@@ -19,8 +19,8 @@ export default function Home() {
         <Navigation />
         <PageBanner />
         <CaseStudiesSlider />
-        <Hero />
         <Services />
+        <Hero />
         <WhoWeServe />
         <HowWeWork />
         <About />

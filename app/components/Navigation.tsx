@@ -34,19 +34,19 @@ export default function Navigation() {
             : 'bg-transparent'
         }`}
       >
-        <nav className="container-wide flex items-center justify-between h-20" aria-label="Global">
+        <nav className="container-wider flex items-center justify-between h-20" aria-label="Global">
           <div className="flex">
             <Link href="/" className="flex items-center gap-0">
               <Image
-                src="/images/logo.png"
+                src="/images/logo.svg"
                 alt="Double Helix Technologies Logo"
-                width={100}
+                width={40}
                 height={0}
-                className="w-100 h-auto"
+                className="h-auto mr-5"
               />
               <div className="flex flex-col">
-                <span className="text-lg font-bold tracking-wide text-text-primary font-heading ml-[-15px] tracking-wider">double helix</span>
-                <span className="text-md font-medium tracking-wide text-text-secondary font-heading ml-[-15px] mt-[-8px] tracking-widest">technologies</span>
+                <span className="text-lg font-semibold text-text-primary font-heading ml-[-15px] tracking-[.1em]">double helix</span>
+                <span className="text-xs font-thin font-mono text-text-secondary ml-[-15px] mt-[-8px] tracking-[.3em]">technologies</span>
               </div>
             </Link>
           </div>
@@ -86,15 +86,16 @@ export default function Navigation() {
             <div className="flex items-center justify-between mb-8">
               <Link href="/" className="flex items-center gap-0">
                 <Image
-                  src="/images/logo.png"
+                  src="/images/logo.svg"
                   alt="Double Helix Technologies Logo"
-                  width={100}
+                  width={40}
                   height={0}
-                  className="w-100 h-auto"
+                  className="h-auto mr-5"
+
                 />
                 <div className="flex flex-col">
-                  <span className="text-lg font-bold tracking-wide text-text-primary font-heading ml-[-15px] tracking-wider">double helix</span>
-                  <span className="text-md font-medium tracking-wide text-text-secondary font-heading ml-[-15px] mt-[-8px] tracking-widest">technologies</span>
+                  <span className="text-lg font-semibold text-text-primary font-heading ml-[-15px] tracking-[.1em]">double helix</span>
+                  <span className="text-xs font-thin font-mono text-text-secondary ml-[-15px] mt-[-8px] tracking-[.3em]">technologies</span>
                 </div>
               </Link>
               <button

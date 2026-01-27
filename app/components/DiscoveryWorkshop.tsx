@@ -1,7 +1,7 @@
 import React from "react";
 
 const DiscoveryWorkshop: React.FC = () => (
-  <section className="bg-gradient-to-r from-indigo-600 to-accent-green text-white">
+  <section className="bg-gradient-to-tr from-purple-900 via-indigo-800 to-70% text-white">
     <div className="mx-auto max-w-7xl px-4 py-12 md:py-16 grid md:grid-cols-12 gap-6 items-center">
       <div className="md:col-span-8 text-white/90">
         <h3 className="text-2xl font-semibold">Discovery Workshop — from ambiguity to a 90‑day plan</h3>
@@ -10,7 +10,7 @@ const DiscoveryWorkshop: React.FC = () => (
       <div className="md:col-span-4 flex flex-col items-center">
         <a
             href="mailto:hello@doublehelix.dev?subject=Book%20a%20workshop"
-            className="btn-primary inline-flex justify-center px-8 py-4"
+            className="btn-primary inline-flex justify-center"
         >
             Start a discovery workshop
         </a>
