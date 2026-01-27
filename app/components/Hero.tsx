@@ -43,7 +43,7 @@ export default function Hero() {
                 See how we work
               </Link>
             </div>
-            <ul className="pace-y-2">
+            <ul className="space-y-2">
               {slogans.map((item) => (
                 <li key={item} className="flex gap-2">
                   <CheckCircle2 className="h-4 w-4 text-accent-green mt-1" /> {item}
