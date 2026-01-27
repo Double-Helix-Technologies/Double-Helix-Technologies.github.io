@@ -100,8 +100,12 @@ export const caseStudies: CaseStudy[] = [
         "Alert volume reduced by over 80%, enabling focus on true critical issues",
         "False positives eliminated; each alert now triggers a proper response",
         "Unified observability dashboards introduced for preventive maintenance",
+        "SLAs and system responsibilities clearly defined across teams",
+        "Root Cause Analysis and proper Root Cause fixes made",
         "Incident response times improved 4 times",
-        "Number of incidents decreased by 40%"
+        "Number of incidents decreased by 40%",
+        "Business regained trust in IT through proactive issue resolution",
+        "Support and development teams freed to focus on strategic improvements"
       ]
     },
     stats: [
