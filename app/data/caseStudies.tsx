@@ -3,7 +3,6 @@ import { ReactNode } from "react";
 export interface CaseStudy {
   slug: string;
   caseTitle: string;
-  subtitle: ReactNode;
   color: "sky" | "amber" | "emerald" | "violet";
   details: {
     problem: string;
@@ -15,6 +14,7 @@ export interface CaseStudy {
     statFrom?: number,
     statSuffix: string;
     statLabel: string;
+    statSubLabel?: ReactNode;
   }[];
 }
 
@@ -29,7 +29,6 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: "process-automation",
     caseTitle: "Process Automation",
-    subtitle: <>by reducing data entry points <span className="text-sky-400 font-semibold">from 7 to 1</span></>,
     color: "sky",
     details: {
       problem: "Manual data entry across multiple IT applications within NGS (next-generation sequencing) project management and customer care teams as well as missing system integrations and lack of single source of truth for relevant information.",
@@ -49,6 +48,7 @@ export const caseStudies: CaseStudy[] = [
         stat: 75,
         statSuffix: "%",
         statLabel: "project management and customer care teams capacity freed up",
+        statSubLabel: <>by reducing data entry points <span className="text-sky-400 font-semibold">from 7 to 1</span></>
       },
       {
         stat: 50,
@@ -70,7 +70,6 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: "rapid-development",
     caseTitle: "Rapid Development",
-    subtitle: <>to production launch in <span className="text-amber-400 font-semibold">1 month</span></>,
     color: "amber",
     details: {
       problem: "Company management wants to validate and field test digital work scheduling process with minimal to no disruption to the existing processes.",
@@ -83,15 +82,16 @@ export const caseStudies: CaseStudy[] = [
     stats: [
       {
         stat: 1,
+        statFrom: 10,
         statSuffix: " week",
         statLabel: "from idea to market validation",
+        statSubLabel: <>to production launch in <span className="text-amber-400 font-semibold">1 month</span></>,
       }
     ]
   },
   {
     slug: "observability-improvement",
     caseTitle: "Observability Improvement",
-    subtitle: <>and false positive alerts reduced by <span className="text-emerald-400 font-semibold">90%</span></>,
     color: "emerald",
     details: {
       problem: "Support specialists working across four global regions (USA, Japan, Europe, and India) were overwhelmed by incident, bug, and support tickets, with little visibility into 30+ live systems. Alerts were triggering over 200 times per day across various severity levels, creating noise and masking real issues. Critical incidents often went unresolved, leading to business disruptions that could have been avoided with better monitoring and focus.",
@@ -109,6 +109,7 @@ export const caseStudies: CaseStudy[] = [
         stat: 4,
         statSuffix: "X",
         statLabel: "increase in incident response times",
+        statSubLabel: <>and false positive alerts reduced by <span className="text-emerald-400 font-semibold">90%</span></>,
       },
       {
         stat: 80,
@@ -125,7 +126,6 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: "reorganization-of-it",
     caseTitle: "Reorganization of IT",
-    subtitle: <>and <span className="text-violet-400 font-semibold">37%</span> annual cost savings</>,
     color: "violet",
     details: {
       problem: "Lack of transparency in how IT maintenance and development are managed causing frustration among users and stakeholders. High volume of recurring incidents indicating deeper issues with service quality and reliability.",
@@ -145,6 +145,7 @@ export const caseStudies: CaseStudy[] = [
         stat: 95,
         statSuffix: "%",
         statLabel: "reduction in repeat incidents",
+        statSubLabel: <>and <span className="text-violet-400 font-semibold">37%</span> annual cost savings</>,
       },
       {
         stat: 7,

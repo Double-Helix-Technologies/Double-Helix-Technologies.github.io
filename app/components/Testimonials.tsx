@@ -1,10 +1,12 @@
 "use client"
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import type { CarouselApi } from './ui/carousel';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from './ui/carousel';
 
 export default function Testimonials() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const testimonialsRef = useRef<HTMLDivElement>(null);
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
   
   const testimonials = [
     {
@@ -29,24 +31,24 @@ export default function Testimonials() {
     }
   ];
 
-  const handleDotClick = (index: number) => {
-    setActiveIndex(index);
-  };
+  useEffect(() => {
+    if (!api) return;
 
-  const handlePrev = () => {
-    setActiveIndex((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
-  };
+    setCurrent(api.selectedScrollSnap());
 
-  const handleNext = () => {
-    setActiveIndex((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
-  };
+    api.on('select', () => {
+      setCurrent(api.selectedScrollSnap());
+    });
+  }, [api]);
 
   useEffect(() => {
+    if (!api) return;
+
     const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
-    }, 8000);
+      api.scrollNext();
+    }, 7000);
     return () => clearInterval(interval);
-  }, [testimonials.length]);
+  }, [api]);
 
   return (
     <div id="testimonials" className="section bg-background-alt">
@@ -59,80 +61,62 @@ export default function Testimonials() {
         </div>
 
         <div className="relative mt-12 pb-12">
-          <div className="relative overflow-hidden">
-            <div
-              ref={testimonialsRef}
-              className="flex transition-transform duration-500 ease-in-out"
-              style={{ transform: `translateX(-${activeIndex * 100}%)` }}
-            >
+          <Carousel
+            setApi={setApi}
+            opts={{
+              align: 'start',
+              loop: true
+            }}
+            className="w-full"
+          >
+            <CarouselContent>
               {testimonials.map((testimonial, index) => (
-                <div
-                  key={testimonial.author}
-                  className="w-full flex-shrink-0 transition-opacity duration-500"
-                  style={{ opacity: activeIndex === index ? 1 : 0.5 }}
-                >
-                  <div className="bg-background p-8 md:p-12 rounded-2xl max-w-3xl mx-auto">
-                    <div className="flex flex-col items-center text-center">
-                      <svg className="h-10 w-10 text-primary/30 mb-6" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                      </svg>
-                      <p className="text-xl md:text-2xl font-medium text-text-primary mb-6 leading-relaxed">
-                        "{testimonial.quote}"
-                      </p>
-                      <div className="mt-4 flex items-center">
-                        <div className="w-12 aspect-square rounded-full bg-primary flex items-center justify-center text-white font-medium text-lg">
-                          {testimonial.author[0]}
-                        </div>
-                        <div className="ml-4 text-left">
-                          <p className="font-medium text-text-primary">{testimonial.author}</p>
-                          <p className="text-text-secondary text-sm">{testimonial.position}</p>
+                <CarouselItem key={index} className="basis-full">
+                   <div className="w-full">
+                    <div className="bg-background p-8 md:p-12 rounded-2xl max-w-3xl mx-auto">
+                      <div className="flex flex-col items-center text-center">
+                        <svg className="h-10 w-10 text-primary/30 mb-6" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                        </svg>
+                        <p className="text-xl md:text-2xl font-medium text-text-primary mb-6 leading-relaxed">
+                          "{testimonial.quote}"
+                        </p>
+                        <div className="mt-4 flex items-center">
+                          <div className="w-12 aspect-square rounded-full bg-primary flex items-center justify-center text-white font-medium text-lg">
+                            {testimonial.author[0]}
+                          </div>
+                          <div className="ml-4 text-left">
+                            <p className="font-medium text-text-primary">{testimonial.author}</p>
+                            <p className="text-text-secondary text-sm">{testimonial.position}</p>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
+                </CarouselItem>
               ))}
-            </div>
-          </div>
+            </CarouselContent>
+            
+            <CarouselPrevious
+              className="hidden lg:flex -left-12 bg-background hover:bg-background text-text-primary border-border"/>
+            <CarouselNext
+              className="hidden lg:flex -right-12 bg-background hover:bg-background text-text-primary border-border"/>
+          </Carousel>
 
-          <div className="absolute left-0 right-0 -bottom-6 flex justify-center space-x-2 mt-6">
-            {testimonials.map((_, index) => (
+          <div className="flex justify-center gap-2 mt-8">
+            {testimonials.map((_, idx) => (
               <button
-                key={index}
-                onClick={() => handleDotClick(index)}
-                className={`w-2.5 h-2.5 rounded-full transition-colors ${
-                  activeIndex === index ? 'bg-primary' : 'bg-border'
+                key={idx}
+                onClick={() => api?.scrollTo(idx)}
+                className={`h-2 cursor-pointer rounded-full transition-all ${
+                  current === idx ? 'w-8 bg-accent-green' : 'w-2 bg-border'
                 }`}
-                aria-label={`Go to slide ${index + 1}`}
+                aria-label={`Go to slide ${idx + 1}`}
               />
             ))}
-          </div>
-          
-          <div className="absolute top-1/2 left-6 transform -translate-y-1/2 hidden md:block">
-            <button 
-              onClick={handlePrev}
-              className="h-10 w-10 rounded-full bg-background flex items-center justify-center shadow-md text-text-primary hover:bg-primary hover:text-white transition-colors"
-              aria-label="Previous testimonial"
-            >
-              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
-          </div>
-          
-          <div className="absolute top-1/2 right-6 transform -translate-y-1/2 hidden md:block">
-            <button 
-              onClick={handleNext}
-              className="h-10 w-10 rounded-full bg-background flex items-center justify-center shadow-md text-text-primary hover:bg-primary hover:text-white transition-colors"
-              aria-label="Next testimonial"
-            >
-              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
           </div>
         </div>
       </div>
     </div>
   );
-} 
+}

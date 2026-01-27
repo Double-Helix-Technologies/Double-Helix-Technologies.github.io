@@ -35,7 +35,7 @@ export default function CaseStudiesSlider() {
   }, [api]);
 
   return (
-    <section id="case-studies" className="container-tight section overflow-hidden">
+    <section id="case-studies" className="container-tight section">
       <div className="relative z-10 max-w-7xl">
         <h2 className="mb-10 text-5xl text-left md:text-5xl text-text-primary">
           Case studies
@@ -49,7 +49,7 @@ export default function CaseStudiesSlider() {
           }}
           className="w-full"
         >
-          <CarouselContent className="py-2 pr-4 md:pr-6 pl-2">
+          <CarouselContent className="py-2 -ml-4 md:-ml-6">
             {caseStudies.map((study) => {
               const colors = colorClasses[study.color];
 
@@ -60,11 +60,11 @@ export default function CaseStudiesSlider() {
                 >
                   <Link href={`/case-studies/${study.slug}`} className="block">
                     <CardSpotlight
-                      className="cursor-pointer transition-all duration-300 min-h-[320px] relative hover:scale-[1.02]"
+                      className="cursor-pointer transition-all duration-300 min-h-[280px] relative hover:scale-[1.02] bg-background-alt"
                       color={colors.glow}
                       radius={400}
                     >
-                      <div className="relative z-10 flex flex-col h-full pb-12">
+                      <div className="relative z-10 flex flex-col h-full">
                         <div className="flex-1">
                           <div
                             className={`inline-flex self-start px-3 py-1 rounded-full ${colors.bg} ${colors.border} border mb-4`}>
@@ -82,12 +82,12 @@ export default function CaseStudiesSlider() {
                             />
                           </div>
 
-                          <h3 className="text-lg md:text-xl font-semibold text-text-primary uppercase mb-2">
+                          <h3 className="text-lg md:text-l font-semibold text-text-primary uppercase mb-2">
                             {study.stats[0].statLabel}
                           </h3>
 
                           <p className="text-text-secondary text-sm mb-3">
-                            {study.subtitle}
+                            {study.stats[0].statSubLabel}
                           </p>
                         </div>
                       </div>
