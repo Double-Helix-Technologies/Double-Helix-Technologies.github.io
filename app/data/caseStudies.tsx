@@ -9,6 +9,11 @@ export interface CaseStudy {
     solution: string;
     outcomes: string[];
   };
+  client: {
+    name: string;
+    sector: string | string[];
+    solution: string;
+  }
   stats: {
     stat: number;
     statFrom?: number,
@@ -27,45 +32,50 @@ export interface ColorClass {
 
 export const caseStudies: CaseStudy[] = [
   {
-    slug: "process-automation",
-    caseTitle: "Process Automation",
-    color: "sky",
+    slug: 'process-automation',
+    caseTitle: 'Process Automation',
+    color: 'sky',
     details: {
-      problem: "Manual data entry across multiple IT applications within NGS (next-generation sequencing) project management and customer care teams as well as missing system integrations and lack of single source of truth for relevant information.",
-      solution: "Introduce process automation, integrations and a single convenient view for Customer Care and project managers via developing information management system MINT.",
+      problem: 'Manual data entry across multiple IT applications within NGS (next-generation sequencing) project management and customer care teams as well as missing system integrations and lack of single source of truth for relevant information.',
+      solution: 'Introduce process automation, integrations and a single convenient view for Customer Care and project managers via developing information management system MINT.',
       outcomes: [
-        "Data entry points reduced from 7 to 1",
-        "Order set-up time reduced by 75%",
-        "Project set-up backlog reduced from 1 week to 1 day",
-        "Data delivery time reduced from 1.5 days to 3 hours",
-        "WIP report creation time reduced by 75%",
-        "50% of project management and customer care teams capacity freed up for other revenue bringing activities",
-        "Implementation done in 10 months from 1st developer hired to MVP go-live"
+        'Data entry points reduced from 7 to 1',
+        'Order set-up time reduced by 75%',
+        'Project set-up backlog reduced from 1 week to 1 day',
+        'Data delivery time reduced from 1.5 days to 3 hours',
+        'WIP report creation time reduced by 75%',
+        '50% of project management and customer care teams capacity freed up for other revenue bringing activities',
+        'Implementation done in 10 months from 1st developer hired to MVP go-live'
       ]
     },
     stats: [
       {
         stat: 75,
-        statSuffix: "%",
-        statLabel: "project management and customer care teams capacity freed up",
+        statSuffix: '%',
+        statLabel: 'Project management and customer care teams capacity freed up',
         statSubLabel: <>by reducing data entry points <span className="text-sky-400 font-semibold">from 7 to 1</span></>
       },
       {
         stat: 50,
-        statSuffix: "%",
-        statLabel: "decrease in sequencing project setup time",
+        statSuffix: '%',
+        statLabel: 'decrease in sequencing project setup time'
       },
       {
         stat: 92,
-        statSuffix: "%",
-        statLabel: "reduction in sequencing data delivery time"
+        statSuffix: '%',
+        statLabel: 'reduction in sequencing data delivery time'
       },
       {
         stat: 10,
-        statSuffix: " months",
-        statLabel: "until working MVP from the time first developer was hired"
+        statSuffix: ' months',
+        statLabel: 'until working MVP from the time first developer was hired'
       }
-    ]
+    ],
+    client: {
+      name: '',
+      sector: '',
+      solution: ''
+    }
   },
   {
     slug: "rapid-development",
@@ -83,19 +93,24 @@ export const caseStudies: CaseStudy[] = [
       {
         stat: 1,
         statFrom: 10,
-        statSuffix: " week",
-        statLabel: "from idea to market validation",
-        statSubLabel: <>to production launch in <span className="text-amber-400 font-semibold">1 month</span></>,
+        statSuffix: ' week',
+        statLabel: 'From idea to market validation',
+        statSubLabel: <>to production launch in <span className="text-amber-400 font-semibold">1 month</span></>
       }
-    ]
+    ],
+    client: {
+      name: '',
+      sector: '',
+      solution: ''
+    }
   },
   {
-    slug: "observability-improvement",
-    caseTitle: "Observability Improvement",
-    color: "emerald",
+    slug: 'observability-improvement',
+    caseTitle: 'Observability Improvement',
+    color: 'emerald',
     details: {
-      problem: "Support specialists working across four global regions (USA, Japan, Europe, and India) were overwhelmed by incident, bug, and support tickets, with little visibility into 30+ live systems. Alerts were triggering over 200 times per day across various severity levels, creating noise and masking real issues. Critical incidents often went unresolved, leading to business disruptions that could have been avoided with better monitoring and focus.",
-      solution: "Establish a dedicated Site Reliability Engineering (SRE) team under strong leadership to rebuild the observability and alerting ecosystem. Map application dependencies and business-critical flows, prioritize alerts based on impact, and redefine thresholds to eliminate noise. Place emphasis on sustainable fixes with business value — no shortcuts or temporary patches.",
+      problem: 'Support specialists working across four global regions (USA, Japan, Europe, and India) were overwhelmed by incident, bug, and support tickets, with little visibility into 30+ live systems. Alerts were triggering over 200 times per day across various severity levels, creating noise and masking real issues. Critical incidents often went unresolved, leading to business disruptions that could have been avoided with better monitoring and focus.',
+      solution: 'Establish a dedicated Site Reliability Engineering (SRE) team under strong leadership to rebuild the observability and alerting ecosystem. Map application dependencies and business-critical flows, prioritize alerts based on impact, and redefine thresholds to eliminate noise. Place emphasis on sustainable fixes with business value — no shortcuts or temporary patches.',
       outcomes: [
         "Alert volume reduced by over 80%, enabling focus on true critical issues",
         "False positives eliminated; each alert now triggers a proper response",
@@ -111,58 +126,69 @@ export const caseStudies: CaseStudy[] = [
     stats: [
       {
         stat: 4,
-        statSuffix: "X",
-        statLabel: "increase in incident response times",
-        statSubLabel: <>and false positive alerts reduced by <span className="text-emerald-400 font-semibold">90%</span></>,
+        statSuffix: 'x',
+        statLabel: 'Increase in incident response times',
+        statSubLabel: <>and false positive alerts reduced by <span
+          className="text-emerald-400 font-semibold">90%</span></>
       },
       {
         stat: 80,
-        statSuffix: "%",
-        statLabel: "reduction in alert volume, enabling focus on true critical issues"
+        statSuffix: '%',
+        statLabel: 'reduction in alert volume, enabling focus on true critical issues'
       },
       {
         stat: 40,
-        statSuffix: "%",
-        statLabel: "decrease in number of incidents",
-      },
-    ]
+        statSuffix: '%',
+        statLabel: 'decrease in number of incidents'
+      }
+    ],
+    client: {
+      name: '',
+      sector: '',
+      solution: ''
+    }
   },
   {
-    slug: "reorganization-of-it",
-    caseTitle: "Reorganization of IT",
-    color: "violet",
+    slug: 'reorganization-of-it',
+    caseTitle: 'Reorganization of IT',
+    color: 'violet',
     details: {
-      problem: "Lack of transparency in how IT maintenance and development are managed causing frustration among users and stakeholders. High volume of recurring incidents indicating deeper issues with service quality and reliability.",
-      solution: "Establish clear and transparent IT processes for 10+ applications. Analyze the current application landscape and implement monitoring and alerting to improve observability. Perform root cause analysis to resolve recurring issues at their source. Analyze, propose and deliver solution for the business need, instead of coding for requirements.",
+      problem: 'Lack of transparency in how IT maintenance and development are managed causing frustration among users and stakeholders. High volume of recurring incidents indicating deeper issues with service quality and reliability.',
+      solution: 'Establish clear and transparent IT processes for 10+ applications. Analyze the current application landscape and implement monitoring and alerting to improve observability. Perform root cause analysis to resolve recurring issues at their source. Analyze, propose and deliver solution for the business need, instead of coding for requirements.',
       outcomes: [
-        "Reduced amount of repeat incidents by 95%",
-        "Introduced early detection of incidents (before end users or customers notice) for preventive maintenance",
-        "Issue resolution lead time reduced from 20+ to 3 days",
-        "Feature lead time reduced from several months to 6 days",
-        "Faster issue resolution due to clear ownership and well documented processes",
-        "Internal IT Net Promoter Score (NPS) improved from -25 to +72",
-        "IT organization's annual costs reduced by 37%"
+        'Reduced amount of repeat incidents by 95%',
+        'Introduced early detection of incidents (before end users or customers notice) for preventive maintenance',
+        'Issue resolution lead time reduced from 20+ to 3 days',
+        'Feature lead time reduced from several months to 6 days',
+        'Faster issue resolution due to clear ownership and well documented processes',
+        'Internal IT Net Promoter Score (NPS) improved from -25 to +72',
+        'IT organization\'s annual costs reduced by 37%'
       ]
     },
     stats: [
       {
         stat: 95,
-        statSuffix: "%",
-        statLabel: "reduction in repeat incidents",
-        statSubLabel: <>and <span className="text-violet-400 font-semibold">37%</span> annual cost savings</>,
+        statSuffix: '%',
+        statLabel: 'Reduction in repeat incidents',
+        statSubLabel: <>and <span className="text-violet-400 font-semibold">37%</span> annual cost savings</>
       },
       {
         stat: 7,
-        statSuffix: "x",
-        statLabel: "faster issue resolution lead time",
+        statSuffix: 'x',
+        statLabel: 'faster issue resolution lead time'
       },
       {
         stat: 37,
-        statSuffix: "%",
-        statLabel: "reduced in IT organization's annual costs",
+        statSuffix: '%',
+        statLabel: 'reduced in IT organization\'s annual costs'
       }
-    ]
-  },
+    ],
+    client: {
+      name: '',
+      sector: '',
+      solution: ''
+    }
+  }
 ];
 
 export const colorClasses: Record<CaseStudy["color"], ColorClass> = {

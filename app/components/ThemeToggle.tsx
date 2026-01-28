@@ -1,59 +1,57 @@
-'use client'
+'use client';
 
-import { useState, useEffect } from 'react'
-import { Moon, Sun } from 'lucide-react'
+import { useEffect, useState } from 'react';
+import { Moon, Sun } from 'lucide-react';
+import { Button } from '@/app/components/ui/button';
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState('dark')
-  const [mounted, setMounted] = useState(false)
+  const [theme, setTheme] = useState('dark');
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true)
-    const storedTheme = localStorage.getItem('theme')
+    setMounted(true);
+    const storedTheme = localStorage.getItem('theme');
     if (storedTheme) {
-      setTheme(storedTheme)
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      setTheme('dark')
+      setTheme(storedTheme);
+    } else if (globalThis.matchMedia('(prefers-color-scheme: dark)').matches) {
+      setTheme('dark');
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
-    if (!mounted) return
-    
+    if (!mounted) return;
+
     if (theme === 'dark') {
-      document.documentElement.classList.add('dark')
+      document.documentElement.classList.add('dark');
     } else {
-      document.documentElement.classList.remove('dark')
+      document.documentElement.classList.remove('dark');
     }
-    localStorage.setItem('theme', theme)
-  }, [theme, mounted])
+    localStorage.setItem('theme', theme);
+  }, [theme, mounted]);
 
   const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light')
-  }
+    setTheme(theme === 'light' ? 'dark' : 'light');
+  };
 
   if (!mounted) {
     return (
-      <button
-        className="p-2 rounded-full bg-background-alt hover:bg-border transition-colors"
-        aria-label="Toggle theme"
+      <Button variant="secondary"
+              size="icon"
+              aria-label="Toggle theme"
       >
-        <div className="h-5 w-5" />
-      </button>
-    )
+        <div className="h-5 w-5"/>
+      </Button>
+    );
   }
 
   return (
-    <button
+    <Button
+      variant="secondary"
+      size="icon"
       onClick={toggleTheme}
-      className="p-2 rounded-full bg-background-alt hover:bg-border transition-colors"
       aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
     >
-      {theme === 'light' ? (
-        <Moon className="h-5 w-5 text-text-primary" />
-      ) : (
-        <Sun className="h-5 w-5 text-text-primary" />
-      )}
-    </button>
-  )
+      {theme === 'light' ? (<Moon/>) : (<Sun/>)}
+    </Button>
+  );
 } 

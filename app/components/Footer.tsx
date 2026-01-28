@@ -2,7 +2,7 @@
 
 export default function Footer() {
   return (
-    <footer className="bg-background-alt pt-16 pb-8 mt-16" aria-labelledby="footer-heading">
+    <footer className="bg-background-alt pt-16 pb-8" aria-labelledby="footer-heading">
       <h2 id="footer-heading" className="sr-only">
         Footer
       </h2>

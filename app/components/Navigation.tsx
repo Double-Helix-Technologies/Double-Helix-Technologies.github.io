@@ -1,6 +1,6 @@
-"use client"
+'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import ThemeToggle from './ThemeToggle';
@@ -20,17 +20,17 @@ export default function Navigation() {
 
   const navigation = [
     { name: 'Services', href: '/#services' },
-    { name: 'Industries', href: '/#industries' },
-    { name: 'About', href: '/#about' },
-    { name: 'Contact', href: '/#contact' },
+    { name: 'About', href: '/about' },
+    { name: 'Team', href: '/team' },
+    { name: 'Contact', href: '/#contact' }
   ];
 
   return (
     <>
-      <header 
+      <header
         className={`fixed w-full top-0 left-0 z-40 transition-all duration-300 ${
-          scrolled 
-            ? 'bg-background/90 dark:bg-background/80 backdrop-blur-md shadow-sm dark:shadow-background/10' 
+          scrolled
+            ? 'bg-background/90 dark:bg-background/80 backdrop-blur-md shadow-sm dark:shadow-background/10'
             : 'bg-transparent'
         }`}
       >
@@ -46,12 +46,13 @@ export default function Navigation() {
               />
               <div className="flex flex-col">
                 <span className="text-lg font-semibold text-text-primary font-heading ml-[-15px] tracking-[.1em]">double helix</span>
-                <span className="text-xs font-thin font-mono text-text-secondary ml-[-15px] mt-[-8px] tracking-[.3em]">technologies</span>
+                <span
+                  className="text-xs font-thin font-mono text-text-secondary ml-[-15px] mt-[-8px] tracking-[.3em]">technologies</span>
               </div>
             </Link>
           </div>
           <div className="flex md:hidden items-center gap-4">
-            <ThemeToggle />
+            <ThemeToggle/>
             <button
               type="button"
               className="p-2 text-text-primary"
@@ -59,7 +60,7 @@ export default function Navigation() {
             >
               <span className="sr-only">Open main menu</span>
               <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
               </svg>
             </button>
           </div>
@@ -73,7 +74,7 @@ export default function Navigation() {
                 {item.name}
               </Link>
             ))}
-            <ThemeToggle />
+            <ThemeToggle/>
           </div>
         </nav>
       </header>
@@ -81,8 +82,10 @@ export default function Navigation() {
       {/* Mobile menu */}
       {mobileMenuOpen && (
         <div className="md:hidden fixed inset-0 z-[60]">
-          <div className="fixed inset-0 bg-black/20 dark:bg-black/50 backdrop-blur-sm" onClick={() => setMobileMenuOpen(false)} />
-          <div className="fixed inset-y-0 right-0 z-[70] w-full max-w-sm overflow-y-auto bg-background p-6 shadow-lg dark:shadow-2xl">
+          <div className="fixed inset-0 bg-black/20 dark:bg-black/50 backdrop-blur-sm"
+               onClick={() => setMobileMenuOpen(false)}/>
+          <div
+            className="fixed inset-y-0 right-0 z-[70] w-full max-w-sm overflow-y-auto bg-background p-6 shadow-lg dark:shadow-2xl">
             <div className="flex items-center justify-between mb-8">
               <Link href="/" className="flex items-center gap-0">
                 <Image
@@ -95,7 +98,8 @@ export default function Navigation() {
                 />
                 <div className="flex flex-col">
                   <span className="text-lg font-semibold text-text-primary font-heading ml-[-15px] tracking-[.1em]">double helix</span>
-                  <span className="text-xs font-thin font-mono text-text-secondary ml-[-15px] mt-[-8px] tracking-[.3em]">technologies</span>
+                  <span
+                    className="text-xs font-thin font-mono text-text-secondary ml-[-15px] mt-[-8px] tracking-[.3em]">technologies</span>
                 </div>
               </Link>
               <button
@@ -105,7 +109,7 @@ export default function Navigation() {
               >
                 <span className="sr-only">Close menu</span>
                 <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12"/>
                 </svg>
               </button>
             </div>

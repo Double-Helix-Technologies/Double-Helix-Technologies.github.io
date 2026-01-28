@@ -2,7 +2,7 @@
 
 export default function Contact() {
   return (
-    <div id="contact" className="section bg-background">
+    <section id="contact" className="section">
       <div className="container-tight">
         <div className="mb-4 text-center">
           <h2 className="text-3xl md:text-4xl text-text-primary mb-4">Ready to move from ideas to outcomes?</h2>
@@ -24,6 +24,6 @@ export default function Contact() {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 } 

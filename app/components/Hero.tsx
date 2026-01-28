@@ -1,89 +1,44 @@
-"use client"
+'use client';
 
-import Link from 'next/link';
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/Card";
-import { CheckCircle2, LineChart } from 'lucide-react';
+import { Button } from '@/app/components/ui/button';
+import { Sparkles } from 'lucide-react';
 
 export default function Hero() {
-  const slogans = [
-    "No bloat—delivering only what’s essential",
-    "Analysis → architecture → build → operate",
-    "Secure by design, audit‑ready",
-    "Partnership mindset: we coach, listen, deliver",
-  ];
-  const workshopItems = [
-    "Stakeholder interviews & goals",
-    "Systems & data flow map",
-    "Risks & controls (incl. compliance)",
-    "Target architecture & options",
-    "90‑day plan with priorities",
-  ];
   return (
-    <div className="relative py-20 md:py-32 overflow-hidden bg-background-alt">
-      <div className="container-tight animate-fade-in">
-        <h2 className="text-4xl md:text-5xl text-text-primary mb-5">
-          Your strategic technology partner
-        </h2>
-        <div className="md:grid md:grid-cols-12 md:gap-16">
-          <div className="text-center md:col-span-7">
-            <p className="mt-6 text-text-secondary max-w-2xl mx-auto text-justify">
-              We help businesses create a healthier, safer, and better organized world by solving IT challenges that matter. We grow businesses by building simple, secure, and adaptable solutions that scale as you go.
-            </p>
-            <div className="mt-10 mb-8 flex flex-col sm:flex-row justify-center gap-4">
-              <a
-                href="mailto:hello@doublehelix.dev?subject=Book%20an%20intro%20call"
-                className="btn-accent"
-              >
-                Book an intro call
-              </a>
-              <Link
-                href="#how-we-work"
-                className="btn-secondary"
-              >
-                See how we work
-              </Link>
-            </div>
-            <ul className="space-y-2">
-              {slogans.map((item) => (
-                <li key={item} className="flex gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-accent-green mt-1" /> {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="md:col-span-5">
-              <div className="relative h-full flex flex-col justify-end">
-              <div className="absolute -inset-6 rounded-3xl bg-gradient-to-tr from-indigo-500/10 via-cyan-500/10 to-purple-600/10 blur-2xl" />
-              <Card className="relative rounded-3xl shadow-xl">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <LineChart className="h-5 w-5" /> Discovery Workshop
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="text-sm">
-                  <ul className="space-y-2">
-                    {workshopItems.map((item) => (
-                      <li key={item} className="flex gap-2">
-                        <CheckCircle2 className="h-4 w-4 text-accent-green mt-1" /> {item}
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="mt-4 flex items-center justify-between">
-                    <div className="text-xs">Timeline: 1–2 weeks</div>
-                    <a
-                      href="mailto:hello@doublehelix.dev?subject=Book%20a%20workshop"
-                      className="btn-accent"
-                    >
-                      Book a workshop
-                    </a>
-                  </div>
-                  <div className="mt-2 text-xs">Discovery Workshop (structured 1–2 week engagement)</div>
-                </CardContent>
-              </Card>
+    <section className="top-section">
+      <div className="grid grid-cols-2"></div>
+      <div className="container-tight cols-span-1 flex flex-col items-start gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <h1
+            className="text-5xl md:text-6xl lg:text-7xl tracking-[.025em] animate-fade-in duration-700 col-span-2 font-semibold text-transparent bg-clip-text bg-gradient-to-tr from-purple-500 via-blue-500 to-cyan-300 pb-2">
+            Simplify IT.<br/>
+            Amplify science.
+          </h1>
+          <div className="col-start-3">
+            <div className="absolute h-80 w-80 content-center justify-items-center">
+              {/*this is a placeholder*/}
+                <Sparkles size={80} className="z-10 animate-bounce"/>
             </div>
           </div>
+          <p className="text-md col-start-1">
+            {/*Simple, secure, adaptable systems for regulated and quality‑driven businesses.*/}
+            We help businesses create a healthier, safer, and better organized world by solving IT challenges that
+            matter.
+            {/*We transform complexity into clarity by building simple, secure, and adaptable solutions that scale as you go.*/}
+          </p>
         </div>
+        <div className="flex flex-row gap-5">
+          <Button variant="gradient">
+            <a href="mailto:hello@doublehelix.dev?subject=Book%20a%20workshop">
+              Book a workshop
+            </a>
+          </Button>
+          <Button variant="secondary">
+            <a href="/#contact">Contact us</a>
+          </Button>
+        </div>
+
       </div>
-    </div>
+    </section>
   );
-} 
+}
