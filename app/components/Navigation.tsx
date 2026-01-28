@@ -38,17 +38,12 @@ export default function Navigation() {
           <div className="flex">
             <Link href="/" className="flex items-center gap-0">
               <Image
-                src="/images/logo.svg"
+                src="/images/logo-full.svg"
                 alt="Double Helix Technologies Logo"
-                width={40}
+                width={150}
                 height={0}
                 className="h-auto mr-5"
               />
-              <div className="flex flex-col">
-                <span className="text-lg font-semibold text-text-primary font-heading ml-[-15px] tracking-[.1em]">double helix</span>
-                <span
-                  className="text-xs font-thin font-mono text-text-secondary ml-[-15px] mt-[-8px] tracking-[.3em]">technologies</span>
-              </div>
             </Link>
           </div>
           <div className="flex md:hidden items-center gap-4">

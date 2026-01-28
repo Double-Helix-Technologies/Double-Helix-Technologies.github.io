@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { Card } from './ui/card';
+import { Card } from '@/app/components/ui/card';
 import { Activity, Asterisk, Rocket, ShieldCheck, Workflow } from 'lucide-react';
 import { CardSpotlight } from '@/app/components/ui/CardSpotlight';
 
@@ -60,18 +60,13 @@ export default function HowWeWork() {
               </li>
             ))}
           </ul>
-          {/*<Button variant="gradient"><CornerDownRight/>
-          <a href="mailto:hello@doublehelix.dev?subject=Book%20a%20workshop">
-            Start your transformation
-          </a>
-          </Button>*/}
         </div>
 
         <div className="flex flex-col gap-4 content-stretch relative">
           {cardContents.map(({ icon, title, description }, idx) => (
             <Card key={title} className="shadow-none">
               <CardSpotlight
-                className="py-8 transition-all duration-300 hover:scale-[1.02] bg-transparent group"
+                className="py-8 transition-all duration-300 bg-transparent group"
                 color={'rgba(156,75,255,0.4)'}
               >
                 <div className="relative z-20 flex flex-col h-full gap-8">

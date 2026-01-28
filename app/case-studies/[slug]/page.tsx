@@ -54,13 +54,13 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
   const overview = (client: any) => {
     return (
       <div className="flex flex-col gap-4">
-        <p className="font-semibold">{client.name || 'Company Name'}</p>
-        <p className="text-text-secondary">Information about the company</p>
+        <p className="font-semibold ">{client.name || '<Company Name>'}</p>
+        <p className="text-text-secondary text-sm">Information about the company</p>
         <p className="font-semibold">Industry</p>
         <Badge variant="custom" className={`w-fit ${colors.bg} ${colors.text}`}>Life sciences</Badge>
         <Separator className="my-2"/>
         <p className="font-semibold">Ready to transform your business?</p>
-        <p className="text-text-secondary mb-2">
+        <p className="text-text-secondary text-sm mb-2">
           Let's discuss how we can help you achieve similar results.
         </p>
         <Button variant="secondary" className={`${colors.bg} ${colors.text} w-fit`}>
@@ -70,14 +70,13 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
     );
   };
 
-
   return (
     <ThemeProvider>
       <main className="min-h-screen">
         <Navigation/>
 
         <section className="top-section bg-gradient-to-b from-background to-background-alt ">
-          <div className="container-tight relative flex-col justify-between gap-12 lg:flex lg:flex-row pb-5 ">
+          <div className="container-tight relative flex-col gap-12 lg:flex lg:flex-row pb-5 ">
             <div className="max-w-3xl">
               <div className="lg:mb-12">
                 <div className="flex flex-col gap-6 mb-6">
@@ -107,7 +106,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
                 </div>
                 <div className="my-8 space-y-12">
                   <div>
-                    <h2 className="text-3xl mb-4 flex items-center gap-2">
+                    <h2 className="text-3xl mb-6 flex items-center">
                       Problem
                     </h2>
                     <p className="text-lg text-text-secondary">
@@ -116,7 +115,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
                   </div>
 
                   <div>
-                    <h2 className="text-3xl mb-4">
+                    <h2 className="text-3xl mb-6">
                       Solution
                     </h2>
                     <p className="text-lg text-text-secondary">
@@ -129,8 +128,8 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
                     </h2>
                     <ul className="space-y-1">
                       {study.details.outcomes.map((outcome) => (
-                        <li key={outcome} className="flex items-start gap-3">
-                          <Check className={`h-7 w-5 ${colors.text}`}/>
+                        <li key={outcome} className="flex items-center gap-3">
+                          <Check size={20} className={`${colors.text}`}/>
                           <span className="text-lg text-text-secondary">{outcome}</span>
                         </li>
                       ))}
@@ -139,7 +138,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
                 </div>
               </div>
             </div>
-            <div className="h-fit lg:sticky top-16 lg:top-16 lg:max-w-80 lg:mt-32 z-40">
+            <div className="h-fit lg:sticky lg:top-32 lg:max-w-80 lg:mt-32 z-40">
               {overview(study.client)}
             </div>
           </div>

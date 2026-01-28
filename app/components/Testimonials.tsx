@@ -3,8 +3,8 @@
 import { useEffect, useState } from 'react';
 import type { CarouselApi } from './ui/carousel';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from './ui/carousel';
-import { Card, CardContent, CardFooter, CardHeader } from '@/app/components/ui/card';
 import AvatarPlaceholder from '@/app/components/ui/avatarPlaceholder';
+import { Card, CardContent, CardFooter, CardHeader } from '@/app/components/ui/card';
 
 export default function Testimonials() {
   const [api, setApi] = useState<CarouselApi>();
@@ -66,19 +66,19 @@ export default function Testimonials() {
           </p>
         </div>
 
-        <div className="relative mt-12 pb-12 max-w-4xl mx-auto">
+        <div className="relative mt-12 pb-12 max-w-5xl mx-auto">
           <Carousel
             setApi={setApi}
             opts={{
-              align: 'start',
+              align: 'center',
               loop: true
             }}
+            className="w-full"
           >
-            <CarouselContent className="-ml-4 items-center">
+            <CarouselContent className="items-center">
               {testimonials.map((testimonial) => (
-                <CarouselItem key={testimonial.author}
-                              className="pl-4 md:pl-6 basis-full">
-                  <Card className="bg-background-alt bg-opacity-40 py-4 px-6">
+                <CarouselItem key={testimonial.author} className="py-4 -ml-1 mr-1 md:basis-6/12">
+                  <Card className="bg-gray-600/10 max-w-xl">
                     <CardHeader className="text-xl font-semibold">
                       <h4 className="text-2xl md:text-1xl font-semibold">{`"${testimonial.tagline}"`}</h4>
                     </CardHeader>
@@ -90,7 +90,7 @@ export default function Testimonials() {
                         {testimonial.author[0]}
                       </AvatarPlaceholder>
                       <div>
-                        <p className="font-medium text-text-primary text-md">{testimonial.author}</p>
+                        <p className="font-medium text-text-primary max-w-48 text-md">{testimonial.author}</p>
                         <p className="text-text-secondary text-xs">{testimonial.position}</p>
                       </div>
                     </CardFooter>

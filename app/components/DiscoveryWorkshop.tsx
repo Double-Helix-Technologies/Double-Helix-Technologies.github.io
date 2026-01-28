@@ -12,7 +12,7 @@ const workshopItems = [
 
 const DiscoveryWorkshop: React.FC = () => (
   <section className="section relative">
-    <div className="container-tight">
+    <div className="container-tight z-10">
       <div className="grid md:grid-cols-12 items-center z-10">
         <div className="md:col-span-6">
           <h2 className="section-heading mb-10">Discovery Workshop - turning ambiguity into a focused
@@ -20,11 +20,11 @@ const DiscoveryWorkshop: React.FC = () => (
           <div className="space-y-2 flex max-w-fit flex-col">
             <Button variant="secondary"><CornerDownRight/>
               <a href="mailto:hello@doublehelix.dev?subject=Book%20a%20workshop">
-                Start your transformation
+                Book your workshop now
               </a>
             </Button>
             <p className="text-xs text-center">
-              a structured 1-2 week engagement
+              structured 1-2 week engagement
             </p>
           </div>
         </div>
@@ -42,7 +42,7 @@ const DiscoveryWorkshop: React.FC = () => (
         </div>
       </div>
     </div>
-    {/*<div className="z-0 rounded-full absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-bl from-purple-900 to-indigo-800 h-80 w-80 blur-2xl"/>*/}
+    <div className="z-0 rounded-full absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-bl from-purple-900/30 to-indigo-800/30 h-80 w-80 blur-3xl"/>
 
   </section>
 

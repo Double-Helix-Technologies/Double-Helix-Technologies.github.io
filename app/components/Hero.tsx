@@ -1,12 +1,8 @@
-'use client';
-
 import { Button } from '@/app/components/ui/button';
-import { Sparkles } from 'lucide-react';
 
 export default function Hero() {
   return (
     <section className="top-section">
-      <div className="grid grid-cols-2"></div>
       <div className="container-tight cols-span-1 flex flex-col items-start gap-10">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
           <h1
@@ -14,12 +10,6 @@ export default function Hero() {
             Simplify IT.<br/>
             Amplify science.
           </h1>
-          <div className="col-start-3">
-            <div className="absolute h-80 w-80 content-center justify-items-center">
-              {/*this is a placeholder*/}
-                <Sparkles size={80} className="z-10 animate-bounce"/>
-            </div>
-          </div>
           <p className="text-md col-start-1">
             {/*Simple, secure, adaptable systems for regulated and quality‑driven businesses.*/}
             We help businesses create a healthier, safer, and better organized world by solving IT challenges that
@@ -37,7 +27,6 @@ export default function Hero() {
             <a href="/#contact">Contact us</a>
           </Button>
         </div>
-
       </div>
     </section>
   );

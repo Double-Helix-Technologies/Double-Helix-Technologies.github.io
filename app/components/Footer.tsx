@@ -1,34 +1,43 @@
-"use client"
+'use client';
+
+import Image from 'next/image';
+import { Separator } from '@radix-ui/react-separator';
+import { Button } from './ui/button';
+import { AtSign, Linkedin } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer className="bg-background-alt pt-16 pb-8" aria-labelledby="footer-heading">
+    <footer className="pt-16 pb-8 bg-gray-600/10" aria-labelledby="footer-heading">
+      <Separator/>
       <h2 id="footer-heading" className="sr-only">
         Footer
       </h2>
       <div className="container-wide">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-          <div>
-            <div className="flex flex-col">
-              <span className="text-2xl font-semibold font-heading tracking-[.1em]">double helix</span>
-              <span className="text-1xl font-thin font-mono tracking-[.3em]">technologies</span>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="max-w-48 flex flex-col gap-6">
+            <Image
+              src="/images/logo-full.svg"
+              alt="Double Helix Technologies Logo"
+              color={'text-text-primary'}
+              width={150}
+              height={0}
+              className="h-auto mr-5 text-text-primary"
+            />
+            <div className="flex gap-2">
+              <Button size="icon" variant="secondary"><a href="https://www.linkedin.com/company/double-helix-technologies"><Linkedin/></a></Button>
+              <Button size="icon" variant="secondary"><a href="mailto:hello@doublehelix.dev"><AtSign/></a></Button>
             </div>
-            <p className="mt-4 text-text-secondary text-sm max-w-xs">
+            <p className="text-sm">
               Simple, secure, adaptable systems for regulated and quality‑driven businesses.
             </p>
           </div>
-          <div className="md:col-span-2 grid grid-cols-2 md:grid-cols-3 gap-8">
-            <div>
-              <h3 className="text-sm font-bold text-text-primary mb-4">Company</h3>
-              <ul className="space-y-3">
+          <div className="md:col-span-2 grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div className="space-y-2">
+              <h3>Company</h3>
+              <ul className="space-y-1">
                 <li>
                   <a href="/#services" className="text-sm text-text-secondary hover:text-primary transition-colors">
                     Services
-                  </a>
-                </li>
-                <li>
-                  <a href="/#industries" className="text-sm text-text-secondary hover:text-primary transition-colors">
-                    Industries
                   </a>
                 </li>
                 <li>
@@ -43,9 +52,9 @@ export default function Footer() {
                 </li>
               </ul>
             </div>
-            <div>
-              <h3 className="text-sm font-bold text-text-primary mb-4">Legal</h3>
-              <ul className="space-y-3">
+            <div className="space-y-2">
+              <h3>Legal</h3>
+              <ul className="space-y-1">
                 <li>
                   <a href="/privacy" className="text-sm text-text-secondary hover:text-primary transition-colors">
                     Privacy
@@ -66,7 +75,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="mt-12 pt-8 border-t border-border">
-          <p className="text-xs text-text-secondary">
+          <p className="text-xs text-text-secondary font-semibold">
             &copy; {new Date().getFullYear()} Double Helix Technologies SIA. All rights reserved.
           </p>
         </div>

@@ -1,8 +1,10 @@
 'use client';
 import React from 'react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion';
-import { Asterisk, ChevronsRight } from 'lucide-react';
+import { ArrowRight, Asterisk, ChevronsRight, Sparkles } from 'lucide-react';
 import { servicesContents } from '../data/services';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/app/components/ui/card';
+import { Button } from '@/app/components/ui/button';
 
 export default function Services() {
   return (
@@ -24,7 +26,7 @@ export default function Services() {
           defaultValue="integration"
           className="w-full mx-auto border-b border-b-gray-700"
         >
-          {servicesContents.map(({ key, title, description, pricing }) => (
+          {servicesContents.map(({ key, title, description, price }) => (
 
             <AccordionItem key={key} value={key} className="w-full">
               <AccordionTrigger>
@@ -35,9 +37,9 @@ export default function Services() {
               </AccordionTrigger>
               <AccordionContent className="flex flex-col gap-8 justify-between">
                 <p>{description}</p>
-                <div className="flex justify-between text-sm opacity-70">
-                  <span>Starting at <strong>{pricing}</strong></span>
-                  <a href={'/'} target="_blank">
+                <div className="flex justify-between">
+                  <span>Starting at <strong>{price}</strong></span>
+                  <a href={`/services/${key}`} target="_blank">
                     <div className="flex flex-row gap-1">
                       learn more <ChevronsRight className="h-6 w-6"/>
                     </div>
@@ -47,6 +49,24 @@ export default function Services() {
             </AccordionItem>
           ))}
         </Accordion>
+        <Card className="bg-gray-600/10 p-5 justify-items-center mt-24 shadow-none">
+          <CardHeader>
+            <CardTitle className="text-2xl flex gap-3">
+              <Sparkles/> Need a custom solution?
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="flex gap-10">
+            We offer tailored packages combining multiple services for comprehensive digital transformation.
+          </CardContent>
+          <CardFooter>
+            <Button variant="secondary">
+              <a href="mailto:hello@doublehelix.dev?subject=Book%20an%20intro%20call">
+                Schedule an intro call
+              </a>
+              <ArrowRight size={11}/>
+            </Button>
+          </CardFooter>
+        </Card>
       </div>
     </section>
   );
