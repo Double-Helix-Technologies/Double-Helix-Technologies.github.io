@@ -87,10 +87,10 @@ export default function TeamPage() {
             <div className="flex flex-col gap-6 mb-6 max-w-3xl">
               {breadcrumb}
               <h1 className="section-heading mb-5 max-w-3xl">
-                People of Double Helix
+                Our People
               </h1>
               <p>
-                Double Helix is a senior, lean engineering team based in Latvia.
+                Double Helix Technologies is a senior, lean engineering team based in Latvia.
               </p>
               <ul className="space-y-2">
                 {[

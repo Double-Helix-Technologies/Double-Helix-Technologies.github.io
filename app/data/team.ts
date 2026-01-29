@@ -94,7 +94,7 @@ const coreTeam = [
     email: ''
   },
   {
-    name: 'Dmitrijs',
+    name: 'Jānis',
     role: 'Software Engineer',
     description: '',
     image: '',

@@ -16,8 +16,7 @@ export default function Services() {
             What we do
           </h2>
           <p className="text-text-secondary max-w-2xl py-4">
-            We provide comprehensive solutions to help you streamline your business process and get the most out of your
-            resources.
+            We help organizations understand how work flows across people, processes, and systems and improve it where it matters most.
           </p>
         </div>
 

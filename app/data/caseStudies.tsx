@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 export interface CaseStudy {
   slug: string;
   caseTitle: string;
+  summary: string;
   color: "sky" | "amber" | "emerald" | "violet";
   details: {
     problem: string;
@@ -11,8 +12,8 @@ export interface CaseStudy {
   };
   client: {
     name: string;
+    summary: string;
     sector: string | string[];
-    solution: string;
   }
   stats: {
     stat: number;
@@ -34,6 +35,7 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: 'process-automation',
     caseTitle: 'Process Automation',
+    summary: 'Automated manual data entry processes and integrated multiple IT applications to create a single source of truth, dramatically reducing setup times and freeing up team capacity for revenue-generating activities.',
     color: 'sky',
     details: {
       problem: 'Manual data entry across multiple IT applications within NGS (next-generation sequencing) project management and customer care teams as well as missing system integrations and lack of single source of truth for relevant information.',
@@ -72,14 +74,15 @@ export const caseStudies: CaseStudy[] = [
       }
     ],
     client: {
-      name: '',
-      sector: '',
-      solution: ''
+      name: 'Eurofins Genomics',
+      summary: 'Eurofins Genomics is a global provider of genomics services and products focused on "reading and writing DNA." It operates as a specialist unit within the larger Eurofins Scientific Group, a major international life-sciences laboratory network.',
+      sector: 'Life sciences'
     }
   },
   {
     slug: "rapid-development",
     caseTitle: "Rapid Development",
+    summary: 'Developed a prototype application for field testing digital work scheduling processes, delivering the first MVP iteration in under a week to validate market fit with minimal disruption to existing operations.',
     color: "amber",
     details: {
       problem: "Company management wants to validate and field test digital work scheduling process with minimal to no disruption to the existing processes.",
@@ -100,13 +103,14 @@ export const caseStudies: CaseStudy[] = [
     ],
     client: {
       name: '',
-      sector: '',
-      solution: ''
+      summary: '',
+      sector: 'Logistics'
     }
   },
   {
     slug: 'observability-improvement',
     caseTitle: 'Observability Improvement',
+    summary: 'Rebuilt the observability and alerting ecosystem for a global support team, reducing alert volume by over 80% and improving incident response times while eliminating false positives.',
     color: 'emerald',
     details: {
       problem: 'Support specialists working across four global regions (USA, Japan, Europe, and India) were overwhelmed by incident, bug, and support tickets, with little visibility into 30+ live systems. Alerts were triggering over 200 times per day across various severity levels, creating noise and masking real issues. Critical incidents often went unresolved, leading to business disruptions that could have been avoided with better monitoring and focus.',
@@ -143,14 +147,15 @@ export const caseStudies: CaseStudy[] = [
       }
     ],
     client: {
-      name: '',
-      sector: '',
-      solution: ''
+      name: 'Eurofins Genomics',
+      summary: 'Eurofins Genomics is a global provider of genomics services and products focused on "reading and writing DNA." It operates as a specialist unit within the larger Eurofins Scientific Group, a major international life-sciences laboratory network.',
+      sector: 'Life sciences'
     }
   },
   {
     slug: 'reorganization-of-it',
     caseTitle: 'Reorganization of IT',
+    summary: 'Transformed IT organization from reactive to proactive by establishing clear and transparent IT processes, ensuring ownership and accountability for various parts of the business flows and, thus, improving service quality, reliability and trust in internal IT.',
     color: 'violet',
     details: {
       problem: 'Lack of transparency in how IT maintenance and development are managed causing frustration among users and stakeholders. High volume of recurring incidents indicating deeper issues with service quality and reliability.',
@@ -184,9 +189,9 @@ export const caseStudies: CaseStudy[] = [
       }
     ],
     client: {
-      name: '',
-      sector: '',
-      solution: ''
+      name: 'Eurofins Genomics',
+      summary: 'Eurofins Genomics is a global provider of genomics services and products focused on "reading and writing DNA." It operates as a specialist unit within the larger Eurofins Scientific Group, a major international life-sciences laboratory network.',
+      sector: 'Life sciences'
     }
   }
 ];

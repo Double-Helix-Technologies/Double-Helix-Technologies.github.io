@@ -54,10 +54,10 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
   const overview = (client: any) => {
     return (
       <div className="flex flex-col gap-4">
-        <p className="font-semibold ">{client.name || '<Company Name>'}</p>
-        <p className="text-text-secondary text-sm">Information about the company</p>
+        <p className="font-semibold ">{client.name}</p>
+        <p className="text-text-secondary text-sm">{client.summary}</p>
         <p className="font-semibold">Industry</p>
-        <Badge variant="custom" className={`w-fit ${colors.bg} ${colors.text}`}>Life sciences</Badge>
+        <Badge variant="custom" className={`w-fit ${colors.bg} ${colors.text}`}>{client.sector}</Badge>
         <Separator className="my-2"/>
         <p className="font-semibold">Ready to transform your business?</p>
         <p className="text-text-secondary text-sm mb-2">
@@ -84,7 +84,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
                   <h1 className="text-4xl md:text-5xl">{study.caseTitle}</h1>
 
                   <p className="text-text-secondary">
-                    Short summary of the case - one two sentences about the case and the client</p>
+                    {study.summary}</p>
                 </div>
                 <div id="result-grid"
                      className={`grid grid-cols-2 grid-auto-rows gap-6 rounded-xl p-8 ${colors.border} ${colors.bg}`}>
