@@ -4,8 +4,11 @@ import Image from 'next/image';
 import { Separator } from '@radix-ui/react-separator';
 import { Button } from './ui/button';
 import { AtSign, Linkedin } from 'lucide-react';
+import { useTheme } from '@/app/components/ThemeProvider';
 
 export default function Footer() {
+  const {logo} = useTheme()
+
   return (
     <footer className="pt-16 pb-8 bg-gray-600/10" aria-labelledby="footer-heading">
       <Separator/>
@@ -16,12 +19,11 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="max-w-52 flex flex-col gap-6">
             <Image
-              src="/images/logo-full.svg"
+              src={logo}
               alt="Double Helix Technologies Logo"
-              color={'text-text-primary'}
               width={180}
               height={0}
-              className="h-auto mr-5 text-text-primary"
+              className="h-auto mr-5 opacity-80"
             />
             <div className="flex gap-2">
               <Button size="icon" variant="secondary"><a href="https://www.linkedin.com/company/double-helix-technologies"><Linkedin/></a></Button>

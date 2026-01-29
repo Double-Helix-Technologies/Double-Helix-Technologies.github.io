@@ -4,8 +4,12 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import ThemeToggle from './ThemeToggle';
+import { useTheme } from '@/app/components/ThemeProvider';
+import { Button } from '@/app/components/ui/button';
+import { X } from 'lucide-react';
 
 export default function Navigation() {
+  const { logo } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -25,6 +29,18 @@ export default function Navigation() {
     { name: 'Contact', href: '/#contact' }
   ];
 
+  const getLogo = () => {
+    return <Link href="/" className="flex items-center gap-0">
+      <Image
+        src={logo}
+        alt="Double Helix Technologies Logo"
+        width={180}
+        height={0}
+        className="h-auto mr-5 opacity-80"
+      />
+    </Link>;
+  };
+
   return (
     <>
       <header
@@ -36,15 +52,7 @@ export default function Navigation() {
       >
         <nav className="container-wider flex items-center justify-between h-20" aria-label="Global">
           <div className="flex">
-            <Link href="/" className="flex items-center gap-0">
-              <Image
-                src="/images/logo-full.svg"
-                alt="Double Helix Technologies Logo"
-                width={180}
-                height={0}
-                className="h-auto mr-5"
-              />
-            </Link>
+            {getLogo()}
           </div>
           <div className="flex md:hidden items-center gap-4">
             <ThemeToggle/>
@@ -77,30 +85,17 @@ export default function Navigation() {
       {/* Mobile menu */}
       {mobileMenuOpen && (
         <div className="md:hidden fixed inset-0 z-[60]">
-          <div className="fixed inset-0 bg-black/20 dark:bg-black/50 backdrop-blur-sm"
-               onClick={() => setMobileMenuOpen(false)}/>
+          <button
+            className="fixed inset-0 bg-black/20 dark:bg-black/50 backdrop-blur-sm"
+            onClick={() => setMobileMenuOpen(false)}/>
           <div
             className="fixed inset-y-0 right-0 z-[70] w-full max-w-sm overflow-y-auto bg-background p-6 shadow-lg dark:shadow-2xl">
             <div className="flex items-center justify-between mb-8">
-              <Link href="/" className="flex items-center gap-0">
-                <Image
-                  src="/images/logo-full.svg"
-                  alt="Double Helix Technologies Logo"
-                  width={180}
-                  height={0}
-                  className="h-auto mr-5"
-                />
-              </Link>
-              <button
-                type="button"
-                className="p-2 text-text-primary hover:bg-background-alt rounded-md transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
+              {getLogo()}
+              <Button size="icon" variant="secondary" onClick={() => setMobileMenuOpen(false)}>
                 <span className="sr-only">Close menu</span>
-                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12"/>
-                </svg>
-              </button>
+                <X/>
+              </Button>
             </div>
             <div className="mt-8 flow-root">
               <div className="space-y-6">
