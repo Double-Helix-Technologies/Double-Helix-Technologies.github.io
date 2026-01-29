@@ -5,6 +5,7 @@ import { ArrowRight, Asterisk, Sparkles } from 'lucide-react';
 import { servicesContents } from '../data/services';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/app/components/ui/card';
 import { Button } from '@/app/components/ui/button';
+import Link from 'next/link';
 
 export default function Services() {
   return (
@@ -40,9 +41,9 @@ export default function Services() {
                 <div className="flex flex-row justify-between">
                   <p className="py-2">Starting at <strong>{price}</strong> *</p>
                   <Button variant="secondary">
-                    <a href={`/services/${key}`} target="_blank">
+                    <Link href={`/services/${key}`}>
                       learn more
-                    </a>
+                    </Link>
                     <ArrowRight size={11}/>
                   </Button>
                 </div>

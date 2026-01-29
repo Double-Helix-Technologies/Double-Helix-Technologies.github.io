@@ -40,7 +40,7 @@ export default function Navigation() {
               <Image
                 src="/images/logo-full.svg"
                 alt="Double Helix Technologies Logo"
-                width={150}
+                width={180}
                 height={0}
                 className="h-auto mr-5"
               />
@@ -64,7 +64,7 @@ export default function Navigation() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-sm font-medium text-text-primary hover:text-primary transition-colors"
+                className="font-medium text-text-primary hover:text-primary transition-colors"
               >
                 {item.name}
               </Link>
@@ -84,18 +84,12 @@ export default function Navigation() {
             <div className="flex items-center justify-between mb-8">
               <Link href="/" className="flex items-center gap-0">
                 <Image
-                  src="/images/logo.svg"
+                  src="/images/logo-full.svg"
                   alt="Double Helix Technologies Logo"
-                  width={40}
+                  width={180}
                   height={0}
                   className="h-auto mr-5"
-
                 />
-                <div className="flex flex-col">
-                  <span className="text-lg font-semibold text-text-primary font-heading ml-[-15px] tracking-[.1em]">double helix</span>
-                  <span
-                    className="text-xs font-thin font-mono text-text-secondary ml-[-15px] mt-[-8px] tracking-[.3em]">technologies</span>
-                </div>
               </Link>
               <button
                 type="button"
