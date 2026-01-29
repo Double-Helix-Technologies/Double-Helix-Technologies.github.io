@@ -1,7 +1,6 @@
 'use client';
 
 import { ChevronRight } from 'lucide-react';
-import { Badge } from '@/app/components/ui/badge';
 import Navigation from '@/app/components/Navigation';
 import { ThemeProvider } from '../components/ThemeProvider';
 import {
@@ -13,6 +12,7 @@ import {
 } from '@/app/components/ui/breadcrumb';
 import Link from 'next/link';
 import Footer from '@/app/components/Footer';
+import { Card, CardHeader, CardTitle } from '@/app/components/ui/card';
 
 export default function AboutPage() {
 
@@ -34,6 +34,18 @@ export default function AboutPage() {
     </BreadcrumbList>
   </Breadcrumb>;
 
+  const valuesCard = (value: string) => {
+    return (<Card className="bg-background">
+      <CardHeader>
+        <CardTitle>
+          <div className="flex items-center gap-4">
+            {value}
+          </div>
+        </CardTitle>
+      </CardHeader>
+    </Card>);
+  };
+
   return (
     <ThemeProvider>
       <main className="min-h-screen">
@@ -42,7 +54,7 @@ export default function AboutPage() {
           <div className="container-tight">
             <div className="flex flex-col gap-6 mb-6 max-w-3xl">
               {breadcrumb}
-              <h1 className="text-5xl text-text-primary text-left mb-5 max-w-3xl">
+              <h1 className="section-heading mb-5 max-w-3xl">
                 We create a healthier, safer & better organized world by solving IT challenges for companies making a
                 positive impact
               </h1>
@@ -65,11 +77,11 @@ export default function AboutPage() {
                 compliance, and security, we cover the full path from problem to production—and we stay to operate it.
               </p>
 
-              <h2 className="text-4xl md:text-5xl">Our Core Values</h2>
-              <p>How we show up with clients and each other.</p>
-              <div className="mt-3 flex flex-wrap gap-2 max-w-md">
+              <h2 className="text-3xl md:text-4xl mb-3">Our core values</h2>
+              <p>How we show up for our clients and each other.</p>
+              <div className="mt-3 flex flex-wrap gap-2">
                 {['Sustainability', 'Adaptability', 'Competence', 'Empathy', 'Collaboration', 'Autonomy', 'Reliability'].map((v) => (
-                  <Badge key={v} className="rounded-xl">{v}</Badge>
+                  valuesCard(v)
                 ))}
               </div>
             </div>

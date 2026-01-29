@@ -7,14 +7,14 @@ export default function Contact() {
   return (
     <section id="contact" className="section bg-gradient-to-b from-background to-background-alt">
       <div className="container-tight">
-        <div className="mb-4 text-center">
-          <h2 className="section-heading mb-4">Ready to move from ideas to outcomes?</h2>
+        <div className="mb-8 text-center">
+          <h2 className="section-heading mb-5">Ready to move from ideas to outcomes?</h2>
           <p className="text-text-secondary max-w-2xl mx-auto">
             Tell us where it hurts. We’ll suggest a right‑sized way forward.
           </p>
         </div>
         <div className="max-w-3xl mx-auto">
-          <div className="bp-8 md:p-10 rounded-2xl text-center">
+          <div className="bp-8 md:pb-10 rounded-2xl text-center">
             <Button variant="gradient">
               <a href="mailto:hello@doublehelix.dev?subject=Book%20an%20intro%20call">
                 Schedule an intro call

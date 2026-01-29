@@ -14,7 +14,7 @@ const leadershipTeam: TeamMember[] = [
     role: 'Chief Executive Officer',
     description: 'Keeps us aligned, focused, and moving in the right direction.',
     image: '/images/team/armands.jpg',
-    email: ''
+    email: 'armands.baranovskis@doublehelix.dev'
   },
   {
     name: 'Aleksandrs',
@@ -22,7 +22,7 @@ const leadershipTeam: TeamMember[] = [
     role: 'Chief Strategy & Business Development Officer',
     description: 'Drives growth through strategy, partnerships, and meaningful client relationships.',
     image: '/images/team/aleksandrs.jpg',
-    email: ''
+    email: 'aleksandrs.gusevs@doublehelix.dev'
   },
   {
     name: 'Valts',

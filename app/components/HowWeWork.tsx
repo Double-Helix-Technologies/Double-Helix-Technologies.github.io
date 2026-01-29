@@ -41,7 +41,7 @@ export default function HowWeWork() {
     <section id="how-we-work" className="section bg-gradient-to-t from-background to-background-alt">
       <div className="container-tight grid lg:grid-cols-2 gap-10 ">
         <div className="flex flex-col gap-5 max-w-md lg:sticky lg:top-20 lg:h-fit">
-          <h2 className="text-5xl text-text-primary mb-5">
+          <h2 className="section-heading mb-3 md:mb-5">
             How we work
           </h2>
           <p className="text-text-secondary">

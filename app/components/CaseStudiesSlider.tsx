@@ -37,7 +37,7 @@ export default function CaseStudiesSlider() {
   return (
     <section id="case-studies" className="section">
       <div className="container-tight">
-        <h2 className="mb-10 text-left text-4xl md:text-5xl text-text-primary">
+        <h2 className="section-heading mb-5 md:mb-10">
           Case studies
         </h2>
 

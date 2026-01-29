@@ -59,14 +59,13 @@ export default function Testimonials() {
   return (
     <section id="testimonials" className="section">
       <div className="container-tight">
-        <div className="text-center mb-16">
-          <h2 className="text-5xl text-center text-text-primary mb-5">What our clients say</h2>
+        <div className="text-center mb-3 md:mb-5">
+          <h2 className="section-heading mb-5">What clients say</h2>
           <p className="text-text-secondary max-w-2xl mx-auto">
             Don't just take our word for it. Hear what our clients have to say about their experience working with us.
           </p>
         </div>
-
-        <div className="relative mt-12 pb-12 max-w-5xl mx-auto">
+        <div className="relative md:mt-12 pb-12 max-w-5xl">
           <Carousel
             setApi={setApi}
             opts={{
@@ -75,9 +74,9 @@ export default function Testimonials() {
             }}
             className="w-full"
           >
-            <CarouselContent className="items-center">
+            <CarouselContent className="items-center align-top">
               {testimonials.map((testimonial) => (
-                <CarouselItem key={testimonial.author} className="py-4 -ml-1 mr-1 md:basis-6/12">
+                <CarouselItem key={testimonial.author} className="py-2 md:py-4 -ml-1 md:mr-1 basis-full md:basis-6/12">
                   <Card className="bg-gray-600/10 max-w-xl">
                     <CardHeader className="text-xl font-semibold">
                       <h4 className="text-2xl md:text-1xl font-semibold">{`"${testimonial.tagline}"`}</h4>
@@ -85,7 +84,7 @@ export default function Testimonials() {
                     <CardContent className="text-md text-text-secondary">
                       {testimonial.quote}
                     </CardContent>
-                    <CardFooter className="flex gap-4 text-left">
+                    <CardFooter className="flex gap-4 text-left items-center">
                       <AvatarPlaceholder>
                         {testimonial.author[0]}
                       </AvatarPlaceholder>
