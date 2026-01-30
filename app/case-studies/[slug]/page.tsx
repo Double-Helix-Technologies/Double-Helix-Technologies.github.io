@@ -127,7 +127,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
                     <ul className="space-y-1">
                       {study.details.outcomes.map((outcome) => (
                         <li key={outcome} className="flex items-center gap-3">
-                          <Check size={20} className={`${colors.text}`}/>
+                          <Check size={20} className={`${colors.text} flex-shrink-0`}/>
                           <span className="text-lg text-text-secondary">{outcome}</span>
                         </li>
                       ))}

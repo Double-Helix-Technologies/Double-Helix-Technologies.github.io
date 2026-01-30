@@ -105,7 +105,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
                     <ul className="space-y-1">
                       {service.items.map((item) => (
                         <li key={item} className="flex items-center gap-3">
-                          <Plus size={20}/>
+                          <Plus size={20} className="flex-shrink-0"/>
                           <span className="text-lg">{item}</span>
                         </li>
                       ))}

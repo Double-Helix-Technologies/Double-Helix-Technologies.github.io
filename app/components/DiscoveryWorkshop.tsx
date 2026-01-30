@@ -27,7 +27,7 @@ const DiscoveryWorkshop: React.FC = () => (
             <ul className="space-y-3 text-xl z-10">
               {workshopItems.map((item) => (
                 <li key={item} className="flex gap-2 hover:">
-                  <Asterisk size={32}/>
+                  <Asterisk size={32} className="flex-shrink-0"/>
                   <p className="md:text-2xl text-lx font-semibold">{item}</p>
                 </li>
               ))}

@@ -27,11 +27,10 @@ export default function Services() {
           className="w-full mx-auto border-b border-b-gray-700"
         >
           {servicesContents.map(({ key, title, description, price }) => (
-
             <AccordionItem key={key} value={key} className="w-full">
               <AccordionTrigger>
                 <div className="flex gap-2">
-                  <Asterisk className="w-8 h-8"/>
+                  <Asterisk className="w-8 h-8 flex-shrink-0"/>
                   {title}
                 </div>
               </AccordionTrigger>
