@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter, IBM_Plex_Sans } from 'next/font/google';
+import { Inter, IBM_Plex_Sans, Outfit } from 'next/font/google';
 import './globals.css';
 
 const inter = Inter({ 
@@ -7,6 +7,12 @@ const inter = Inter({
   weight: ['400', '500', '600', '700'],
   variable: '--font-inter'
 });
+
+const outfit = Outfit({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-outfit'
+})
 
 const ibmPlexSans = IBM_Plex_Sans({ 
   subsets: ['latin'],
@@ -47,7 +53,7 @@ export default function RootLayout({
           `
         }} />
       </head>
-      <body className={`${inter.variable} ${ibmPlexSans.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} ${inter.variable} font-sans antialiased`}>
         {children}
       </body>
     </html>
