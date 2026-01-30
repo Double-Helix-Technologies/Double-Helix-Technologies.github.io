@@ -7,10 +7,10 @@ export default function Hero() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
           <h1
             className="text-5xl md:text-6xl lg:text-7xl tracking-[.025em] animate-fade-in duration-700 col-span-3 font-semibold text-transparent bg-clip-text bg-gradient-to-tr from-purple-500 via-blue-500 to-cyan-300 pb-2">
-            We make work flows clear<br/>
+            We make workflows clear<br/>
             and make them work better.
           </h1>
-          <p className="text-xl col-start-1 col-span-3 md:col-span-1">
+          <p className="text-lg col-start-1 col-span-1 md:col-span-2">
             We help life science and manufacturing companies understand how work moves across people, processes, and systems and improve execution by reducing risk and friction.
           </p>
         </div>
