@@ -11,8 +11,6 @@ export interface CaseStudy {
     outcomes: string[];
   };
   client: {
-    name: string;
-    summary: string;
     sector: string | string[];
   }
   stats: {
@@ -74,8 +72,6 @@ export const caseStudies: CaseStudy[] = [
       }
     ],
     client: {
-      name: '',
-      summary: '',
       sector: 'Life sciences'
     }
   },
@@ -102,8 +98,6 @@ export const caseStudies: CaseStudy[] = [
       }
     ],
     client: {
-      name: '',
-      summary: '',
       sector: 'Logistics'
     }
   },
@@ -147,8 +141,6 @@ export const caseStudies: CaseStudy[] = [
       }
     ],
     client: {
-      name: '',
-      summary: '',
       sector: 'Life sciences'
     }
   },
@@ -189,8 +181,6 @@ export const caseStudies: CaseStudy[] = [
       }
     ],
     client: {
-      name: '',
-      summary: '',
       sector: 'Life sciences'
     }
   }

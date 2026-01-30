@@ -54,8 +54,6 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
   const overview = (client: any) => {
     return (
       <div className="flex flex-col gap-4">
-        <p className="font-semibold ">{client.name}</p>
-        <p className="text-text-secondary text-sm">{client.summary}</p>
         <p className="font-semibold">Industry</p>
         <Badge variant="custom" className={`w-fit ${colors.bg} ${colors.text}`}>{client.sector}</Badge>
         <Separator className="my-2"/>
