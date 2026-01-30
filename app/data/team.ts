@@ -44,9 +44,65 @@ const leadershipTeam: TeamMember[] = [
 
 const coreTeam = [
   {
+    name: 'Santa',
+    role: 'Business Analyst',
+    description: 'Bridging business needs with technical solutions',
+    image: '',
+    email: ''
+  },  
+  {
+    name: 'Agnis',
+    role: 'Software Engineer',
+    description: '',
+    image: '',
+    email: ''
+  },  
+  {
+    name: 'Agris',
+    role: 'Software Engineer',
+    description: '',
+    image: '',
+    email: ''
+  },  
+  {
+    name: 'Tamāra',
+    role: 'Solution Architect',
+    description: '',
+    image: '',
+    email: ''
+  },
+  {
+    name: 'Anastasia',
+    role: 'Software Engineer',
+    description: '',
+    image: '',
+    email: ''
+  },
+  {
     name: 'Jānis',
     role: 'Software Engineer',
     description: 'Full-stack developer with expertise in cloud architecture',
+    image: '',
+    email: ''
+  },
+  {
+    name: 'Gints',
+    role: 'System Administrator',
+    description: 'Ensuring smooth operations of our and your infrastructure',
+    image: '',
+    email: ''
+  },
+  {
+    name: 'Marts',
+    role: 'Software Reliability Engineer',
+    description: '',
+    image: '',
+    email: ''
+  },
+  {
+    name: 'Harijs',
+    role: 'Software Engineer',
+    description: '',
     image: '',
     email: ''
   },
@@ -65,35 +121,6 @@ const coreTeam = [
     email: ''
   },
   {
-    name: 'Gints',
-    role: 'System Administrator',
-    description: 'Ensuring smooth operations of our and your infrastructure',
-    image: '',
-    email: ''
-  },
-  {
-    name: 'Santa',
-    role: 'Business Analyst',
-    description: 'Bridging business needs with technical solutions',
-    image: '',
-    email: ''
-  },
-  {
-    name: 'Agnis',
-    role: 'Software Engineer',
-    description: '',
-    image: '',
-    email: ''
-
-  },
-  {
-    name: 'Agris',
-    role: 'Software Engineer',
-    description: '',
-    image: '',
-    email: ''
-  },
-  {
     name: 'Jānis',
     role: 'Software Engineer',
     description: '',
@@ -101,29 +128,8 @@ const coreTeam = [
     email: ''
   },
   {
-    name: 'Tamāra',
-    role: 'Solution Architect',
-    description: '',
-    image: '',
-    email: ''
-  },
-  {
-    name: 'Anastasia',
-    role: 'Software Engineer',
-    description: '',
-    image: '',
-    email: ''
-  },
-  {
-    name: 'Marts',
-    role: 'Software Reliability Engineer',
-    description: '',
-    image: '',
-    email: ''
-  },
-  {
-    name: 'Harijs',
-    role: 'Software Engineer',
+    name: 'Konstantins',
+    role: 'System Administrator',
     description: '',
     image: '',
     email: ''

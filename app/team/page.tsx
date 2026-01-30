@@ -1,7 +1,7 @@
 'use client';
 
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/app/components/ui/card';
-import { Asterisk, AtSign, ChevronRight } from 'lucide-react';
+import { Asterisk, ChevronRight, Mail } from 'lucide-react';
 import Image from 'next/image';
 import Navigation from '@/app/components/Navigation';
 import { ThemeProvider } from '../components/ThemeProvider';
@@ -52,7 +52,7 @@ const TeamMemberCard = ({ person }: { person: TeamMember }) => (
       <p className="text-text-secondary">{person.description}</p>
     </CardContent>
     <CardFooter className="flex flex-col">
-      {person.email && <a href={`mailto:${person.email}`}><AtSign size={20}/></a>}
+      {person.email && <a href={`mailto:${person.email}`}><Mail size={20}/></a>}
     </CardFooter>
   </Card>
 );
@@ -104,16 +104,9 @@ export default function TeamPage() {
               </ul>
             </div>
 
-            <h2 className="text-3xl md:text-4xl my-16">The Founding Team</h2>
+            <h2 className="text-3xl md:text-4xl my-16">Our Team</h2>
             <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-4 gap-4">
-              {leadershipTeam.map((person) => (
-                <TeamMemberCard key={person.name} person={person}/>
-              ))}
-            </div>
-
-            <h2 className="text-3xl md:text-4xl my-16">Our Tech Team</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {coreTeam.map((person) => (
+              {[...leadershipTeam].map((person) => ( //, ...coreTeam
                 <TeamMemberCard key={person.name} person={person}/>
               ))}
             </div>

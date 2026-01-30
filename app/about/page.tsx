@@ -59,7 +59,7 @@ export default function AboutPage() {
                 positive impact
               </h1>
               <p>
-                Double Helix is a senior, lean engineering team based in Latvia.
+                Double Helix Technologies is a senior-level, lean engineering team based in Latvia.
               </p>
               <p><b>Our mission</b> is to help businesses transform complexity into clarity through
                 tailored IT solutions—guided by technical excellence, empathy, and strategic thinking.

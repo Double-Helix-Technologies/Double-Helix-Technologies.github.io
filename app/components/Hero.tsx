@@ -11,17 +11,14 @@ export default function Hero() {
             and make them work better.
           </h1>
           <p className="text-xl col-start-1">
-            We help you understand how work moves across people, processes, and systems and improve execution by reducing risk and friction.
+            We help life science and manufacturing companies understand how work moves across people, processes, and systems and improve execution by reducing risk and friction.
           </p>
         </div>
         <div className="flex flex-row gap-5">
           <Button variant="gradient" size="lg">
-            <a href="mailto:hello@doublehelix.dev?subject=Book%20a%20workshop">
-              Book a workshop
+            <a href="/#contact">
+              Contact us
             </a>
-          </Button>
-          <Button variant="secondary" size="lg">
-            <a href="/#contact">Contact us</a>
           </Button>
         </div>
       </div>

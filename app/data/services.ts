@@ -1,4 +1,5 @@
 export interface Service {
+  timeline: string;
   title: string;
   key: string;
   description: string;
@@ -13,6 +14,7 @@ export const servicesContents: Service[] = [
     key: 'Discovery',
     description: 'We help you understand how work actually flows across your organization by mapping people, processes, and systems end to end. We identify where execution breaks down, where risk hides, and where ownership or visibility is unclear. The result is a decision grade view of operational risk, and a clear, prioritized & actionable remediation plan you can execute internally or with partners before incidents force action.',
     price: '€15000',
+    timeline: '2-4 months',
     items: [
       'Kickoff to confirm scope, goals, process walkthrough',
       'Interviews with key people across the workflow',
@@ -25,7 +27,7 @@ export const servicesContents: Service[] = [
       'End-to-end flow maps',
       'Handoff matrix and exception overlay',
       'Risk register with scoring and owners',
-      '30/60/90 day actionable remediation plan',
+      'Actionable remediation plan',
       'Executive readout deck',
       'Board-ready one-page memo'    
     ]
@@ -35,6 +37,7 @@ export const servicesContents: Service[] = [
     key: 'Integration',
     description: 'We design and implement integrations that ensure data is reliable, complete, and consistent across your application landscape. By connecting systems end to end, we eliminate gaps, reduce manual workarounds, and establish a single source of truth with a clear audit trail. Built-in observability ensures issues are detected early, often before users or customers notice, supporting stable day-to-day operations in complex and regulated environments.',
     price: '€10000',
+    timeline: '2-4 months',
     items: [
       'Review of all systems involved and how they currently exchange data',
       'Agreement on what data “source of truth” is for key records',
@@ -58,6 +61,7 @@ export const servicesContents: Service[] = [
     key: 'Architecture',
     description: 'We assess your current software architecture with a focus on scalability, maintainability, security, and long-term fit. We identify structural risks, technical debt, and growth blockers, then provide clear, pragmatic recommendations to evolve your systems without unnecessary rewrites. The goal is a future-ready architecture that supports business change, integrations, and reliable operations over time.',
     price: '€10 000',
+    timeline: '2-4 months',
     items: [
       'Review of the current system structure and key dependencies',
       'Assessment of scalability, maintainability, reliability, and security',
@@ -80,6 +84,7 @@ export const servicesContents: Service[] = [
     key: 'System',
     description: 'We design or improve observability so teams can see how workflows, integrations, and systems behave in real life. By making data flows, failures, and bottlenecks visible end to end, we help teams detect issues earlier, reduce downtime, and improve traceability across operations.',
     price: '€5000',
+    timeline: '1-2 months',
     items: [
       'Review of what you can see today and where visibility is missing',
       'Agreement on the most important workflows to track end to end',
@@ -102,6 +107,7 @@ export const servicesContents: Service[] = [
     key: 'Security',
     description: 'We perform pragmatic security and compliance risk assessments focused on real operational impact. We identify and classify risks across machines, systems, data flows, and integrations, then deliver clear, prioritized recommendations that are practical to implement. Each step produces concrete deliverables that support audit readiness, security posture, and confidence in everyday operations.',
     price: '€7500',
+    timeline: '1-2 months',
     items: [
       'Inventory of key systems, users, and data flows',
       'Review of access control and sensitive data movement',

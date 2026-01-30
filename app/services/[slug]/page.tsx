@@ -70,7 +70,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
         </div>
         <div className="space-y-2">
           <p className="font-semibold row-start-2">Timeline</p>
-          <p className="text-text-secondary text-sm">2-4 months</p>
+          <p className="text-text-secondary text-sm">{service.timeline}</p>
         </div>
         <Separator className="my-2"/>
         <Button variant="gradient" className="w-fit">

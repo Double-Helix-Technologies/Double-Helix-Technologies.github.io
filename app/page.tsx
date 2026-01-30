@@ -18,7 +18,7 @@ export default function Home() {
         <CaseStudiesSlider/>
         <Services/>
         <HowWeWork/>
-        <DiscoveryWorkshop/>
+        {/* <DiscoveryWorkshop/> */}
         <Testimonials/>
         <Contact/>
         <Footer/>
