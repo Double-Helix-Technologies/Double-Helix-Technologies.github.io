@@ -10,7 +10,7 @@ export default function Hero() {
             We make work flows clear<br/>
             and make them work better.
           </h1>
-          <p className="text-xl col-start-1">
+          <p className="text-xl col-start-1 col-span-3 md:col-span-1">
             We help life science and manufacturing companies understand how work moves across people, processes, and systems and improve execution by reducing risk and friction.
           </p>
         </div>
