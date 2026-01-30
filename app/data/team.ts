@@ -46,8 +46,8 @@ const coreTeam = [
   {
     name: 'Santa',
     role: 'Product Owner',
-    description: 'Experienced software development project management, product owner, professional, and team lead',
-    image: '/images/team/santa.jpg',
+    description: '', //'Experienced software development project management, product owner, professional, and team lead',
+    image: '', //'/images/team/santa.jpg',
     email: ''
   },  
   {
@@ -81,14 +81,14 @@ const coreTeam = [
   {
     name: 'Jānis',
     role: 'Software Engineer',
-    description: 'Full-stack developer with expertise in cloud architecture',
+    description: '', //'Full-stack developer with expertise in cloud architecture',
     image: '',
     email: ''
   },
   {
     name: 'Gints',
     role: 'System Administrator',
-    description: 'Ensuring smooth operations of our and your infrastructure',
+    description: '', //'Ensuring smooth operations of our and your infrastructure',
     image: '',
     email: ''
   },
@@ -109,14 +109,14 @@ const coreTeam = [
   {
     name: 'Lauris',
     role: 'Software Engineer',
-    description: 'Full-stack developer with expertise in complex systems',
+    description: '', //'Full-stack developer with expertise in complex systems',
     image: '',
     email: ''
   },
   {
     name: 'Murathan',
     role: 'DevSecOps Engineer',
-    description: 'Infrastructure and automation specialist',
+    description: '', //'Infrastructure and automation specialist',
     image: '',
     email: ''
   },

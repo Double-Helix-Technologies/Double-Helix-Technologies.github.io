@@ -106,7 +106,7 @@ export default function TeamPage() {
 
             <h2 className="text-3xl md:text-4xl my-16">Our Team</h2>
             <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-4 gap-4">
-              {[...leadershipTeam].map((person) => ( //, ...coreTeam
+              {[...leadershipTeam, ...coreTeam].map((person) => (
                 <TeamMemberCard key={person.name} person={person}/>
               ))}
             </div>
