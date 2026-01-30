@@ -45,9 +45,9 @@ const leadershipTeam: TeamMember[] = [
 const coreTeam = [
   {
     name: 'Santa',
-    role: 'Business Analyst',
-    description: 'Bridging business needs with technical solutions',
-    image: '',
+    role: 'Product Owner',
+    description: 'Experienced software development project management, product owner, professional, and team lead',
+    image: '/images/team/santa.jpg',
     email: ''
   },  
   {
