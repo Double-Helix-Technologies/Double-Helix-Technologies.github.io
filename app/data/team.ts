@@ -116,7 +116,7 @@ const coreTeam = [
   {
     name: 'Murathan',
     role: 'DevSecOps Engineer',
-    description: '', //'Infrastructure and automation specialist',
+    description: '', //'Building resilient infrastructure with a security-first mindset',
     image: '',
     email: ''
   },
