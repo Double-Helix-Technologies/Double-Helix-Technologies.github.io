@@ -1,0 +1,47 @@
+.accordionItem {
+  background: var(--background);
+  border: 1px solid rgba(90, 95, 115, 0.5);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.accordionButton {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  text-align: left;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  gap: 1rem;
+}
+
+.accordionButton:hover {
+  background: var(--background-alt);
+}
+
+.accordionButton:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: -2px;
+}
+
+.accordionButton:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.accordionContent {
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
+  padding: 0 1.5rem;
+  max-height: 0;
+  opacity: 0;
+}
+
+.accordionContentOpen {
+  max-height: 1000px;
+  opacity: 1;
+  padding-bottom: 1.5rem;
+}
