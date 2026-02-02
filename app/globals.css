@@ -10,7 +10,7 @@
   --text-button: #FDFCF9; /* Soft Ivory White */
   --background: #FDFCF9;    /* Soft Ivory White */
   --background-alt: #E9ECEF; /* Fog Grey */
-  --border: #5A5F73;        /* Slate Grey */
+  --border: #616470;        /* Slate Grey */
   --accent-primary: #5A5F73; /* Comet Grey */
   --accent-green: #826ffb;  /* Emerald Green */
 }
@@ -21,7 +21,7 @@
   --text-primary: #FDFCF9;  /* Soft Ivory White */
   --text-secondary: #c5dfed; /* Fog Grey */
   --background: #0d1119;    /* Deep Baltic Blue */
-  --background-alt: rgb(20, 27, 41); /* Darker Baltic Blue */
+  --background-alt: rgb(30, 30, 57); /* Darker Baltic Blue */
   --border: #5A5F73;        /* Slate Grey */
   --accent-primary: #5A5F73; /* Comet Grey */
   --accent-green: #976ffb;  /* Emerald Green */
