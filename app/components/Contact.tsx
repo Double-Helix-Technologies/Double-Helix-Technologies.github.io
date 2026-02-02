@@ -1,30 +1,31 @@
-"use client"
+'use client';
+
+import { Button } from '@/app/components/ui/button';
+import React from 'react';
 
 export default function Contact() {
   return (
-    <div id="contact" className="section bg-background">
+    <section id="contact" className="section bg-gradient-to-b from-background to-background-alt">
       <div className="container-tight">
-        <div className="mb-16 text-center">
-          <h2 className="text-3xl md:text-4xl font-semibold text-text-primary mb-6">Ready to move from ideas to outcomes?</h2>
-          <p className="text-lg text-text-secondary max-w-2xl mx-auto">
+        <div className="mb-8 text-center">
+          <h2 className="section-heading mb-5">Ready to move from ideas to outcomes?</h2>
+          <p className="text-text-secondary max-w-2xl mx-auto">
             Tell us where it hurts. We’ll suggest a right‑sized way forward.
           </p>
         </div>
-        
         <div className="max-w-3xl mx-auto">
-          <div className="bg-background-alt p-8 md:p-10 rounded-2xl text-center">
-            <a
-              href="mailto:hello@doublehelix.dev?subject=Book%20an%20intro%20call"
-              className="btn-primary inline-flex justify-center px-8 py-4"
-            >
-              Book an intro call
-            </a>
-            <p className="mt-6 text-text-secondary">
+          <div className="bp-8 md:pb-10 rounded-2xl text-center">
+            <Button variant="gradient">
+              <a href="mailto:hello@doublehelix.dev?subject=Book%20an%20intro%20call">
+                Schedule an intro call
+              </a>
+            </Button>
+            <p className="mt-2 text-text-secondary text-xs">
               Intro call (15–30 min)
             </p>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 } 

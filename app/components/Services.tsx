@@ -1,73 +1,73 @@
-"use client"
-import React from "react";
-import { Card, CardContent, CardHeader, CardTitle, Icon } from "./ui/Card";
-import {
-  Database,
-  FlaskConical,
-  LineChart,
-  Server,
-  ShieldCheck,
-  Users
-} from "lucide-react";
+'use client';
+import React from 'react';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion';
+import { ArrowRight, Asterisk, Sparkles } from 'lucide-react';
+import { servicesContents } from '../data/services';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/app/components/ui/card';
+import { Button } from '@/app/components/ui/button';
+import Link from 'next/link';
 
 export default function Services() {
-  const cardContents = [
-    {
-      title: 'IT Consultancy',
-      description: 'Strategic technology consulting to help you make informed decisions. We break down problems and map out business-smart, tech-driven paths to results.',
-      icon: LineChart,
-    },
-    {
-      title: 'Integrations & Process Automation',
-      description: 'Streamline your business operations through intelligent automation and system integration. Transform your workflows to prepare for the digital future. Get the most out of your resources.',
-      icon: Database,
-    },
-    {
-      title: 'Software Development',
-      description: 'Custom IT solutions tailored to your business needs, built with modern technologies and best practices. Secure, scalable, and simple.',
-      icon: Server,
-    },
-    {
-      title: 'MVP Development',
-      description: 'Rapid development of minimum viable products to validate your business ideas quickly. Get return on investment faster.',
-      icon: FlaskConical,
-    },
-    {
-      title: 'Reliable Operations & Monitoring',
-      description: 'Keep systems stable and fast. Predictable releases, clear alerts, and response playbooks—so issues are found and fixed early.',
-      icon: ShieldCheck,
-    },
-    {
-      title: 'Compliance & Security',
-      description: 'Gap analysis and security posture reviews; implement safeguards (access control, logging) with certified partners.',
-      icon: Users,
-    },
-  ];
-
   return (
-    <div id="services" className="section bg-background">
-      <div className="container-tight">
-        <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-5xl font-semibold text-text-primary mb-6">
-            What We Do
+    <section id="services" className="section bg-gradient-to-b from-background to-background-alt">
+      <div className="container-tight text-left">
+        <div className="mb-10">
+          <h2 className="section-heading mb-3 md:mb-5">
+            What we do
           </h2>
-          <p className="text-lg text-text-secondary max-w-2xl mx-auto">
-            We provide comprehensive solutions to help you streamline your business process and get the most out of your resources.
+          <p className="text-text-secondary max-w-2xl py-4">
+            We help organizations understand how work flows across people, processes, and systems and improve it where it matters most.
           </p>
         </div>
-        
-        <div className="grid gap-8 md:grid-cols-2">
-          {cardContents.map(({ icon, title, description }) => (
-            <Card key={title} className="bg-background-alt">
-              <CardHeader>
-                <Icon>{React.createElement(icon)}</Icon>
-                <CardTitle>{title}</CardTitle>
-              </CardHeader>
-              <CardContent>{description}</CardContent>
-            </Card>
+
+        <Accordion
+          type="single"
+          collapsible
+          defaultValue="integration"
+          className="w-full mx-auto border-b border-b-gray-700"
+        >
+          {servicesContents.map(({ key, title, description, price }) => (
+            <AccordionItem key={key} value={key} className="w-full">
+              <AccordionTrigger>
+                <div className="flex gap-2">
+                  <Asterisk className="w-8 h-8 flex-shrink-0"/>
+                  {title}
+                </div>
+              </AccordionTrigger>
+              <AccordionContent className="flex flex-col gap-8">
+                <p>{description}</p>
+                <div className="flex flex-row justify-between">
+                  <p className="py-2">Starting at <strong>{price}</strong> *</p>
+                  <Button variant="secondary">
+                    <Link href={`/services/${key}`}>
+                      learn more
+                    </Link>
+                    <ArrowRight size={11}/>
+                  </Button>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
           ))}
-        </div>
+        </Accordion>
+        <Card className="bg-gray-600/10 p-5 justify-items-center mt-12 md:mt-24 shadow-none">
+          <CardHeader>
+            <CardTitle className="text-2xl flex gap-3">
+              <Sparkles/> Need a custom solution?
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="flex gap-10">
+            We offer tailored packages combining multiple services for comprehensive digital transformation.
+          </CardContent>
+          <CardFooter>
+            <Button variant="secondary">
+              <a href="mailto:hello@doublehelix.dev?subject=Book%20an%20intro%20call">
+                Schedule an intro call
+              </a>
+              <ArrowRight size={11}/>
+            </Button>
+          </CardFooter>
+        </Card>
       </div>
-    </div>
+    </section>
   );
 } 

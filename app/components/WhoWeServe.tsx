@@ -1,14 +1,7 @@
-"use client"
-import React from "react";
-import { Card, CardContent, CardHeader, CardTitle, Icon } from "./ui/Card";
-import {
-  CheckCircle2,
-  Database,
-  FlaskConical,
-  GitBranch,
-  ShieldCheck,
-  Users
-} from "lucide-react";
+'use client';
+import React from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/app/components/ui/card';
+import { Asterisk, CheckCircle2, Database, FlaskConical, GitBranch, ShieldCheck, Users } from 'lucide-react';
 
 export default function WhoWeServe() {
   const cardContents = [
@@ -18,7 +11,7 @@ export default function WhoWeServe() {
         'Integrated instruments with LIMS for automatic result posting and fewer manual entries',
         'Built SLA dashboards & exception handling to improve turnaround visibility'
       ],
-      icon: FlaskConical,
+      icon: FlaskConical
     },
     {
       title: 'Analytical & Public Safety Labs',
@@ -26,7 +19,7 @@ export default function WhoWeServe() {
         'Automated secure case exchange with audit trail and role‑based access',
         'Streamlined intake‑to‑report workflow to reduce manual actions and errors'
       ],
-      icon: ShieldCheck,
+      icon: ShieldCheck
     },
     {
       title: 'Life‑Science Operations & QA',
@@ -34,7 +27,7 @@ export default function WhoWeServe() {
         'Standardized approvals & change control with clear documentation rhythms (GxP‑aware)',
         'Automated hand‑offs between R&D, QA, and production to cut delays'
       ],
-      icon: Users,
+      icon: Users
     },
     {
       title: 'Regulated Manufacturing & QC',
@@ -42,7 +35,7 @@ export default function WhoWeServe() {
         'Introduced CI/CD with staged releases and approvals to speed up safe delivery',
         'Integrated supplier & quality data flows to improve end‑to‑end visibility'
       ],
-      icon: Database,
+      icon: Database
     },
     {
       title: 'Clinics & Health Service Providers',
@@ -50,7 +43,7 @@ export default function WhoWeServe() {
         'Role‑based access for physicians and lab staff with full audit trail',
         'Automated intake to report status tracking to shorten TATs'
       ],
-      icon: Users,
+      icon: Users
     },
     {
       title: 'Cross‑Industry Integrations & Automation',
@@ -58,34 +51,37 @@ export default function WhoWeServe() {
         'Wrapped legacy systems with APIs; introduced CI/CD and monitoring',
         'Built BI‑ready data flows with partners to improve decision‑making'
       ],
-      icon: GitBranch,
-    },
+      icon: GitBranch
+    }
   ];
 
   return (
     <div id="industries" className="section bg-background">
       <div className="container-tight">
         <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-5xl font-semibold text-text-primary mb-6">
+          <h2 className="text-4xl md:text-5xl text-text-primary mb-6">
             Who we serve
           </h2>
-          <p className="text-lg text-text-secondary max-w-2xl mx-auto">
-            We primarily work with mid‑sized, quality‑driven companies and analytical or molecular labs. We also support early‑stage startups that need to move from idea to MVP, and help large enterprises accelerate proofs of concept and integration work.
+          <p className="text-text-secondary max-w-2xl mx-auto">
+            We primarily work with mid‑sized, quality‑driven companies and analytical or molecular labs. We also support
+            early‑stage startups that need to move from idea to MVP, and help large enterprises accelerate proofs of
+            concept and integration work.
           </p>
         </div>
-        
+
         <div className="grid gap-8 md:grid-cols-2">
           {cardContents.map(({ icon, title, listItems }) => (
             <Card key={title} className="bg-background-alt">
               <CardHeader>
-                <Icon>{React.createElement(icon)}</Icon>
+                {/*<Icon>{React.createElement(icon)}</Icon>*/}
+                <Asterisk/>
                 <CardTitle>{title}</CardTitle>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2">
-                  {listItems.map((item, idx) => (
-                    <li key={idx} className="flex items-top gap-2">
-                      <CheckCircle2 className="h-4 w-4 text-accent-green flex-shrink-0 mt-1" />
+                  {listItems.map((item) => (
+                    <li key={item} className="flex items-top gap-2">
+                      <CheckCircle2 className="h-4 w-4 text-accent-green flex-shrink-0 mt-1"/>
                       {item}
                     </li>
                   ))}
