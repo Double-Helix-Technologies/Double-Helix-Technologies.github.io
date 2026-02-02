@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter, IBM_Plex_Sans, Outfit } from 'next/font/google';
+import { Inter, Outfit } from 'next/font/google';
 import './globals.css';
 
 const inter = Inter({ 
@@ -14,12 +14,6 @@ const outfit = Outfit({
   variable: '--font-outfit'
 })
 
-const ibmPlexSans = IBM_Plex_Sans({ 
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-ibm-plex-sans'
-});
-
 export const metadata: Metadata = {
   title: 'Double Helix Technologies - Strategic Technology Partner',
   description: 'We help businesses scale by providing senior-level software engineering, IT process consulting, and digital transformation strategies.',
@@ -32,11 +26,20 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <head>
-        <link rel="icon" href="/images/favicon.ico" sizes="any" />
-        {/* Script to avoid FOUC (Flash of Unstyled Content) when switching themes */}
-        <script dangerouslySetInnerHTML={{
-          __html: `
+    <head>
+      <link rel="icon" href="/images/favicon.ico" sizes="any"/>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+      />
+      <link rel="preconnect" href="https://fonts.googleapis.com"/>
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous"/>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Outfit:wght@100..900&display=swap"
+        rel="stylesheet"/>
+      {/* Script to avoid FOUC (Flash of Unstyled Content) when switching themes */}
+      <script dangerouslySetInnerHTML={{
+        __html: `
             (function() {
               try {
                 const themeStorage = localStorage.getItem('theme');
@@ -51,11 +54,11 @@ export default function RootLayout({
               }
             })();
           `
-        }} />
-      </head>
-      <body className={`${inter.variable} ${inter.variable} font-sans antialiased`}>
-        {children}
-      </body>
+      }}/>
+    </head>
+    <body className={`${inter.variable} ${outfit.variable} font-sans antialiased`}>
+    {children}
+    </body>
     </html>
   );
 }

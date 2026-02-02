@@ -36,7 +36,7 @@ export default function OperationalFlowRiskAssessmentPage() {
       className="flex flex-col sm:flex-row justify-center items-center gap-4"
     >
       <Button variant="gradient">
-        <Link href="/contact">
+        <Link href="../#contact">
           Book a discovery call
         </Link>
         <ArrowRight size={16}/>

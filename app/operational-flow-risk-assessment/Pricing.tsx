@@ -193,7 +193,7 @@ export default function Pricing() {
             </p>
             <div className="font-mono text-sm text-text-primary mb-4">
               ROI ≈ (avoided downtime + avoided scrap/rework + reduced premium freight + reduced overtime +
-              avoided penalties) – remediation costs
+              avoided penalties + avoided reputation damage) – remediation costs
             </div>
           </motion.div>
         </motion.div>
