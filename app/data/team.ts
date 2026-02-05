@@ -81,7 +81,7 @@ const coreTeam = [
   {
     name: 'Jānis',
     role: 'Software Engineer',
-    description: '', //'Full-stack developer with expertise in cloud architecture',
+    description: '', //'Full-stack engineer, particularly specialized on AI adoption',
     image: '',
     email: ''
   },
