@@ -1,8 +1,8 @@
 'use client';
 
-import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
-import darkLogoSrc from '@/images/logo-full-drk.svg'
-import lightLogoSrc from '@/images/logo-full.svg'
+import { createContext, ReactNode, useContext, useEffect, useMemo, useState } from 'react';
+import darkLogoSrc from '@/images/logo-full-dark.svg';
+import lightLogoSrc from '@/images/logo-full-light.svg';
 
 type Theme = 'light' | 'dark'
 
@@ -14,7 +14,7 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-export function ThemeProvider({ children }: { children: ReactNode }) {
+export function ThemeProvider({ children }: Readonly<{ children: ReactNode }>) {
   const [theme, setTheme] = useState<Theme>('dark');
   const [mounted, setMounted] = useState(false);
 
@@ -35,11 +35,11 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   const logo = theme === 'dark' ? lightLogoSrc : darkLogoSrc;
 
-  const value = {
+  const value = useMemo(() => ({
     theme,
     setTheme,
     logo
-  };
+  }), [logo, theme]);
 
   return (
     <ThemeContext.Provider value={value}>

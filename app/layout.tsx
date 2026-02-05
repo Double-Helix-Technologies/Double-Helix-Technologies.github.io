@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 import { Inter, Outfit } from 'next/font/google';
 import './globals.css';
+import { ReactNode } from 'react';
 
-const inter = Inter({ 
+const inter = Inter({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
   variable: '--font-inter'
@@ -12,20 +13,16 @@ const outfit = Outfit({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
   variable: '--font-outfit'
-})
+});
 
 export const metadata: Metadata = {
   title: 'Double Helix Technologies - Strategic Technology Partner',
-  description: 'We help businesses scale by providing senior-level software engineering, IT process consulting, and digital transformation strategies.',
+  description: 'We help businesses scale by providing senior-level software engineering, IT process consulting, and digital transformation strategies.'
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: Readonly<{ children: ReactNode; }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
     <head>
       <link rel="icon" href="/images/favicon.ico" sizes="any"/>
       <link

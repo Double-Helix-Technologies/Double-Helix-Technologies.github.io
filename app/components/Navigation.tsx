@@ -36,6 +36,7 @@ export default function Navigation() {
         alt="Double Helix Technologies Logo"
         width={180}
         height={0}
+        priority={true}
         className="h-auto mr-5 opacity-80"
       />
     </Link>;

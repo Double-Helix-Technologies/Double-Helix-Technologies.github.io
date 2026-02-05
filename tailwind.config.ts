@@ -28,8 +28,10 @@ const config: Config = {
   			'background-alt': 'var(--background-alt)',
   			border: 'var(--border)',
   			'accent-primary': 'var(--accent-primary)',
-  			'accent-green': 'var(--accent-green)',
-				'gradient-accent': 'var(--gradient-accent)',
+				'accent-pink': 'var(--accent-comfort-pink)',
+				'accent-teal': 'var(--accent-science-teal)',
+				'accent-lilac': 'var(--accent-novel-lilac)',
+				'accent-blue': 'var(--accent-digital-blue)',
   		},
   		animation: {
   			'fade-in': 'fadeIn 1s ease-in-out',

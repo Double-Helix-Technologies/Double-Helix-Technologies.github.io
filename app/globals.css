@@ -3,26 +3,30 @@
 @tailwind utilities;
 
 :root {
-  --primary: #1B2A41;       /* Deep Baltic Blue */
-  --primary-dark: #141f30;  /* Darker Baltic Blue */
+  --primary: #0d1119;   /* Deep Baltic Blue */
+  --primary-dark: #201A3A; /* Darker Baltic Blue */
   --text-primary: #2F2F2F;  /* Graphite */
   --text-secondary: #5A5F73; /* Slate Grey */
   --text-button: #FDFCF9; /* Soft Ivory White */
-  --background: #FDFCF9;    /* Soft Ivory White */
-  --background-alt: #E9ECEF; /* Fog Grey */
-  --border: #616470;        /* Slate Grey */
+  --background: #F9F9F9;    /* Soft Ivory White */
+  --background-alt: #e9ebf3; /* Fog Grey */
+  --border: #847d9e;        /* Slate Grey */
   --accent-primary: #5A5F73; /* Comet Grey */
-  --accent-green: #826ffb;  /* Emerald Green */
+
+  --accent-science-teal: #02C0BA;
+  --accent-digital-blue: #3382EF;
+  --accent-novel-lilac: #886FF7;
+  --accent-comfort-pink: #B96BFF;
 }
 
 .dark {
   --primary: #826ffb;       /* Emerald Green as primary in dark mode */
   --primary-dark: #6e5afb;  /* Darker Emerald Green */
   --text-primary: #FDFCF9;  /* Soft Ivory White */
-  --text-secondary: #c5dfed; /* Fog Grey */
+  --text-secondary: #d6ddff; /* Fog Grey */
   --background: #0d1119;    /* Deep Baltic Blue */
   --background-alt: rgb(30, 30, 57); /* Darker Baltic Blue */
-  --border: #5A5F73;        /* Slate Grey */
+  --border: #847d9e;        /* Slate Grey */
   --accent-primary: #5A5F73; /* Comet Grey */
   --accent-green: #976ffb;  /* Emerald Green */
 }

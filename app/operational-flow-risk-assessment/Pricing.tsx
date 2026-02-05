@@ -102,8 +102,8 @@ export default function Pricing() {
   const addonGroup = (group: any) => {
     const Icon = group.icon;
     return (
-      <>
-        <div key={group.group} className="flex items-center gap-2">
+      <div key={group.group}>
+        <div className="flex items-center gap-2">
           <Icon strokeWidth={1.5}/>
           <h3 className="text-lg md:text-xl text-text-primary">
             {group.group}
@@ -112,7 +112,7 @@ export default function Pricing() {
         <div className="flex flex-wrap space-x-2 m-4">
           {group.addons.map((addon: string) => (addonBadge(addon)))}
         </div>
-      </>
+      </div>
     );
   };
 
@@ -208,11 +208,7 @@ export default function Pricing() {
             </motion.div>
           ))}
         </div>
-
-        {/*</motion.div>*/}
       </motion.div>
-
     </section>
-
   );
 }

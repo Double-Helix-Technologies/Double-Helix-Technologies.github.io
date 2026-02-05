@@ -10,7 +10,7 @@ export default function Footer() {
   const {logo} = useTheme()
 
   return (
-    <footer className="pt-16 pb-8 bg-gray-600/10" aria-labelledby="footer-heading">
+    <footer className="pt-16 pb-8" aria-labelledby="footer-heading">
       <Separator/>
       <h2 id="footer-heading" className="sr-only">
         Footer
