@@ -8,8 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "export": "next build",
-    "serve-static": "cd dist && npx serve",
-    "test-static": "node scripts/test-static.js"
+    "serve-static": "cd dist && npx serve"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.12",

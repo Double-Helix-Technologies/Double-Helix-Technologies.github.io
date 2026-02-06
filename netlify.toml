@@ -1,0 +1,11 @@
+[build]
+  # Skip build - we only need functions
+  command = "echo 'Functions only deployment'"
+  publish = "."
+  functions = "netlify/functions"
+
+[[redirects]]
+  from = "/api/quiz-submit"
+  to = "/.netlify/functions/quiz-submit"
+  status = 200
+  force = true
