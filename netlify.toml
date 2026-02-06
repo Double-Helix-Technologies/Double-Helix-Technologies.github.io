@@ -1,7 +1,7 @@
 [build]
-  # Skip build - we only need functions
+  # Functions-only deployment - no Next.js build needed
   command = "echo 'Functions only deployment'"
-  publish = "."
+  publish = "public"
   functions = "netlify/functions"
 
 [[redirects]]
