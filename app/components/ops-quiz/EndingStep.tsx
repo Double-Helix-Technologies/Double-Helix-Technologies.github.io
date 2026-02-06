@@ -9,11 +9,12 @@ import { track } from '@/app/utils/analytics';
 interface EndingStepProps {
   ending: Ending;
   onSoftFollowUp?: (choice: string) => void;
+  onProceedToLeadCapture?: () => void;
 }
 
 const SOFT_FOLLOW_UP_OPTIONS = ['Visibility', 'Rework', 'Ownership'];
 
-export default function EndingStep({ ending, onSoftFollowUp }: EndingStepProps) {
+export default function EndingStep({ ending, onSoftFollowUp, onProceedToLeadCapture }: EndingStepProps) {
   const [softFollowUpChoice, setSoftFollowUpChoice] = useState<string | null>(null);
   const [hasSubmittedFollowUp, setHasSubmittedFollowUp] = useState(false);
 
@@ -24,6 +25,11 @@ export default function EndingStep({ ending, onSoftFollowUp }: EndingStepProps) 
       onSoftFollowUp(choice);
     }
     track('quiz_soft_followup', { choice, endingId: ending.id });
+    if (onProceedToLeadCapture) {
+      setTimeout(() => {
+        onProceedToLeadCapture();
+      }, 500);
+    }
   };
 
   return (
@@ -81,7 +87,7 @@ export default function EndingStep({ ending, onSoftFollowUp }: EndingStepProps) 
           animate={{ opacity: 1 }}
           className="text-center pt-4"
         >
-          <p className="text-base text-text-secondary">Thank you! If you provided your email, we'll reach out soon.</p>
+          <p className="text-base text-text-secondary">Thank you! We'll ask for your email next.</p>
         </motion.div>
       )}
     </motion.div>

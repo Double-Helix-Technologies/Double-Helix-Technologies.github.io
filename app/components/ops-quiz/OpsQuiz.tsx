@@ -32,6 +32,8 @@ interface QuizSubmissionPayload {
   eventCodeProof?: string;
 }
 
+const HIDE_PROGRESS_STEPS: Step[] = ['event-code', 'welcome', 'ending', 'lead-capture'];
+
 export default function OpsQuiz() {
   const [eventCodeProof, setEventCodeProof] = useState<string | null>(null);
   const [step, setStep] = useState<Step>('event-code');
@@ -41,15 +43,13 @@ export default function OpsQuiz() {
   const [startedAt, setStartedAt] = useState<Date | null>(null);
   const [completedAt, setCompletedAt] = useState<Date | null>(null);
   const [leadData, setLeadData] = useState<LeadData | null>(null);
+  const [softFollowUpChoice, setSoftFollowUpChoice] = useState<string | null>(null);
 
   useEffect(() => {
     const proof = sessionStorage.getItem(SESSION_STORAGE_KEY);
-    
     if (proof) {
       setEventCodeProof(proof);
       setStep('welcome');
-    } else {
-      setStep('event-code');
     }
   }, []);
 
@@ -58,14 +58,26 @@ export default function OpsQuiz() {
     setStep('welcome');
   }, []);
 
+  const resetQuiz = useCallback(() => {
+    setStep('welcome');
+    setCurrentQuestionIndex(0);
+    setAnswers([]);
+    setSelectedOption(null);
+    setStartedAt(null);
+    setCompletedAt(null);
+    setLeadData(null);
+    setSoftFollowUpChoice(null);
+  }, []);
+
   const currentQuestion = QUESTIONS[currentQuestionIndex];
   const totalSteps = QUESTIONS.length + 2;
-  
-  const currentStepNumber = 
-    step === 'event-code' || step === 'welcome' ? 0 :
-    step === 'question' ? currentQuestionIndex + 1 :
-    step === 'lead-capture' ? QUESTIONS.length + 1 :
-    totalSteps;
+
+  const getCurrentStepNumber = useCallback((): number => {
+    if (step === 'event-code' || step === 'welcome') return 0;
+    if (step === 'question') return currentQuestionIndex + 1;
+    if (step === 'ending') return QUESTIONS.length + 1;
+    return totalSteps;
+  }, [step, currentQuestionIndex, totalSteps]);
 
   const handleStart = useCallback(() => {
     setStartedAt(new Date());
@@ -75,21 +87,10 @@ export default function OpsQuiz() {
     track('quiz_started');
   }, []);
 
-  const handleAnswerSelect = useCallback((optionId: QuestionOption['id']) => {
-    if (!currentQuestion) return;
-
-    const option = currentQuestion.options.find((opt) => opt.id === optionId);
-    if (!option) return;
-
-    setSelectedOption(optionId);
-
+  const updateAnswer = useCallback((questionId: string, optionId: QuestionOption['id'], points: number) => {
     setAnswers((prev) => {
-      const existingIndex = prev.findIndex((a) => a.questionId === currentQuestion.id);
-      const newAnswer: Answer = {
-        questionId: currentQuestion.id,
-        selectedOptionId: optionId,
-        points: option.points,
-      };
+      const existingIndex = prev.findIndex((a) => a.questionId === questionId);
+      const newAnswer: Answer = { questionId, selectedOptionId: optionId, points };
 
       if (existingIndex >= 0) {
         const updated = [...prev];
@@ -98,20 +99,54 @@ export default function OpsQuiz() {
       }
       return [...prev, newAnswer];
     });
+  }, []);
+
+  const handleAnswerSelect = useCallback((optionId: QuestionOption['id']) => {
+    if (!currentQuestion) return;
+
+    const option = currentQuestion.options.find((opt) => opt.id === optionId);
+    if (!option) return;
+
+    setSelectedOption(optionId);
+    updateAnswer(currentQuestion.id, optionId, option.points);
 
     track('quiz_question_answered', {
       questionId: currentQuestion.id,
       optionId,
       points: option.points,
     });
-  }, [currentQuestion]);
+  }, [currentQuestion, updateAnswer]);
+
+  const calculateTotalScore = useCallback((): number => {
+    return answers.reduce((sum, a) => sum + a.points, 0);
+  }, [answers]);
+
+  const createSubmissionPayload = useCallback((
+    lead?: LeadData,
+    softFollowUp?: { choice: string }
+  ): QuizSubmissionPayload => {
+    const totalScore = calculateTotalScore();
+    const ending = getEndingForScore(totalScore);
+
+    return {
+      startedAt: startedAt!,
+      completedAt: completedAt || new Date(),
+      answers,
+      totalScore,
+      endingId: ending.id,
+      ...(lead && { lead }),
+      ...(softFollowUp && { softFollowUp }),
+      ...(eventCodeProof && { eventCodeProof }),
+    };
+  }, [answers, startedAt, completedAt, eventCodeProof, calculateTotalScore]);
 
   const handleNext = useCallback(() => {
     if (currentQuestionIndex < QUESTIONS.length - 1) {
       setCurrentQuestionIndex((prev) => prev + 1);
       setSelectedOption(null);
     } else {
-      setStep('lead-capture');
+      setCompletedAt(new Date());
+      setStep('ending');
     }
   }, [currentQuestionIndex]);
 
@@ -124,62 +159,18 @@ export default function OpsQuiz() {
     }
   }, [currentQuestionIndex, answers]);
 
-  const calculateTotalScore = useCallback((): number => {
-    return answers.reduce((sum, a) => sum + a.points, 0);
-  }, [answers]);
-
-  const createSubmissionPayload = useCallback((
-    lead?: LeadData,
-    softFollowUp?: { choice: string }
-  ): QuizSubmissionPayload => {
-    const totalScore = calculateTotalScore();
-    const ending = getEndingForScore(totalScore);
-    
-    return {
-      startedAt: startedAt!,
-      completedAt: new Date(),
-      answers,
-      totalScore,
-      endingId: ending.id,
-      ...(lead && { lead }),
-      ...(softFollowUp && { softFollowUp }),
-      ...(eventCodeProof && { eventCodeProof }),
-    };
-  }, [answers, startedAt, eventCodeProof, calculateTotalScore]);
-
-  const handleLeadSubmit = useCallback((lead: LeadData) => {
-    setLeadData(lead);
-    track('quiz_lead_submitted', lead);
-    
-    const completed = new Date();
-    setCompletedAt(completed);
-    setStep('ending');
-
-    submitQuiz(createSubmissionPayload(lead), true);
-  }, [createSubmissionPayload]);
-
-  const handleLeadSkip = useCallback(() => {
-    const completed = new Date();
-    setCompletedAt(completed);
-    setStep('ending');
-
-    submitQuiz(createSubmissionPayload(), true);
-  }, [createSubmissionPayload]);
-
-  const handleSoftFollowUp = useCallback((choice: string) => {
-    if (completedAt && startedAt) {
-      submitQuiz(createSubmissionPayload(leadData || undefined, { choice }));
-    }
-  }, [completedAt, startedAt, leadData, createSubmissionPayload]);
-
-  const submitQuiz = async (payload: QuizSubmissionPayload, trackCompletion = false) => {
+  const submitQuiz = useCallback(async (payload: QuizSubmissionPayload, trackCompletion = false) => {
     try {
+      const serializedPayload = {
+        ...payload,
+        startedAt: payload.startedAt.toISOString(),
+        completedAt: payload.completedAt.toISOString(),
+      };
+
       const response = await fetch(QUIZ_SUBMIT_ENDPOINT, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(serializedPayload),
       });
 
       if (response.ok && trackCompletion) {
@@ -191,22 +182,41 @@ export default function OpsQuiz() {
     } catch (error) {
       console.error('Failed to submit quiz:', error);
     }
-  };
+  }, []);
+
+  const handleSoftFollowUp = useCallback((choice: string) => {
+    if (!completedAt || !startedAt) return;
+
+    setSoftFollowUpChoice(choice);
+    submitQuiz(createSubmissionPayload(undefined, { choice }), true);
+  }, [completedAt, startedAt, createSubmissionPayload, submitQuiz]);
+
+  const handleLeadSubmit = useCallback((lead: LeadData) => {
+    setLeadData(lead);
+    track('quiz_lead_submitted', lead);
+
+    if (lead.email) {
+      const softFollowUp = softFollowUpChoice ? { choice: softFollowUpChoice } : undefined;
+      submitQuiz(createSubmissionPayload(lead, softFollowUp), false);
+    }
+
+    resetQuiz();
+  }, [createSubmissionPayload, softFollowUpChoice, submitQuiz, resetQuiz]);
 
   const currentAnswer = currentQuestion
     ? answers.find((a) => a.questionId === currentQuestion.id)
     : null;
   const currentSelectedOption = currentAnswer?.selectedOptionId || selectedOption;
 
-  const ending = step === 'ending' && completedAt
+  const ending = (step === 'ending' || step === 'lead-capture') && completedAt
     ? getEndingForScore(calculateTotalScore())
     : null;
 
   return (
     <OpsQuizShell
-      currentStep={currentStepNumber}
+      currentStep={getCurrentStepNumber()}
       totalSteps={totalSteps}
-      showProgress={step !== 'event-code' && step !== 'welcome' && step !== 'ending'}
+      showProgress={!HIDE_PROGRESS_STEPS.includes(step)}
     >
       <AnimatePresence mode="wait">
         {step === 'event-code' && (
@@ -226,18 +236,19 @@ export default function OpsQuiz() {
             canGoBack={currentQuestionIndex > 0}
           />
         )}
-        {step === 'lead-capture' && (
-          <LeadCaptureStep
-            key="lead-capture"
-            onSubmit={handleLeadSubmit}
-            onSkip={handleLeadSkip}
-          />
-        )}
         {step === 'ending' && ending && (
           <EndingStep
             key="ending"
             ending={ending}
             onSoftFollowUp={handleSoftFollowUp}
+            onProceedToLeadCapture={() => setStep('lead-capture')}
+          />
+        )}
+        {step === 'lead-capture' && (
+          <LeadCaptureStep
+            key="lead-capture"
+            onSubmit={handleLeadSubmit}
+            onSkip={resetQuiz}
           />
         )}
       </AnimatePresence>

@@ -20,12 +20,12 @@ export default function OpsQuizShell({
   const progress = totalSteps > 0 ? (currentStep / totalSteps) * 100 : 0;
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-4 md:p-8">
+    <div className="min-h-screen bg-background flex items-start md:items-center justify-center p-4 md:p-8 pt-24 md:pt-28 relative z-10">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-br from-accent-lilac/10 via-transparent to-accent-blue/10 blur-3xl" />
       </div>
 
-      <div className="relative w-full max-w-2xl">
+      <div className="relative w-full max-w-2xl z-10">
         {showProgress && totalSteps > 0 && (
           <div className="mb-6 flex items-center justify-between text-sm text-text-secondary">
             <span className="font-medium">
