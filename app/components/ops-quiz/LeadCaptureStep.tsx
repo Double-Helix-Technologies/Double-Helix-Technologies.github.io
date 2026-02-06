@@ -39,11 +39,17 @@ export default function LeadCaptureStep({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(formData);
+    if (isFormValid()) {
+      onSubmit(formData);
+    }
   };
 
   const handleChange = (field: keyof LeadData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const isFormValid = () => {
+    return !!formData.email?.trim();
   };
 
   return (
@@ -55,7 +61,7 @@ export default function LeadCaptureStep({
     >
       <div>
         <h2 className="text-2xl md:text-3xl font-semibold text-text-primary mb-2">
-          Optional - we'll reach out if you'd like
+          We'll reach out if you'd like
         </h2>
         <p className="text-text-secondary text-sm">
           If you provide your email, we'll reach out to discuss how you can get clarity with our product.
@@ -93,7 +99,7 @@ export default function LeadCaptureStep({
             value={formData.email}
             onChange={(e) => handleChange('email', e.target.value)}
             placeholder="you@company.com"
-            required={false}
+            required
             variant="dark"
           />
         </div>
@@ -147,7 +153,7 @@ export default function LeadCaptureStep({
             type="submit"
             variant="gradient"
             className="flex-1"
-            disabled={!formData.email}
+            disabled={!isFormValid()}
           >
             Submit
           </Button>

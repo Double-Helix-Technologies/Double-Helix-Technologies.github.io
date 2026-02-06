@@ -62,6 +62,16 @@ export default function QuestionStep({
     }, delay);
   };
 
+  const getIndicatorColor = (optionId: QuestionOption['id']): string => {
+    switch (optionId) {
+      case 'A': return 'bg-green-500'; // Green
+      case 'B': return 'bg-yellow-400'; // Bright Yellow
+      case 'C': return 'bg-orange-500'; // Medium Orange/Amber
+      case 'D': return 'bg-red-600'; // Dark Red
+      default: return 'bg-gray-400';
+    }
+  };
+
   return (
     <motion.div
       key={question.id}
@@ -128,6 +138,10 @@ export default function QuestionStep({
                     {option.label}
                   </div>
                 </div>
+                <div className={cn(
+                  'flex-shrink-0 w-3 h-3 rounded-full mt-1.5',
+                  getIndicatorColor(option.id)
+                )} />
               </div>
             </motion.button>
           );

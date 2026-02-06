@@ -87,8 +87,6 @@ export interface Ending {
   id: 'confident' | 'fragile' | 'blind';
   title: string;
   text: string;
-  ctaButton: string;
-  ctaLine: string;
   minScore: number;
   maxScore: number;
 }
@@ -97,9 +95,7 @@ export const ENDINGS: Ending[] = [
   {
     id: 'confident',
     title: 'Confident control ✅',
-    text: 'You\'re mostly in control. The win now is to harden the few weak links before they become expensive surprises.',
-    ctaButton: 'Let\'s discuss how you can get clarity with our product',
-    ctaLine: 'Want a comprehensive plan to reduce risk without a big transformation?',
+    text: 'Rock on! You are fully and confidently in control of your processes, other organisations can learn from you!',
     minScore: 17,
     maxScore: 21,
   },
@@ -107,8 +103,6 @@ export const ENDINGS: Ending[] = [
     id: 'fragile',
     title: 'Fragile (but fixable) ⚠️',
     text: 'Things work - but gaps in visibility, handovers, and "truth in numbers" are creating hidden risk and stress.',
-    ctaButton: 'Let\'s discuss how you can get clarity with our product',
-    ctaLine: 'Our Operational System Flow & Risk Assessment maps your end-to-end flow, scores the risk points, and gives a practical comprehensive action plan.',
     minScore: 10,
     maxScore: 16,
   },
@@ -116,8 +110,6 @@ export const ENDINGS: Ending[] = [
     id: 'blind',
     title: 'Flying blind 🚨',
     text: 'You\'re relying on heroics. One production stop, quality escape, or compliance miss can cost more than fixing the system early.',
-    ctaButton: 'Let\'s discuss how you can get clarity with our product',
-    ctaLine: 'Let\'s map where work really breaks and what to fix first.',
     minScore: 0,
     maxScore: 9,
   },

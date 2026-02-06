@@ -7,13 +7,14 @@ import WelcomeStep from './WelcomeStep';
 import QuestionStep from './QuestionStep';
 import LeadCaptureStep from './LeadCaptureStep';
 import EndingStep from './EndingStep';
+import ThankYouStep from './ThankYouStep';
 import EventCodeGate from './EventCodeGate';
 import { QUESTIONS, getEndingForScore, QuestionOption } from '@/app/data/opsQuiz';
 import { track } from '@/app/utils/analytics';
 import { LeadData } from './LeadCaptureStep';
 import { QUIZ_SUBMIT_ENDPOINT, SESSION_STORAGE_KEY } from './constants';
 
-type Step = 'event-code' | 'welcome' | 'question' | 'lead-capture' | 'ending';
+type Step = 'event-code' | 'welcome' | 'question' | 'lead-capture' | 'ending' | 'thank-you';
 
 interface Answer {
   questionId: string;
@@ -32,7 +33,7 @@ interface QuizSubmissionPayload {
   eventCodeProof?: string;
 }
 
-const HIDE_PROGRESS_STEPS: Step[] = ['event-code', 'welcome', 'ending', 'lead-capture'];
+const HIDE_PROGRESS_STEPS: Step[] = ['event-code', 'welcome', 'ending', 'lead-capture', 'thank-you'];
 
 export default function OpsQuiz() {
   const [eventCodeProof, setEventCodeProof] = useState<string | null>(null);
@@ -76,6 +77,8 @@ export default function OpsQuiz() {
     if (step === 'event-code' || step === 'welcome') return 0;
     if (step === 'question') return currentQuestionIndex + 1;
     if (step === 'ending') return QUESTIONS.length + 1;
+    if (step === 'lead-capture') return QUESTIONS.length + 2;
+    if (step === 'thank-you') return QUESTIONS.length + 3;
     return totalSteps;
   }, [step, currentQuestionIndex, totalSteps]);
 
@@ -195,13 +198,13 @@ export default function OpsQuiz() {
     setLeadData(lead);
     track('quiz_lead_submitted', lead);
 
-    if (lead.email) {
+    if (lead.email?.trim()) {
       const softFollowUp = softFollowUpChoice ? { choice: softFollowUpChoice } : undefined;
       submitQuiz(createSubmissionPayload(lead, softFollowUp), false);
     }
 
-    resetQuiz();
-  }, [createSubmissionPayload, softFollowUpChoice, submitQuiz, resetQuiz]);
+    setStep('thank-you');
+  }, [createSubmissionPayload, softFollowUpChoice, submitQuiz]);
 
   const currentAnswer = currentQuestion
     ? answers.find((a) => a.questionId === currentQuestion.id)
@@ -248,7 +251,13 @@ export default function OpsQuiz() {
           <LeadCaptureStep
             key="lead-capture"
             onSubmit={handleLeadSubmit}
-            onSkip={resetQuiz}
+            onSkip={() => setStep('thank-you')}
+          />
+        )}
+        {step === 'thank-you' && (
+          <ThankYouStep
+            key="thank-you"
+            onRestart={resetQuiz}
           />
         )}
       </AnimatePresence>
