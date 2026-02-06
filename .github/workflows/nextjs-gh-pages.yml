@@ -34,6 +34,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Build with Next.js
+        env:
+          NEXT_PUBLIC_EVENT_CODE_HASH: ${{ secrets.NEXT_PUBLIC_EVENT_CODE_HASH }}
+          NEXT_PUBLIC_EVENT_CODE_SALT: ${{ secrets.NEXT_PUBLIC_EVENT_CODE_SALT }}
         run: npm run build
       # - name: Copy CNAME file
       #   run: |
