@@ -188,11 +188,8 @@ export default function OpsQuiz() {
   }, []);
 
   const handleSoftFollowUp = useCallback((choice: string) => {
-    if (!completedAt || !startedAt) return;
-
     setSoftFollowUpChoice(choice);
-    submitQuiz(createSubmissionPayload(undefined, { choice }), true);
-  }, [completedAt, startedAt, createSubmissionPayload, submitQuiz]);
+  }, []);
 
   const handleLeadSubmit = useCallback((lead: LeadData) => {
     setLeadData(lead);
