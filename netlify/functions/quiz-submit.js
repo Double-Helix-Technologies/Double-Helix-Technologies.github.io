@@ -3,8 +3,30 @@ const MAX_SCORE = 21;
 const VALID_ENDINGS = ['confident', 'fragile', 'blind'];
 const DEFAULT_EMAIL_FROM = 'board@doublehelix.dev';
 
-const createResponse = (statusCode, ok, error = null) => ({
+// Allowed origins for CORS
+const ALLOWED_ORIGINS = [
+  'https://doublehelix.dev',
+  'https://www.doublehelix.dev',
+  'http://localhost:3000', // For local development
+];
+
+const getCorsHeaders = (origin) => {
+  const allowedOrigin = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
+  
+  return {
+    'Access-Control-Allow-Origin': allowedOrigin,
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Max-Age': '86400', // 24 hours
+  };
+};
+
+const createResponse = (statusCode, ok, error = null, headers = {}) => ({
   statusCode,
+  headers: {
+    'Content-Type': 'application/json',
+    ...headers,
+  },
   body: JSON.stringify({ ok, ...(error && { error }) }),
 });
 
@@ -74,8 +96,20 @@ const sendEmail = async (submissionData, recipientEmail) => {
 };
 
 exports.handler = async (event) => {
+  const origin = event.headers.origin || event.headers.Origin;
+  const corsHeaders = getCorsHeaders(origin);
+
+  // Handle preflight OPTIONS request
+  if (event.httpMethod === 'OPTIONS') {
+    return {
+      statusCode: 200,
+      headers: corsHeaders,
+      body: '',
+    };
+  }
+
   if (event.httpMethod !== 'POST') {
-    return createResponse(405, false, 'Method not allowed');
+    return createResponse(405, false, 'Method not allowed', corsHeaders);
   }
 
   try {
@@ -83,12 +117,12 @@ exports.handler = async (event) => {
 
     const eventCodeValidation = validateEventCode(payload, process.env.EVENT_CODE_HASH);
     if (!eventCodeValidation.valid) {
-      return createResponse(eventCodeValidation.statusCode, false, eventCodeValidation.error);
+      return createResponse(eventCodeValidation.statusCode, false, eventCodeValidation.error, corsHeaders);
     }
 
     const payloadValidation = validatePayload(payload);
     if (!payloadValidation.valid) {
-      return createResponse(400, false, payloadValidation.error);
+      return createResponse(400, false, payloadValidation.error, corsHeaders);
     }
 
     const submissionData = {
@@ -101,14 +135,14 @@ exports.handler = async (event) => {
     
     if (!recipientEmail) {
       console.log('[Quiz Submission]', JSON.stringify(submissionData, null, 2));
-      return createResponse(200, true);
+      return createResponse(200, true, null, corsHeaders);
     }
 
     await sendEmail(submissionData, recipientEmail);
-    return createResponse(200, true);
+    return createResponse(200, true, null, corsHeaders);
   } catch (error) {
     console.error('[Quiz Submission Error]', error);
-    return createResponse(500, false, 'Failed to process submission');
+    return createResponse(500, false, 'Failed to process submission', corsHeaders);
   }
 };
 
