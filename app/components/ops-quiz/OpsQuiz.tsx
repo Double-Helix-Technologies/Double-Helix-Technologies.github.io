@@ -174,8 +174,7 @@ export default function OpsQuiz() {
 
   const submitQuiz = async (payload: QuizSubmissionPayload, trackCompletion = false) => {
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
-      const response = await fetch(`${apiUrl}${QUIZ_SUBMIT_ENDPOINT}`, {
+      const response = await fetch(QUIZ_SUBMIT_ENDPOINT, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
