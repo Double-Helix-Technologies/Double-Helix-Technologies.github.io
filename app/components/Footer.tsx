@@ -5,6 +5,20 @@ import { Separator } from '@radix-ui/react-separator';
 import { Button } from './ui/button';
 import { AtSign, Linkedin } from 'lucide-react';
 import { useTheme } from '@/app/components/ThemeProvider';
+import { useConsent } from './ConsentProvider';
+
+function CookieSettingsLink() {
+  const { openConsentModal } = useConsent();
+  
+  return (
+    <button
+      onClick={openConsentModal}
+      className="text-text-secondary hover:text-primary transition-colors text-left"
+    >
+      Cookie Settings
+    </button>
+  );
+}
 
 export default function Footer() {
   const {logo} = useTheme()
@@ -71,6 +85,9 @@ export default function Footer() {
                   <a href="/notice" className="text-text-secondary hover:text-primary transition-colors">
                     Legal Notice
                   </a>
+                </li>
+                <li>
+                  <CookieSettingsLink />
                 </li>
               </ul>
             </div>

@@ -2,6 +2,10 @@ import type { Metadata } from 'next';
 import { Inter, Outfit } from 'next/font/google';
 import './globals.css';
 import { ReactNode } from 'react';
+import { ConsentProvider } from './components/ConsentProvider';
+import CookieBanner from './components/CookieBanner';
+import CookiePreferencesModal from './components/CookiePreferencesModal';
+import GA4Script from './components/GA4Script';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -25,16 +29,34 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode;
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
     <head>
       <link rel="icon" href="/images/favicon.ico" sizes="any"/>
-      <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-        rel="stylesheet"
-      />
-      <link rel="preconnect" href="https://fonts.googleapis.com"/>
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous"/>
-      <link
-        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Outfit:wght@100..900&display=swap"
-        rel="stylesheet"/>
-      {/* Script to avoid FOUC (Flash of Unstyled Content) when switching themes */}
+      <script dangerouslySetInnerHTML={{
+        __html: `
+            (function() {
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              window.gtag = gtag;
+              gtag('consent', 'default', {
+                'analytics_storage': 'denied',
+                'ad_storage': 'denied',
+                'ad_user_data': 'denied',
+                'ad_personalization': 'denied',
+                'wait_for_update': 500
+              });
+              try {
+                const consentCookie = document.cookie.split(';').find(c => c.trim().startsWith('dht_consent='));
+                if (consentCookie) {
+                  const consentValue = decodeURIComponent(consentCookie.split('=')[1]);
+                  const consent = JSON.parse(consentValue);
+                  if (consent.preferences && consent.preferences.analytics) {
+                    gtag('consent', 'update', {
+                      'analytics_storage': 'granted'
+                    });
+                  }
+                }
+              } catch (e) {}
+            })();
+          `
+      }}/>
       <script dangerouslySetInnerHTML={{
         __html: `
             (function() {
@@ -54,7 +76,12 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode;
       }}/>
     </head>
     <body className={`${inter.variable} ${outfit.variable} font-sans antialiased`}>
-    {children}
+      <ConsentProvider>
+        <CookieBanner />
+        <CookiePreferencesModal />
+        <GA4Script />
+        {children}
+      </ConsentProvider>
     </body>
     </html>
   );
