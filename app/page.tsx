@@ -5,6 +5,7 @@ import HowWeWork from './components/HowWeWork';
 import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import LiaaInfo from './components/LiaaInfo';
 import { ThemeProvider } from './components/ThemeProvider';
 import DiscoveryWorkshop from './components/DiscoveryWorkshop';
 import CaseStudiesSlider from './components/CaseStudiesSlider';
@@ -21,6 +22,7 @@ export default function Home() {
         {/* <DiscoveryWorkshop/> */}
         <Testimonials/>
         <Contact/>
+        <LiaaInfo/>
         <Footer/>
       </main>
     </ThemeProvider>
