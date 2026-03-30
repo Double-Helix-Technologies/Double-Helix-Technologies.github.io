@@ -17,7 +17,7 @@ export default function LiaaInfo() {
                 height={98}
                 className="h-auto w-full max-w-[147px]"
               />
-              <p className="mt-3 text-sm text-text-secondary">Fincanced by European Union</p>
+              <p className="mt-3 text-sm text-text-secondary">Financed by European Union</p>
             </div>
             <div className="flex justify-center">
               <Image
