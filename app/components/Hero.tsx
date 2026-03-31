@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Button } from '@/app/components/ui/button';
 
 export default function Hero() {
@@ -16,9 +17,9 @@ export default function Hero() {
         </div>
         <div className="flex flex-row gap-5">
           <Button variant="gradient">
-            <a href="/#contact">
+            <Link href="/#contact">
               Contact us
-            </a>
+            </Link>
           </Button>
         </div>
       </div>

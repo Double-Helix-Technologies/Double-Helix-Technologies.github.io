@@ -23,8 +23,9 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function CaseStudyPage({ params }: { params: { slug: string } }) {
-  const study = caseStudies.find((s) => s.slug === params.slug);
+export default async function CaseStudyPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const study = caseStudies.find((s) => s.slug === slug);
 
   if (!study) {
     notFound();
@@ -62,7 +63,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
           Let's discuss how we can help you achieve similar results.
         </p>
         <Button variant="secondary" className={`${colors.bg} ${colors.text} w-fit`}>
-          <a href="/#contact">Get in Touch</a>
+          <Link href="/#contact">Get in Touch</Link>
         </Button>
       </div>
     );

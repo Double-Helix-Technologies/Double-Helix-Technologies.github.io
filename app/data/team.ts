@@ -42,7 +42,7 @@ const leadershipTeam: TeamMember[] = [
   }
 ];
 
-const coreTeam = [
+const coreTeam: TeamMember[] = [
   {
     name: 'Santa',
     role: 'Product Owner',

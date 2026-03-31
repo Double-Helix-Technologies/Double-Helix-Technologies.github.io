@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { Separator } from '@radix-ui/react-separator';
 import { Button } from './ui/button';
 import { AtSign, Linkedin } from 'lucide-react';
@@ -52,19 +53,19 @@ export default function Footer() {
               <h3 className="text-lg">Company</h3>
               <ul className="space-y-1">
                 <li>
-                  <a href="/#services" className="text-text-secondary hover:text-primary transition-colors">
+                  <Link href="/#services" className="text-text-secondary hover:text-primary transition-colors">
                     Services
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="/#about" className="text-text-secondary hover:text-primary transition-colors">
+                  <Link href="/about" className="text-text-secondary hover:text-primary transition-colors">
                     About
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="/#contact" className="text-text-secondary hover:text-primary transition-colors">
+                  <Link href="/#contact" className="text-text-secondary hover:text-primary transition-colors">
                     Contact
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -72,19 +73,19 @@ export default function Footer() {
               <h3 className="text-lg">Legal</h3>
               <ul className="space-y-1">
                 <li>
-                  <a href="/privacy" className="text-text-secondary hover:text-primary transition-colors">
+                  <Link href="/privacy" className="text-text-secondary hover:text-primary transition-colors">
                     Privacy
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="/terms" className="text-text-secondary hover:text-primary transition-colors">
+                  <Link href="/terms" className="text-text-secondary hover:text-primary transition-colors">
                     Terms
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="/notice" className="text-text-secondary hover:text-primary transition-colors">
+                  <Link href="/notice" className="text-text-secondary hover:text-primary transition-colors">
                     Legal Notice
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <CookieSettingsLink />
