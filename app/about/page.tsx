@@ -35,7 +35,7 @@ export default function AboutPage() {
   </Breadcrumb>;
 
   const valuesCard = (value: string) => {
-    return (<Card className="bg-background">
+    return (<Card key={value} className="bg-background">
       <CardHeader>
         <CardTitle>
           <div className="flex items-center gap-4">
