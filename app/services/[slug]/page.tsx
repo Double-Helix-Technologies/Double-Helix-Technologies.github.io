@@ -22,8 +22,9 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function CaseStudyPage({ params }: { params: { slug: string } }) {
-  const service = servicesContents.find((s) => s.key === params.slug);
+export default async function CaseStudyPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const service = servicesContents.find((s) => s.key === slug);
 
   if (!service) {
     notFound();
@@ -74,7 +75,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
         </div>
         <Separator className="my-2"/>
         <Button variant="gradient" className="w-fit">
-          <a href="/#contact">Get started</a><ArrowRight/>
+          <Link href="/#contact">Get started</Link><ArrowRight/>
         </Button>
       </div>
     );
