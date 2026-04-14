@@ -1,6 +1,15 @@
+import type { Metadata } from 'next';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import { ThemeProvider } from '../components/ThemeProvider';
+import { buildMetadata } from '../lib/seo';
+
+export const metadata: Metadata = buildMetadata({
+  title: 'Terms of Use',
+  description: 'Terms of use for Double Helix Technologies.',
+  path: '/terms/',
+  noIndex: true
+});
 
 export default function TermsOfUse() {
   return (

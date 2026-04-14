@@ -1,5 +1,4 @@
-'use client';
-
+import type { Metadata } from 'next';
 import { ChevronRight } from 'lucide-react';
 import Navigation from '@/app/components/Navigation';
 import { ThemeProvider } from '../components/ThemeProvider';
@@ -13,6 +12,19 @@ import {
 import Link from 'next/link';
 import Footer from '@/app/components/Footer';
 import { Card, CardHeader, CardTitle } from '@/app/components/ui/card';
+import { buildMetadata } from '../lib/seo';
+
+export const metadata: Metadata = buildMetadata({
+  title: 'About Our Life Sciences & Healthcare IT Team',
+  description:
+    'Meet Double Helix Technologies, a senior engineering and consulting team helping life sciences and healthcare organizations improve software, integrations, and operational clarity.',
+  path: '/about/',
+  keywords: [
+    'life sciences technology partner',
+    'healthcare IT consulting team',
+    'Latvia software consulting'
+  ]
+});
 
 export default function AboutPage() {
 

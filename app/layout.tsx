@@ -6,6 +6,7 @@ import { ConsentProvider } from './components/ConsentProvider';
 import CookieBanner from './components/CookieBanner';
 import CookiePreferencesModal from './components/CookiePreferencesModal';
 import GA4Script from './components/GA4Script';
+import { absoluteUrl, organizationSchema, siteConfig, websiteSchema } from './lib/seo';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -20,8 +21,34 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: 'Double Helix Technologies - Strategic Technology Partner',
-  description: 'We help businesses scale by providing senior-level software engineering, IT process consulting, and digital transformation strategies.'
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: `${siteConfig.name} | ${siteConfig.defaultTitle}`,
+    template: `%s | ${siteConfig.name}`
+  },
+  description: siteConfig.description,
+  alternates: {
+    canonical: absoluteUrl('/')
+  },
+  openGraph: {
+    title: `${siteConfig.name} | ${siteConfig.defaultTitle}`,
+    description: siteConfig.description,
+    url: siteConfig.url,
+    siteName: siteConfig.name,
+    locale: 'en_US',
+    type: 'website',
+    images: [
+      {
+        url: absoluteUrl(siteConfig.ogImage)
+      }
+    ]
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `${siteConfig.name} | ${siteConfig.defaultTitle}`,
+    description: siteConfig.description,
+    images: [absoluteUrl(siteConfig.ogImage)]
+  }
 };
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode; }>) {
@@ -29,6 +56,14 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode;
     <html lang="en" className="scroll-smooth" data-scroll-behavior="smooth" suppressHydrationWarning>
     <head>
       <link rel="icon" href="/images/favicon.ico" sizes="any"/>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
       <script dangerouslySetInnerHTML={{
         __html: `
             (function() {

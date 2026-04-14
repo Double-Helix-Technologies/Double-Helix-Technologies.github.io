@@ -1,7 +1,16 @@
+import type { Metadata } from 'next';
 import React from 'react';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import { ThemeProvider } from '../components/ThemeProvider';
+import { buildMetadata } from '../lib/seo';
+
+export const metadata: Metadata = buildMetadata({
+  title: 'Legal Notice',
+  description: 'Legal notice for Double Helix Technologies SIA.',
+  path: '/notice/',
+  noIndex: true
+});
 
 const Notice = () => {
   return (

@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
 import Services from './components/Services';
@@ -9,6 +10,21 @@ import LiaaInfo from './components/LiaaInfo';
 import { ThemeProvider } from './components/ThemeProvider';
 import DiscoveryWorkshop from './components/DiscoveryWorkshop';
 import CaseStudiesSlider from './components/CaseStudiesSlider';
+import { buildMetadata } from './lib/seo';
+
+export const metadata: Metadata = buildMetadata({
+  title: 'Custom Software, Integrations & AI Adoption for Life Sciences',
+  description:
+    'IT services for life sciences and healthcare teams: custom software development, system integrations that remove data bottlenecks, and practical AI adoption solutions.',
+  path: '/',
+  keywords: [
+    'life sciences custom software development',
+    'healthcare software development',
+    'system integrations for healthcare',
+    'data flow automation',
+    'AI adoption consulting'
+  ]
+});
 
 export default function Home() {
   return (

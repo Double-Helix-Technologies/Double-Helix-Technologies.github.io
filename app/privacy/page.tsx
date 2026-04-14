@@ -1,6 +1,15 @@
+import type { Metadata } from 'next';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import { ThemeProvider } from '../components/ThemeProvider';
+import { buildMetadata } from '../lib/seo';
+
+export const metadata: Metadata = buildMetadata({
+  title: 'Privacy Policy',
+  description: 'Privacy policy for Double Helix Technologies.',
+  path: '/privacy/',
+  noIndex: true
+});
 
 export default function PrivacyPolicy() {
   return (

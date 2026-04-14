@@ -1,5 +1,4 @@
-'use client';
-
+import type { Metadata } from 'next';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/app/components/ui/card';
 import { Asterisk, ChevronRight, Mail } from 'lucide-react';
 import Image from 'next/image';
@@ -16,6 +15,15 @@ import Link from 'next/link';
 import Footer from '@/app/components/Footer';
 import AvatarPlaceholder from '@/app/components/ui/avatarPlaceholder';
 import { coreTeam, leadershipTeam, TeamMember } from '@/app/data/team';
+import { buildMetadata } from '../lib/seo';
+
+export const metadata: Metadata = buildMetadata({
+  title: 'Team',
+  description:
+    'Get to know the senior engineering and consulting team behind Double Helix Technologies and our work in life sciences and healthcare IT.',
+  path: '/team/',
+  keywords: ['healthcare software team', 'life sciences engineering team']
+});
 
 const getAvatar = (person: TeamMember) => {
   return person.image ? (

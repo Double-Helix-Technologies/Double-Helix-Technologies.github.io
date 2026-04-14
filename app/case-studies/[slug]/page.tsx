@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Check, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
@@ -16,11 +17,34 @@ import {
 import { Button } from '@/app/components/ui/button';
 import { Badge } from '@/app/components/ui/badge';
 import { Separator } from '@/app/components/ui/separator';
+import { absoluteUrl, buildMetadata, siteConfig } from '@/app/lib/seo';
 
 export async function generateStaticParams() {
   return caseStudies.map((study) => ({
     slug: study.slug
   }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const study = caseStudies.find((item) => item.slug === slug);
+
+  if (!study) {
+    return buildMetadata({
+      title: 'Case Study',
+      description: siteConfig.description,
+      path: `/case-studies/${slug}/`,
+      type: 'article'
+    });
+  }
+
+  return buildMetadata({
+    title: `${study.caseTitle} Case Study`,
+    description: study.summary,
+    path: `/case-studies/${study.slug}/`,
+    type: 'article',
+    keywords: [study.caseTitle, `${study.client.sector} case study`, 'workflow optimization case study']
+  });
 }
 
 export default async function CaseStudyPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -33,6 +57,25 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
   const link = `/case-studies/${study.slug}`;
   const colors = colorClasses[study.color];
+  const caseStudyStructuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: `${study.caseTitle} Case Study`,
+    description: study.summary,
+    author: {
+      '@type': 'Organization',
+      name: siteConfig.name
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: siteConfig.name,
+      logo: {
+        '@type': 'ImageObject',
+        url: absoluteUrl(siteConfig.ogImage)
+      }
+    },
+    mainEntityOfPage: absoluteUrl(link)
+  };
 
   const breadcrumb = <Breadcrumb className="mb-4">
     <BreadcrumbList>
@@ -72,6 +115,10 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
   return (
     <ThemeProvider>
       <main className="min-h-screen">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(caseStudyStructuredData) }}
+        />
         <Navigation/>
 
         <section className="top-section bg-gradient-to-b from-background to-background-alt ">
