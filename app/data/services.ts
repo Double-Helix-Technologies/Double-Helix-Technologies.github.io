@@ -133,35 +133,33 @@ export const servicesContents: Service[] = [
     }
   },
   {
-    title: 'AI Adoption, Observability & Workflow Monitoring',
+    title: 'Observability & Workflow Monitoring',
     key: 'System',
     slug: 'observability-workflow-monitoring',
-    description: 'We help teams put AI into real workflows and monitor those workflows once they are live. That includes the telemetry, dashboards, and alerting needed to see where AI-assisted or automated steps succeed, fail, or need human review.',
+    description: 'We help teams see how workflows, integrations, and operational systems behave in real life. That includes the telemetry, dashboards, and alerting needed to spot failures early, trace issues across handoffs, and keep critical operational flows visible.',
     price: '€5000',
     timeline: '1-2 months',
     items: [
       'Review of current visibility, logging, and monitoring gaps',
-      'Selection of the workflows, automations, or AI-assisted steps to track end to end',
-      'Definition of the key events, thresholds, and human-review checkpoints to monitor',
+      'Selection of the workflows and integrations to track end to end',
+      'Definition of the key events, thresholds, and exception conditions to monitor',
       'Setup or improvement of dashboards for workflow, integration, and system health',
       'Alert rules and escalation logic so the right teams are notified quickly',
       'Operational playbooks for troubleshooting, incident response, and follow-up',
     ],
     deliverables: [
       'Visibility gap assessment',
-      'Workflow and AI monitoring plan',
+      'Workflow monitoring plan',
       'Dashboards for flow, exceptions, and system health',
       'Alert rules and escalation paths',
       'Incident and troubleshooting playbooks',
       'Operational reporting template',
     ],
     seo: {
-      title: 'AI Adoption, Observability & Workflow Monitoring',
+      title: 'Observability & Workflow Monitoring',
       description:
-        'Adopt AI in real workflows and monitor workflow visibility, observability, and operational telemetry across connected systems in healthcare and life sciences.',
+        'Improve workflow visibility, observability, and operational telemetry across connected systems in healthcare and life sciences.',
       keywords: [
-        'AI workflow monitoring',
-        'AI adoption consulting',
         'workflow monitoring',
         'observability consulting',
         'operational telemetry',

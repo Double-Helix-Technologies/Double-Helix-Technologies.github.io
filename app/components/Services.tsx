@@ -23,7 +23,6 @@ export default function Services() {
         <Accordion
           type="single"
           collapsible
-          defaultValue="Integration"
           className="w-full mx-auto border-b border-b-gray-700"
         >
           {servicesContents.map(({ key, slug, title, description, price }) => (
