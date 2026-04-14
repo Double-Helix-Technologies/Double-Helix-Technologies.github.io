@@ -4,7 +4,9 @@
 /services/Integration/ /services/system-integrations/ 301
 /services/Architecture /services/custom-software-development/ 301
 /services/Architecture/ /services/custom-software-development/ 301
-/services/System /services/ai-adoption-observability/ 301
-/services/System/ /services/ai-adoption-observability/ 301
+/services/System /services/observability-workflow-monitoring/ 301
+/services/System/ /services/observability-workflow-monitoring/ 301
+/services/ai-adoption-observability /services/observability-workflow-monitoring/ 301
+/services/ai-adoption-observability/ /services/observability-workflow-monitoring/ 301
 /services/Security /services/ai-governance-compliance/ 301
 /services/Security/ /services/ai-governance-compliance/ 301

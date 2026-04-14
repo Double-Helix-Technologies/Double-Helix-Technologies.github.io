@@ -96,7 +96,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
       </BreadcrumbSeparator>
       <BreadcrumbItem>
         <BreadcrumbLink asChild>
-          <Link href={link}>{service.key}</Link>
+          <Link href={link}>{service.title}</Link>
         </BreadcrumbLink>
       </BreadcrumbItem>
     </BreadcrumbList>
@@ -119,7 +119,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
       <div className="grid flex-cols-1 frid-rows-3 gap-4">
         <div className="space-y-2">
           <p className="font-semibold">Starting at {service.price}</p>
-          <p className="text-text-secondary text-sm">custom quotes available</p>
+          <p className="text-text-secondary text-sm">tailored scope available</p>
         </div>
         <div className="space-y-2">
           <p className="font-semibold row-start-2">Timeline</p>
@@ -127,7 +127,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         </div>
         <Separator className="my-2"/>
         <Button variant="gradient" className="w-fit">
-          <Link href="/#contact">Get started</Link><ArrowRight/>
+          <Link href="/#contact">Discuss this service</Link><ArrowRight/>
         </Button>
       </div>
     );
@@ -168,7 +168,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                 <div className="my-8 space-y-12">
                   <div>
                     <h2 className="text-3xl mb-6 flex items-center gap-2">
-                      What's included
+                      How we work
                     </h2>
                     <ul className="space-y-1">
                       {service.items.map((item) => (
@@ -181,7 +181,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                   </div>
                   <div>
                     <h2 className="text-3xl mb-6 flex items-center gap-2">
-                      Deliverables
+                      What you get
                     </h2>
                     <div className="flex flex-wrap gap-4">
                       {service.deliverables.map((deliverable) => (

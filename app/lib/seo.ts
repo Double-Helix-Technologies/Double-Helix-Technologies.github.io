@@ -192,8 +192,8 @@ export function buildOfferCatalogSchema() {
           '@type': 'Service',
           name: 'AI Adoption Solutions',
           description:
-            'AI adoption, observability, and governance readiness for operational workflows in regulated environments.',
-          url: absoluteUrl('/services/ai-adoption-observability/')
+            'AI use-case discovery, readiness assessment, governance, and rollout planning for regulated operational environments.',
+          url: absoluteUrl('/services/ai-adoption-solutions/')
         }
       }
     ]

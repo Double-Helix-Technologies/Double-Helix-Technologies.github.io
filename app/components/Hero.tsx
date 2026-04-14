@@ -8,17 +8,17 @@ export default function Hero() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
           <h1
             className="text-5xl md:text-6xl lg:text-7xl tracking-[.025em] animate-fade-in duration-700 col-span-3 font-semibold text-transparent bg-clip-text bg-gradient-to-tr from-accent-pink via-accent-blue to-accent-teal pb-2">
-            We make workflows clear<br/>
-            and make them work better.
+            Custom software, system integrations,<br/>
+            and AI adoption for life sciences.
           </h1>
           <p className="text-lg col-start-1 col-span-1 md:col-span-2">
-            We help life science and manufacturing companies understand how work moves across people, processes, and systems and improve execution by reducing risk and friction.
+            We help life sciences and healthcare teams reduce data bottlenecks, replace fragile manual handoffs, and build reliable operational workflows across people, processes, and systems.
           </p>
         </div>
         <div className="flex flex-row gap-5">
           <Button variant="gradient">
             <Link href="/#contact">
-              Contact us
+              Book an intro call
             </Link>
           </Button>
         </div>

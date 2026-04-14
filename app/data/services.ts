@@ -11,31 +11,37 @@ export interface Service {
     title: string;
     description: string;
     keywords: string[];
-    category: 'custom-software-development' | 'system-integrations' | 'ai-adoption-solutions' | 'workflow-assessment';
+    category:
+      | 'custom-software-development'
+      | 'system-integrations'
+      | 'ai-adoption-solutions'
+      | 'workflow-assessment'
+      | 'observability-monitoring'
+      | 'security-compliance';
   };
 }
 
 export const servicesContents: Service[] = [
   {
-    title: 'Operational System Flow and Risk Assessment',
+    title: 'Operational Workflow Risk Assessment',
     key: 'Discovery',
     slug: 'operational-workflow-risk-assessment',
-    description: 'We help you understand how work actually flows across your organization by mapping people, processes, and systems end to end. We identify where execution breaks down, where risk hides, and where ownership or visibility is unclear. The result is a decision grade view of operational risk, and a clear, prioritized & actionable remediation plan you can execute internally or with partners before incidents force action.',
+    description: 'We trace how work moves across teams, systems, spreadsheets, and handoffs so you can see where delays, rework, and compliance risk are introduced. The result is a prioritized remediation plan for healthcare and life sciences operations before incidents, audit findings, or missed deadlines force action.',
     price: '€15000',
     timeline: '2-4 months',
     items: [
-      'Kickoff to confirm scope, goals, process walkthrough',
-      'Interviews with key people across the workflow',
-      'On-site walkthroughs to see how work is actually done',
-      'Review of operational reports and historical incidents',
-      'Mapping of handoffs, ownership, and system touchpoints end to end',
-      'Prioritization sessions',
+      'Kickoff to confirm scope, workflow boundaries, and business risk',
+      'Interviews with the people who run and support the workflow',
+      'On-site or remote walkthroughs to see how work is actually performed',
+      'Review of SOPs, operational reports, incidents, and exception paths',
+      'Mapping of handoffs, ownership, decisions, and system touchpoints end to end',
+      'Prioritization workshops to align on the highest-impact fixes',
     ],
     deliverables: [
       'End-to-end flow maps',
       'Handoff matrix and exception overlay',
       'Risk register with scoring and owners',
-      'Actionable remediation plan',
+      'Prioritized remediation plan',
       'Executive readout deck',
       'Board-ready one-page memo'    
     ],
@@ -53,24 +59,24 @@ export const servicesContents: Service[] = [
     }
   },
   {
-    title: 'End-to-end integration design & implementation',
+    title: 'System Integrations & Data Flow Optimization',
     key: 'Integration',
     slug: 'system-integrations',
-    description: 'We design and implement integrations that ensure data is reliable, complete, and consistent across your application landscape. By connecting systems end to end, we eliminate gaps, reduce manual workarounds, and establish a single source of truth with a clear audit trail. Built-in observability ensures issues are detected early, often before users or customers notice, supporting stable day-to-day operations in complex and regulated environments.',
+    description: 'We connect disconnected systems so critical data moves automatically, accurately, and with clear ownership. That means fewer manual handoffs, less duplicate entry, and a dependable source of truth across regulated workflows.',
     price: '€10000',
     timeline: '2-4 months',
     items: [
-      'Review of all systems involved and how they currently exchange data',
-      'Agreement on what data “source of truth” is for key records',
-      'Design of interfaces and data mappings between systems',
-      'Implementation in small steps with testing after each step',
-      'End-to-end testing including main exceptions and failure cases',
-      'Setup of monitoring so issues are detected early',
-      'Handover documentation so teams can operate and troubleshoot',
+      'Review of the systems involved and how data currently moves between them',
+      'Definition of source-of-truth rules for critical records and fields',
+      'Interface, mapping, and error-handling design for each integration point',
+      'Incremental implementation with validation at each stage',
+      'End-to-end testing for main flows, edge cases, and failure scenarios',
+      'Monitoring and alerting so integration issues surface early',
+      'Handover documentation for operations, support, and troubleshooting',
     ],
     deliverables: [
       'Integration architecture and system map',
-      'Specification and data mapping',
+      'Interface specification and data mapping',
       'Production-ready integrations',
       'Automated end-to-end tests',
       'Monitoring dashboards and alerts',
@@ -91,25 +97,25 @@ export const servicesContents: Service[] = [
     }
   },
   {
-    title: 'Software architecture assessment & future-readiness advisory',
+    title: 'Custom Software Development & Architecture Advisory',
     key: 'Architecture',
     slug: 'custom-software-development',
-    description: 'We assess your current software architecture with a focus on scalability, maintainability, security, and long-term fit. We identify structural risks, technical debt, and growth blockers, then provide clear, pragmatic recommendations to evolve your systems without unnecessary rewrites. The goal is a future-ready architecture that supports business change, integrations, and reliable operations over time.',
+    description: 'We design and improve custom software for operational workflows that off-the-shelf tools cannot support well. We identify architectural risk, technical debt, and delivery blockers, then define practical next steps so teams can improve without unnecessary rewrites.',
     price: '€10 000',
     timeline: '2-4 months',
     items: [
-      'Review of the current system structure and key dependencies',
+      'Review of the current product, architecture, and key technical dependencies',
       'Assessment of scalability, maintainability, reliability, and security',
-      'Identification of high-risk areas and technical debt that slows delivery',
-      'Workshop to discuss options and trade-offs (improve, refactor, split, replace)',
-      'Clear recommendations focused on avoiding unnecessary rewrites',
-      'A step-by-step roadmap for what to do next',
+      'Identification of high-risk components and technical debt slowing delivery',
+      'Workshops to compare options such as improve, refactor, split, or replace',
+      'Recommendations grounded in operational constraints and delivery reality',
+      'A step-by-step roadmap for what to build, fix, or retire next',
     ],
     deliverables: [
       'Architecture and dependency map',
       'Risk and technical debt register',
       'Scalability and maintainability findings',
-      'Future options and recommendations',
+      'Future-state options and recommendations',
       'Improvement roadmap and priorities',
       'Decision memo for leadership',      
     ],
@@ -127,55 +133,94 @@ export const servicesContents: Service[] = [
     }
   },
   {
-    title: 'System observability setup and improvement',
+    title: 'AI Adoption, Observability & Workflow Monitoring',
     key: 'System',
-    slug: 'ai-adoption-observability',
-    description: 'We design or improve observability so teams can see how workflows, integrations, and systems behave in real life. By making data flows, failures, and bottlenecks visible end to end, we help teams detect issues earlier, reduce downtime, and improve traceability across operations.',
+    slug: 'observability-workflow-monitoring',
+    description: 'We help teams put AI into real workflows and monitor those workflows once they are live. That includes the telemetry, dashboards, and alerting needed to see where AI-assisted or automated steps succeed, fail, or need human review.',
     price: '€5000',
     timeline: '1-2 months',
     items: [
-      'Review of what you can see today and where visibility is missing',
-      'Agreement on the most important workflows to track end to end',
-      'Plan for what to measure and how to connect events across systems',
-      'Setup or improvement of dashboards for workflow and system health',
-      'Alert rules so issues reach the right people fast',
-      'Clear procedures for incident response and troubleshooting',
+      'Review of current visibility, logging, and monitoring gaps',
+      'Selection of the workflows, automations, or AI-assisted steps to track end to end',
+      'Definition of the key events, thresholds, and human-review checkpoints to monitor',
+      'Setup or improvement of dashboards for workflow, integration, and system health',
+      'Alert rules and escalation logic so the right teams are notified quickly',
+      'Operational playbooks for troubleshooting, incident response, and follow-up',
     ],
     deliverables: [
       'Visibility gap assessment',
-      'Workflow monitoring plan',
-      'Dashboards for flow and health',
+      'Workflow and AI monitoring plan',
+      'Dashboards for flow, exceptions, and system health',
       'Alert rules and escalation paths',
       'Incident and troubleshooting playbooks',
-      'Operational reporting template',      
+      'Operational reporting template',
     ],
     seo: {
-      title: 'AI-Ready Observability & Workflow Monitoring',
+      title: 'AI Adoption, Observability & Workflow Monitoring',
       description:
-        'Improve workflow visibility, observability, and operational telemetry to support automation and AI adoption across connected systems.',
+        'Adopt AI in real workflows and monitor workflow visibility, observability, and operational telemetry across connected systems in healthcare and life sciences.',
       keywords: [
+        'AI workflow monitoring',
+        'AI adoption consulting',
         'workflow monitoring',
         'observability consulting',
-        'AI readiness',
-        'operational telemetry'
+        'operational telemetry',
+        'system observability'
+      ],
+      category: 'observability-monitoring'
+    }
+  },
+  {
+    title: 'AI Adoption Solutions',
+    key: 'AI',
+    slug: 'ai-adoption-solutions',
+    description: 'We help teams decide where AI should and should not be used. We identify practical use cases, assess readiness, define guardrails, and shape pilots that fit regulated healthcare and life sciences environments.',
+    price: '€7500',
+    timeline: '1-2 months',
+    items: [
+      'Discovery sessions to identify high-value AI opportunities',
+      'Assessment of workflow, data quality, and system readiness',
+      'Prioritization of use cases by value, feasibility, and risk',
+      'Definition of governance, review, and human-in-the-loop controls',
+      'Pilot design for one or two practical AI implementations',
+      'Implementation roadmap aligned to operational constraints',
+    ],
+    deliverables: [
+      'AI opportunity map',
+      'Prioritized use case shortlist',
+      'Readiness and risk assessment',
+      'Governance guardrails',
+      'Pilot implementation plan',
+      'AI adoption roadmap',
+    ],
+    seo: {
+      title: 'AI Adoption Solutions for Healthcare & Life Sciences',
+      description:
+        'Identify practical AI use cases, assess readiness, and roll out AI adoption safely in healthcare and life sciences operations.',
+      keywords: [
+        'AI adoption consulting',
+        'healthcare AI adoption',
+        'life sciences AI consulting',
+        'AI readiness assessment',
+        'AI implementation roadmap'
       ],
       category: 'ai-adoption-solutions'
     }
   },
   {
-    title: 'Compliance & Security',
+    title: 'Security, Compliance & AI Governance Readiness',
     key: 'Security',
     slug: 'ai-governance-compliance',
-    description: 'We perform pragmatic security and compliance risk assessments focused on real operational impact. We identify and classify risks across machines, systems, data flows, and integrations, then deliver clear, prioritized recommendations that are practical to implement. Each step produces concrete deliverables that support audit readiness, security posture, and confidence in everyday operations.',
+    description: 'We assess the controls that protect systems, integrations, data flows, and AI-enabled processes. You get a prioritized plan to reduce operational risk, support audit readiness, and strengthen day-to-day governance in regulated environments.',
     price: '€7500',
     timeline: '1-2 months',
     items: [
-      'Inventory of key systems, users, and data flows',
-      'Review of access control and sensitive data movement',
-      'Assessment of real security risks that can disrupt operations',
+      'Inventory of critical systems, users, interfaces, and data flows',
+      'Review of access control, privileged actions, and sensitive data movement',
+      'Assessment of security and compliance risks that can disrupt operations',
       'Prioritized recommendations that are practical to implement',
-      'Audit readiness support with an evidence checklist and gap list',
-      'Optional incident simulation to test response readiness',      
+      'Audit-readiness support with an evidence checklist and gap list',
+      'Optional incident simulation to test detection and response readiness',
     ],
     deliverables: [
       'System and data flow inventory',
@@ -195,7 +240,7 @@ export const servicesContents: Service[] = [
         'regulated system governance',
         'AI governance readiness'
       ],
-      category: 'ai-adoption-solutions'
+      category: 'security-compliance'
     }
   }
 ];

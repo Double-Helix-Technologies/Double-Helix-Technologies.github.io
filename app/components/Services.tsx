@@ -16,14 +16,14 @@ export default function Services() {
             What we do
           </h2>
           <p className="text-text-secondary max-w-2xl py-4">
-            We help organizations understand how work flows across people, processes, and systems and improve it where it matters most.
+            We help life sciences and healthcare organizations improve operational flow with custom software development, system integrations, and practical AI adoption support.
           </p>
         </div>
 
         <Accordion
           type="single"
           collapsible
-          defaultValue="integration"
+          defaultValue="Integration"
           className="w-full mx-auto border-b border-b-gray-700"
         >
           {servicesContents.map(({ key, slug, title, description, price }) => (
@@ -56,7 +56,7 @@ export default function Services() {
             </CardTitle>
           </CardHeader>
           <CardContent className="flex gap-10">
-            We offer tailored packages combining multiple services for comprehensive digital transformation.
+            We combine engineering, integration, and workflow expertise to solve operational bottlenecks in regulated environments.
           </CardContent>
           <CardFooter>
             <Button variant="secondary">
