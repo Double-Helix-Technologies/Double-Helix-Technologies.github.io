@@ -2,6 +2,7 @@ export interface Service {
   timeline: string;
   title: string;
   key: string;
+  slug: string;
   description: string;
   price: string;
   items: string[];
@@ -18,6 +19,7 @@ export const servicesContents: Service[] = [
   {
     title: 'Operational System Flow and Risk Assessment',
     key: 'Discovery',
+    slug: 'operational-workflow-risk-assessment',
     description: 'We help you understand how work actually flows across your organization by mapping people, processes, and systems end to end. We identify where execution breaks down, where risk hides, and where ownership or visibility is unclear. The result is a decision grade view of operational risk, and a clear, prioritized & actionable remediation plan you can execute internally or with partners before incidents force action.',
     price: '€15000',
     timeline: '2-4 months',
@@ -53,6 +55,7 @@ export const servicesContents: Service[] = [
   {
     title: 'End-to-end integration design & implementation',
     key: 'Integration',
+    slug: 'system-integrations',
     description: 'We design and implement integrations that ensure data is reliable, complete, and consistent across your application landscape. By connecting systems end to end, we eliminate gaps, reduce manual workarounds, and establish a single source of truth with a clear audit trail. Built-in observability ensures issues are detected early, often before users or customers notice, supporting stable day-to-day operations in complex and regulated environments.',
     price: '€10000',
     timeline: '2-4 months',
@@ -90,6 +93,7 @@ export const servicesContents: Service[] = [
   {
     title: 'Software architecture assessment & future-readiness advisory',
     key: 'Architecture',
+    slug: 'custom-software-development',
     description: 'We assess your current software architecture with a focus on scalability, maintainability, security, and long-term fit. We identify structural risks, technical debt, and growth blockers, then provide clear, pragmatic recommendations to evolve your systems without unnecessary rewrites. The goal is a future-ready architecture that supports business change, integrations, and reliable operations over time.',
     price: '€10 000',
     timeline: '2-4 months',
@@ -125,6 +129,7 @@ export const servicesContents: Service[] = [
   {
     title: 'System observability setup and improvement',
     key: 'System',
+    slug: 'ai-adoption-observability',
     description: 'We design or improve observability so teams can see how workflows, integrations, and systems behave in real life. By making data flows, failures, and bottlenecks visible end to end, we help teams detect issues earlier, reduce downtime, and improve traceability across operations.',
     price: '€5000',
     timeline: '1-2 months',
@@ -160,6 +165,7 @@ export const servicesContents: Service[] = [
   {
     title: 'Compliance & Security',
     key: 'Security',
+    slug: 'ai-governance-compliance',
     description: 'We perform pragmatic security and compliance risk assessments focused on real operational impact. We identify and classify risks across machines, systems, data flows, and integrations, then deliver clear, prioritized recommendations that are practical to implement. Each step produces concrete deliverables that support audit readiness, security posture, and confidence in everyday operations.',
     price: '€7500',
     timeline: '1-2 months',
@@ -193,3 +199,15 @@ export const servicesContents: Service[] = [
     }
   }
 ];
+
+export function getServiceBySlug(slug: string) {
+  return servicesContents.find((service) => service.slug === slug || service.key === slug);
+}
+
+export function isLegacyServiceSlug(service: Service, slug: string) {
+  return slug === service.key;
+}
+
+export function getServicePath(service: Service) {
+  return `/services/${service.slug}/`;
+}

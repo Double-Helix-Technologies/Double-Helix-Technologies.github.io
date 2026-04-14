@@ -26,7 +26,7 @@ export default function Services() {
           defaultValue="integration"
           className="w-full mx-auto border-b border-b-gray-700"
         >
-          {servicesContents.map(({ key, title, description, price }) => (
+          {servicesContents.map(({ key, slug, title, description, price }) => (
             <AccordionItem key={key} value={key} className="w-full">
               <AccordionTrigger>
                 <div className="flex gap-2">
@@ -39,7 +39,7 @@ export default function Services() {
                 <div className="flex flex-row justify-between">
                   <p className="py-2">Starting at <strong>{price}</strong> *</p>
                   <Button variant="secondary">
-                    <Link href={`/services/${key}`}>
+                    <Link href={`/services/${slug}/`}>
                       learn more
                     </Link>
                     <ArrowRight size={11}/>

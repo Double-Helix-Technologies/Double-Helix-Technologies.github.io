@@ -173,7 +173,7 @@ export function buildOfferCatalogSchema() {
           name: 'Custom Software Development',
           description:
             'Custom software design, architecture, and delivery for life sciences and healthcare organizations.',
-          url: absoluteUrl('/services/Architecture/')
+          url: absoluteUrl('/services/custom-software-development/')
         }
       },
       {
@@ -183,7 +183,7 @@ export function buildOfferCatalogSchema() {
           name: 'System Integrations & Data Flow Optimization',
           description:
             'System integrations that reduce manual handoffs, remove data bottlenecks, and establish a single source of truth.',
-          url: absoluteUrl('/services/Integration/')
+          url: absoluteUrl('/services/system-integrations/')
         }
       },
       {
@@ -193,7 +193,7 @@ export function buildOfferCatalogSchema() {
           name: 'AI Adoption Solutions',
           description:
             'AI adoption, observability, and governance readiness for operational workflows in regulated environments.',
-          url: absoluteUrl('/services/System/')
+          url: absoluteUrl('/services/ai-adoption-observability/')
         }
       }
     ]

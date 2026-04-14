@@ -13,20 +13,21 @@ import {
   BreadcrumbSeparator
 } from '@/app/components/ui/breadcrumb';
 import { Button } from '@/app/components/ui/button';
-import { Service, servicesContents } from '@/app/data/services';
+import { getServiceBySlug, getServicePath, isLegacyServiceSlug, Service, servicesContents } from '@/app/data/services';
 import { Card, CardHeader, CardTitle } from '@/app/components/ui/card';
 import { Separator } from '@/app/components/ui/separator';
 import { absoluteUrl, buildBreadcrumbSchema, buildMetadata, siteConfig } from '@/app/lib/seo';
 
 export async function generateStaticParams() {
-  return servicesContents.map((service: Service) => ({
-    slug: service.key
-  }));
+  return servicesContents.flatMap((service: Service) => ([
+    { slug: service.slug },
+    { slug: service.key }
+  ]));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const service = servicesContents.find((item) => item.key === slug);
+  const service = getServiceBySlug(slug);
 
   if (!service) {
     return buildMetadata({
@@ -36,23 +37,28 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     });
   }
 
+  const canonicalPath = getServicePath(service);
+  const isLegacySlug = isLegacyServiceSlug(service, slug);
+
   return buildMetadata({
     title: service.seo.title,
     description: service.seo.description,
-    path: `/services/${service.key}/`,
-    keywords: service.seo.keywords
+    path: canonicalPath,
+    keywords: service.seo.keywords,
+    noIndex: isLegacySlug
   });
 }
 
 export default async function CaseStudyPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const service = servicesContents.find((s) => s.key === slug);
+  const service = getServiceBySlug(slug);
 
   if (!service) {
     notFound();
   }
 
-  const link = `/services/${service.key}`;
+  const link = getServicePath(service);
+  const isLegacySlug = isLegacyServiceSlug(service, slug);
   const breadcrumbStructuredData = buildBreadcrumbSchema([
     { name: 'Home', path: '/' },
     { name: service.title, path: link }
@@ -138,6 +144,13 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbStructuredData) }}
         />
+        {isLegacySlug ? (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `window.location.replace(${JSON.stringify(link)});`
+            }}
+          />
+        ) : null}
         <Navigation/>
 
         <section className="top-section bg-gradient-to-b from-background to-background-alt ">
