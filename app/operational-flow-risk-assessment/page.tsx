@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import OperationalFlowRiskAssessmentPageClient from './OperationalFlowRiskAssessmentPageClient';
-import { buildMetadata } from '../lib/seo';
+import { buildBreadcrumbSchema, buildFAQSchema, buildMetadata } from '../lib/seo';
+import { faqItems } from './faqData';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Operational Flow Risk Assessment',
@@ -16,5 +17,23 @@ export const metadata: Metadata = buildMetadata({
 });
 
 export default function OperationalFlowRiskAssessmentPage() {
-  return <OperationalFlowRiskAssessmentPageClient />;
+  const faqSchema = buildFAQSchema(faqItems);
+  const breadcrumbSchema = buildBreadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'Operational System Flow & Risk Assessment', path: '/operational-flow-risk-assessment/' }
+  ]);
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <OperationalFlowRiskAssessmentPageClient />
+    </>
+  );
 }

@@ -131,3 +131,71 @@ export const websiteSchema = {
   description: siteConfig.description,
   inLanguage: 'en'
 };
+
+export function buildBreadcrumbSchema(items: Array<{ name: string; path: string }>) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: absoluteUrl(item.path)
+    }))
+  };
+}
+
+export function buildFAQSchema(items: ReadonlyArray<{ question: string; answer: string }>) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: items.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer
+      }
+    }))
+  };
+}
+
+export function buildOfferCatalogSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'OfferCatalog',
+    name: 'Life Sciences & Healthcare IT Services',
+    itemListElement: [
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Custom Software Development',
+          description:
+            'Custom software design, architecture, and delivery for life sciences and healthcare organizations.',
+          url: absoluteUrl('/services/Architecture/')
+        }
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'System Integrations & Data Flow Optimization',
+          description:
+            'System integrations that reduce manual handoffs, remove data bottlenecks, and establish a single source of truth.',
+          url: absoluteUrl('/services/Integration/')
+        }
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'AI Adoption Solutions',
+          description:
+            'AI adoption, observability, and governance readiness for operational workflows in regulated environments.',
+          url: absoluteUrl('/services/System/')
+        }
+      }
+    ]
+  };
+}

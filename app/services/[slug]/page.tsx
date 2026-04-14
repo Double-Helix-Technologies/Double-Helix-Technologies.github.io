@@ -16,67 +16,13 @@ import { Button } from '@/app/components/ui/button';
 import { Service, servicesContents } from '@/app/data/services';
 import { Card, CardHeader, CardTitle } from '@/app/components/ui/card';
 import { Separator } from '@/app/components/ui/separator';
-import { absoluteUrl, buildMetadata, siteConfig } from '@/app/lib/seo';
+import { absoluteUrl, buildBreadcrumbSchema, buildMetadata, siteConfig } from '@/app/lib/seo';
 
 export async function generateStaticParams() {
   return servicesContents.map((service: Service) => ({
     slug: service.key
   }));
 }
-
-const serviceMetadataByKey: Record<string, { title: string; description: string; keywords: string[] }> = {
-  Discovery: {
-    title: 'Operational Workflow & Risk Assessment',
-    description:
-      'Map workflows, uncover hidden handoff risk, and identify data bottlenecks across life sciences and healthcare operations.',
-    keywords: [
-      'operational workflow assessment',
-      'workflow bottleneck analysis',
-      'process risk assessment'
-    ]
-  },
-  Integration: {
-    title: 'System Integration & Data Flow Optimization',
-    description:
-      'Reduce manual handoffs, connect fragmented systems, and create a reliable single source of truth with end-to-end integration services.',
-    keywords: [
-      'system integration consulting',
-      'single source of truth',
-      'data flow bottlenecks',
-      'manual handoff reduction'
-    ]
-  },
-  Architecture: {
-    title: 'Software Architecture Assessment',
-    description:
-      'Assess software architecture, scalability, and delivery risk for healthcare and life sciences systems that need to evolve safely.',
-    keywords: [
-      'software architecture assessment',
-      'healthcare software architecture',
-      'custom software consulting'
-    ]
-  },
-  System: {
-    title: 'Observability & Workflow Monitoring',
-    description:
-      'Improve observability across systems and workflows so teams can detect issues earlier and reduce operational friction.',
-    keywords: [
-      'observability consulting',
-      'workflow monitoring',
-      'system health dashboards'
-    ]
-  },
-  Security: {
-    title: 'Security & Compliance Risk Assessment',
-    description:
-      'Strengthen security posture and audit readiness across systems, integrations, and data flows in regulated environments.',
-    keywords: [
-      'compliance risk assessment',
-      'healthcare IT security',
-      'regulated system compliance'
-    ]
-  }
-};
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
@@ -90,17 +36,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     });
   }
 
-  const metadata = serviceMetadataByKey[service.key] ?? {
-    title: service.title,
-    description: service.description,
-    keywords: [service.title]
-  };
-
   return buildMetadata({
-    title: metadata.title,
-    description: metadata.description,
+    title: service.seo.title,
+    description: service.seo.description,
     path: `/services/${service.key}/`,
-    keywords: metadata.keywords
+    keywords: service.seo.keywords
   });
 }
 
@@ -113,11 +53,15 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
   }
 
   const link = `/services/${service.key}`;
+  const breadcrumbStructuredData = buildBreadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: service.title, path: link }
+  ]);
   const serviceStructuredData = {
     '@context': 'https://schema.org',
     '@type': 'Service',
     name: service.title,
-    description: service.description,
+    description: service.seo.description,
     provider: {
       '@type': 'Organization',
       name: siteConfig.name,
@@ -125,6 +69,12 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
     },
     areaServed: ['Europe', 'United States'],
     serviceType: service.title,
+    category: service.seo.category,
+    audience: {
+      '@type': 'Audience',
+      audienceType: 'Life sciences and healthcare organizations'
+    },
+    termsOfService: absoluteUrl('/terms/'),
     url: absoluteUrl(link)
   };
 
@@ -183,6 +133,10 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceStructuredData) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbStructuredData) }}
         />
         <Navigation/>
 

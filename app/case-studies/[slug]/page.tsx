@@ -17,7 +17,7 @@ import {
 import { Button } from '@/app/components/ui/button';
 import { Badge } from '@/app/components/ui/badge';
 import { Separator } from '@/app/components/ui/separator';
-import { absoluteUrl, buildMetadata, siteConfig } from '@/app/lib/seo';
+import { absoluteUrl, buildBreadcrumbSchema, buildMetadata, siteConfig } from '@/app/lib/seo';
 
 export async function generateStaticParams() {
   return caseStudies.map((study) => ({
@@ -57,6 +57,11 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
   const link = `/case-studies/${study.slug}`;
   const colors = colorClasses[study.color];
+  const breadcrumbStructuredData = buildBreadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'Case studies', path: '/#case-studies' },
+    { name: study.caseTitle, path: link }
+  ]);
   const caseStudyStructuredData = {
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -118,6 +123,10 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(caseStudyStructuredData) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbStructuredData) }}
         />
         <Navigation/>
 

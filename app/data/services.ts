@@ -6,6 +6,12 @@ export interface Service {
   price: string;
   items: string[];
   deliverables: string[];
+  seo: {
+    title: string;
+    description: string;
+    keywords: string[];
+    category: 'custom-software-development' | 'system-integrations' | 'ai-adoption-solutions' | 'workflow-assessment';
+  };
 }
 
 export const servicesContents: Service[] = [
@@ -30,7 +36,19 @@ export const servicesContents: Service[] = [
       'Actionable remediation plan',
       'Executive readout deck',
       'Board-ready one-page memo'    
-    ]
+    ],
+    seo: {
+      title: 'Operational Workflow & Risk Assessment',
+      description:
+        'Map workflows, uncover hidden handoff risk, and identify data bottlenecks across life sciences and healthcare operations.',
+      keywords: [
+        'operational workflow assessment',
+        'workflow bottleneck analysis',
+        'process risk assessment',
+        'healthcare operations consulting'
+      ],
+      category: 'workflow-assessment'
+    }
   },
   {
     title: 'End-to-end integration design & implementation',
@@ -54,7 +72,20 @@ export const servicesContents: Service[] = [
       'Automated end-to-end tests',
       'Monitoring dashboards and alerts',
       'Handover documentation',
-    ]
+    ],
+    seo: {
+      title: 'System Integration & Data Flow Optimization',
+      description:
+        'Reduce manual handoffs, connect fragmented systems, and create a reliable single source of truth with end-to-end integration services.',
+      keywords: [
+        'system integration consulting',
+        'single source of truth',
+        'data flow bottlenecks',
+        'manual handoff reduction',
+        'healthcare system integrations'
+      ],
+      category: 'system-integrations'
+    }
   },
   {
     title: 'Software architecture assessment & future-readiness advisory',
@@ -77,7 +108,19 @@ export const servicesContents: Service[] = [
       'Future options and recommendations',
       'Improvement roadmap and priorities',
       'Decision memo for leadership',      
-    ]
+    ],
+    seo: {
+      title: 'Custom Software Architecture & Delivery Advisory',
+      description:
+        'Assess software architecture, delivery risk, and future-readiness for custom software used in healthcare and life sciences environments.',
+      keywords: [
+        'custom software development consulting',
+        'software architecture assessment',
+        'healthcare software architecture',
+        'life sciences software development'
+      ],
+      category: 'custom-software-development'
+    }
   },
   {
     title: 'System observability setup and improvement',
@@ -100,7 +143,19 @@ export const servicesContents: Service[] = [
       'Alert rules and escalation paths',
       'Incident and troubleshooting playbooks',
       'Operational reporting template',      
-    ]
+    ],
+    seo: {
+      title: 'AI-Ready Observability & Workflow Monitoring',
+      description:
+        'Improve workflow visibility, observability, and operational telemetry to support automation and AI adoption across connected systems.',
+      keywords: [
+        'workflow monitoring',
+        'observability consulting',
+        'AI readiness',
+        'operational telemetry'
+      ],
+      category: 'ai-adoption-solutions'
+    }
   },
   {
     title: 'Compliance & Security',
@@ -123,6 +178,18 @@ export const servicesContents: Service[] = [
       'Audit readiness checklist',
       'Security hardening checklist',
       'Optional incident simulation summary',
-    ]
+    ],
+    seo: {
+      title: 'Security, Compliance & AI Governance Readiness',
+      description:
+        'Assess security, compliance, and governance risks across systems, integrations, and data flows in regulated healthcare and life sciences environments.',
+      keywords: [
+        'healthcare IT security',
+        'compliance risk assessment',
+        'regulated system governance',
+        'AI governance readiness'
+      ],
+      category: 'ai-adoption-solutions'
+    }
   }
 ];

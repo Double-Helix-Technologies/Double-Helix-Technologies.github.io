@@ -10,7 +10,7 @@ import LiaaInfo from './components/LiaaInfo';
 import { ThemeProvider } from './components/ThemeProvider';
 import DiscoveryWorkshop from './components/DiscoveryWorkshop';
 import CaseStudiesSlider from './components/CaseStudiesSlider';
-import { buildMetadata } from './lib/seo';
+import { buildMetadata, buildOfferCatalogSchema } from './lib/seo';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Custom Software, Integrations & AI Adoption for Life Sciences',
@@ -27,9 +27,15 @@ export const metadata: Metadata = buildMetadata({
 });
 
 export default function Home() {
+  const offerCatalogSchema = buildOfferCatalogSchema();
+
   return (
     <ThemeProvider>
       <main className="min-h-screen">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(offerCatalogSchema) }}
+        />
         <Navigation/>
         <Hero/>
         <CaseStudiesSlider/>
