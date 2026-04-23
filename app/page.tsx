@@ -8,14 +8,14 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import LiaaInfo from './components/LiaaInfo';
 import { ThemeProvider } from './components/ThemeProvider';
-import DiscoveryWorkshop from './components/DiscoveryWorkshop';
 import CaseStudiesSlider from './components/CaseStudiesSlider';
 import { buildMetadata, buildOfferCatalogSchema } from './lib/seo';
+import ComplianceNotice from './components/ComplianceNotice';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Custom Software, Integrations & AI Adoption for Life Sciences',
   description:
-    'IT services for life sciences and healthcare teams: custom software development, system integrations that remove data bottlenecks, and practical AI adoption solutions.',
+    'IT services for life sciences and healthcare teams, with ISO 9001 and ISO 27001 certification underway and a target to become ISO 9001 / ISO 27001 certified in July 2026.',
   path: '/',
   keywords: [
     'life sciences custom software development',
@@ -45,6 +45,7 @@ export default function Home() {
         <Testimonials/>
         <Contact/>
         <LiaaInfo/>
+        <ComplianceNotice/>
         <Footer/>
       </main>
     </ThemeProvider>

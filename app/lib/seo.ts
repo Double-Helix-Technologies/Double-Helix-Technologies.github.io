@@ -27,7 +27,10 @@ const defaultKeywords = [
   'AI adoption solutions',
   'operational workflow optimization',
   'healthcare software consulting',
-  'life sciences software consulting'
+  'life sciences software consulting',
+  'ISO 9001 and ISO 27001 certification',
+  'ISO 9001 / ISO 27001 certified',
+  'quality management and information security'
 ];
 
 export function absoluteUrl(path = '/') {
@@ -119,7 +122,9 @@ export const organizationSchema = {
   knowsAbout: [
     'Custom software development for life sciences and healthcare',
     'System integrations and data flow optimization',
-    'AI adoption solutions for operational workflows'
+    'AI adoption solutions for operational workflows',
+    'ISO 9001 and ISO 27001 certification in progress',
+    'Quality management and information security for regulated software delivery'
   ]
 };
 
