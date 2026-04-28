@@ -8,7 +8,6 @@ Date: 2026-04-20
 - Navigation is intentionally small today: `Services`, `About`, `Team`, `Contact`.
 - The sitemap currently includes the homepage, `/about/`, `/team/`, `/operational-flow-risk-assessment/`, service pages, and case studies.
 - LinkedIn is currently linked only from the footer; there is no on-site updates or events area.
-- The codebase already includes event-oriented utilities for the ops quiz, which means an events section could later support event-specific calls to action if useful.
 
 ## Recommendation Summary
 
@@ -174,4 +173,3 @@ Current recommendations were aligned to:
 - Google Search Central guidance on canonicalization and duplicate content
 - Google Search Central guidance for `Event` structured data
 - LinkedIn help documentation showing that LinkedIn public profiles and Pages can surface in search, but that does not imply an embedded LinkedIn feed meaningfully improves indexing for your own domain
-
