@@ -16,7 +16,11 @@ export default function Contact() {
         <div className="max-w-3xl mx-auto">
           <div className="bp-8 md:pb-10 rounded-2xl text-center">
             <Button variant="gradient">
-              <a href="mailto:hello@doublehelix.dev?subject=Book%20an%20intro%20call">
+              <a
+                href="https://cal.com/aleksandrs-gusevs/let-s-meet"
+                target="_blank"
+                rel="noreferrer"
+              >
                 Schedule an intro call
               </a>
             </Button>

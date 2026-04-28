@@ -59,7 +59,11 @@ export default function Services() {
           </CardContent>
           <CardFooter>
             <Button variant="secondary">
-              <a href="mailto:hello@doublehelix.dev?subject=Book%20an%20intro%20call">
+              <a
+                href="https://cal.com/aleksandrs-gusevs/let-s-meet"
+                target="_blank"
+                rel="noreferrer"
+              >
                 Schedule an intro call
               </a>
               <ArrowRight size={11}/>
