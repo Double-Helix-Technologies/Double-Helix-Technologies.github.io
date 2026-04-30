@@ -103,7 +103,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
   </Breadcrumb>;
 
   const deliverableCard = (deliverable: string) => {
-    return (<Card className="bg-background">
+    return (<Card key={deliverable} className="bg-background">
       <CardHeader>
         <CardTitle>
           <div className="flex items-center gap-4">
@@ -118,11 +118,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
     return (
       <div className="grid flex-cols-1 frid-rows-3 gap-4">
         <div className="space-y-2">
-          <p className="font-semibold">Starting at {service.price}</p>
-          <p className="text-text-secondary text-sm">tailored scope available</p>
-        </div>
-        <div className="space-y-2">
-          <p className="font-semibold row-start-2">Timeline</p>
+          <p className="font-semibold row-start-2">Typical timeline</p>
           <p className="text-text-secondary text-sm">{service.timeline}</p>
         </div>
         <Separator className="my-2"/>

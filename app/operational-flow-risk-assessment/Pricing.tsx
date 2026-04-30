@@ -88,7 +88,7 @@ const roiCopyOg = 'One production stop, quality escape, or compliance gap can co
   'assessment.';
 
 const roiCopyV2 = 'One production stop, quality escape, or compliance gap can cost multiples of this engagement, not just in downtime and scrap, ' +
-  'but in lost stakeholder trust and reputational damage. Instead of paying that price reactively, ' +
+  'but in lost stakeholder trust and reputational damage. Instead of absorbing that cost reactively, ' +
   'you pay once upfront to identify and eliminate those risks. You get flow maps, a risk register, and a 30/60/90 fix plan. Prevention beats crisis management.';
 
 export default function Pricing() {

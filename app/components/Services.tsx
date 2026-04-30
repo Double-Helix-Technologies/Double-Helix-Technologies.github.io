@@ -32,7 +32,7 @@ export default function Services() {
           collapsible
           className="w-full mx-auto border-b border-b-gray-700"
         >
-          {servicesContents.map(({ key, slug, title, description, price }) => (
+          {servicesContents.map(({ key, slug, title, description }) => (
             <AccordionItem key={key} value={key} className="w-full">
               <AccordionTrigger>
                 <div className="flex gap-2">
@@ -42,8 +42,7 @@ export default function Services() {
               </AccordionTrigger>
               <AccordionContent className="flex flex-col gap-8">
                 <p>{description}</p>
-                <div className="flex flex-row justify-between">
-                  <p className="py-2">Starting at <strong>{price}</strong> *</p>
+                <div className="flex flex-row justify-end">
                   <Button variant="secondary">
                     <Link href={`/services/${slug}/`}>
                       learn more

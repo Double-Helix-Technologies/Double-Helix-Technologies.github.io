@@ -4,7 +4,6 @@ export interface Service {
   key: string;
   slug: string;
   description: string;
-  price: string;
   items: string[];
   deliverables: string[];
   seo: {
@@ -27,7 +26,6 @@ export const servicesContents: Service[] = [
     key: 'Discovery',
     slug: 'operational-workflow-risk-assessment',
     description: 'We trace how work moves across teams, systems, spreadsheets, and handoffs so you can see where delays, rework, and compliance risk are introduced. The result is a prioritized remediation plan for healthcare and life sciences operations before incidents, audit findings, or missed deadlines force action.',
-    price: '€15000',
     timeline: '2-4 months',
     items: [
       'Kickoff to confirm scope, workflow boundaries, and business risk',
@@ -63,7 +61,6 @@ export const servicesContents: Service[] = [
     key: 'Integration',
     slug: 'system-integrations',
     description: 'We connect disconnected systems so critical data moves automatically, accurately, and with clear ownership. That means fewer manual handoffs, less duplicate entry, and a dependable source of truth across regulated workflows.',
-    price: '€10000',
     timeline: '2-4 months',
     items: [
       'Review of the systems involved and how data currently moves between them',
@@ -101,7 +98,6 @@ export const servicesContents: Service[] = [
     key: 'Architecture',
     slug: 'custom-software-development',
     description: 'We design and improve custom software for regulated operational workflows that off-the-shelf tools cannot support well. We identify architectural risk, delivery blockers, and integration constraints, then define practical next steps for life sciences and healthcare teams.',
-    price: '€10 000',
     timeline: '2-4 months',
     items: [
       'Review of the current product, architecture, and key technical dependencies',
@@ -138,7 +134,6 @@ export const servicesContents: Service[] = [
     key: 'System',
     slug: 'observability-workflow-monitoring',
     description: 'We help teams see how workflows, integrations, and operational systems behave in real life. That includes the telemetry, dashboards, and alerting needed to spot failures early, trace issues across handoffs, and keep critical operational flows visible.',
-    price: '€5000',
     timeline: '1-2 months',
     items: [
       'Review of current visibility, logging, and monitoring gaps',
@@ -174,7 +169,6 @@ export const servicesContents: Service[] = [
     key: 'AI',
     slug: 'ai-adoption-solutions',
     description: 'We help teams identify, shape, and govern practical AI solutions for regulated workflows. That includes use-case discovery, readiness assessment, human review controls, and rollout planning for life sciences and healthcare environments.',
-    price: '€7500',
     timeline: '1-2 months',
     items: [
       'Discovery sessions to identify high-value AI opportunities',
@@ -213,7 +207,6 @@ export const servicesContents: Service[] = [
     key: 'Security',
     slug: 'ai-governance-compliance',
     description: 'We assess the controls that protect systems, integrations, data flows, and AI-enabled processes. You get a prioritized plan to reduce operational risk, support audit readiness, and strengthen day-to-day governance in regulated environments.',
-    price: '€7500',
     timeline: '1-2 months',
     items: [
       'Inventory of critical systems, users, interfaces, and data flows',
