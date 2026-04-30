@@ -32,7 +32,7 @@ export interface ColorClass {
 export const caseStudies: CaseStudy[] = [
   {
     slug: 'process-automation',
-    caseTitle: 'Process Automation',
+    caseTitle: 'NGS Workflow Automation & LIMS Integration',
     summary: 'We automated manual data entry processes and integrated multiple IT applications to create a single source of truth, dramatically reducing setup times and freeing up team capacity for revenue-generating activities.',
     color: 'sky',
     details: {
@@ -103,7 +103,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: 'observability-improvement',
-    caseTitle: 'Observability Improvement',
+    caseTitle: 'Life Sciences Observability & Incident Response',
     summary: 'We rebuilt the observability and alerting ecosystem for a global support team, reducing alert volume by over 80% and improving incident response times while eliminating false positives.',
     color: 'emerald',
     details: {
@@ -146,7 +146,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: 'reorganization-of-it',
-    caseTitle: 'Reorganization of IT',
+    caseTitle: 'Life Sciences IT Reorganization & Reliability Improvement',
     summary: 'We transformed IT organization from reactive to proactive by establishing clear and transparent IT processes, ensuring ownership and accountability for various parts of the business flows and, thus, improving service quality, reliability and trust in internal IT.',
     color: 'violet',
     details: {

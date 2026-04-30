@@ -68,6 +68,11 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li>
+                  <Link href="/solutions/custom-ai-software-life-sciences/" className="text-text-secondary hover:text-primary transition-colors">
+                    AI for life sciences
+                  </Link>
+                </li>
+                <li>
                   <Link href="/#contact" className="text-text-secondary hover:text-primary transition-colors">
                     Contact
                   </Link>

@@ -97,10 +97,10 @@ export const servicesContents: Service[] = [
     }
   },
   {
-    title: 'Custom Software Development & Architecture Advisory',
+    title: 'Custom Software Development for Life Sciences & Healthcare',
     key: 'Architecture',
     slug: 'custom-software-development',
-    description: 'We design and improve custom software for operational workflows that off-the-shelf tools cannot support well. We identify architectural risk, technical debt, and delivery blockers, then define practical next steps so teams can improve without unnecessary rewrites.',
+    description: 'We design and improve custom software for regulated operational workflows that off-the-shelf tools cannot support well. We identify architectural risk, delivery blockers, and integration constraints, then define practical next steps for life sciences and healthcare teams.',
     price: '€10 000',
     timeline: '2-4 months',
     items: [
@@ -120,10 +120,11 @@ export const servicesContents: Service[] = [
       'Decision memo for leadership',      
     ],
     seo: {
-      title: 'Custom Software Architecture & Delivery Advisory',
+      title: 'Custom Software Development for Life Sciences & Healthcare',
       description:
-        'Assess software architecture, delivery risk, and future-readiness for custom software used in healthcare and life sciences environments.',
+        'Design, modernize, and improve custom software for life sciences and healthcare workflows where off-the-shelf tools fall short.',
       keywords: [
+        'custom software ai solutions in life sciences',
         'custom software development consulting',
         'software architecture assessment',
         'healthcare software architecture',
@@ -169,10 +170,10 @@ export const servicesContents: Service[] = [
     }
   },
   {
-    title: 'AI Adoption Solutions',
+    title: 'Custom AI Solutions for Life Sciences & Healthcare',
     key: 'AI',
     slug: 'ai-adoption-solutions',
-    description: 'We help teams decide where AI should and should not be used. We identify practical use cases, assess readiness, define guardrails, and shape pilots that fit regulated healthcare and life sciences environments.',
+    description: 'We help teams identify, shape, and govern practical AI solutions for regulated workflows. That includes use-case discovery, readiness assessment, human review controls, and rollout planning for life sciences and healthcare environments.',
     price: '€7500',
     timeline: '1-2 months',
     items: [
@@ -192,10 +193,12 @@ export const servicesContents: Service[] = [
       'AI adoption roadmap',
     ],
     seo: {
-      title: 'AI Adoption Solutions for Healthcare & Life Sciences',
+      title: 'Custom AI Solutions for Life Sciences & Healthcare',
       description:
-        'Identify practical AI use cases, assess readiness, and roll out AI adoption safely in healthcare and life sciences operations.',
+        'Identify, design, and roll out practical AI solutions safely across life sciences and healthcare workflows.',
       keywords: [
+        'custom software ai solutions in life sciences',
+        'custom AI solutions for life sciences',
         'AI adoption consulting',
         'healthcare AI adoption',
         'life sciences AI consulting',

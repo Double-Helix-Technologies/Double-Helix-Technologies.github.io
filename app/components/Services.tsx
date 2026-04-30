@@ -16,7 +16,14 @@ export default function Services() {
             What we do
           </h2>
           <p className="text-text-secondary max-w-2xl py-4">
-            We help life sciences and healthcare organizations improve operational flow with custom software development, system integrations, and practical AI adoption support.
+            We help life sciences and healthcare organizations streamline regulated operations through custom software, system integrations, and practical AI.
+          </p>
+          <p className="text-text-secondary max-w-2xl">
+            Looking for a solution focused on AI-enabled workflows? Explore our{' '}
+            <Link href="/solutions/custom-ai-software-life-sciences/" className="text-primary underline-offset-4 hover:underline">
+              custom AI software solutions for life sciences
+            </Link>
+            {' '}page.
           </p>
         </div>
 
@@ -58,15 +65,11 @@ export default function Services() {
             We combine engineering, integration, and workflow expertise to solve operational bottlenecks in regulated environments.
           </CardContent>
           <CardFooter>
-            <Button variant="secondary">
-              <a
-                href="https://cal.com/aleksandrs-gusevs/let-s-meet"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Schedule an intro call
-              </a>
-              <ArrowRight size={11}/>
+            <Button variant="secondary" asChild>
+              <Link href="/solutions/custom-ai-software-life-sciences/">
+                See life sciences AI solutions
+                <ArrowRight size={11}/>
+              </Link>
             </Button>
           </CardFooter>
         </Card>

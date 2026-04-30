@@ -13,16 +13,16 @@ import { buildMetadata, buildOfferCatalogSchema } from './lib/seo';
 import ComplianceNotice from './components/ComplianceNotice';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Custom Software, Integrations & AI Adoption for Life Sciences',
+  title: 'Custom Software, System Integrations and AI Adoption for Life Sciences',
   description:
-    'IT services for life sciences and healthcare teams, with ISO 9001 and ISO 27001 certification underway and a target to become ISO 9001 / ISO 27001 certified in July 2026.',
+    'Custom software, system integrations, and AI solutions for life sciences and healthcare teams working in regulated environments.',
   path: '/',
   keywords: [
+    'custom software ai solutions in life sciences',
     'life sciences custom software development',
+    'life sciences AI software solutions',
     'healthcare software development',
-    'system integrations for healthcare',
-    'data flow automation',
-    'AI adoption consulting'
+    'system integrations for healthcare'
   ]
 });
 

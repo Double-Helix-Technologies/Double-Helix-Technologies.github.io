@@ -6,7 +6,7 @@ export const siteConfig = {
   url: 'https://doublehelix.dev',
   defaultTitle: 'Life Sciences & Healthcare IT Services',
   description:
-    'Double Helix Technologies helps life sciences and healthcare teams improve operations with custom software development, system integrations, and practical AI adoption solutions.',
+    'Double Helix Technologies helps life sciences and healthcare teams deliver custom software, system integrations, and practical AI solutions for regulated workflows.',
   ogImage: '/images/logo.png',
   email: 'hello@doublehelix.dev',
   phone: '+37129636428',
@@ -21,6 +21,7 @@ const defaultKeywords = [
   'life sciences IT services',
   'healthcare IT services',
   'custom software development',
+  'custom AI software solutions',
   'system integrations',
   'data flow bottlenecks',
   'single source of truth',
@@ -118,9 +119,11 @@ export const organizationSchema = {
     addressLocality: siteConfig.address.addressLocality,
     addressCountry: siteConfig.address.addressCountry
   },
-  areaServed: ['Europe', 'United States'],
+  areaServed: ['Europe', 'Germany', 'Austria', 'Belgium', 'Switzerland', 'Netherlands', 'United States'],
+  sameAs: ['https://www.linkedin.com/company/double-helix-technologies'],
   knowsAbout: [
     'Custom software development for life sciences and healthcare',
+    'Custom AI software solutions for life sciences and healthcare',
     'System integrations and data flow optimization',
     'AI adoption solutions for operational workflows',
     'ISO 9001 and ISO 27001 certification in progress',
@@ -175,9 +178,9 @@ export function buildOfferCatalogSchema() {
         '@type': 'Offer',
         itemOffered: {
           '@type': 'Service',
-          name: 'Custom Software Development',
+          name: 'Custom Software Development for Life Sciences & Healthcare',
           description:
-            'Custom software design, architecture, and delivery for life sciences and healthcare organizations.',
+            'Custom software design, modernization, scalable architecture and infrastructure delivery for life sciences and healthcare organizations.',
           url: absoluteUrl('/services/custom-software-development/')
         }
       },
@@ -195,9 +198,9 @@ export function buildOfferCatalogSchema() {
         '@type': 'Offer',
         itemOffered: {
           '@type': 'Service',
-          name: 'AI Adoption Solutions',
+          name: 'Custom AI Solutions for Life Sciences & Healthcare',
           description:
-            'AI use-case discovery, readiness assessment, governance, and rollout planning for regulated operational environments.',
+            'Practical AI solution design, governance, and rollout planning for regulated operational environments.',
           url: absoluteUrl('/services/ai-adoption-solutions/')
         }
       }

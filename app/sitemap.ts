@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/',
     '/about/',
     '/events/',
+    '/solutions/custom-ai-software-life-sciences/',
     '/team/',
     '/operational-flow-risk-assessment/'
   ];

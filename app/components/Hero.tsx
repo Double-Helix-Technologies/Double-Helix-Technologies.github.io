@@ -12,13 +12,18 @@ export default function Hero() {
             and AI adoption for life sciences.
           </h1>
           <p className="text-lg col-start-1 col-span-1 md:col-span-2">
-            We help life sciences and healthcare teams reduce data bottlenecks, replace fragile manual handoffs, and build reliable operational workflows across people, processes, and systems.
+            We help life sciences and healthcare teams connect fragmented systems, reduce manual handoffs, and build regulated workflow software, using practical AI where it creates measurable operational value.
           </p>
         </div>
         <div className="flex flex-row gap-5">
-          <Button variant="gradient">
+          <Button variant="gradient" asChild>
             <Link href="/#contact">
               Book an intro call
+            </Link>
+          </Button>
+          <Button variant="secondary" asChild>
+            <Link href="/solutions/custom-ai-software-life-sciences/">
+              Explore AI for life sciences
             </Link>
           </Button>
         </div>
