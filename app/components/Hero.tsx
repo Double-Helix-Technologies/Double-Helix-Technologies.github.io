@@ -15,10 +15,15 @@ export default function Hero() {
             We help life sciences and healthcare teams connect fragmented systems, reduce manual handoffs, and build regulated workflow software, using practical AI where it creates measurable operational value.
           </p>
         </div>
-        <div className="flex flex-row gap-5">
+        <div className="flex flex-wrap gap-5">
           <Button variant="gradient" asChild>
             <Link href="/#contact">
               Book an intro call
+            </Link>
+          </Button>
+          <Button variant="secondary" asChild>
+            <Link href="/work">
+              Explore our work
             </Link>
           </Button>
           <Button variant="secondary" asChild>

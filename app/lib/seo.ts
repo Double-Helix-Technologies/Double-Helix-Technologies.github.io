@@ -140,6 +140,15 @@ export const websiteSchema = {
   inLanguage: 'en'
 };
 
+export const workPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Delivered Client Solutions & Our Products',
+  description:
+    'Client solutions and software products from Double Helix Technologies, spanning workflow automation, systems integration, and AI-assisted care software.',
+  url: absoluteUrl('/work/')
+};
+
 export function buildBreadcrumbSchema(items: Array<{ name: string; path: string }>) {
   return {
     '@context': 'https://schema.org',
