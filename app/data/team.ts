@@ -27,7 +27,7 @@ const leadershipTeam: TeamMember[] = [
   {
     name: 'Valts',
     lastName: 'Mazurs',
-    role: 'Chief Information Officer',
+    role: 'Chief Technology Officer',
     description: 'Connects the dots between business needs and smart tech choices.',
     image: '/images/team/valts.jpg',
     email: ''
