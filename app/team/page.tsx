@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/app/components/ui/card';
-import { Asterisk, ChevronRight, Mail } from 'lucide-react';
+import { ChevronRight, Mail } from 'lucide-react';
 import Image from 'next/image';
 import Navigation from '@/app/components/Navigation';
 import { ThemeProvider } from '../components/ThemeProvider';
@@ -95,21 +95,47 @@ export default function TeamPage() {
             <div className="flex flex-col gap-6 mb-6 max-w-3xl">
               {breadcrumb}
               <h1 className="section-heading mb-5 max-w-3xl">
-                Our People
+                A small senior team solving complex problems.
               </h1>
               <p>
-                Double Helix Technologies is a senior, lean engineering team based in Latvia.
+                We help life sciences companies simplify complicated workflows, connect fragmented systems and build
+                software that makes operations easier.
               </p>
-              <ul className="space-y-2">
+              <p>
+                We’re a lean team of engineers, architects and problem-solvers. We stay close to the work, from
+                understanding the problem to building and improving the solution.
+              </p>
+
+              <h2 className="text-3xl md:text-4xl mb-3">What we believe</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {[
-                  'Multilingual engineers proficient in modern frameworks.',
-                  'Business‑minded, proactive problem solvers with ownership.',
-                  'Agile teams that integrate seamlessly with client stakeholders.'
-                ].map((v) => (
-                  <li key={v} className="flex gap-2"><Asterisk
-                    className="h-6 w-7 flex-shrink-0"/>{v}</li>
+                  {
+                    title: 'Understand before building',
+                    description: 'We start with the workflow, not the technology.'
+                  },
+                  {
+                    title: 'Simplify before automating',
+                    description: 'There’s no point automating a broken process.'
+                  },
+                  {
+                    title: 'Reuse before reinventing',
+                    description: 'We use existing systems where they make sense and build only what’s missing.'
+                  },
+                  {
+                    title: 'Build for the long term',
+                    description: 'Reliable, maintainable software matters more than impressive demos.'
+                  }
+                ].map((belief) => (
+                  <Card key={belief.title} className="bg-background">
+                    <CardHeader>
+                      <CardTitle>{belief.title}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-text-secondary">{belief.description}</p>
+                    </CardContent>
+                  </Card>
                 ))}
-              </ul>
+              </div>
             </div>
 
             <h2 className="text-3xl md:text-4xl my-16">Core Team</h2>
