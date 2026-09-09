@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/app/components/ui/card';
-import { ChevronRight, Mail } from 'lucide-react';
+import { ChevronRight, Linkedin, Mail } from 'lucide-react';
 import Image from 'next/image';
 import Navigation from '@/app/components/Navigation';
 import { ThemeProvider } from '../components/ThemeProvider';
@@ -138,11 +138,24 @@ export default function TeamPage() {
               </div>
             </div>
 
-            <h2 className="text-3xl md:text-4xl my-16">Core Team</h2>
+            <h2 className="text-3xl md:text-4xl mt-16 mb-3">The people behind the work</h2>
+            <p className="text-text-secondary mb-8">You work directly with the people building your solution.</p>
             <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-4 gap-4">
               {leadershipTeam.map((person, index) => (
                 <TeamMemberCard key={`${person.name}-${index}`} person={person}/>
               ))}
+            </div>
+
+            <div className="mt-8">
+              <a
+                href="https://www.linkedin.com/company/double-helix-technologies/people/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-text-secondary hover:text-text-primary"
+              >
+                <Linkedin size={20}/>
+                Meet the whole team
+              </a>
             </div>
           </div>
         </section>
