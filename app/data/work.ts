@@ -2,6 +2,38 @@ export type ClientSolutionStatus = 'completed' | 'ongoing';
 export type ProductStatus = 'live' | 'pilot' | 'in-development';
 export type WorkTag = 'Client work' | 'Our products';
 
+export interface Customer {
+  name: string;
+  href: string;
+  logo: string;
+  logoWidth: number;
+  logoHeight: number;
+}
+
+export const customers: Customer[] = [
+  {
+    name: 'Eurofins Genomics',
+    href: 'https://eurofinsgenomics.com/en/home/',
+    logo: '/images/customers/eurofins-genomics.svg',
+    logoWidth: 567,
+    logoHeight: 213
+  },
+  {
+    name: 'Lifespin',
+    href: 'https://lifespin.health/',
+    logo: '/images/customers/lifespin.svg',
+    logoWidth: 773,
+    logoHeight: 240
+  },
+  {
+    name: 'Onyx Biotech',
+    href: 'https://www.onyx-biotech.com/',
+    logo: '/images/customers/onyx-biotech.png',
+    logoWidth: 800,
+    logoHeight: 315
+  }
+];
+
 export interface HighlightStat {
   value: string;
   label: string;

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { ChevronRight } from 'lucide-react';
 import Navigation from '@/app/components/Navigation';
@@ -12,7 +13,7 @@ import {
   BreadcrumbSeparator
 } from '@/app/components/ui/breadcrumb';
 import { absoluteUrl, buildBreadcrumbSchema, buildMetadata } from '@/app/lib/seo';
-import { getWorkListItems } from '@/app/data/work';
+import { customers, getWorkListItems } from '@/app/data/work';
 import WorkShowcase from './WorkShowcase';
 
 export const metadata: Metadata = buildMetadata({
@@ -93,6 +94,34 @@ export default function WorkPage() {
 
             <div className="mt-12">
               <WorkShowcase items={workItems} />
+            </div>
+
+            <div className="mt-20">
+              <h2 className="text-3xl md:text-4xl mb-3">Customers who have trusted us</h2>
+              <p className="text-text-secondary mb-8">
+                Life sciences and healthcare teams that have partnered with us to deliver on complex operational and
+                product challenges.
+              </p>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                {customers.map((customer) => (
+                  <a
+                    key={customer.name}
+                    href={customer.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={customer.name}
+                    className="flex h-28 items-center justify-center rounded-xl border border-[var(--border)]/20 bg-white p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
+                  >
+                    <Image
+                      src={customer.logo}
+                      alt={customer.name}
+                      width={customer.logoWidth}
+                      height={customer.logoHeight}
+                      className="h-full w-full object-contain"
+                    />
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
         </section>
