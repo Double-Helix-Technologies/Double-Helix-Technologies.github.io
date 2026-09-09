@@ -8,9 +8,9 @@ export default function Contact() {
     <section id="contact" className="section bg-gradient-to-b from-background to-background-alt">
       <div className="container-tight">
         <div className="mb-8 text-center">
-          <h2 className="section-heading mb-5">Ready to move from ideas to outcomes?</h2>
+          <h2 className="section-heading mb-5">When systems don’t talk, we listen.</h2>
           <p className="text-text-secondary max-w-2xl mx-auto">
-            Tell us where it hurts. We’ll suggest a right‑sized way forward.
+            Tell us what’s broken, missing or worth building. We’ll suggest a way forward.
           </p>
         </div>
         <div className="max-w-3xl mx-auto">
