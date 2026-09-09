@@ -86,10 +86,9 @@ export default function WorkPage() {
               </BreadcrumbList>
             </Breadcrumb>
 
-            <h1 className="section-heading max-w-4xl">Delivered Client Solutions &amp; Our Products</h1>
+            <h1 className="section-heading max-w-4xl">Work that works.</h1>
             <p className="max-w-3xl text-lg text-text-secondary">
-              Explore the client solutions we deliver and the products we are building around complex operational,
-              data, and care workflows.
+              Client solutions, products, and a few things we built because we thought they should exist.
             </p>
 
             <div className="mt-12">

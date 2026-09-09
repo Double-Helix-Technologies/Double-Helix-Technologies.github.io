@@ -10,10 +10,10 @@ type WorkShowcaseProps = {
   items: WorkListItem[];
 };
 
-const FILTERS: Array<WorkTag | 'All'> = ['All', 'Client work', 'Our products'];
+const FILTERS: Array<WorkTag | 'All'> = ['All', 'for clients', 'Our products'];
 
 const ACCENT: Record<WorkTag, { border: string; bg: string; glow: string }> = {
-  'Client work': {
+  'for clients': {
     border: 'border-accent-digital-blue/20',
     bg: 'bg-accent-digital-blue/10',
     glow: 'rgba(51, 130, 239, 0.22)'

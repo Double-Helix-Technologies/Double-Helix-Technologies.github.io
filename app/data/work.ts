@@ -1,6 +1,6 @@
 export type ClientSolutionStatus = 'completed' | 'ongoing';
 export type ProductStatus = 'live' | 'pilot' | 'in-development';
-export type WorkTag = 'Client work' | 'Our products';
+export type WorkTag = 'for clients' | 'Our products';
 
 export interface Customer {
   name: string;
@@ -249,7 +249,7 @@ export function getWorkListItems(): WorkListItem[] {
   return [
     ...clientSolutions.map((solution) => ({
       slug: solution.slug,
-      tag: 'Client work' as const,
+      tag: 'for clients' as const,
       title: solution.title,
       preview: solution.preview,
       metaLabel: 'Outcome',
