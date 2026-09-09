@@ -14,7 +14,7 @@ import {
 import Link from 'next/link';
 import Footer from '@/app/components/Footer';
 import AvatarPlaceholder from '@/app/components/ui/avatarPlaceholder';
-import { coreTeam, leadershipTeam, TeamMember } from '@/app/data/team';
+import { leadershipTeam, TeamMember } from '@/app/data/team';
 import { buildMetadata } from '../lib/seo';
 
 export const metadata: Metadata = buildMetadata({
@@ -114,7 +114,7 @@ export default function TeamPage() {
 
             <h2 className="text-3xl md:text-4xl my-16">Our Team</h2>
             <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-4 gap-4">
-              {[...leadershipTeam, ...coreTeam].map((person, index) => (
+              {leadershipTeam.map((person, index) => (
                 <TeamMemberCard key={`${person.name}-${index}`} person={person}/>
               ))}
             </div>
