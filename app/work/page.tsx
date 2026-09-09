@@ -96,7 +96,7 @@ export default function WorkPage() {
             </div>
 
             <div className="mt-20">
-              <h2 className="text-3xl md:text-4xl mb-3">Customers who have trusted us</h2>
+              <h2 className="text-3xl md:text-4xl mb-3">Teams we&rsquo;ve worked with</h2>
               <p className="text-text-secondary mb-8">
                 Life sciences and healthcare teams that have partnered with us to deliver on complex operational and
                 product challenges.
