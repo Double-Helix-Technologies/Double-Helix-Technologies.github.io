@@ -25,7 +25,7 @@ export default function Navigation() {
   const navigation = [
     { name: 'Services', href: '/#services' },
     { name: 'Our work', href: '/work' },
-    { name: 'Team', href: '/team' },
+    { name: 'About us', href: '/team' },
     { name: 'Contact', href: '/#contact' }
   ];
 

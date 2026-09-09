@@ -18,7 +18,7 @@ import { leadershipTeam, TeamMember } from '@/app/data/team';
 import { buildMetadata } from '../lib/seo';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Team',
+  title: 'About us',
   description:
     'Get to know the senior engineering and consulting team behind Double Helix Technologies and our work in life sciences and healthcare IT.',
   path: '/team/',
@@ -90,7 +90,7 @@ export default function TeamPage() {
       <main className="min-h-screen">
         <Navigation/>
 
-        <section id="team" className="top-section bg-gradient-to-t from-background-alt to-background pb-10">
+        <section id="about-us" className="top-section bg-gradient-to-t from-background-alt to-background pb-10">
           <div className="container-tight">
             <div className="flex flex-col gap-6 mb-6 max-w-3xl">
               {breadcrumb}
