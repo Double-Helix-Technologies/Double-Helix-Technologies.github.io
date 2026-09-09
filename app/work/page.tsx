@@ -96,11 +96,7 @@ export default function WorkPage() {
             </div>
 
             <div className="mt-20">
-              <h2 className="text-3xl md:text-4xl mb-3">Teams we&rsquo;ve worked with</h2>
-              <p className="text-text-secondary mb-8">
-                Life sciences and healthcare teams that have partnered with us to deliver on complex operational and
-                product challenges.
-              </p>
+              <h2 className="text-3xl md:text-4xl mb-8">Teams we&rsquo;ve worked with</h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                 {customers.map((customer) => (
                   <a
