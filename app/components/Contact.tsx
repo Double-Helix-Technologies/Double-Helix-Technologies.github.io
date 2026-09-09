@@ -21,11 +21,11 @@ export default function Contact() {
                 target="_blank"
                 rel="noreferrer"
               >
-                Schedule an intro call
+                Book a free consultation
               </a>
             </Button>
             <p className="mt-2 text-text-secondary text-xs">
-              Intro call (15–30 min)
+              Free consultation (15–30 min)
             </p>
           </div>
         </div>
