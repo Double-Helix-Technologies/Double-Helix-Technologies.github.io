@@ -13,9 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/solutions/custom-ai-software-life-sciences/',
     '/team/',
     '/operational-flow-risk-assessment/',
-    '/work/',
-    '/work/client-solutions/',
-    '/work/products/'
+    '/work/'
   ];
 
   const serviceRoutes = servicesContents.map((service) => getServicePath(service));

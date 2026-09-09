@@ -1,5 +1,6 @@
 export type ClientSolutionStatus = 'completed' | 'ongoing';
 export type ProductStatus = 'live' | 'pilot' | 'in-development';
+export type WorkTag = 'Client work' | 'Our products';
 
 export interface HighlightStat {
   value: string;
@@ -187,11 +188,11 @@ export const products: Product[] = [
 ];
 
 export function getClientSolutionPath(solution: ClientSolution) {
-  return `/work/client-solutions/${solution.slug}/`;
+  return `/work/${solution.slug}/`;
 }
 
 export function getProductPath(product: Product) {
-  return `/work/products/${product.slug}/`;
+  return `/work/${product.slug}/`;
 }
 
 export function getClientSolutionBySlug(slug: string) {
@@ -200,4 +201,59 @@ export function getClientSolutionBySlug(slug: string) {
 
 export function getProductBySlug(slug: string) {
   return products.find((product) => product.slug === slug);
+}
+
+export interface WorkListItem {
+  slug: string;
+  tag: WorkTag;
+  title: string;
+  preview: string;
+  metaLabel: string;
+  metaValue: string;
+  path: string;
+}
+
+export function getWorkListItems(): WorkListItem[] {
+  return [
+    ...clientSolutions.map((solution) => ({
+      slug: solution.slug,
+      tag: 'Client work' as const,
+      title: solution.title,
+      preview: solution.preview,
+      metaLabel: 'Outcome',
+      metaValue: solution.previewOutcome,
+      path: getClientSolutionPath(solution)
+    })),
+    ...products.map((product) => ({
+      slug: product.slug,
+      tag: 'Our products' as const,
+      title: product.name,
+      preview: product.preview,
+      metaLabel: 'Availability',
+      metaValue: product.previewState,
+      path: getProductPath(product)
+    }))
+  ];
+}
+
+export type WorkEntry =
+  | { kind: 'client-solution'; data: ClientSolution }
+  | { kind: 'product'; data: Product };
+
+export function getAllWorkSlugs() {
+  return [...clientSolutions.map((solution) => solution.slug), ...products.map((product) => product.slug)];
+}
+
+export function getWorkEntryBySlug(slug: string): WorkEntry | undefined {
+  const solution = getClientSolutionBySlug(slug);
+  if (solution) {
+    return { kind: 'client-solution', data: solution };
+  }
+
+  const product = getProductBySlug(slug);
+  if (product) {
+    return { kind: 'product', data: product };
+  }
+
+  return undefined;
 }
