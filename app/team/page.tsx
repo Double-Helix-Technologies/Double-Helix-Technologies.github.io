@@ -95,15 +95,16 @@ export default function TeamPage() {
             <div className="flex flex-col gap-6 mb-6 max-w-3xl">
               {breadcrumb}
               <h1 className="section-heading mb-5 max-w-3xl">
-                A small senior team solving complex problems.
+                A small senior team for complex problems.
               </h1>
               <p>
-                We help life sciences companies simplify complicated workflows, connect fragmented systems and build
-                software that makes operations easier.
+                We help life sciences companies simplify workflows, connect systems and build software that
+                makes operations easier.
               </p>
               <p>
-                We’re a lean team of engineers, architects and problem-solvers. We stay close to the work, from
-                understanding the problem to building and improving the solution.
+                Based in Europe, we work with customers across Europe and North America. Our senior team works
+                closely with each customer, combining deep expertise with a hands-on approach from problem to
+                solution.
               </p>
 
               <h2 className="text-3xl md:text-4xl mb-3">What we believe</h2>
