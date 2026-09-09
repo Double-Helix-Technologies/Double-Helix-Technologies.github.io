@@ -27,6 +27,12 @@ export default function Contact() {
             <p className="mt-2 text-text-secondary text-xs">
               Free consultation (15–30 min)
             </p>
+            <p className="mt-2 text-text-secondary text-xs">
+              Prefer typing to talking? Email us:{' '}
+              <a href="mailto:aleksandrs.gusevs@doublehelix.dev" className="underline">
+                aleksandrs.gusevs@doublehelix.dev
+              </a>
+            </p>
           </div>
         </div>
       </div>
