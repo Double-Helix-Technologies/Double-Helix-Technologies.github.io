@@ -17,6 +17,45 @@ import AvatarPlaceholder from '@/app/components/ui/avatarPlaceholder';
 import { leadershipTeam, TeamMember } from '@/app/data/team';
 import { buildMetadata } from '../lib/seo';
 
+type Affiliation = {
+  name: string;
+  href: string;
+  logo: string;
+  logoWidth: number;
+  logoHeight: number;
+};
+
+const affiliations: Affiliation[] = [
+  {
+    name: 'Digital Health Association Latvia',
+    href: 'https://www.digitalaveseliba.lv/',
+    logo: '/images/partners/digital-health-latvia.svg',
+    logoWidth: 149,
+    logoHeight: 38
+  },
+  {
+    name: 'Latvian Startup Association "Startin.LV"',
+    href: 'https://startin.lv/',
+    logo: '/images/partners/startin-lv.png',
+    logoWidth: 263,
+    logoHeight: 138
+  },
+  {
+    name: 'Latvian American Chamber of Commerce',
+    href: 'https://latvianchamber.com/',
+    logo: '/images/partners/latvian-american-chamber.svg',
+    logoWidth: 258,
+    logoHeight: 84
+  },
+  {
+    name: 'Latvian IT Cluster',
+    href: 'https://www.itbaltic.com/',
+    logo: '/images/partners/latvian-it-cluster.png',
+    logoWidth: 493,
+    logoHeight: 657
+  }
+];
+
 export const metadata: Metadata = buildMetadata({
   title: 'About us',
   description:
@@ -157,6 +196,31 @@ export default function TeamPage() {
                 <Linkedin size={20}/>
                 Meet the whole team
               </a>
+            </div>
+
+            <h2 className="text-3xl md:text-4xl mt-16 mb-3">Part of something bigger</h2>
+            <p className="text-text-secondary mb-8">
+              We&apos;re active members of Latvia&apos;s health tech and business communities.
+            </p>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              {affiliations.map((affiliation) => (
+                <a
+                  key={affiliation.name}
+                  href={affiliation.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={affiliation.name}
+                  className="flex h-28 items-center justify-center rounded-xl border border-[var(--border)]/20 bg-white p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
+                >
+                  <Image
+                    src={affiliation.logo}
+                    alt={affiliation.name}
+                    width={affiliation.logoWidth}
+                    height={affiliation.logoHeight}
+                    className="h-full w-full object-contain"
+                  />
+                </a>
+              ))}
             </div>
           </div>
         </section>
