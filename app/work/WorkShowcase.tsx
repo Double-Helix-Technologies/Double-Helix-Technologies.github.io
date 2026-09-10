@@ -12,6 +12,12 @@ type WorkShowcaseProps = {
 
 const FILTERS: Array<WorkTag | 'All'> = ['All', 'for clients', 'Our products'];
 
+const FILTER_LABELS: Record<WorkTag | 'All', string> = {
+  All: 'All',
+  'for clients': 'For clients',
+  'Our products': 'Our products'
+};
+
 const ACCENT: Record<WorkTag, { border: string; bg: string; glow: string }> = {
   'for clients': {
     border: 'border-accent-digital-blue/20',
@@ -48,7 +54,7 @@ export default function WorkShowcase({ items }: WorkShowcaseProps) {
                 : 'border-border/40 text-text-secondary hover:border-border hover:text-text-primary'
             }`}
           >
-            {filter}
+            {FILTER_LABELS[filter]}
           </button>
         ))}
       </div>

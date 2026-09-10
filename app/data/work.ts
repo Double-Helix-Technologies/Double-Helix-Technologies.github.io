@@ -31,6 +31,20 @@ export const customers: Customer[] = [
     logo: '/images/customers/onyx-biotech.png',
     logoWidth: 800,
     logoHeight: 315
+  },
+  {
+    name: 'Mainos',
+    href: 'https://www.mainos.lv/lv',
+    logo: '/images/customers/mainos.svg',
+    logoWidth: 2613,
+    logoHeight: 392
+  },
+  {
+    name: 'Krafthub',
+    href: 'https://www.krafthub.ai/en',
+    logo: '/images/customers/krafthub.svg',
+    logoWidth: 620,
+    logoHeight: 140
   }
 ];
 
