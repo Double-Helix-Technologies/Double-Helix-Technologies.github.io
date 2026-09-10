@@ -145,37 +145,6 @@ export default function TeamPage() {
                 closely with each customer, combining deep expertise with a hands-on approach from problem to
                 solution.
               </p>
-
-              <h2 className="text-3xl md:text-4xl mb-3">What we believe</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {[
-                  {
-                    title: 'Understand before building',
-                    description: 'We start with the workflow, not the technology.'
-                  },
-                  {
-                    title: 'Simplify before automating',
-                    description: 'There’s no point automating a broken process.'
-                  },
-                  {
-                    title: 'Reuse before reinventing',
-                    description: 'We use existing systems where they make sense and build only what’s missing.'
-                  },
-                  {
-                    title: 'Build for the long term',
-                    description: 'Reliable, maintainable software matters more than impressive demos.'
-                  }
-                ].map((belief) => (
-                  <Card key={belief.title} className="bg-background">
-                    <CardHeader>
-                      <CardTitle>{belief.title}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-text-secondary">{belief.description}</p>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
             </div>
 
             <h2 className="text-3xl md:text-4xl mt-16 mb-3">The people behind the work</h2>
