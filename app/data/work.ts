@@ -1,5 +1,52 @@
 export type ClientSolutionStatus = 'completed' | 'ongoing';
 export type ProductStatus = 'live' | 'pilot' | 'in-development';
+export type WorkTag = 'for clients' | 'Our products';
+
+export interface Customer {
+  name: string;
+  href: string;
+  logo: string;
+  logoWidth: number;
+  logoHeight: number;
+}
+
+export const customers: Customer[] = [
+  {
+    name: 'Eurofins Genomics',
+    href: 'https://eurofinsgenomics.com/en/home/',
+    logo: '/images/customers/eurofins-genomics.svg',
+    logoWidth: 567,
+    logoHeight: 213
+  },
+  {
+    name: 'Lifespin',
+    href: 'https://lifespin.health/',
+    logo: '/images/customers/lifespin.svg',
+    logoWidth: 773,
+    logoHeight: 240
+  },
+  {
+    name: 'Onyx Biotech',
+    href: 'https://www.onyx-biotech.com/',
+    logo: '/images/customers/onyx-biotech.png',
+    logoWidth: 800,
+    logoHeight: 315
+  },
+  {
+    name: 'Mainos',
+    href: 'https://www.mainos.lv/lv',
+    logo: '/images/customers/mainos.svg',
+    logoWidth: 2613,
+    logoHeight: 392
+  },
+  {
+    name: 'Krafthub',
+    href: 'https://www.krafthub.ai/en',
+    logo: '/images/customers/krafthub.svg',
+    logoWidth: 620,
+    logoHeight: 140
+  }
+];
 
 export interface HighlightStat {
   value: string;
@@ -187,11 +234,11 @@ export const products: Product[] = [
 ];
 
 export function getClientSolutionPath(solution: ClientSolution) {
-  return `/work/client-solutions/${solution.slug}/`;
+  return `/work/${solution.slug}/`;
 }
 
 export function getProductPath(product: Product) {
-  return `/work/products/${product.slug}/`;
+  return `/work/${product.slug}/`;
 }
 
 export function getClientSolutionBySlug(slug: string) {
@@ -200,4 +247,59 @@ export function getClientSolutionBySlug(slug: string) {
 
 export function getProductBySlug(slug: string) {
   return products.find((product) => product.slug === slug);
+}
+
+export interface WorkListItem {
+  slug: string;
+  tag: WorkTag;
+  title: string;
+  preview: string;
+  metaLabel: string;
+  metaValue: string;
+  path: string;
+}
+
+export function getWorkListItems(): WorkListItem[] {
+  return [
+    ...clientSolutions.map((solution) => ({
+      slug: solution.slug,
+      tag: 'for clients' as const,
+      title: solution.title,
+      preview: solution.preview,
+      metaLabel: 'Outcome',
+      metaValue: solution.previewOutcome,
+      path: getClientSolutionPath(solution)
+    })),
+    ...products.map((product) => ({
+      slug: product.slug,
+      tag: 'Our products' as const,
+      title: product.name,
+      preview: product.preview,
+      metaLabel: 'Availability',
+      metaValue: product.previewState,
+      path: getProductPath(product)
+    }))
+  ];
+}
+
+export type WorkEntry =
+  | { kind: 'client-solution'; data: ClientSolution }
+  | { kind: 'product'; data: Product };
+
+export function getAllWorkSlugs() {
+  return [...clientSolutions.map((solution) => solution.slug), ...products.map((product) => product.slug)];
+}
+
+export function getWorkEntryBySlug(slug: string): WorkEntry | undefined {
+  const solution = getClientSolutionBySlug(slug);
+  if (solution) {
+    return { kind: 'client-solution', data: solution };
+  }
+
+  const product = getProductBySlug(slug);
+  if (product) {
+    return { kind: 'product', data: product };
+  }
+
+  return undefined;
 }

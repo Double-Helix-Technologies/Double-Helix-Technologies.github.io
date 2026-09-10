@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowRight, ChevronRight } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 import Navigation from '@/app/components/Navigation';
 import Footer from '@/app/components/Footer';
 import { ThemeProvider } from '@/app/components/ThemeProvider';
@@ -11,9 +11,9 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator
 } from '@/app/components/ui/breadcrumb';
-import { Card } from '@/app/components/ui/card';
-import { CardSpotlight } from '@/app/components/ui/CardSpotlight';
-import { buildBreadcrumbSchema, buildMetadata, workPageSchema } from '@/app/lib/seo';
+import { absoluteUrl, buildBreadcrumbSchema, buildMetadata } from '@/app/lib/seo';
+import { getWorkListItems } from '@/app/data/work';
+import WorkShowcase from './WorkShowcase';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Client Solutions & Software Products',
@@ -29,17 +29,35 @@ export const metadata: Metadata = buildMetadata({
 });
 
 export default function WorkPage() {
+  const workItems = getWorkListItems();
   const breadcrumbStructuredData = buildBreadcrumbSchema([
     { name: 'Home', path: '/' },
     { name: 'Work', path: '/work/' }
   ]);
+  const collectionStructuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'Work',
+    description:
+      'Delivered client solutions and software products from Double Helix Technologies.',
+    url: absoluteUrl('/work/'),
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: workItems.map((item, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: item.title,
+        url: absoluteUrl(item.path)
+      }))
+    }
+  };
 
   return (
     <ThemeProvider>
       <main className="min-h-screen">
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(workPageSchema) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionStructuredData) }}
         />
         <script
           type="application/ld+json"
@@ -48,76 +66,59 @@ export default function WorkPage() {
         <Navigation />
 
         <section className="top-section bg-gradient-to-b from-background to-background-alt">
-          <div className="container-tight">
-            <div className="max-w-4xl space-y-6">
-              <Breadcrumb className="mb-4">
-                <BreadcrumbList>
-                  <BreadcrumbItem>
-                    <BreadcrumbLink asChild>
-                      <Link href="/">Home</Link>
-                    </BreadcrumbLink>
-                  </BreadcrumbItem>
-                  <BreadcrumbSeparator>
-                    <ChevronRight />
-                  </BreadcrumbSeparator>
-                  <BreadcrumbItem>
-                    <BreadcrumbLink asChild>
-                      <Link href="/work">Work</Link>
-                    </BreadcrumbLink>
-                  </BreadcrumbItem>
-                </BreadcrumbList>
-              </Breadcrumb>
+          <div className="container-tight max-w-5xl space-y-6">
+            <Breadcrumb className="mb-4">
+              <BreadcrumbList>
+                <BreadcrumbItem>
+                  <BreadcrumbLink asChild>
+                    <Link href="/">Home</Link>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator>
+                  <ChevronRight />
+                </BreadcrumbSeparator>
+                <BreadcrumbItem>
+                  <BreadcrumbLink asChild>
+                    <Link href="/work">Work</Link>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
 
-              <h1 className="section-heading max-w-4xl">Delivered Client Solutions &amp; Our Products</h1>
-              <p className="max-w-3xl text-lg text-text-secondary">
-                Explore the client solutions we deliver and the products we are building around complex operational,
-                data, and care workflows.
-              </p>
+            <h1 className="section-heading max-w-4xl">Work that works.</h1>
+            <p className="max-w-3xl text-lg text-text-secondary">
+              Client solutions, products, and a few things we built because we thought they should exist.
+            </p>
+
+            <div className="mt-12">
+              <WorkShowcase items={workItems} />
             </div>
 
-            <div className="mt-12 grid gap-6 lg:grid-cols-2">
-              <Link href="/work/client-solutions" className="group block">
-                <Card className="h-full shadow-none bg-transparent">
-                  <CardSpotlight
-                    className="h-full border border-accent-digital-blue/25 bg-accent-digital-blue/10 backdrop-blur-[2px] p-10 transition-all duration-300"
-                    color="rgba(51, 130, 239, 0.22)"
+            {/* Temporarily hidden - customers section
+            <div className="mt-20">
+              <h2 className="text-3xl md:text-4xl mb-8">Teams we&rsquo;ve worked with</h2>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                {customers.map((customer) => (
+                  <a
+                    key={customer.name}
+                    href={customer.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={customer.name}
+                    className="flex h-28 items-center justify-center rounded-xl border border-[var(--border)]/20 bg-white p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
                   >
-                    <div className="relative z-20 flex h-full flex-col gap-6">
-                      <h2 className="text-3xl">Client solutions we have delivered</h2>
-                      <p className="text-text-secondary">
-                        Examples of how we simplify difficult workflows, connect critical systems, and make day-to-day
-                        operations easier to run.
-                      </p>
-                      <p className="inline-flex items-center gap-2 font-medium text-text-primary transition-transform group-hover:translate-x-1">
-                        Explore client solutions
-                        <ArrowRight />
-                      </p>
-                    </div>
-                  </CardSpotlight>
-                </Card>
-              </Link>
-
-              <Link href="/work/products" className="group block">
-                <Card className="h-full shadow-none bg-transparent">
-                  <CardSpotlight
-                    className="h-full border border-accent-science-teal/25 bg-accent-science-teal/10 backdrop-blur-[2px] p-10 transition-all duration-300"
-                    color="rgba(2, 192, 186, 0.22)"
-                  >
-                    <div className="relative z-20 flex h-full flex-col gap-6">
-                      <h2 className="text-3xl">Our products</h2>
-                      <p className="text-text-secondary">
-                        Products we are building where continuity of care, operational clarity, and practical software
-                        matter most.
-                      </p>
-                      <p className="inline-flex items-center gap-2 font-medium text-text-primary transition-transform group-hover:translate-x-1">
-                        Explore products
-                        <ArrowRight />
-                      </p>
-                    </div>
-                  </CardSpotlight>
-                </Card>
-              </Link>
+                    <Image
+                      src={customer.logo}
+                      alt={customer.name}
+                      width={customer.logoWidth}
+                      height={customer.logoHeight}
+                      className="h-full w-full object-contain"
+                    />
+                  </a>
+                ))}
+              </div>
             </div>
+            */}
           </div>
         </section>
       </main>

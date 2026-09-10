@@ -9,14 +9,11 @@ export const dynamic = 'force-static';
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
     '/',
-    '/about/',
     '/events/',
     '/solutions/custom-ai-software-life-sciences/',
     '/team/',
     '/operational-flow-risk-assessment/',
-    '/work/',
-    '/work/client-solutions/',
-    '/work/products/'
+    '/work/'
   ];
 
   const serviceRoutes = servicesContents.map((service) => getServicePath(service));
