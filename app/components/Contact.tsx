@@ -42,7 +42,8 @@ export default function Contact() {
               <a href="mailto:hello@doublehelix.dev" className="hover:text-primary transition-colors">
                 hello@doublehelix.dev
               </a>
-              {' · '}
+            </p>
+            <p>
               <a href="tel:+37129636428" className="hover:text-primary transition-colors">
                 +371 29636428
               </a>

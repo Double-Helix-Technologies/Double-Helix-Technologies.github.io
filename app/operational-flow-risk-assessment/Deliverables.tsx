@@ -73,7 +73,7 @@ const boundaries = [
   },
   {
     title: 'Implementation or integration builds',
-    description: 'We map, diagnose, and plan. Implementation happens separately—in-house, with another partner, or with us in a follow-on engagement.'
+    description: 'We map, diagnose, and plan. Implementation happens separately: in-house, with another partner, or with us in a follow-on engagement.'
   },
   {
     title: 'Regulatory frameworks out of scope',

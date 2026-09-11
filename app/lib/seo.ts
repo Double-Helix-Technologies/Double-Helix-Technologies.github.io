@@ -30,7 +30,6 @@ const defaultKeywords = [
   'healthcare software consulting',
   'life sciences software consulting',
   'ISO 9001 and ISO 27001 certification',
-  'ISO 9001 / ISO 27001 certified',
   'quality management and information security'
 ];
 

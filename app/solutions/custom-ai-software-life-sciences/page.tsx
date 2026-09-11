@@ -14,7 +14,7 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator
 } from '@/app/components/ui/breadcrumb';
-import { caseStudies } from '@/app/data/caseStudies';
+import { clientSolutions, getClientSolutionPath } from '@/app/data/work';
 import { absoluteUrl, buildBreadcrumbSchema, buildFAQSchema, buildMetadata, siteConfig } from '@/app/lib/seo';
 
 export const metadata: Metadata = buildMetadata({
@@ -102,7 +102,8 @@ const fitSignals = [
   'You need practical AI with clear ownership and traceability'
 ] as const;
 
-const lifeSciencesCaseStudies = caseStudies.filter((study) => study.client.sector === 'Life sciences');
+const LIFE_SCIENCES_PROOF_SLUGS = ['process-automation-lims-integration', 'ngs-data-delivery-automation', 'customer-integration-api-onboarding'];
+const lifeSciencesCaseStudies = clientSolutions.filter((study) => LIFE_SCIENCES_PROOF_SLUGS.includes(study.slug));
 
 export default function CustomAiSoftwareLifeSciencesPage() {
   const faqSchema = buildFAQSchema(faqItems);
@@ -294,12 +295,12 @@ export default function CustomAiSoftwareLifeSciencesPage() {
               {lifeSciencesCaseStudies.map((study) => (
                 <Card key={study.slug} className="bg-background">
                   <CardHeader>
-                    <CardTitle>{study.caseTitle}</CardTitle>
+                    <CardTitle>{study.title}</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <p className="text-text-secondary">{study.summary}</p>
                     <Button variant="secondary" asChild>
-                      <Link href={`/case-studies/${study.slug}/`}>
+                      <Link href={getClientSolutionPath(study)}>
                         Read case study
                         <ArrowRight />
                       </Link>

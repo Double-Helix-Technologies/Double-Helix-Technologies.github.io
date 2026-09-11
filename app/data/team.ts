@@ -22,7 +22,7 @@ const leadershipTeam: TeamMember[] = [
     lastName: 'Gusevs',
     role: 'Chief Strategy & Business Development Officer',
     description:
-      '13 years of building software and leading engineering teams. Strong in architecture, integrations, automation and reliable systems — from APIs and delivery to DevOps, SRE and observability. Deep experience in genomics, diagnostics and digital health.',
+      '13 years of building software and leading engineering teams. Strong in architecture, integrations, automation and reliable systems, from APIs and delivery to DevOps, SRE and observability. Deep experience in genomics, diagnostics and digital health.',
     image: '/images/team/aleksandrs.jpg',
     email: 'aleksandrs.gusevs@doublehelix.dev'
   },

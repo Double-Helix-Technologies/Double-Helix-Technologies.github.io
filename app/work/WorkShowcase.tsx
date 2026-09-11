@@ -73,9 +73,14 @@ export default function WorkShowcase({ items }: WorkShowcaseProps) {
                 >
                   <div className="relative z-20 flex h-full flex-col gap-5">
                     <div className="space-y-3">
-                      <span className="inline-flex w-fit rounded-full border border-border/30 bg-background/40 px-3 py-1 text-xs font-medium uppercase tracking-[0.14em] text-text-secondary">
-                        {item.tag}
-                      </span>
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="inline-flex w-fit rounded-full border border-border/30 bg-background/40 px-3 py-1 text-xs font-medium uppercase tracking-[0.14em] text-text-secondary">
+                          {item.tag}
+                        </span>
+                        {item.clientName && (
+                          <span className="text-xs font-medium text-text-secondary">{item.clientName}</span>
+                        )}
+                      </div>
                       <h3 className="text-2xl md:text-3xl">{item.title}</h3>
                       {item.headline && (
                         <p className="text-lg font-semibold text-text-primary">{item.headline}</p>

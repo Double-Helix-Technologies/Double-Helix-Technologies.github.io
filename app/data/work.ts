@@ -48,6 +48,10 @@ export const customers: Customer[] = [
   }
 ];
 
+/**
+ * A quantified result shown in a large stat card. Only numeric results belong here;
+ * qualitative outcomes go into `outcomes` or `whatWasDelivered`.
+ */
 export interface HighlightStat {
   value: string;
   label: string;
@@ -56,7 +60,30 @@ export interface HighlightStat {
 
 export interface ClientSolutionQuote {
   text: string;
-  attribution?: string;
+  /** Name, role and organisation exactly as approved for publication. */
+  attribution: string;
+}
+
+/** Named client. Only set when the client has approved being named on this case study. */
+export interface ClientReference {
+  name: string;
+}
+
+export interface EngagementFact {
+  label: string;
+  value: string;
+}
+
+/**
+ * The single number shown on the homepage slider card, animated from `from` to `value`.
+ * Keep `label` to one short line; the card shows nothing else.
+ */
+export interface FeaturedStat {
+  value: number;
+  from?: number;
+  prefix?: string;
+  suffix?: string;
+  label: string;
 }
 
 export interface ClientSolution {
@@ -69,6 +96,7 @@ export interface ClientSolution {
   tags: string[];
   sector: string;
   status: ClientSolutionStatus;
+  client?: ClientReference;
   primaryCategory: string;
   supportingThemes: string[];
   seo: {
@@ -83,6 +111,8 @@ export interface ClientSolution {
   whatWasDelivered: string[];
   outcomes: string[];
   highlightStats: HighlightStat[];
+  featuredStat: FeaturedStat;
+  engagementFacts?: EngagementFact[];
   relatedServiceSlugs: string[];
   quote?: ClientSolutionQuote;
 }
@@ -111,130 +141,65 @@ export interface Product {
   currentStage: string;
 }
 
+/**
+ * Content source of truth: the Double Helix sales deck "IT service partner for life sciences
+ * and healthcare" and the company one-pager. Figures and quotes must match those documents.
+ * Clients are named only where `client` is set; everything else stays anonymous.
+ */
 export const clientSolutions: ClientSolution[] = [
-  {
-    slug: 'sanger-ngs-data-delivery-pipeline-automation',
-    title: 'Sanger and NGS data delivery pipeline automation',
-    headline: '50% capacity freed',
-    tags: ['Automation', 'Integration', 'LIMS'],
-    summary:
-      'A delivery example from high-throughput sequencing operations where manual data delivery, fragmented systems, and limited workflow visibility were replaced with a more automated and transparent pipeline.',
-    preview:
-      'Manual sequencing data delivery was turned into a clearer, more automated pipeline with better visibility across project and delivery status.',
-    previewOutcome:
-      '50% of customer care capacity freed by removing manual delivery work.',
-    sector: 'High-throughput sequencing operations',
-    status: 'completed',
-    primaryCategory: 'Workflow automation',
-    supportingThemes: [
-      'Sample Management System',
-      'LIMS integration',
-      'Bioinformatics workflow',
-      'Single source of truth'
-    ],
-    seo: {
-      title: 'Sanger and NGS data delivery pipeline automation case study',
-      description:
-        'See how Double Helix automated Sanger and NGS data delivery with a custom Sample Management System, LIMS integration, flexible delivery endpoints, and a 50% customer care capacity gain.',
-      keywords: [
-        'sequencing workflow automation',
-        'NGS data delivery pipeline',
-        'Sanger sequencing automation',
-        'Sample Management System',
-        'LIMS integration',
-        'bioinformatics workflow automation'
-      ]
-    },
-    problem:
-      'Sequencing data delivery was handled through manual steps, command-line work, fragmented systems, and poor visibility into delivery status. Teams could not reliably track what had already been delivered, what was waiting on bioinformatics steps, or how to handle the delivery technicalities efficiently for each customer setup.',
-    approach:
-      'Double Helix first mapped the current-state process in detail, then designed the target workflow and executed the change stage by stage. The implementation combined workflow automation, a custom Sample Management System, LIMS integration, and the necessary bioinformatics handoffs to make sequencing data delivery more reliable and easier to understand.',
-    dataFlow:
-      'Instead of relying on a fixed FTP-style delivery pattern, sequencing data could be routed to a more flexible endpoint based on the project setup. That could be customer-managed storage, service-provider storage, cloud-based destinations, or even FTP when it was still required. The technical complexity stayed in the delivery pipeline so customers could benefit from a better-fit infrastructure setup without extra manual coordination.',
-    users: ['Project managers', 'Customer care team', 'Bioinformatics team'],
-    whatWasDelivered: [
-      'Full current-state process mapping for Sanger and NGS data delivery',
-      'Future-state workflow design with stage-by-stage rollout planning',
-      'Custom Sample Management System integrated with LIMS',
-      'Automation for delivery routing and visibility across the pipeline',
-      'Operational alignment with bioinformatics steps required for secondary analysis'
-    ],
-    outcomes: [
-      '50% of customer care team capacity freed from manual data delivery work',
-      'Single source of truth for project and delivery state across teams',
-      'Faster response to client enquiries because delivery status became easier to understand',
-      'Lower reliance on manual command-line execution and fragmented handoffs'
-    ],
-    highlightStats: [
-      {
-        value: '50%',
-        label: 'customer care capacity freed',
-        detail: 'Manual delivery work was removed so the team could focus on calls, enquiries, and issue resolution.'
-      },
-      {
-        value: 'Flexible',
-        label: 'delivery endpoints supported',
-        detail: 'Data could be delivered to the endpoint that best fit the customer and infrastructure setup.'
-      },
-      {
-        value: 'Shared',
-        label: 'delivery visibility across teams',
-        detail: 'Project managers and customer care gained clearer visibility into current delivery status.'
-      }
-    ],
-    relatedServiceSlugs: [
-      'system-integrations',
-      'custom-software-development',
-      'operational-workflow-risk-assessment'
-    ]
-  },
   {
     slug: 'process-automation-lims-integration',
     title: 'Process automation & LIMS integration',
     headline: '7 data entry points → 1',
     tags: ['Automation', 'Integration', 'LIMS'],
     summary:
-      'Connected LIMS, ERP, e-commerce and reporting systems, automated the workflow between them, and created one place to manage projects and samples.',
+      'Connected e-commerce, LIMS, ERP and reporting systems in an NGS operation, automated the workflow between them, and gave project managers and Customer Care one place to manage projects and samples.',
     preview:
-      'Manual work across LIMS, ERP, e-commerce and reporting was slowing down project teams.',
-    previewOutcome: '75% less order setup time · 50% team capacity freed up',
-    sector: 'Life sciences services / LIMS operations',
+      'Manual data entry across e-commerce, LIMS, ERP and reporting was slowing down NGS project teams.',
+    previewOutcome: '75% less order setup time, 50% of team capacity freed',
+    sector: 'Genomics services / NGS operations',
     status: 'completed',
+    client: { name: 'Eurofins Genomics' },
     primaryCategory: 'Workflow automation',
-    supportingThemes: ['LIMS integration', 'ERP integration', 'E-commerce integration', 'Single source of truth'],
+    supportingThemes: ['LIMS integration', 'ERP integration', 'E-commerce integration', 'Sample Management System', 'Single source of truth'],
     seo: {
       title: 'Process Automation & LIMS Integration Case Study',
       description:
-        'See how Double Helix connected LIMS, ERP, e-commerce and reporting systems to cut data entry points from 7 to 1 and free up 50% of team capacity.',
+        'See how Double Helix connected LIMS, ERP, e-commerce and reporting systems for Eurofins Genomics, cut data entry points from 7 to 1 and freed 50% of team capacity.',
       keywords: [
         'LIMS integration case study',
         'process automation life sciences',
         'ERP LIMS integration',
         'workflow automation case study',
-        'sample management automation'
+        'sample management automation',
+        'Sample Management System',
+        'sequencing workflow automation'
       ]
     },
     problem:
-      'Project managers and Customer Care teams were manually moving data between multiple systems. E-commerce, LIMS, ERP and reporting weren’t connected, and there was no single view of projects and samples.',
+      'Project managers and Customer Care were entering the same data by hand across multiple IT applications in the NGS domain. E-commerce, LIMS, ERP and reporting were not connected end to end, and there was no single source of truth for project overview and sample management.',
+    approach:
+      'Double Helix first mapped the current-state process in detail, then designed the target workflow and rolled the change out stage by stage. The implementation combined process automation, integrations between LIMS and the surrounding business systems, and a custom Sample Management System that became the single overview for Customer Care and project managers.',
     users: ['Project managers', 'Customer Care team'],
     whatWasDelivered: [
-      'Automated the process across the different systems',
-      'Integrated LIMS with surrounding business systems',
-      'Created a single overview for project managers and Customer Care',
-      'Reduced the number of places where people had to enter the same data'
+      'Current-state process mapping and future-state workflow design with a stage-by-stage rollout',
+      'Process automation across e-commerce, LIMS, ERP and reporting',
+      'Integration of LIMS with the surrounding business systems',
+      'Custom Sample Management System as the single overview for project managers and Customer Care',
+      'One place to enter data instead of seven'
     ],
     outcomes: [
-      '7 → 1 data entry points',
-      '75% reduction in order setup time',
+      'Data entry points reduced from 7 to 1',
+      'Order setup time reduced by 75%',
       'Project setup backlog reduced from 1 week to 1 day',
-      '75% less time spent creating WIP reports',
-      '50% of team capacity freed up for revenue-generating work'
+      'WIP report creation time reduced by 75%',
+      '50% of project management and Customer Care capacity freed for revenue-generating work'
     ],
     highlightStats: [
       {
         value: '7 → 1',
         label: 'data entry points',
-        detail: 'The same data no longer needs to be entered separately across LIMS, ERP, e-commerce and reporting.'
+        detail: 'The same data no longer needs to be entered separately across e-commerce, LIMS, ERP and reporting.'
       },
       {
         value: '75%',
@@ -243,87 +208,104 @@ export const clientSolutions: ClientSolution[] = [
       },
       {
         value: '50%',
-        label: 'team capacity freed up',
-        detail: 'Time previously spent on manual data entry is now available for revenue-generating work.'
+        label: 'of team capacity freed',
+        detail: 'Project management and Customer Care time previously spent on data entry now goes to revenue-generating work.'
       }
     ],
-    relatedServiceSlugs: ['system-integrations', 'operational-workflow-risk-assessment', 'custom-software-development']
+    featuredStat: { value: 50, suffix: '%', label: 'of project management and Customer Care capacity freed' },
+    engagementFacts: [
+      { label: 'Time to MVP go-live', value: '10 months from the first developer hired' },
+      { label: 'Systems connected', value: 'E-commerce, LIMS, ERP, reporting' }
+    ],
+    relatedServiceSlugs: ['system-integrations', 'operational-workflow-risk-assessment', 'custom-software-development'],
+    quote: {
+      text:
+        'Working with this team was a game-changer. They don’t just code, they dive deep into your business, challenge assumptions, and co-create solutions that are both innovative and intuitive. I was impressed about their ability to translate very complex business processes into elegant, user-friendly solutions.',
+      attribution: 'Annika Schott, Project Management Team Lead NGS, Eurofins Genomics Europe'
+    }
   },
   {
     slug: 'ngs-data-delivery-automation',
     title: 'NGS data delivery automation',
     headline: '1.5 days → 3 hours',
     tags: ['Automation', 'Data', 'Cloud', 'Monitoring'],
-    summary: 'Automated, monitored and auditable data delivery and archival, replacing manual command-line transfers.',
-    preview: 'A critical data delivery process depended on people copying files through command-line tools.',
+    summary:
+      'Automated, monitored and auditable delivery and archival of sequencing data, replacing manual command-line file transfers.',
+    preview: 'A critical data delivery process depended on people copying FASTQ files through command-line tools.',
     previewOutcome: 'Delivery time cut from 1.5 days to 3 hours',
     sector: 'Genomics / NGS sequencing operations',
     status: 'completed',
+    client: { name: 'Eurofins Genomics' },
     primaryCategory: 'Data pipeline automation',
     supportingThemes: ['Data delivery automation', 'Cloud storage tiering', 'Audit and approval workflow', 'Monitoring and alerting'],
     seo: {
       title: 'NGS Data Delivery Automation Case Study',
       description:
-        'See how Double Helix automated NGS data delivery and archival, cutting delivery time from 1.5 days to 3 hours with monitoring and a 4-eyes approval step.',
+        'See how Double Helix automated NGS data delivery and archival for Eurofins Genomics, cutting delivery time from 1.5 days to 3 hours with monitoring and an optional 4-eyes approval.',
       keywords: [
         'NGS data delivery automation',
         'genomics data pipeline automation',
         'sequencing data archival',
         'FASTQ delivery automation',
-        'cloud storage tiering case study'
+        'cloud storage tiering case study',
+        'Sanger sequencing data delivery',
+        'NGS data delivery pipeline'
       ]
     },
     problem:
-      'Data delivery was completely manual. FASTQ files were copied through command-line terminals, with frequent problems around disk space, stalled transfers and missing notifications. The process worked — until it didn’t.',
+      'Data delivery was completely manual: FASTQ files were copied and moved through command-line terminals. The process was fragile and prone to human error, with frequent technical problems such as running out of disk space, stalled copies and missing notifications, because there was no archiving or monitoring in place. The process worked, until it didn’t.',
+    dataFlow:
+      'Instead of a fixed FTP-style delivery pattern, sequencing data is routed to the endpoint that fits each project setup: customer-managed storage, service-provider storage, cloud destinations, or FTP where a customer still requires it. The technical complexity stays inside the delivery pipeline, so customers get a better-fitting setup without extra manual coordination. The pipeline covers both NGS and Sanger sequencing deliveries.',
     users: ['Bioinformatics team', 'Operations team', 'Customer care team'],
     whatWasDelivered: [
       'Automated the entire data delivery workflow',
-      'Added monitoring and notifications',
-      'Added an auditable process with a 4-eyes approval step',
+      'Monitoring and notifications for every delivery',
+      'Auditable process with an optional 4-eyes approval before data reaches the end customer',
       'Automated data archival',
-      'Used different cloud storage tiers depending on customer requirements'
+      'Cloud storage tiers (hot, warm, cold) chosen per customer requirements',
+      'Flexible delivery endpoints: customer storage, provider storage, cloud or FTP'
     ],
     outcomes: [
-      'Data delivery became fully automated',
-      'Delivery time dropped from 1.5 days to 3 hours',
-      'Data archival happens automatically',
-      'Cloud storage can be optimized based on how frequently data is accessed'
+      'Data delivery is fully automated',
+      'Delivery time reduced from 1.5 days to 3 hours',
+      'Data archival happens automatically, based on customer requirements',
+      'Cloud storage cost optimised by tiering data on how often it is accessed',
+      'Delivery status is visible to project managers and customer care, so client enquiries are answered faster'
     ],
     highlightStats: [
       {
-        value: '3 hrs',
-        label: 'delivery time',
-        detail: 'Down from 1.5 days when files were copied manually through command-line tools.'
-      },
-      {
-        value: 'Auditable',
-        label: '4-eyes approval step',
-        detail: 'Every delivery is monitored, notified and approved through a repeatable, auditable process.'
-      },
-      {
-        value: 'Tiered',
-        label: 'cloud storage',
-        detail: 'Archival storage tier is chosen automatically based on customer requirements and access frequency.'
+        value: '3 hours',
+        label: 'delivery time, down from 1.5 days',
+        detail: 'Files were previously copied by hand through command-line tools.'
       }
     ],
-    relatedServiceSlugs: ['system-integrations', 'observability-workflow-monitoring', 'custom-software-development']
+    featuredStat: { value: 3, from: 36, suffix: ' hours', label: 'data delivery time, down from 1.5 days' },
+    engagementFacts: [{ label: 'Data types', value: 'NGS and Sanger sequencing data' }],
+    relatedServiceSlugs: ['system-integrations', 'observability-workflow-monitoring', 'custom-software-development'],
+    quote: {
+      text:
+        'Working with this team has been an exceptional experience. They delivered our project management application for multiple laboratories with remarkable speed and precision, all while maintaining the highest standards of quality. What truly impressed us was their communication: always clear, responsive, and collaborative. They didn’t just build software, they took the time to understand our entire business ecosystem, not just the immediate requirements. Their approach went beyond solving surface-level problems, they actively sought out root causes and designed solutions that support both current operations and future growth. Their dedication, insight, and professionalism make them a standout partner for any organization looking to build impactful, scalable digital solutions.',
+      attribution: 'Andreas Feldl, Global Business Product Owner, Eurofins Genomics'
+    }
   },
   {
     slug: 'customer-integration-api-onboarding',
     title: 'Customer integration & API onboarding',
     headline: 'Months → under 2 weeks',
     tags: ['APIs', 'Integration', 'Onboarding'],
-    summary: 'Built a standard API and onboarding process connecting customer systems with the service provider’s LIMS.',
+    summary:
+      'Built a standardised API and onboarding process connecting B2B customer systems with the service provider’s LIMS.',
     preview: 'Every new customer integration was becoming its own project.',
     previewOutcome: 'Customer onboarding cut from months to under two weeks',
     sector: 'B2B life sciences platform integrations',
     status: 'completed',
+    client: { name: 'Eurofins Genomics' },
     primaryCategory: 'API integration & onboarding',
-    supportingThemes: ['Standardized APIs', 'Sample lifecycle visibility', 'Onboarding documentation', 'System monitoring'],
+    supportingThemes: ['Standardised APIs', 'Sample lifecycle visibility', 'Onboarding documentation', 'System monitoring'],
     seo: {
       title: 'Customer Integration & API Onboarding Case Study',
       description:
-        'See how Double Helix built a standardized API and onboarding process that cut B2B customer onboarding from months to under two weeks.',
+        'See how Double Helix built a standardised API and onboarding process for Eurofins Genomics that cut B2B customer onboarding from months to under two weeks.',
       keywords: [
         'API onboarding case study',
         'B2B LIMS integration',
@@ -333,39 +315,34 @@ export const clientSolutions: ClientSolution[] = [
       ]
     },
     problem:
-      'B2B customers needed their systems connected to the service provider. Each integration was effectively a one-off, making onboarding slow and expensive. Customers also had little visibility into what was happening with their samples.',
+      'B2B customers needed an automated interface between their applications and the service provider’s systems. Every integration was a one-off, so onboarding took months, customers had little visibility into sample management, and opportunities were lost while integrations were being built.',
     users: ['B2B customers', 'Integration engineering team', 'Customer success team'],
     whatWasDelivered: [
-      'Built a standardized API between customer applications and LIMS',
-      'Added visibility into the sample lifecycle',
-      'Created a repeatable onboarding process',
-      'Created documentation so new customers could be onboarded without reinventing the integration every time',
-      'Added system monitoring to catch issues before customers did'
+      'Standardised API between the service provider’s LIMS and customer applications',
+      'Visibility into the sample management process for customers',
+      'Standard onboarding process',
+      'Onboarding documentation, so new customers no longer need a bespoke integration',
+      'Full system monitoring'
     ],
     outcomes: [
-      'Customer onboarding reduced from several months to under 2 weeks',
-      'Issues can be identified proactively',
-      'Less project-management effort required',
-      'Customers get visibility into their sample lifecycle'
+      'Customer onboarding time reduced from several months to under two weeks',
+      'Issues are resolved proactively, before end customers notice',
+      'Significantly less project management capacity needed, because customers can follow their sample lifecycle themselves'
     ],
     highlightStats: [
       {
-        value: '<2 wks',
-        label: 'customer onboarding',
-        detail: 'Down from several months when every integration was built as a one-off project.'
-      },
-      {
-        value: 'Standardized',
-        label: 'API and onboarding process',
-        detail: 'New customers are onboarded through a repeatable process instead of a bespoke integration.'
-      },
-      {
-        value: 'Proactive',
-        label: 'issue detection',
-        detail: 'System monitoring surfaces problems before customers notice them.'
+        value: 'Under 2 weeks',
+        label: 'customer onboarding, down from several months',
+        detail: 'Every integration used to be built as a one-off project.'
       }
     ],
-    relatedServiceSlugs: ['system-integrations', 'custom-software-development', 'observability-workflow-monitoring']
+    featuredStat: { value: 2, prefix: 'Under ', suffix: ' weeks', label: 'customer onboarding, down from several months' },
+    relatedServiceSlugs: ['system-integrations', 'custom-software-development', 'observability-workflow-monitoring'],
+    quote: {
+      text:
+        'Collaborating with Double Helix Technologies has greatly enhanced the efficiency and reliability of our IT integration projects. Their strong technical expertise and proactive, customer-focused approach enabled us to address potential issues early and implement solutions perfectly aligned with our user needs. The team’s ability to listen carefully and anticipate challenges ensured a smooth and efficient integration that supports our business objectives. Double Helix Technologies is a dependable partner for any organization seeking innovative and client-centered IT integration services.',
+      attribution: 'Reynald Vidili, Sales Director, Eurofins Genomics France SAS'
+    }
   },
   {
     slug: 'forensics-integration',
@@ -373,17 +350,17 @@ export const clientSolutions: ClientSolution[] = [
     headline: '2 years late. First to launch.',
     tags: ['MVP', 'Integration', 'Digitalization'],
     summary:
-      'Built a new team, delivered an MVP integration and replaced email and paper-based workflows with a connected portal.',
-    preview: 'A customer joined a major government digitalization initiative two years behind schedule.',
+      'Formed a new team, delivered an MVP integration and replaced email and paper-based workflows with a connected portal.',
+    preview: 'A customer joined a government digitalisation initiative two years behind schedule.',
     previewOutcome: 'First to launch despite the late start',
-    sector: 'Forensics / law enforcement digitalization',
+    sector: 'Forensics / law enforcement digitalisation',
     status: 'completed',
     primaryCategory: 'Digital transformation / systems integration',
-    supportingThemes: ['Government digitalization initiative', 'Drug and DNA analysis workflow', 'Back-office portal', 'Secure information exchange'],
+    supportingThemes: ['Government digitalisation initiative', 'Drug and DNA analysis workflow', 'Back-office portal', 'Secure information exchange'],
     seo: {
       title: 'Forensics Digitalization Integration Case Study',
       description:
-        'See how Double Helix formed a new delivery team and launched an MVP integration that let a customer be first to launch in a national forensics digitalization initiative, two years behind schedule.',
+        'See how Double Helix formed a new delivery team and launched an MVP integration that let a customer be first to launch in a government forensics digitalization initiative, two years behind schedule.',
       keywords: [
         'forensics digitalization case study',
         'law enforcement systems integration',
@@ -393,42 +370,34 @@ export const clientSolutions: ClientSolution[] = [
       ]
     },
     problem:
-      'Police, prosecution and forensic organizations were working together to move drug and DNA analysis workflows into a digital, paperless environment. Our customer joined the initiative two years late, putting the opportunity at risk.',
+      'Police, prosecution and forensic laboratory organisations were moving their drug and DNA analysis workflows into a shared, paperless digital process. Our customer joined the initiative two years late, which put the opportunity at risk.',
     users: ['Police', 'Prosecution', 'Forensic laboratory staff'],
     whatWasDelivered: [
       'Formed a new delivery team',
-      'Built and launched an MVP integration',
+      'Built and launched the MVP integration for drug analysis',
       'Developed a new back-office portal',
-      'Continued development for drug and DNA analysis',
-      'Worked closely with business users and external partners'
+      'Continued development of drug and DNA analysis support, in close collaboration with the business and its partners'
     ],
     outcomes: [
-      'Despite the two-year delay, the customer was the first to launch',
-      'Paper and email-based handoffs were replaced with an integrated workflow',
-      'Information exchange became faster',
-      'Information protection was strengthened',
-      'Turnaround times were reduced'
+      'Despite the two-year handicap, the customer was the first to launch the integration and seize the opportunity',
+      'Information protection strengthened through the new architecture',
+      'Paperless workflow with no emails: communication runs directly between the police base systems and the new portal',
+      'Shorter turnaround times through faster information exchange'
     ],
     highlightStats: [
       {
-        value: 'First',
-        label: 'to launch',
-        detail: 'Despite joining the national digitalization initiative two years behind schedule.'
-      },
-      {
-        value: 'Paperless',
-        label: 'workflow',
-        detail: 'Paper and email-based handoffs were replaced with an integrated, connected portal.'
-      },
-      {
-        value: 'Faster',
-        label: 'information exchange',
-        detail: 'Turnaround times were reduced and information protection was strengthened.'
+        value: '1st',
+        label: 'to launch, despite joining two years late',
+        detail: 'The MVP integration went live ahead of the other participants in the initiative.'
       }
     ],
+    featuredStat: { value: 2, suffix: ' years late', label: 'and still the first to launch' },
+    engagementFacts: [{ label: 'Team', value: 'New delivery team formed for this project' }],
     relatedServiceSlugs: ['system-integrations', 'custom-software-development', 'operational-workflow-risk-assessment'],
     quote: {
-      text: 'The automated workflow is leaner, faster, requires less manual actions and is more secure.'
+      text:
+        'For these cases no emails were exchanged, because all communication was done directly from the base systems of Police to the new Portal and vice versa. So, now the automated workflow is leaner, faster, requires less manual actions and is more secure. This is a great milestone for us and I want to thank multiple people who have made this possible. I appreciate your hard work to make this possible, both IT-wise and operationally!',
+      attribution: 'Director and the management team of the customer organisation'
     }
   },
   {
@@ -437,16 +406,17 @@ export const clientSolutions: ClientSolution[] = [
     headline: '95% fewer repeat incidents',
     tags: ['IT Operations', 'Reliability', 'Support'],
     summary: 'Reworked IT processes, application ownership, monitoring and root-cause analysis across 10+ applications.',
-    preview: 'IT was spending too much time fixing the same problems — while users had little idea what was going on.',
-    previewOutcome: '95% fewer repeat incidents · 37% lower IT costs · NPS from -25 to +72',
-    sector: 'Enterprise IT operations',
+    preview: 'IT was spending too much time fixing the same problems, while users had little idea what was going on.',
+    previewOutcome: '95% fewer repeat incidents, 37% lower IT costs, NPS from -25 to +72',
+    sector: 'Life sciences / genomics services IT operations',
     status: 'completed',
+    client: { name: 'Eurofins Genomics' },
     primaryCategory: 'IT operations transformation',
     supportingThemes: ['Application ownership', 'Root-cause analysis', 'Monitoring and alerting', 'IT process redesign'],
     seo: {
       title: 'IT Reorganization Case Study',
       description:
-        'See how Double Helix reworked IT processes and application ownership across 10+ applications, cutting repeat incidents by 95% and IT costs by 37%.',
+        'See how Double Helix reworked IT processes and application ownership across 10+ applications at Eurofins Genomics, cutting repeat incidents by 95% and IT costs by 37%.',
       keywords: [
         'IT reorganization case study',
         'IT operations transformation',
@@ -456,28 +426,29 @@ export const clientSolutions: ClientSolution[] = [
       ]
     },
     problem:
-      'There was little transparency around IT maintenance and development. Users were frustrated, recurring incidents were common, and problems were often fixed without addressing what caused them in the first place.',
+      'There was little transparency in how IT maintenance and development were managed, which frustrated users and stakeholders. A high volume of recurring incidents pointed to deeper issues with service quality and reliability.',
     users: ['IT leadership', 'Support teams', 'Application owners'],
     whatWasDelivered: [
-      'Established clear IT processes across 10+ applications',
-      'Mapped the application landscape',
-      'Introduced monitoring and alerting',
-      'Investigated recurring issues at their root cause',
-      'Clarified ownership',
-      'Shifted the focus from simply implementing requirements to solving the underlying business problem'
+      'Clear and transparent IT processes across 10+ applications',
+      'Analysis of the current application landscape',
+      'Monitoring and alerting to improve observability',
+      'Root-cause analysis to resolve recurring issues at their source',
+      'Clear ownership and documented processes',
+      'A shift from coding to requirements towards analysing, proposing and delivering solutions for the business need'
     ],
     outcomes: [
       'Repeat incidents reduced by 95%',
-      'Issue resolution time: 20+ days → 3 days',
-      'Feature lead time: several months → 6 days',
-      'IT NPS: -25 → +72',
-      'Annual IT costs: -37%'
+      'Early detection of incidents, before end users or customers notice',
+      'Issue resolution lead time reduced from 20+ days to 3 days',
+      'Feature lead time reduced from several months to 6 days',
+      'Internal IT Net Promoter Score improved from -25 to +72',
+      'IT organisation’s annual costs reduced by 37%'
     ],
     highlightStats: [
       {
         value: '95%',
         label: 'fewer repeat incidents',
-        detail: 'Root-cause analysis and clarified ownership stopped the same problems from recurring.'
+        detail: 'Root-cause analysis and clear ownership stopped the same problems from recurring.'
       },
       {
         value: '-37%',
@@ -486,11 +457,18 @@ export const clientSolutions: ClientSolution[] = [
       },
       {
         value: '-25 → +72',
-        label: 'IT NPS',
+        label: 'internal IT NPS',
         detail: 'User sentiment shifted from frustration to strong satisfaction.'
       }
     ],
-    relatedServiceSlugs: ['observability-workflow-monitoring', 'operational-workflow-risk-assessment', 'custom-software-development']
+    featuredStat: { value: 95, suffix: '%', label: 'fewer repeat incidents' },
+    engagementFacts: [{ label: 'Scope', value: '10+ applications' }],
+    relatedServiceSlugs: ['observability-workflow-monitoring', 'operational-workflow-risk-assessment', 'custom-software-development'],
+    quote: {
+      text:
+        'The IT team consistently demonstrates a solution-oriented approach and a commitment to building sustainable structures that enhance our workflow. Their valuable interactions and willingness to share knowledge significantly impact our projects. Their hard work and dedication are truly commendable, and I look forward to seeing our collective continued success.',
+      attribution: 'Nadine Tappe, Head of Oligonucleotides, Eurofins Genomics Europe'
+    }
   },
   {
     slug: 'observability-improvement',
@@ -499,11 +477,11 @@ export const clientSolutions: ClientSolution[] = [
     tags: ['SRE', 'Observability', 'Monitoring'],
     summary: 'Built an SRE function, mapped critical systems and redesigned monitoring around business impact.',
     preview: '30+ live systems were generating more than 200 alerts every day. The important ones were getting lost in the noise.',
-    previewOutcome: '80%+ fewer alerts · 40% fewer incidents · 4× faster response',
-    sector: 'Multi-region live operations / SRE',
+    previewOutcome: '80%+ fewer alerts, 40% fewer incidents, 4× faster response',
+    sector: 'Global support operations / SRE',
     status: 'completed',
     primaryCategory: 'Observability & SRE',
-    supportingThemes: ['Alert tuning', 'SLA definition', 'Unified dashboards', 'Business-impact prioritization'],
+    supportingThemes: ['Alert tuning', 'SLA definition', 'Unified dashboards', 'Business-impact prioritisation'],
     seo: {
       title: 'Observability Improvement Case Study',
       description:
@@ -517,31 +495,29 @@ export const clientSolutions: ClientSolution[] = [
       ]
     },
     problem:
-      'Support specialists across four regions were dealing with 30+ live systems and more than 200 alerts every day. There was plenty of monitoring — but not enough useful information. Alert noise made it harder to spot real problems, and critical incidents sometimes went unresolved.',
+      'Support specialists across four global regions (USA, Japan, Europe and India) were overwhelmed by incident, bug and support tickets, with little visibility into 30+ live systems. Alerts fired more than 200 times a day across all severity levels, creating noise and masking real issues. Critical incidents sometimes went unresolved, causing business disruptions that better monitoring and focus could have avoided.',
     users: ['Support specialists', 'SRE team', 'Development teams'],
     whatWasDelivered: [
-      'Established a dedicated SRE team',
-      'Mapped application dependencies and business-critical flows',
-      'Prioritized alerts based on business impact',
-      'Redesigned alert thresholds',
-      'Removed unnecessary alert noise',
-      'Built unified observability dashboards',
-      'Defined SLAs and system ownership',
-      'Focused on root-cause fixes instead of temporary patches'
+      'A dedicated Site Reliability Engineering team under strong leadership',
+      'Mapping of application dependencies and business-critical flows',
+      'Alerts prioritised by business impact, thresholds redefined and noise removed',
+      'Unified observability dashboards for preventive maintenance',
+      'SLAs and system responsibilities defined across teams',
+      'Root-cause analysis and sustainable fixes instead of shortcuts or temporary patches'
     ],
     outcomes: [
-      'Alert volume reduced by 80%+',
-      'False positives eliminated',
-      'Incident response 4× faster',
-      'Number of incidents reduced by 40%',
-      'Clearer ownership across teams',
-      'Support and development teams had more time for strategic work'
+      'Alert volume reduced by over 80%, enabling focus on truly critical issues',
+      'False positives eliminated; each alert now triggers a proper response',
+      'Incident response times improved 4 times',
+      'Number of incidents decreased by 40%',
+      'The business regained trust in IT through proactive issue resolution',
+      'Support and development teams freed up to focus on strategic improvements'
     ],
     highlightStats: [
       {
         value: '-80%+',
         label: 'alert volume',
-        detail: 'Alert thresholds were redesigned and noise removed, leaving only alerts tied to business impact.'
+        detail: 'Thresholds were redefined and noise removed, leaving only alerts tied to business impact.'
       },
       {
         value: '4×',
@@ -554,6 +530,11 @@ export const clientSolutions: ClientSolution[] = [
         detail: 'Root-cause fixes replaced temporary patches across the mapped critical systems.'
       }
     ],
+    featuredStat: { value: 4, suffix: '×', label: 'faster incident response' },
+    engagementFacts: [
+      { label: 'Team', value: 'Dedicated SRE team established' },
+      { label: 'Scope', value: '30+ live systems across four regions (USA, Japan, Europe, India)' }
+    ],
     relatedServiceSlugs: ['observability-workflow-monitoring', 'operational-workflow-risk-assessment']
   },
   {
@@ -562,8 +543,8 @@ export const clientSolutions: ClientSolution[] = [
     headline: 'Idea → working MVP in under a week',
     tags: ['MVP', 'Discovery', 'Product Development'],
     summary: 'Ran discovery workshops, built a working prototype and put it in the hands of real users.',
-    preview: 'The business wanted to test a new digital scheduling process without disrupting existing operations.',
-    previewOutcome: 'MVP in under a week · Pilot live in 2 months',
+    preview: 'The business wanted to field-test a new digital work-scheduling process without disrupting existing operations.',
+    previewOutcome: 'MVP in under a week, pilot live in 2 months',
     sector: 'Digital scheduling / field operations',
     status: 'completed',
     primaryCategory: 'Rapid prototyping / MVP development',
@@ -581,38 +562,31 @@ export const clientSolutions: ClientSolution[] = [
       ]
     },
     problem:
-      'Management wanted to test a new digital work-scheduling process, but didn’t want to commit to a large software project before knowing whether the idea actually worked in the field.',
+      'Management wanted to validate and field-test a digital work-scheduling process, with minimal to no disruption to existing processes, before committing to a large software project.',
     users: ['Operations management', 'Field users'],
     whatWasDelivered: [
-      'Ran focused discovery workshops',
-      'Identified the functionality needed for a real-world test',
-      'Built a working prototype',
-      'Put the MVP into field testing',
-      'Created a structured approach for what to build next'
+      'A series of workshops for functionality discovery',
+      'A prototype application for field testing',
+      'A structured approach for further development after process validation'
     ],
     outcomes: [
-      'First functional MVP ready in under 1 week',
-      'Pilot went live within 2 months',
-      'The process could be tested with real users',
-      'Existing operations continued without disruption'
+      'First MVP iteration ready for pilot in under a week, from idea to functional product',
+      'Pilot went live in two months and is being field-tested with no disruption to existing processes',
+      'The process could be validated with real users before a larger investment'
     ],
     highlightStats: [
       {
-        value: '<1 wk',
-        label: 'to first working MVP',
+        value: 'Under 1 week',
+        label: 'from idea to first working MVP',
         detail: 'Discovery workshops identified exactly what was needed for a real-world test, nothing more.'
       },
       {
-        value: '2 mo',
+        value: '2 months',
         label: 'to live pilot',
         detail: 'The prototype moved from field testing to a live pilot without disrupting existing operations.'
-      },
-      {
-        value: 'Structured',
-        label: 'roadmap for what’s next',
-        detail: 'Field-tested results fed directly into a plan for further development.'
       }
     ],
+    featuredStat: { value: 1, from: 10, prefix: 'Under ', suffix: ' week', label: 'from idea to working MVP' },
     relatedServiceSlugs: ['custom-software-development', 'ai-adoption-solutions']
   }
 ];
@@ -664,11 +638,27 @@ export const products: Product[] = [
     ],
     markets: ['DACH', 'BeNeLux', 'USA'],
     ctaLabel: 'Join early access',
-    ctaHref: '/#contact',
+    ctaHref: 'https://tiltera.health',
     currentStage:
       'Currently in development, with prototype walkthroughs and early access conversations available.'
   }
 ];
+
+/**
+ * Old URLs that must keep resolving. Values are current client-solution slugs.
+ * `/work/<old-slug>/` and `/case-studies/<old-slug>/` render a redirect page to `/work/<new-slug>/`.
+ */
+export const legacyWorkRedirects: Record<string, string> = {
+  // Merged into the two Eurofins Genomics cases it overlapped with (decision 2026-09-11).
+  'sanger-ngs-data-delivery-pipeline-automation': 'ngs-data-delivery-automation'
+};
+
+export const legacyCaseStudyRedirects: Record<string, string> = {
+  'process-automation': 'process-automation-lims-integration',
+  'rapid-development': 'rapid-mvp-development',
+  'observability-improvement': 'observability-improvement',
+  'reorganization-of-it': 'it-reorganization'
+};
 
 export function getClientSolutionPath(solution: ClientSolution) {
   return `/work/${solution.slug}/`;
@@ -693,6 +683,7 @@ export interface WorkListItem {
   headline?: string;
   tags?: string[];
   preview: string;
+  clientName?: string;
   metaLabel: string;
   metaValue: string;
   path: string;
@@ -707,6 +698,7 @@ export function getWorkListItems(): WorkListItem[] {
       headline: solution.headline,
       tags: solution.tags,
       preview: solution.preview,
+      clientName: solution.client?.name,
       metaLabel: 'Outcome',
       metaValue: solution.previewOutcome,
       path: getClientSolutionPath(solution)
@@ -725,10 +717,15 @@ export function getWorkListItems(): WorkListItem[] {
 
 export type WorkEntry =
   | { kind: 'client-solution'; data: ClientSolution }
-  | { kind: 'product'; data: Product };
+  | { kind: 'product'; data: Product }
+  | { kind: 'redirect'; to: string };
 
 export function getAllWorkSlugs() {
-  return [...clientSolutions.map((solution) => solution.slug), ...products.map((product) => product.slug)];
+  return [
+    ...clientSolutions.map((solution) => solution.slug),
+    ...products.map((product) => product.slug),
+    ...Object.keys(legacyWorkRedirects)
+  ];
 }
 
 export function getWorkEntryBySlug(slug: string): WorkEntry | undefined {
@@ -740,6 +737,14 @@ export function getWorkEntryBySlug(slug: string): WorkEntry | undefined {
   const product = getProductBySlug(slug);
   if (product) {
     return { kind: 'product', data: product };
+  }
+
+  const redirectTarget = legacyWorkRedirects[slug];
+  if (redirectTarget) {
+    const target = getClientSolutionBySlug(redirectTarget);
+    if (target) {
+      return { kind: 'redirect', to: getClientSolutionPath(target) };
+    }
   }
 
   return undefined;
