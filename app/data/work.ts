@@ -91,10 +91,14 @@ export interface ClientSolution {
   title: string;
   headline: string;
   summary: string;
+  /** One sentence on the problem, shown on the overview card under the title. */
   preview: string;
-  previewOutcome: string;
+  /** Further results beyond `headline`, revealed on the overview card on hover. Must not repeat `headline`. */
+  moreOutcomes: string;
   tags: string[];
   sector: string;
+  /** Short label for the overview card when the client is not named. Falls back to `sector`. */
+  cardLabel?: string;
   status: ClientSolutionStatus;
   client?: ClientReference;
   primaryCategory: string;
@@ -156,7 +160,7 @@ export const clientSolutions: ClientSolution[] = [
       'Connected e-commerce, LIMS, ERP and reporting systems in an NGS operation, automated the workflow between them, and gave project managers and Customer Care one place to manage projects and samples.',
     preview:
       'Manual data entry across e-commerce, LIMS, ERP and reporting was slowing down NGS project teams.',
-    previewOutcome: '75% less order setup time, 50% of team capacity freed',
+    moreOutcomes: '75% less order setup time, 50% of team capacity freed for revenue-generating work',
     sector: 'Genomics services / NGS operations',
     status: 'completed',
     client: { name: 'Eurofins Genomics' },
@@ -232,7 +236,7 @@ export const clientSolutions: ClientSolution[] = [
     summary:
       'Automated, monitored and auditable delivery and archival of sequencing data, replacing manual command-line file transfers.',
     preview: 'A critical data delivery process depended on people copying FASTQ files through command-line tools.',
-    previewOutcome: 'Delivery time cut from 1.5 days to 3 hours',
+    moreOutcomes: 'Fully automated and auditable, with archival and cloud storage tiering handled automatically',
     sector: 'Genomics / NGS sequencing operations',
     status: 'completed',
     client: { name: 'Eurofins Genomics' },
@@ -296,7 +300,7 @@ export const clientSolutions: ClientSolution[] = [
     summary:
       'Built a standardised API and onboarding process connecting B2B customer systems with the service provider’s LIMS.',
     preview: 'Every new customer integration was becoming its own project.',
-    previewOutcome: 'Customer onboarding cut from months to under two weeks',
+    moreOutcomes: 'Standardised API, repeatable onboarding, issues caught before customers notice them',
     sector: 'B2B life sciences platform integrations',
     status: 'completed',
     client: { name: 'Eurofins Genomics' },
@@ -352,8 +356,9 @@ export const clientSolutions: ClientSolution[] = [
     summary:
       'Formed a new team, delivered an MVP integration and replaced email and paper-based workflows with a connected portal.',
     preview: 'A customer joined a government digitalisation initiative two years behind schedule.',
-    previewOutcome: 'First to launch despite the late start',
+    moreOutcomes: 'Paperless workflow with no emails, stronger information protection, shorter turnaround times',
     sector: 'Forensics / law enforcement digitalisation',
+    cardLabel: 'Forensics',
     status: 'completed',
     primaryCategory: 'Digital transformation / systems integration',
     supportingThemes: ['Government digitalisation initiative', 'Drug and DNA analysis workflow', 'Back-office portal', 'Secure information exchange'],
@@ -407,7 +412,7 @@ export const clientSolutions: ClientSolution[] = [
     tags: ['IT Operations', 'Reliability', 'Support'],
     summary: 'Reworked IT processes, application ownership, monitoring and root-cause analysis across 10+ applications.',
     preview: 'IT was spending too much time fixing the same problems, while users had little idea what was going on.',
-    previewOutcome: '95% fewer repeat incidents, 37% lower IT costs, NPS from -25 to +72',
+    moreOutcomes: '37% lower annual IT costs, internal IT NPS from -25 to +72, issue resolution from 20+ days to 3',
     sector: 'Life sciences / genomics services IT operations',
     status: 'completed',
     client: { name: 'Eurofins Genomics' },
@@ -477,8 +482,9 @@ export const clientSolutions: ClientSolution[] = [
     tags: ['SRE', 'Observability', 'Monitoring'],
     summary: 'Built an SRE function, mapped critical systems and redesigned monitoring around business impact.',
     preview: '30+ live systems were generating more than 200 alerts every day. The important ones were getting lost in the noise.',
-    previewOutcome: '80%+ fewer alerts, 40% fewer incidents, 4× faster response',
+    moreOutcomes: '40% fewer incidents, false positives eliminated, SLAs and system ownership defined',
     sector: 'Global support operations / SRE',
+    cardLabel: 'Global support operations',
     status: 'completed',
     primaryCategory: 'Observability & SRE',
     supportingThemes: ['Alert tuning', 'SLA definition', 'Unified dashboards', 'Business-impact prioritisation'],
@@ -544,8 +550,9 @@ export const clientSolutions: ClientSolution[] = [
     tags: ['MVP', 'Discovery', 'Product Development'],
     summary: 'Ran discovery workshops, built a working prototype and put it in the hands of real users.',
     preview: 'The business wanted to field-test a new digital work-scheduling process without disrupting existing operations.',
-    previewOutcome: 'MVP in under a week, pilot live in 2 months',
+    moreOutcomes: 'Pilot live in two months with no disruption to existing operations',
     sector: 'Digital scheduling / field operations',
+    cardLabel: 'Field operations',
     status: 'completed',
     primaryCategory: 'Rapid prototyping / MVP development',
     supportingThemes: ['Discovery workshops', 'Field testing', 'Product roadmap planning'],
@@ -676,17 +683,23 @@ export function getProductBySlug(slug: string) {
   return products.find((product) => product.slug === slug);
 }
 
+/**
+ * What an overview card shows, in reading order: `eyebrow` (client name, or a short sector label
+ * when the client is not named), `title` (what we worked on), `problem` (one sentence on why),
+ * then an emphasised result block with `result` and, on hover, `resultMore`. `name` is the entity
+ * name used in structured data.
+ */
 export interface WorkListItem {
   slug: string;
   tag: WorkTag;
-  title: string;
-  headline?: string;
-  tags?: string[];
-  preview: string;
-  clientName?: string;
-  metaLabel: string;
-  metaValue: string;
   path: string;
+  name: string;
+  eyebrow: string;
+  title: string;
+  problem: string;
+  resultLabel: string;
+  result: string;
+  resultMore: string;
 }
 
 export function getWorkListItems(): WorkListItem[] {
@@ -694,23 +707,26 @@ export function getWorkListItems(): WorkListItem[] {
     ...clientSolutions.map((solution) => ({
       slug: solution.slug,
       tag: 'for clients' as const,
+      path: getClientSolutionPath(solution),
+      name: solution.title,
+      eyebrow: solution.client ? solution.client.name : solution.cardLabel ?? solution.sector,
       title: solution.title,
-      headline: solution.headline,
-      tags: solution.tags,
-      preview: solution.preview,
-      clientName: solution.client?.name,
-      metaLabel: 'Outcome',
-      metaValue: solution.previewOutcome,
-      path: getClientSolutionPath(solution)
+      problem: solution.preview,
+      resultLabel: 'Result',
+      result: solution.headline,
+      resultMore: solution.moreOutcomes
     })),
     ...products.map((product) => ({
       slug: product.slug,
       tag: 'Our products' as const,
+      path: getProductPath(product),
+      name: product.name,
+      eyebrow: 'Our product',
       title: product.name,
-      preview: product.preview,
-      metaLabel: 'Availability',
-      metaValue: product.previewState,
-      path: getProductPath(product)
+      problem: product.preview,
+      resultLabel: 'Status',
+      result: 'In development',
+      resultMore: 'Prototype walkthroughs and early access conversations available'
     }))
   ];
 }

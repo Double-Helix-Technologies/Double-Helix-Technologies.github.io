@@ -171,7 +171,7 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
                   </Breadcrumb>
 
                   <div className="flex flex-wrap items-center gap-3">
-                    <span className="inline-flex w-fit rounded-full border border-accent-digital-blue/25 bg-accent-digital-blue/10 px-3 py-1 text-xs font-medium uppercase tracking-[0.14em] text-text-secondary">
+                    <span className="inline-flex w-fit rounded-full border border-accent-blue/25 bg-accent-blue/10 px-3 py-1 text-xs font-medium uppercase tracking-[0.14em] text-text-secondary">
                       Client work
                     </span>
                     {solution.client && (
@@ -412,7 +412,7 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
                   </BreadcrumbList>
                 </Breadcrumb>
 
-                <span className="inline-flex w-fit rounded-full border border-accent-science-teal/25 bg-accent-science-teal/10 px-3 py-1 text-xs font-medium uppercase tracking-[0.14em] text-text-secondary">
+                <span className="inline-flex w-fit rounded-full border border-accent-teal/25 bg-accent-teal/10 px-3 py-1 text-xs font-medium uppercase tracking-[0.14em] text-text-secondary">
                   Our products
                 </span>
                 <h1 className="text-4xl md:text-5xl">{product.name}</h1>

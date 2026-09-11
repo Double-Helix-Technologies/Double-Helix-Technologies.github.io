@@ -47,7 +47,7 @@ export default function WorkPage() {
       itemListElement: workItems.map((item, index) => ({
         '@type': 'ListItem',
         position: index + 1,
-        name: item.title,
+        name: item.name,
         url: absoluteUrl(item.path)
       }))
     }
