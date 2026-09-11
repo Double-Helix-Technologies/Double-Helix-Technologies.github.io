@@ -143,6 +143,7 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
                     Client work
                   </span>
                   <h1 className="text-4xl md:text-5xl">{solution.title}</h1>
+                  <p className="text-2xl md:text-3xl font-semibold text-text-primary">{solution.headline}</p>
                   <p className="text-lg text-text-secondary">{solution.summary}</p>
                 </div>
 
@@ -179,15 +180,19 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
                     </div>
                   </div>
 
-                  <div>
-                    <h2 className="text-3xl mb-6">How it worked</h2>
-                    <p className="text-lg text-text-secondary">{solution.approach}</p>
-                  </div>
+                  {solution.approach && (
+                    <div>
+                      <h2 className="text-3xl mb-6">How it worked</h2>
+                      <p className="text-lg text-text-secondary">{solution.approach}</p>
+                    </div>
+                  )}
 
-                  <div>
-                    <h2 className="text-3xl mb-6">Data delivery setup</h2>
-                    <p className="text-lg text-text-secondary">{solution.dataFlow}</p>
-                  </div>
+                  {solution.dataFlow && (
+                    <div>
+                      <h2 className="text-3xl mb-6">Data delivery setup</h2>
+                      <p className="text-lg text-text-secondary">{solution.dataFlow}</p>
+                    </div>
+                  )}
 
                   <div>
                     <h2 className="text-3xl mb-6">What changed operationally</h2>
@@ -199,6 +204,20 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
                       ))}
                     </ul>
                   </div>
+
+                  {solution.quote && (
+                    <div>
+                      <h2 className="text-3xl mb-6">Customer said</h2>
+                      <Card className="max-w-xl bg-gray-600/10">
+                        <CardContent className="pt-6">
+                          <p className="text-xl font-medium text-text-primary">{`"${solution.quote.text}"`}</p>
+                          {solution.quote.attribution && (
+                            <p className="mt-4 text-text-secondary">{solution.quote.attribution}</p>
+                          )}
+                        </CardContent>
+                      </Card>
+                    </div>
+                  )}
                 </div>
               </div>
 
@@ -221,6 +240,20 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
                     <div className="space-y-2">
                       <p className="font-semibold text-text-primary">Core focus</p>
                       <p>{[solution.primaryCategory, ...solution.supportingThemes].join(', ')}</p>
+                    </div>
+                    <Separator />
+                    <div className="space-y-2">
+                      <p className="font-semibold text-text-primary">Tags</p>
+                      <div className="flex flex-wrap gap-2">
+                        {solution.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="rounded-full border border-border/20 bg-background/30 px-2.5 py-1 text-xs text-text-secondary"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                     <Separator />
                     <div className="space-y-2">

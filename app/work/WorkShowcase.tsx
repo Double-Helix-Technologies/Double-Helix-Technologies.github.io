@@ -77,6 +77,9 @@ export default function WorkShowcase({ items }: WorkShowcaseProps) {
                         {item.tag}
                       </span>
                       <h3 className="text-2xl md:text-3xl">{item.title}</h3>
+                      {item.headline && (
+                        <p className="text-lg font-semibold text-text-primary">{item.headline}</p>
+                      )}
                       <p className="text-text-secondary">{item.preview}</p>
                     </div>
 
@@ -86,6 +89,19 @@ export default function WorkShowcase({ items }: WorkShowcaseProps) {
                       </p>
                       <p className="mt-2 text-text-primary">{item.metaValue}</p>
                     </div>
+
+                    {item.tags && item.tags.length > 0 && (
+                      <div className="flex flex-wrap gap-2">
+                        {item.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="rounded-full border border-border/20 bg-background/30 px-2.5 py-1 text-xs text-text-secondary"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    )}
 
                     <div className="mt-auto inline-flex items-center gap-2 font-medium text-text-primary">
                       Open full details
