@@ -43,14 +43,14 @@ type Accent = {
 const ACCENTS: Record<WorkTag, Accent> = {
   'for clients': {
     slideTint: 'bg-accent-blue/20',
-    hoverBorder: 'group-hover:border-accent-blue/60',
+    hoverBorder: 'can-hover:group-hover:border-accent-blue/60',
     eyebrow: 'text-accent-blue',
     resultText: 'text-accent-blue',
     spotlight: 'rgba(51, 130, 239, 0.18)'
   },
   'Our products': {
     slideTint: 'bg-accent-teal/20',
-    hoverBorder: 'group-hover:border-accent-teal/60',
+    hoverBorder: 'can-hover:group-hover:border-accent-teal/60',
     eyebrow: 'text-accent-teal',
     resultText: 'text-accent-teal',
     spotlight: 'rgba(2, 192, 186, 0.18)'
@@ -63,10 +63,11 @@ const TILT_DEGREES = 5;
 /**
  * Work overview grid. Each card reads top to bottom the way a buyer thinks: what we worked on
  * (title), why (one sentence on the problem), what came out of it (emphasised result block).
- * On hover the result block reveals further outcomes, the card tilts a few degrees towards the
- * pointer, a spotlight follows the pointer, and a highlight slides between cards (shared layout
- * animation, after Aceternity UI's Card Hover Effect and 3D Card). Motion is disabled when the
- * visitor prefers reduced motion.
+ * On devices with a real hover the result crossfades into further outcomes, the card tilts a few
+ * degrees towards the pointer, a spotlight follows the pointer, and a highlight slides between cards
+ * (shared layout animation, after Aceternity UI's Card Hover Effect and 3D Card). On touch devices
+ * there is no hover, so the further outcomes are shown stacked under the result and the decorations
+ * stay off. Motion is disabled when the visitor prefers reduced motion.
  */
 export default function WorkShowcase({ items }: WorkShowcaseProps) {
   const [activeFilter, setActiveFilter] = useState<WorkTag | 'All'>('All');
@@ -187,7 +188,7 @@ function WorkCard({ item, hovered, onHover }: WorkCardProps) {
       >
         <motion.span
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+          className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 can-hover:group-hover:opacity-100"
           style={{ background: spotlight }}
         />
 
@@ -196,7 +197,7 @@ function WorkCard({ item, hovered, onHover }: WorkCardProps) {
           <p className={`text-xs font-semibold uppercase tracking-[0.16em] ${accent.eyebrow}`}>{item.eyebrow}</p>
           <ArrowUpRight
             aria-hidden="true"
-            className="h-5 w-5 shrink-0 text-text-secondary transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-text-primary"
+            className="h-5 w-5 shrink-0 text-text-secondary transition-transform duration-300 can-hover:group-hover:-translate-y-0.5 can-hover:group-hover:translate-x-0.5 can-hover:group-hover:text-text-primary"
           />
         </div>
 
@@ -206,19 +207,18 @@ function WorkCard({ item, hovered, onHover }: WorkCardProps) {
           <p className="text-sm leading-relaxed text-text-secondary md:text-base">{item.problem}</p>
         </div>
 
-        {/* 3. What came out of it. Result and further outcomes share one grid cell, so the crossfade never changes the card height. */}
+        {/* 3. What came out of it. On touch devices both lines are simply stacked and always visible.
+            On devices with a real hover (`can-hover:`) they share one grid cell and crossfade, so the
+            card height never changes. */}
         <div className="relative mt-auto border-t border-border/30 pt-4">
           <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-text-secondary">{item.resultLabel}</p>
-          <div className="mt-1 grid">
+          <div className="mt-1 grid gap-1 can-hover:gap-0">
             <p
-              className={`col-start-1 row-start-1 text-xl font-semibold leading-snug transition-all duration-300 md:text-2xl group-hover:-translate-y-1 group-hover:opacity-0 ${accent.resultText}`}
+              className={`col-start-1 row-start-1 text-xl font-semibold leading-snug md:text-2xl can-hover:transition-all can-hover:duration-300 can-hover:group-hover:-translate-y-1 can-hover:group-hover:opacity-0 ${accent.resultText}`}
             >
               {item.result}
             </p>
-            <p
-              aria-hidden={!hovered}
-              className="col-start-1 row-start-1 translate-y-1 text-sm font-medium leading-snug text-text-primary opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100"
-            >
+            <p className="col-start-1 row-start-2 text-sm font-medium leading-snug text-text-primary can-hover:row-start-1 can-hover:translate-y-1 can-hover:opacity-0 can-hover:transition-all can-hover:duration-300 can-hover:group-hover:translate-y-0 can-hover:group-hover:opacity-100">
               {item.resultMore}
             </p>
           </div>
