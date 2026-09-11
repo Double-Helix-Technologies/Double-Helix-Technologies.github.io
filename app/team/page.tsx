@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/app/components/ui/card';
-import { Asterisk, ChevronRight, Mail } from 'lucide-react';
+import { ChevronRight, Linkedin, Mail } from 'lucide-react';
 import Image from 'next/image';
 import Navigation from '@/app/components/Navigation';
 import { ThemeProvider } from '../components/ThemeProvider';
@@ -14,11 +14,50 @@ import {
 import Link from 'next/link';
 import Footer from '@/app/components/Footer';
 import AvatarPlaceholder from '@/app/components/ui/avatarPlaceholder';
-import { coreTeam, leadershipTeam, TeamMember } from '@/app/data/team';
+import { leadershipTeam, TeamMember } from '@/app/data/team';
 import { buildMetadata } from '../lib/seo';
 
+type Affiliation = {
+  name: string;
+  href: string;
+  logo: string;
+  logoWidth: number;
+  logoHeight: number;
+};
+
+const affiliations: Affiliation[] = [
+  {
+    name: 'Digital Health Association Latvia',
+    href: 'https://www.digitalaveseliba.lv/',
+    logo: '/images/partners/digital-health-latvia.svg',
+    logoWidth: 149,
+    logoHeight: 38
+  },
+  {
+    name: 'Latvian Startup Association "Startin.LV"',
+    href: 'https://startin.lv/',
+    logo: '/images/partners/startin-lv.png',
+    logoWidth: 263,
+    logoHeight: 138
+  },
+  {
+    name: 'Latvian American Chamber of Commerce',
+    href: 'https://latvianchamber.com/',
+    logo: '/images/partners/latvian-american-chamber.svg',
+    logoWidth: 258,
+    logoHeight: 84
+  },
+  {
+    name: 'Latvian IT Cluster',
+    href: 'https://www.itbaltic.com/',
+    logo: '/images/partners/latvian-it-cluster.png',
+    logoWidth: 493,
+    logoHeight: 657
+  }
+];
+
 export const metadata: Metadata = buildMetadata({
-  title: 'Team',
+  title: 'About us',
   description:
     'Get to know the senior engineering and consulting team behind Double Helix Technologies and our work in life sciences and healthcare IT.',
   path: '/team/',
@@ -90,32 +129,66 @@ export default function TeamPage() {
       <main className="min-h-screen">
         <Navigation/>
 
-        <section id="team" className="top-section bg-gradient-to-t from-background-alt to-background pb-10">
+        <section id="about-us" className="top-section bg-gradient-to-t from-background-alt to-background pb-10">
           <div className="container-tight">
             <div className="flex flex-col gap-6 mb-6 max-w-3xl">
               {breadcrumb}
               <h1 className="section-heading mb-5 max-w-3xl">
-                Our People
+                A small senior team for complex problems.
               </h1>
               <p>
-                Double Helix Technologies is a senior, lean engineering team based in Latvia.
+                We help life sciences companies simplify workflows, connect systems and build software that
+                makes operations easier.
               </p>
-              <ul className="space-y-2">
-                {[
-                  'Multilingual engineers proficient in modern frameworks.',
-                  'Business‑minded, proactive problem solvers with ownership.',
-                  'Agile teams that integrate seamlessly with client stakeholders.'
-                ].map((v) => (
-                  <li key={v} className="flex gap-2"><Asterisk
-                    className="h-6 w-7 flex-shrink-0"/>{v}</li>
-                ))}
-              </ul>
+              <p>
+                Based in Europe, we work with customers across Europe and North America. Our senior team works
+                closely with each customer, combining deep expertise with a hands-on approach from problem to
+                solution.
+              </p>
             </div>
 
-            <h2 className="text-3xl md:text-4xl my-16">Our Team</h2>
+            <h2 className="text-3xl md:text-4xl mt-16 mb-3">The people behind the work</h2>
+            <p className="text-text-secondary mb-8">You work directly with the people building your solution.</p>
             <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-4 gap-4">
-              {[...leadershipTeam, ...coreTeam].map((person, index) => (
+              {leadershipTeam.map((person, index) => (
                 <TeamMemberCard key={`${person.name}-${index}`} person={person}/>
+              ))}
+            </div>
+
+            <div className="mt-8">
+              <a
+                href="https://www.linkedin.com/company/double-helix-technologies/people/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-text-secondary hover:text-text-primary"
+              >
+                <Linkedin size={20}/>
+                Meet the whole team
+              </a>
+            </div>
+
+            <h2 className="text-3xl md:text-4xl mt-16 mb-3">Part of something bigger</h2>
+            <p className="text-text-secondary mb-8">
+              We&apos;re active members of Latvia&apos;s health tech and business communities.
+            </p>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              {affiliations.map((affiliation) => (
+                <a
+                  key={affiliation.name}
+                  href={affiliation.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={affiliation.name}
+                  className="flex h-28 items-center justify-center rounded-xl border border-[var(--border)]/20 bg-white p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
+                >
+                  <Image
+                    src={affiliation.logo}
+                    alt={affiliation.name}
+                    width={affiliation.logoWidth}
+                    height={affiliation.logoHeight}
+                    className="h-full w-full object-contain"
+                  />
+                </a>
               ))}
             </div>
           </div>

@@ -6,6 +6,7 @@ import {motion, useInView, useMotionValue, useSpring} from "framer-motion";
 interface AnimatedCounterProps {
   value: number;
   from?: number;
+  prefix?: string;
   suffix?: string;
   className?: string;
 }
@@ -13,6 +14,7 @@ interface AnimatedCounterProps {
 export function AnimatedCounter({
   value,
   from,
+  prefix = "",
   suffix = "",
   className = ""
 }: AnimatedCounterProps) {
@@ -46,6 +48,7 @@ export function AnimatedCounter({
       animate={isInView ? { opacity: 1, scale: 1 } : {}}
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
+      {prefix}
       {displayValue}
       {suffix}
     </motion.span>

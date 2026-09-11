@@ -12,7 +12,8 @@ const leadershipTeam: TeamMember[] = [
     name: 'Armands',
     lastName: 'Baranovskis',
     role: 'Chief Executive Officer',
-    description: 'Keeps us aligned, focused, and moving in the right direction.',
+    description:
+      '20+ years of experience in digital transformation, management and process improvement across banking, telco, insurance, life sciences, logistics and the public sector. Former guest lecturer at Riga Technical University and co-author and educator of a RISEBA programme on Agile, Scrum, Lean and Kanban.',
     image: '/images/team/armands.jpg',
     email: 'armands.baranovskis@doublehelix.dev'
   },
@@ -20,15 +21,17 @@ const leadershipTeam: TeamMember[] = [
     name: 'Aleksandrs',
     lastName: 'Gusevs',
     role: 'Chief Strategy & Business Development Officer',
-    description: 'Drives growth through strategy, partnerships, and meaningful client relationships.',
+    description:
+      '13 years of building software and leading engineering teams. Strong in architecture, integrations, automation and reliable systems, from APIs and delivery to DevOps, SRE and observability. Deep experience in genomics, diagnostics and digital health.',
     image: '/images/team/aleksandrs.jpg',
     email: 'aleksandrs.gusevs@doublehelix.dev'
   },
   {
     name: 'Valts',
     lastName: 'Mazurs',
-    role: 'Chief Information Officer',
-    description: 'Connects the dots between business needs and smart tech choices.',
+    role: 'Chief Technology Officer',
+    description:
+      '23 years of experience across software, security and architecture. Leads IT security and architecture audits, designs critical systems, maps complex technology landscapes, and provides technical leadership to development teams.',
     image: '/images/team/valts.jpg',
     email: ''
   },
@@ -36,109 +39,15 @@ const leadershipTeam: TeamMember[] = [
     name: 'Aleksandra',
     lastName: 'Romanovska',
     role: 'Chief Operating Officer',
-    description: 'Ensures smooth operations and delivery across teams and engagements.',
+    description:
+      '15+ years of experience across business operations, organizational transformation, people and technology. Established and scaled two IT delivery centers in Latvia, built operational functions from the ground up, and led organizational change, restructuring and process improvement across international teams.',
     image: '/images/team/aleksandra.png',
     email: ''
   }
 ];
 
-const coreTeam: TeamMember[] = [
-  {
-    name: 'Santa',
-    role: 'Product Owner',
-    description: '', //'Experienced software development project management, product owner, professional, and team lead',
-    image: '', //'/images/team/santa.jpg',
-    email: ''
-  },  
-  {
-    name: 'Agnis',
-    role: 'Software Engineer',
-    description: '',
-    image: '',
-    email: ''
-  },  
-  {
-    name: 'Agris',
-    role: 'Software Engineer',
-    description: '',
-    image: '',
-    email: ''
-  },  
-  {
-    name: 'Tamāra',
-    role: 'Solution Architect',
-    description: '',
-    image: '',
-    email: ''
-  },
-  {
-    name: 'Anastasia',
-    role: 'Software Engineer',
-    description: '',
-    image: '',
-    email: ''
-  },
-  {
-    name: 'Jānis',
-    role: 'Software Engineer',
-    description: '', //'Full-stack engineer, particularly specialized on AI adoption',
-    image: '',
-    email: ''
-  },
-  {
-    name: 'Gints',
-    role: 'System Administrator',
-    description: '', //'Ensuring smooth operations of our and your infrastructure',
-    image: '',
-    email: ''
-  },
-  {
-    name: 'Marts',
-    role: 'Software Reliability Engineer',
-    description: '',
-    image: '',
-    email: ''
-  },
-  {
-    name: 'Harijs',
-    role: 'Software Engineer',
-    description: '',
-    image: '',
-    email: ''
-  },
-  {
-    name: 'Lauris',
-    role: 'Software Engineer',
-    description: '', //'Full-stack developer with expertise in complex systems',
-    image: '',
-    email: ''
-  },
-  {
-    name: 'Murathan',
-    role: 'DevSecOps Engineer',
-    description: '', //'Building resilient infrastructure with a security-first mindset',
-    image: '',
-    email: ''
-  },
-  {
-    name: 'Jānis',
-    role: 'Software Engineer',
-    description: '',
-    image: '',
-    email: ''
-  },
-  {
-    name: 'Konstantins',
-    role: 'System Administrator',
-    description: '',
-    image: '',
-    email: ''
-  }
-];
-
 export {
-  leadershipTeam,
-  coreTeam
+  leadershipTeam
 };
 
 export type { TeamMember };

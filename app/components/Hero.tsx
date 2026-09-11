@@ -18,7 +18,7 @@ export default function Hero() {
         <div className="flex flex-wrap gap-5">
           <Button variant="gradient" asChild>
             <Link href="/#contact">
-              Book an intro call
+              Book a free consultation
             </Link>
           </Button>
           <Button variant="secondary" asChild>

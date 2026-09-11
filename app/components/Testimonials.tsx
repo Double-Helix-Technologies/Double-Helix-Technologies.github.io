@@ -19,7 +19,7 @@ export default function Testimonials() {
     },
     {
       tagline: 'Working with this team was a game-changer.',
-      quote: 'They don’t just code—they dive deep into your business, challenge assumptions, and co-create solutions that are both innovative and intuitive. I was impressed about their ability to translate very complex business processes into elegant, user-friendly solutions.',
+      quote: 'They don’t just code, they dive deep into your business, challenge assumptions, and co-create solutions that are both innovative and intuitive. I was impressed about their ability to translate very complex business processes into elegant, user-friendly solutions.',
       author: 'Annika Schott',
       position: 'Eurofins Genomics Europe Project Management Team Lead NGS'
     },
