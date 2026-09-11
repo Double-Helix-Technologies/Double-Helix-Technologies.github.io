@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss';
+import plugin from 'tailwindcss/plugin';
 
 const config: Config = {
   darkMode: ['class', 'class'],
@@ -83,7 +84,13 @@ const config: Config = {
   		}
   	}
   },
-  plugins: [],
+  plugins: [
+    // `can-hover:` applies only on devices with a real hover (mouse, trackpad). Touch devices skip it,
+    // so anything that is revealed on hover must also have a non-hover fallback.
+    plugin(({ addVariant }) => {
+      addVariant('can-hover', '@media (hover: hover)');
+    })
+  ],
 };
 
 export default config; 

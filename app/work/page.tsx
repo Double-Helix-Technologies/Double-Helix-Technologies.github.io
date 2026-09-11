@@ -18,12 +18,13 @@ import WorkShowcase from './WorkShowcase';
 export const metadata: Metadata = buildMetadata({
   title: 'Client Solutions & Software Products',
   description:
-    'Explore client solutions and software products from Double Helix, including workflow automation, systems integration, sequencing operations support, and AI-assisted care software.',
+    'Delivered client work from Double Helix Technologies in genomics, forensics and lab operations: workflow automation, LIMS and system integration, sequencing data delivery, observability and IT operations, plus our own software products.',
   path: '/work/',
   keywords: [
     'life sciences client solutions',
     'workflow automation case studies',
     'systems integration case studies',
+    'LIMS integration case studies',
     'healthcare software products'
   ]
 });
@@ -46,7 +47,7 @@ export default function WorkPage() {
       itemListElement: workItems.map((item, index) => ({
         '@type': 'ListItem',
         position: index + 1,
-        name: item.title,
+        name: item.name,
         url: absoluteUrl(item.path)
       }))
     }
@@ -85,9 +86,13 @@ export default function WorkPage() {
               </BreadcrumbList>
             </Breadcrumb>
 
-            <h1 className="section-heading max-w-4xl">Work that works.</h1>
+            <h1 className="section-heading max-w-4xl">Delivered client solutions and our own products</h1>
             <p className="max-w-3xl text-lg text-text-secondary">
-              Client solutions, products, and a few things we built because we thought they should exist.
+              Workflow automation, LIMS and system integration, sequencing data delivery, observability and IT operations,
+              delivered for genomics, forensics and other regulated environments.
+            </p>
+            <p className="max-w-3xl text-text-secondary">
+              Clients are named where we have their permission to do so. References are available on request.
             </p>
 
             <div className="mt-12">

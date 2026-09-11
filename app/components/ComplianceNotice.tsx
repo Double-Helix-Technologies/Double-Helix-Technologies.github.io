@@ -24,10 +24,10 @@ export default function ComplianceNotice() {
             Compliance
           </p>
           <h2 id="compliance-heading" className="mx-auto max-w-2xl text-3xl md:text-4xl">
-            ISO certification work is underway.
+            ISO 9001 and ISO 27001 certification is in progress.
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-text-secondary">
-            We are currently undergoing ISO 9001 and ISO 27001 certification, with a target to become ISO 9001 / ISO 27001 certified in July 2026.
+            We operate a quality and information security management system aligned with ISO 9001 and ISO 27001. The certification audit is scheduled for the end of October 2026; we will publish the certificate details here once issued.
           </p>
 
           <div className="mt-8 flex flex-col items-center justify-center gap-4 md:flex-row md:gap-6">

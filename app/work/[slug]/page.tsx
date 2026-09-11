@@ -4,6 +4,7 @@ import { ArrowRight, ChevronRight } from 'lucide-react';
 import { notFound } from 'next/navigation';
 import Navigation from '@/app/components/Navigation';
 import Footer from '@/app/components/Footer';
+import LegacyRedirect from '@/app/components/LegacyRedirect';
 import { ThemeProvider } from '@/app/components/ThemeProvider';
 import {
   Breadcrumb,
@@ -20,6 +21,7 @@ import { absoluteUrl, buildBreadcrumbSchema, buildMetadata, siteConfig } from '@
 import {
   getAllWorkSlugs,
   getClientSolutionPath,
+  getClientSolutionBySlug,
   getProductPath,
   getWorkEntryBySlug
 } from '@/app/data/work';
@@ -27,6 +29,16 @@ import {
 function isDefined<T>(value: T | undefined): value is T {
   return value !== undefined;
 }
+
+/** Tailwind needs static class names, so the stat grid width is picked from a fixed map. */
+const STAT_GRID_CLASS: Record<number, string> = {
+  1: 'grid gap-4 md:grid-cols-2',
+  2: 'grid gap-4 md:grid-cols-2',
+  3: 'grid gap-4 md:grid-cols-3'
+};
+
+const GRADIENT_BUTTON_CLASS =
+  'bg-gradient-to-tr from-accent-pink to-accent-blue hover:brightness-110 focus-visible:ring-accent-lilac focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-background';
 
 export async function generateStaticParams() {
   return getAllWorkSlugs().map((slug) => ({ slug }));
@@ -41,6 +53,18 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       title: 'Work',
       description: siteConfig.description,
       path: `/work/${slug}/`,
+      type: 'article'
+    });
+  }
+
+  if (entry.kind === 'redirect') {
+    const targetSlug = entry.to.split('/').filter(Boolean).pop() ?? '';
+    const target = getClientSolutionBySlug(targetSlug);
+    return buildMetadata({
+      title: target?.seo.title ?? 'Work',
+      description: target?.seo.description ?? siteConfig.description,
+      path: entry.to,
+      noIndex: true,
       type: 'article'
     });
   }
@@ -65,10 +89,17 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
     notFound();
   }
 
+  if (entry.kind === 'redirect') {
+    const targetSlug = entry.to.split('/').filter(Boolean).pop() ?? '';
+    const target = getClientSolutionBySlug(targetSlug);
+    return <LegacyRedirect to={entry.to} title={target?.title ?? 'Work'} />;
+  }
+
   if (entry.kind === 'client-solution') {
     const solution = entry.data;
     const link = getClientSolutionPath(solution);
     const relatedServices = solution.relatedServiceSlugs.map(getServiceBySlug).filter(isDefined);
+    const statGridClass = STAT_GRID_CLASS[Math.min(solution.highlightStats.length, 3)];
     const breadcrumbStructuredData = buildBreadcrumbSchema([
       { name: 'Home', path: '/' },
       { name: 'Work', path: '/work/' },
@@ -139,25 +170,36 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
                     </BreadcrumbList>
                   </Breadcrumb>
 
-                  <span className="inline-flex w-fit rounded-full border border-accent-digital-blue/25 bg-accent-digital-blue/10 px-3 py-1 text-xs font-medium uppercase tracking-[0.14em] text-text-secondary">
-                    Client work
-                  </span>
+                  <div className="flex flex-wrap items-center gap-3">
+                    <span className="inline-flex w-fit rounded-full border border-accent-blue/25 bg-accent-blue/10 px-3 py-1 text-xs font-medium uppercase tracking-[0.14em] text-text-secondary">
+                      Client work
+                    </span>
+                    {solution.client && (
+                      <span className="text-sm font-medium text-text-secondary">
+                        Client: <span className="text-text-primary">{solution.client.name}</span>
+                      </span>
+                    )}
+                  </div>
                   <h1 className="text-4xl md:text-5xl">{solution.title}</h1>
+                  <p className="text-2xl md:text-3xl font-semibold text-text-primary">{solution.headline}</p>
                   <p className="text-lg text-text-secondary">{solution.summary}</p>
                 </div>
 
-                <div className="grid gap-4 md:grid-cols-3">
-                  {solution.highlightStats.map((stat) => (
-                    <Card key={stat.label} className="bg-background/60 border border-border/20 shadow-none">
-                      <CardHeader>
-                        <CardTitle className="text-4xl">{stat.value}</CardTitle>
-                      </CardHeader>
-                      <CardContent className="pt-0">
-                        <p className="font-medium text-text-secondary">{stat.label}</p>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
+                {solution.highlightStats.length > 0 && (
+                  <div className={statGridClass}>
+                    {solution.highlightStats.map((stat) => (
+                      <Card key={stat.label} className="bg-background/60 border border-border/20 shadow-none">
+                        <CardHeader>
+                          <CardTitle className="text-4xl">{stat.value}</CardTitle>
+                        </CardHeader>
+                        <CardContent className="pt-0 space-y-2">
+                          <p className="font-medium text-text-secondary">{stat.label}</p>
+                          <p className="text-sm text-text-secondary/80">{stat.detail}</p>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                )}
 
                 <div className="my-8 space-y-12">
                   <div>
@@ -179,15 +221,19 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
                     </div>
                   </div>
 
-                  <div>
-                    <h2 className="text-3xl mb-6">How it worked</h2>
-                    <p className="text-lg text-text-secondary">{solution.approach}</p>
-                  </div>
+                  {solution.approach && (
+                    <div>
+                      <h2 className="text-3xl mb-6">How it worked</h2>
+                      <p className="text-lg text-text-secondary">{solution.approach}</p>
+                    </div>
+                  )}
 
-                  <div>
-                    <h2 className="text-3xl mb-6">Data delivery setup</h2>
-                    <p className="text-lg text-text-secondary">{solution.dataFlow}</p>
-                  </div>
+                  {solution.dataFlow && (
+                    <div>
+                      <h2 className="text-3xl mb-6">Data delivery setup</h2>
+                      <p className="text-lg text-text-secondary">{solution.dataFlow}</p>
+                    </div>
+                  )}
 
                   <div>
                     <h2 className="text-3xl mb-6">What changed operationally</h2>
@@ -199,15 +245,32 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
                       ))}
                     </ul>
                   </div>
+
+                  {solution.quote && (
+                    <div>
+                      <h2 className="text-3xl mb-6">In the client’s words</h2>
+                      <Card className="max-w-xl bg-gray-600/10">
+                        <CardContent className="pt-6">
+                          <p className="text-xl font-medium text-text-primary">{`“${solution.quote.text}”`}</p>
+                          <p className="mt-4 text-text-secondary">{solution.quote.attribution}</p>
+                        </CardContent>
+                      </Card>
+                    </div>
+                  )}
                 </div>
               </div>
 
-              <div className="h-fit lg:sticky lg:top-32 lg:max-w-80 lg:mt-32 z-40">
+              <div className="lg:sticky lg:top-32 lg:max-w-80 lg:mt-32 lg:self-start z-10">
                 <Card className="bg-background/90 border border-border/30 shadow-none">
                   <CardHeader className="space-y-4">
                     <CardTitle>At a glance</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4 text-text-secondary">
+                    <div>
+                      <p className="font-semibold text-text-primary">Client</p>
+                      <p>{solution.client ? solution.client.name : 'Not disclosed'}</p>
+                    </div>
+                    <Separator />
                     <div>
                       <p className="font-semibold text-text-primary">Sector</p>
                       <p>{solution.sector}</p>
@@ -217,10 +280,38 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
                       <p className="font-semibold text-text-primary">Primary users</p>
                       <p>{solution.users.join(', ')}</p>
                     </div>
+                    {solution.engagementFacts && solution.engagementFacts.length > 0 && (
+                      <>
+                        <Separator />
+                        <div className="space-y-3">
+                          <p className="font-semibold text-text-primary">Engagement</p>
+                          {solution.engagementFacts.map((fact) => (
+                            <div key={fact.label}>
+                              <p className="text-xs uppercase tracking-[0.14em] text-text-secondary/80">{fact.label}</p>
+                              <p>{fact.value}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </>
+                    )}
                     <Separator />
                     <div className="space-y-2">
                       <p className="font-semibold text-text-primary">Core focus</p>
                       <p>{[solution.primaryCategory, ...solution.supportingThemes].join(', ')}</p>
+                    </div>
+                    <Separator />
+                    <div className="space-y-2">
+                      <p className="font-semibold text-text-primary">Tags</p>
+                      <div className="flex flex-wrap gap-2">
+                        {solution.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="rounded-full border border-border/20 bg-background/30 px-2.5 py-1 text-xs text-text-secondary"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                     <Separator />
                     <div className="space-y-2">
@@ -237,7 +328,7 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
                         ))}
                       </div>
                     </div>
-                    <Button variant="gradient" asChild>
+                    <Button variant="gradient" className={GRADIENT_BUTTON_CLASS} asChild>
                       <Link href="/#contact">
                         Discuss a similar workflow
                         <ArrowRight />
@@ -321,7 +412,7 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
                   </BreadcrumbList>
                 </Breadcrumb>
 
-                <span className="inline-flex w-fit rounded-full border border-accent-science-teal/25 bg-accent-science-teal/10 px-3 py-1 text-xs font-medium uppercase tracking-[0.14em] text-text-secondary">
+                <span className="inline-flex w-fit rounded-full border border-accent-teal/25 bg-accent-teal/10 px-3 py-1 text-xs font-medium uppercase tracking-[0.14em] text-text-secondary">
                   Our products
                 </span>
                 <h1 className="text-4xl md:text-5xl">{product.name}</h1>
@@ -367,7 +458,7 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
               </div>
             </div>
 
-            <div className="h-fit lg:sticky lg:top-32 lg:max-w-80 lg:mt-32 z-40">
+            <div className="lg:sticky lg:top-32 lg:max-w-80 lg:mt-32 lg:self-start z-10">
               <Card className="bg-background/90 border border-border/30 shadow-none">
                 <CardHeader className="space-y-4">
                   <CardTitle>Early access</CardTitle>
@@ -375,11 +466,12 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
                 <CardContent className="space-y-4 text-text-secondary">
                   <p>{product.currentStage}</p>
                   <p>Join if you want an early look at the product and a chance to shape how it develops.</p>
-                  <Button variant="gradient" asChild>
-                    <Link href={product.ctaHref}>
+                  <Button variant="gradient" className={GRADIENT_BUTTON_CLASS} asChild>
+                    <a href={product.ctaHref} target="_blank" rel="noopener noreferrer">
                       {product.ctaLabel}
+                      <span className="sr-only"> (opens in a new tab)</span>
                       <ArrowRight />
-                    </Link>
+                    </a>
                   </Button>
                 </CardContent>
               </Card>

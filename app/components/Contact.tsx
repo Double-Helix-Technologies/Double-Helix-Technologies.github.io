@@ -1,6 +1,7 @@
 'use client';
 
 import { Button } from '@/app/components/ui/button';
+import Link from 'next/link';
 import React from 'react';
 
 export default function Contact() {
@@ -34,8 +35,28 @@ export default function Contact() {
               </a>
             </p>
           </div>
+          <div className="mt-8 pt-8 border-t border-border text-center text-text-secondary text-sm">
+            <p className="font-semibold text-text-primary">Double Helix Technologies SIA</p>
+            <p>Bauskas iela 203 - 35, Riga, Latvia</p>
+            <p>
+              <a href="mailto:hello@doublehelix.dev" className="hover:text-primary transition-colors">
+                hello@doublehelix.dev
+              </a>
+            </p>
+            <p>
+              <a href="tel:+37129636428" className="hover:text-primary transition-colors">
+                +371 29636428
+              </a>
+            </p>
+            <p>VAT: LV50203351951</p>
+            <p className="mt-2 text-xs">
+              <Link href="/notice" className="underline hover:text-primary transition-colors">
+                Full legal notice
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
     </section>
   );
-} 
+}
