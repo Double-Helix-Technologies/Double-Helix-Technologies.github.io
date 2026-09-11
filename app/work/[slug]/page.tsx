@@ -221,7 +221,7 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
                 </div>
               </div>
 
-              <div className="h-fit lg:sticky lg:top-32 lg:max-w-80 lg:mt-32 z-40">
+              <div className="lg:sticky lg:top-32 lg:max-w-80 lg:mt-32 lg:self-start z-10">
                 <Card className="bg-background/90 border border-border/30 shadow-none">
                   <CardHeader className="space-y-4">
                     <CardTitle>At a glance</CardTitle>
@@ -400,7 +400,7 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
               </div>
             </div>
 
-            <div className="h-fit lg:sticky lg:top-32 lg:max-w-80 lg:mt-32 z-40">
+            <div className="lg:sticky lg:top-32 lg:max-w-80 lg:mt-32 lg:self-start z-10">
               <Card className="bg-background/90 border border-border/30 shadow-none">
                 <CardHeader className="space-y-4">
                   <CardTitle>Early access</CardTitle>
