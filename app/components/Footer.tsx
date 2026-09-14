@@ -36,7 +36,7 @@ export default function Footer() {
       </h2>
       <div className="container-wide">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="max-w-52 flex flex-col gap-6">
+          <div className="flex flex-col gap-6 md:max-w-52">
             <Image src={logo} alt="Double Helix Technologies Logo" width={180} height={0} className="h-auto mr-5 opacity-80" />
             <div className="flex gap-2">
               <Button size="icon" variant="secondary">
