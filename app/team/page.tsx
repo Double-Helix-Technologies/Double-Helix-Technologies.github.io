@@ -186,34 +186,37 @@ export default function TeamPage() {
               ))}
             </div>
 
-            <h2 className="text-3xl md:text-4xl mt-16 mb-3">Company details</h2>
-            <div className="text-text-secondary space-y-1">
-              <p className="font-semibold text-text-primary">{siteConfig.legalName}</p>
-              <p>
-                Registered office: {siteConfig.address.streetAddress}, {siteConfig.address.addressLocality},{' '}
-                {siteConfig.address.postalCode}, Latvia
-              </p>
-              <p>Registration number 50203351951</p>
-              <p>VAT LV50203351951</p>
-              <p>
-                <a href={`mailto:${siteConfig.email}`} className="hover:text-text-primary">
-                  {siteConfig.email}
-                </a>
-                {', '}
-                <a href="tel:+37129636428" className="hover:text-text-primary">
-                  +371 29636428
-                </a>
-              </p>
-              <p className="pt-2 text-sm">
-                <Link href="/notice/" className="underline underline-offset-4 hover:text-text-primary">
-                  Full legal notice
-                </Link>
-              </p>
+            {/* Small print: company details and the approved ISO wording (complianceStatement), side by side. */}
+            <div className="mt-16 grid gap-8 border-t border-divider pt-8 text-sm text-text-secondary md:grid-cols-2 md:gap-12">
+              <div className="space-y-1">
+                <h2 className="text-sm font-semibold uppercase tracking-[0.16em] text-text-primary">Company details</h2>
+                <p className="pt-2 font-medium text-text-primary">{siteConfig.legalName}</p>
+                <p>
+                  Registered office: {siteConfig.address.streetAddress}, {siteConfig.address.addressLocality},{' '}
+                  {siteConfig.address.postalCode}, Latvia
+                </p>
+                <p>Registration number 50203351951, VAT LV50203351951</p>
+                <p>
+                  <a href={`mailto:${siteConfig.email}`} className="hover:text-text-primary">
+                    {siteConfig.email}
+                  </a>
+                  {', '}
+                  <a href="tel:+37129636428" className="hover:text-text-primary">
+                    +371 29636428
+                  </a>
+                </p>
+                <p className="pt-1">
+                  <Link href="/notice/" className="underline underline-offset-4 hover:text-text-primary">
+                    Full legal notice
+                  </Link>
+                </p>
+              </div>
+              <div className="space-y-1">
+                <h2 className="text-sm font-semibold uppercase tracking-[0.16em] text-text-primary">Quality and information security</h2>
+                <p className="pt-2 font-medium text-text-primary">{complianceStatement.heading}</p>
+                <p>{complianceStatement.body}</p>
+              </div>
             </div>
-
-            {/* Approved ISO wording; see complianceStatement. Certification is in progress, nothing more is claimed. */}
-            <h2 className="text-3xl md:text-4xl mt-16 mb-3">{complianceStatement.heading}</h2>
-            <p className="text-text-secondary max-w-3xl">{complianceStatement.body}</p>
           </div>
         </section>
 
