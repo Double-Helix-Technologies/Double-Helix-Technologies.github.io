@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { getServicePath, servicesContents } from '../data/services';
+import { SectionBackdrop } from './ui/section-backdrop';
 
 /**
  * Business problems we solve. A plain two-column list: every service shows its title and
@@ -8,19 +9,20 @@ import { getServicePath, servicesContents } from '../data/services';
  */
 export default function Services() {
   return (
-    <section id="services" className="section bg-background">
-      <div className="container-tight">
-        <div className="mb-12 max-w-2xl">
-          <h2 className="section-heading mb-5">What we help with</h2>
-          <p className="text-lg text-text-secondary">
+    <section id="services" className="section relative isolate overflow-hidden bg-background lg:flex lg:min-h-[100svh] lg:items-center">
+      <SectionBackdrop variant="grid" className="opacity-70" />
+      <div className="container-tight w-full">
+        <div className="mb-12 max-w-2xl lg:mb-16">
+          <h2 className="section-heading mb-5 lg:text-6xl">What we help with</h2>
+          <p className="text-lg text-text-secondary md:text-xl">
             Six kinds of work for regulated operations, each with a defined scope and deliverables.
           </p>
         </div>
 
-        <ul className="grid gap-x-12 gap-y-10 md:grid-cols-2">
+        <ul className="grid gap-x-12 gap-y-10 md:grid-cols-2 lg:gap-x-16 lg:gap-y-12">
           {servicesContents.map((service) => (
-            <li key={service.slug} className="border-t border-divider pt-6">
-              <h3 className="text-xl font-semibold leading-snug text-text-primary">{service.title}</h3>
+            <li key={service.slug}>
+              <h3 className="text-xl font-semibold leading-snug text-text-primary lg:text-2xl">{service.title}</h3>
               <p className="mt-3 leading-relaxed text-text-secondary">{service.description}</p>
               <Link
                 href={getServicePath(service)}

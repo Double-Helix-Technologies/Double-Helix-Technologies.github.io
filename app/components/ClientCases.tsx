@@ -7,6 +7,7 @@ import { useReducedMotion } from 'framer-motion';
 import type { CarouselApi } from './ui/carousel';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from './ui/carousel';
 import { clientSolutions, getClientSolutionPath, type ClientSolution } from '@/app/data/work';
+import { SectionBackdrop } from './ui/section-backdrop';
 
 /**
  * Result headings in prose, one per case. Each restates the approved `headline` from work.ts
@@ -27,12 +28,13 @@ function eyebrowFor(solution: ClientSolution) {
 }
 
 /**
- * Client cases as a page-wide carousel: one slide per case, each in the same calm layout
- * (client or sector, result heading, one sentence, the figures, the attributed quote where one
- * exists, and a link to the full case). Everything is read from `app/data/work.ts`. All slides
- * are in the server-rendered HTML. The carousel advances by itself every 12 seconds, pauses while
- * the pointer or keyboard focus is on it so nobody loses their place while reading, and stays
- * still for visitors who prefer reduced motion.
+ * Client cases as a page-wide carousel that fills the screen: one slide per case, each in the same
+ * calm layout (client or sector, result heading, one sentence, the figures, the attributed quote
+ * where one exists, and a link to the full case). Everything is read from `app/data/work.ts`. All
+ * slides are in the server-rendered HTML. The carousel advances by itself every 12 seconds, pauses
+ * while the pointer or keyboard focus is on it so nobody loses their place while reading, and stays
+ * still for visitors who prefer reduced motion. Vertical scrolling is never captured: the visitor
+ * can move past the section at any time.
  */
 const AUTO_ADVANCE_MS = 12000;
 export default function ClientCases() {
@@ -93,7 +95,7 @@ export default function ClientCases() {
     <section
       id="client-cases"
       ref={sectionRef}
-      className="section bg-background-alt"
+      className="section relative isolate bg-background-alt lg:flex lg:min-h-[100svh] lg:items-center"
       aria-label="Client cases"
       onPointerEnter={() => setPaused(true)}
       onPointerLeave={() => setPaused(false)}
@@ -102,18 +104,21 @@ export default function ClientCases() {
         if (!sectionRef.current?.contains(event.relatedTarget as Node | null)) setPaused(false);
       }}
     >
-      <div className="container-tight">
+      <SectionBackdrop variant="glow" />
+      <div className="container-tight w-full">
         <Carousel setApi={setApi} opts={{ align: 'start', loop: true }} className="w-full">
           <CarouselContent className="items-start">
             {clientSolutions.map((solution) => (
               <CarouselItem key={solution.slug} className="basis-full">
                 <article className="flex flex-col gap-10 md:gap-12" aria-label={solution.title}>
-                  <div className="max-w-3xl">
-                    <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-text-secondary">
+                  <div className="max-w-4xl">
+                    <p className="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-text-secondary">
                       {eyebrowFor(solution)}
                     </p>
-                    <h2 className="section-heading mb-5">{RESULT_HEADINGS[solution.slug] ?? solution.headline}</h2>
-                    <p className="text-lg leading-relaxed text-text-secondary">{solution.summary}</p>
+                    <h2 className="section-heading mb-6 text-balance leading-[1.08] lg:text-6xl">
+                      {RESULT_HEADINGS[solution.slug] ?? solution.headline}
+                    </h2>
+                    <p className="max-w-3xl text-lg leading-relaxed text-text-secondary md:text-xl">{solution.summary}</p>
                   </div>
 
                   <dl className="grid gap-8 sm:grid-cols-3 sm:gap-6">
@@ -161,17 +166,17 @@ export default function ClientCases() {
               <ArrowLeft className="h-4 w-4" aria-hidden="true" />
             </button>
             <div className="flex gap-2" role="tablist" aria-label="Client cases">
-            {clientSolutions.map((solution, idx) => (
-              <button
-                key={solution.slug}
-                type="button"
-                role="tab"
-                aria-selected={current === idx}
-                onClick={() => api?.scrollTo(idx)}
-                className={`h-2 cursor-pointer rounded-full transition-all ${current === idx ? 'w-4 bg-text-primary' : 'w-2 bg-border'}`}
-                aria-label={`${solution.title} (${idx + 1} of ${clientSolutions.length})`}
-              />
-            ))}
+              {clientSolutions.map((solution, idx) => (
+                <button
+                  key={solution.slug}
+                  type="button"
+                  role="tab"
+                  aria-selected={current === idx}
+                  onClick={() => api?.scrollTo(idx)}
+                  className={`h-2 cursor-pointer rounded-full transition-all ${current === idx ? 'w-4 bg-text-primary' : 'w-2 bg-border'}`}
+                  aria-label={`${solution.title} (${idx + 1} of ${clientSolutions.length})`}
+                />
+              ))}
             </div>
             <button
               type="button"

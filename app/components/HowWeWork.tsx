@@ -3,6 +3,7 @@ import React from 'react';
 import { Card } from '@/app/components/ui/card';
 import { Activity, Asterisk, Rocket, ShieldCheck, Workflow } from 'lucide-react';
 import { CardSpotlight } from '@/app/components/ui/CardSpotlight';
+import { SectionBackdrop } from '@/app/components/ui/section-backdrop';
 
 export default function HowWeWork() {
   const cardContents = [
@@ -39,10 +40,11 @@ export default function HowWeWork() {
   ];
 
   return (
-    <section id="how-we-work" className="section bg-background">
-      <div className="container-tight grid lg:grid-cols-2 gap-10 ">
+    <section id="how-we-work" className="section relative isolate overflow-hidden bg-background lg:flex lg:min-h-[100svh] lg:items-center">
+      <SectionBackdrop variant="dots" />
+      <div className="container-tight grid w-full lg:grid-cols-2 gap-10 ">
         <div className="flex flex-col gap-5 max-w-md lg:sticky lg:top-20 lg:h-fit">
-          <h2 className="section-heading mb-3 md:mb-5">
+          <h2 className="section-heading mb-3 md:mb-5 lg:text-6xl">
             How we work
           </h2>
           <p className="text-text-secondary">

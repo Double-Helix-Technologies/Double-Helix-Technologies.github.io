@@ -33,6 +33,7 @@ const buttonVariants = cva(
         icon: "rounded-full p-2",
         // Homepage calls to action: a larger tap target that keeps the rounded-xl shape.
         cta: "h-11 px-6 text-base",
+        hero: "h-12 px-7 text-lg",
       },
     },
     defaultVariants: {

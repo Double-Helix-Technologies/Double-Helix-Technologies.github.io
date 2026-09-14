@@ -7,6 +7,7 @@ import { Button } from '@/app/components/ui/button';
 import { Sparkles } from '@/app/components/ui/sparkles';
 import { useTheme } from '@/app/components/ThemeProvider';
 import LogoMarquee from './LogoMarquee';
+import { MeshGradient } from '@/app/components/ui/section-backdrop';
 import { siteConfig } from '@/app/lib/seo';
 
 /**
@@ -26,13 +27,7 @@ export default function Hero() {
 
   return (
     <section className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-background">
-      {/* Mesh gradient: three blurred brand-colour fields drifting slowly. */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-20">
-        <div className="absolute -left-[12%] top-[8%] h-[52vw] w-[52vw] rounded-full bg-accent-pink opacity-25 blur-3xl motion-safe:animate-drift dark:opacity-20" />
-        <div className="absolute -right-[10%] top-[22%] h-[46vw] w-[46vw] rounded-full bg-accent-blue opacity-20 blur-3xl motion-safe:animate-drift motion-safe:[animation-delay:-8s] dark:opacity-15" />
-        <div className="absolute -bottom-[18%] left-[24%] h-[44vw] w-[44vw] rounded-full bg-accent-teal opacity-15 blur-3xl motion-safe:animate-drift motion-safe:[animation-delay:-15s] dark:opacity-10" />
-        <div className="absolute -bottom-[20%] -right-[8%] h-[38vw] w-[38vw] rounded-full bg-accent-lilac opacity-15 blur-3xl motion-safe:animate-drift motion-safe:[animation-delay:-4s] dark:opacity-10" />
-      </div>
+      <MeshGradient />
 
       <div className="relative flex flex-1 items-center px-0 pb-14 pt-28 sm:px-6 md:px-8 md:pt-32">
         {/* Sparkles rise from the line where the marquee begins and fade out on the way up. */}
@@ -58,22 +53,22 @@ export default function Hero() {
           <div className="absolute inset-x-[25%] bottom-0 h-[3px] bg-gradient-to-r from-transparent via-accent-blue to-transparent blur-sm" />
         </div>
 
-        <div className="container-tight flex flex-col items-start gap-8 md:gap-10">
-          <h1 className="animate-fade-in max-w-4xl bg-gradient-to-tr from-accent-pink via-accent-blue to-accent-teal bg-clip-text pb-2 text-4xl font-semibold leading-[1.08] tracking-[.02em] text-transparent sm:text-5xl lg:text-6xl">
+        <div className="container-tight flex flex-col items-start gap-8 md:gap-12">
+          <h1 className="animate-fade-in max-w-5xl bg-gradient-to-tr from-accent-pink via-accent-blue to-accent-teal bg-clip-text pb-2 text-5xl font-semibold leading-[1.04] tracking-[.01em] text-transparent sm:text-6xl lg:text-7xl xl:text-8xl">
             Higher throughput. Lower running costs.
           </h1>
-          <p className="max-w-2xl text-lg leading-relaxed text-text-secondary md:text-xl">
+          <p className="max-w-3xl text-xl leading-relaxed text-text-secondary md:text-2xl">
             Custom software and system integrations for life sciences and healthcare operations in Europe and North
             America.
           </p>
           <div className="flex flex-wrap gap-3 md:gap-4">
-            <Button variant="cta" size="cta" asChild>
+            <Button variant="cta" size="hero" asChild>
               <a href={siteConfig.booking.url} target="_blank" rel="noreferrer">
                 Book a free consultation
                 <ArrowRight aria-hidden="true" />
               </a>
             </Button>
-            <Button variant="secondary" size="cta" asChild>
+            <Button variant="secondary" size="hero" asChild>
               <Link href="/work/">See our work</Link>
             </Button>
           </div>
