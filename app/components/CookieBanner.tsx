@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from './ui/button';
 import { useConsent } from './ConsentProvider';
@@ -8,24 +8,37 @@ import { X } from 'lucide-react';
 import { cn } from '@/app/utils/cn';
 import { BANNER_COPY } from './CookieBanner.constants';
 
+/**
+ * Consent banner. Analytics stay off until the visitor allows them; declining is one tap away and
+ * the close control also declines. The banner measures itself and pads the page by exactly its
+ * own height, so the footer is never hidden behind it and a phone does not lose more of the
+ * viewport than the banner actually needs.
+ */
 export default function CookieBanner() {
-  const { 
+  const {
     consentStatus,
-    grantConsent, 
+    grantConsent,
     declineConsent,
-    openConsentModal,
+    openConsentModal
   } = useConsent();
 
   const [hasPulsed, setHasPulsed] = useState(false);
   const bannerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (consentStatus === 'pending') {
-      document.body.style.paddingBottom = '120px';
-      return () => {
-        document.body.style.paddingBottom = '';
-      };
-    }
+  useLayoutEffect(() => {
+    if (consentStatus !== 'pending') return;
+
+    const applyPadding = () => {
+      const height = bannerRef.current?.offsetHeight ?? 0;
+      document.body.style.paddingBottom = `${height}px`;
+    };
+
+    applyPadding();
+    window.addEventListener('resize', applyPadding);
+    return () => {
+      window.removeEventListener('resize', applyPadding);
+      document.body.style.paddingBottom = '';
+    };
   }, [consentStatus]);
 
   useEffect(() => {
@@ -41,22 +54,6 @@ export default function CookieBanner() {
     return null;
   }
 
-  const handleAccept = () => {
-    grantConsent();
-  };
-
-  const handleReject = () => {
-    declineConsent();
-  };
-
-  const handleCustomize = () => {
-    openConsentModal();
-  };
-
-  const handleClose = () => {
-    declineConsent();
-  };
-
   return (
     <AnimatePresence>
       <motion.div
@@ -66,43 +63,37 @@ export default function CookieBanner() {
         exit={{ y: 100, opacity: 0 }}
         transition={{ duration: 0.4, ease: 'easeOut' }}
         className={cn(
-          "fixed bottom-0 left-0 right-0 z-[9999]",
-          "bg-background border-t-2 border-primary/20",
-          "shadow-2xl",
-          "px-4 py-4 sm:px-6 sm:py-5",
-          // Enhanced visibility
-          "backdrop-blur-sm bg-background/95"
+          'fixed bottom-0 left-0 right-0 z-[9999]',
+          'border-t-2 border-primary/20 bg-background/95 backdrop-blur-sm shadow-2xl',
+          'px-4 py-3 sm:px-6 sm:py-5'
         )}
-        role="banner"
-        aria-label="Cookie consent banner"
+        role="region"
+        aria-label="Cookie consent"
       >
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+        <div className="absolute left-0 right-0 top-0 h-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
         <div className="container-wide mx-auto">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
             <button
-              onClick={handleClose}
+              onClick={declineConsent}
               className={cn(
-                "hidden sm:block",
-                "absolute top-3 right-3 sm:relative sm:top-0 sm:right-0",
-                "p-2 rounded-full hover:bg-background-alt transition-colors",
-                "text-text-secondary hover:text-text-primary",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
-                "min-w-[44px] min-h-[44px] flex items-center justify-center"
+                'hidden sm:flex',
+                'relative items-center justify-center rounded-full p-2 transition-colors hover:bg-background-alt',
+                'text-text-secondary hover:text-text-primary',
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
+                'min-h-[44px] min-w-[44px]'
               )}
               aria-label="Reject cookies and close banner"
               title="Reject cookies"
             >
-              <X className="w-5 h-5" />
+              <X className="h-5 w-5" />
             </button>
-            <div className="flex-1 min-w-0 pr-8 sm:pr-0">
-              <p className="text-sm sm:text-base text-text-primary leading-relaxed font-medium">
-                {BANNER_COPY.primaryMessage}
-              </p>
-              <p className="text-xs sm:text-sm text-text-secondary leading-relaxed mt-1">
-                {BANNER_COPY.secondaryMessage}{' '}
+            <div className="min-w-0 flex-1">
+              <p className="text-sm font-medium leading-snug text-text-primary sm:text-base sm:leading-relaxed">
+                {BANNER_COPY.primaryMessage}{' '}
+                <span className="font-normal text-text-secondary">{BANNER_COPY.secondaryMessage}</span>{' '}
                 <a
                   href={BANNER_COPY.privacyPolicyUrl}
-                  className="underline hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded"
+                  className="rounded text-text-secondary underline transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -110,53 +101,48 @@ export default function CookieBanner() {
                 </a>
               </p>
             </div>
-            <div className="flex flex-wrap items-center gap-2 sm:gap-3 w-full sm:w-auto">
+            <div className="flex w-full items-center gap-2 sm:w-auto sm:gap-3">
               <Button
-                onClick={handleReject}
+                onClick={declineConsent}
                 variant="outline"
                 size="default"
                 className={cn(
-                  "flex-1 sm:flex-none",
-                  "min-h-[44px] min-w-[100px]",
-                  "border-border hover:bg-background-alt",
-                  "text-sm sm:text-base"
+                  'flex-1 sm:flex-none',
+                  'min-h-[44px] px-3 sm:min-w-[100px]',
+                  'border-border hover:bg-background-alt',
+                  'text-xs sm:text-base'
                 )}
               >
                 {BANNER_COPY.buttons.reject}
               </Button>
               <Button
-                onClick={handleCustomize}
+                onClick={openConsentModal}
                 variant="outline"
                 size="default"
                 className={cn(
-                  "flex-1 sm:flex-none",
-                  "min-h-[44px] min-w-[100px]",
-                  "border-border hover:bg-background-alt",
-                  "text-sm sm:text-base"
+                  'flex-1 sm:flex-none',
+                  'min-h-[44px] px-3 sm:min-w-[100px]',
+                  'border-border hover:bg-background-alt',
+                  'text-xs sm:text-base'
                 )}
               >
                 {BANNER_COPY.buttons.customize}
               </Button>
               <motion.div
-                animate={!hasPulsed ? {
-                  scale: [1, 1.05, 1],
-                } : {}}
-                transition={{
-                  duration: 0.6,
-                  delay: 0.5,
-                  ease: 'easeInOut',
-                }}
+                className="flex-1 sm:flex-none"
+                animate={!hasPulsed ? { scale: [1, 1.05, 1] } : {}}
+                transition={{ duration: 0.6, delay: 0.5, ease: 'easeInOut' }}
               >
                 <Button
-                  onClick={handleAccept}
+                  onClick={grantConsent}
                   variant="default"
                   size="default"
                   className={cn(
-                    "flex-1 sm:flex-none",
-                    "min-h-[44px] min-w-[120px]",
-                    "bg-primary text-white hover:bg-primary/90",
-                    "text-sm sm:text-base font-semibold",
-                    "shadow-md hover:shadow-lg transition-shadow"
+                    'w-full sm:w-auto',
+                    'min-h-[44px] px-3 sm:min-w-[120px]',
+                    'bg-primary text-white hover:bg-primary/90',
+                    'text-xs font-semibold sm:text-base',
+                    'shadow-md transition-shadow hover:shadow-lg'
                   )}
                 >
                   {BANNER_COPY.buttons.accept}
