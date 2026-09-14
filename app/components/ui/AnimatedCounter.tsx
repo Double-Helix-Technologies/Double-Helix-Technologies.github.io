@@ -1,56 +1,62 @@
-"use client";
+'use client';
 
-import {useEffect, useRef, useState} from "react";
-import {motion, useInView, useMotionValue, useSpring} from "framer-motion";
+import { useEffect, useRef, useState } from 'react';
+import { animate, useInView, useReducedMotion } from 'framer-motion';
 
 interface AnimatedCounterProps {
+  /** Final value. This is what the static HTML contains. */
   value: number;
+  /** Value the count-up starts from once the element is mounted and in view. Defaults to 0. */
   from?: number;
   prefix?: string;
   suffix?: string;
   className?: string;
+  /** Duration of the count-up in seconds. */
+  duration?: number;
 }
 
+/**
+ * Renders `prefix + value + suffix` in the server-rendered HTML, so crawlers, reader mode, screen
+ * readers and anyone without JavaScript see the real figure, never the start value. The count-up
+ * from `from` to `value` starts only after mount and once the element is in view, and is skipped
+ * entirely when the visitor prefers reduced motion.
+ */
 export function AnimatedCounter({
   value,
   from,
-  prefix = "",
-  suffix = "",
-  className = ""
+  prefix = '',
+  suffix = '',
+  className = '',
+  duration = 1.2
 }: AnimatedCounterProps) {
   const ref = useRef<HTMLSpanElement>(null);
-  const startValue = from ?? 0;
-  const motionValue = useMotionValue(startValue);
-  const springValue = useSpring(motionValue, {
-    damping: 60,
-    stiffness: 100,
-  });
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const [displayValue, setDisplayValue] = useState(startValue);
+  const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const reduceMotion = useReducedMotion();
+  const [displayValue, setDisplayValue] = useState(value);
 
   useEffect(() => {
-    if (isInView) {
-      motionValue.set(value);
+    if (!isInView || reduceMotion) {
+      setDisplayValue(value);
+      return;
     }
-  }, [isInView, value, motionValue]);
 
-  useEffect(() => {
-    return springValue.on("change", (latest) => {
-      setDisplayValue(Math.round(latest));
+    const startValue = from ?? 0;
+    if (startValue === value) return;
+
+    const controls = animate(startValue, value, {
+      duration,
+      ease: 'easeOut',
+      onUpdate: (latest) => setDisplayValue(Math.round(latest))
     });
-  }, [springValue]);
+
+    return () => controls.stop();
+  }, [isInView, reduceMotion, from, value, duration]);
 
   return (
-    <motion.span
-      ref={ref}
-      className={className}
-      initial={{ opacity: 0, scale: 0.5 }}
-      animate={isInView ? { opacity: 1, scale: 1 } : {}}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-    >
+    <span ref={ref} className={className}>
       {prefix}
       {displayValue}
       {suffix}
-    </motion.span>
+    </span>
   );
 }
