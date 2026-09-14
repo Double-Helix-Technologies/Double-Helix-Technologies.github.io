@@ -134,7 +134,7 @@ export default function TeamPage() {
 
             <h2 className="text-3xl md:text-4xl mt-16 mb-3">Part of something bigger</h2>
             <p className="text-text-secondary mb-8">
-              We&apos;re active members of Latvia&apos;s health tech and business communities.
+              Memberships in Latvia&apos;s health tech and business communities, and partners we work alongside.
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
               {partners.map((affiliation) => (
