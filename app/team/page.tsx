@@ -15,7 +15,7 @@ import Link from 'next/link';
 import Footer from '@/app/components/Footer';
 import AvatarPlaceholder from '@/app/components/ui/avatarPlaceholder';
 import { leadershipTeam, TeamMember } from '@/app/data/team';
-import { partners } from '@/app/data/partners';
+import { memberships } from '@/app/data/partners';
 import Wordmark from '@/app/components/Wordmark';
 import { buildMetadata, siteConfig } from '../lib/seo';
 import { complianceStatement } from '@/app/components/ComplianceNotice';
@@ -134,10 +134,10 @@ export default function TeamPage() {
 
             <h2 className="text-3xl md:text-4xl mt-16 mb-3">Part of something bigger</h2>
             <p className="text-text-secondary mb-8">
-              Memberships in Latvia&apos;s health tech and business communities, and partners we work alongside.
+              We&apos;re active members of Latvia&apos;s health tech and business communities.
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-              {partners.map((affiliation) => (
+              {memberships.map((affiliation) => (
                 <a
                   key={affiliation.name}
                   href={affiliation.href}

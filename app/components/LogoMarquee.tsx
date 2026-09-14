@@ -17,7 +17,7 @@ import { partners, type Partner } from '@/app/data/partners';
  * Biotech, Mainos and Krafthub have each approved publication of their logo. Add a customer here
  * only with the same confirmation; the list is `customers` in app/data/work.ts.
  */
-const logos: Partner[] = [...customers, ...partners];
+const logos: Partner[] = [...customers.map((customer) => ({ ...customer, kind: 'partner' as const })), ...partners];
 
 export default function LogoMarquee() {
   const reduceMotion = useReducedMotion();
