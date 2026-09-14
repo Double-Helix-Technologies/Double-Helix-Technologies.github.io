@@ -1,8 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { useReducedMotion } from 'framer-motion';
 import type { CarouselApi } from './ui/carousel';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from './ui/carousel';
 import { clientSolutions, getClientSolutionPath, type ClientSolution } from '@/app/data/work';
@@ -29,12 +30,27 @@ function eyebrowFor(solution: ClientSolution) {
  * Client cases as a page-wide carousel: one slide per case, each in the same calm layout
  * (client or sector, result heading, one sentence, the figures, the attributed quote where one
  * exists, and a link to the full case). Everything is read from `app/data/work.ts`. All slides
- * are in the server-rendered HTML; the carousel only moves on the visitor's action, so nobody
- * loses their place while reading.
+ * are in the server-rendered HTML. The carousel advances by itself every 12 seconds, pauses while
+ * the pointer or keyboard focus is on it so nobody loses their place while reading, and stays
+ * still for visitors who prefer reduced motion.
  */
+const AUTO_ADVANCE_MS = 12000;
 export default function ClientCases() {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const reduceMotion = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (!api || paused || reduceMotion) return;
+
+    const interval = setInterval(() => {
+      api.scrollNext();
+    }, AUTO_ADVANCE_MS);
+
+    return () => clearInterval(interval);
+  }, [api, paused, reduceMotion]);
 
   useEffect(() => {
     if (!api) return;
@@ -74,7 +90,18 @@ export default function ClientCases() {
   }, [api]);
 
   return (
-    <section id="client-cases" className="section bg-background-alt" aria-label="Client cases">
+    <section
+      id="client-cases"
+      ref={sectionRef}
+      className="section bg-background-alt"
+      aria-label="Client cases"
+      onPointerEnter={() => setPaused(true)}
+      onPointerLeave={() => setPaused(false)}
+      onFocus={() => setPaused(true)}
+      onBlur={(event) => {
+        if (!sectionRef.current?.contains(event.relatedTarget as Node | null)) setPaused(false);
+      }}
+    >
       <div className="container-tight">
         <Carousel setApi={setApi} opts={{ align: 'start', loop: true }} className="w-full">
           <CarouselContent className="items-start">
