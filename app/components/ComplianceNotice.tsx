@@ -26,7 +26,7 @@ export const complianceAreas = [
   }
 ];
 
-/** Compliance section, shown at the bottom of the homepage next to the funding disclosure. */
+/** Standalone compliance section. Not currently rendered; the footer carries `complianceStatement` on every page. */
 export default function ComplianceNotice() {
   return (
     <section className="section pt-10 pb-12" aria-labelledby="compliance-heading">

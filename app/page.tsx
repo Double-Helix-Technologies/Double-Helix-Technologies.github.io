@@ -4,11 +4,9 @@ import Hero from './components/Hero';
 import ClientCases from './components/ClientCases';
 import Services from './components/Services';
 import HowWeWork from './components/HowWeWork';
-import ComplianceNotice from './components/ComplianceNotice';
 import Leadership from './components/Leadership';
 import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
-import LiaaInfo from './components/LiaaInfo';
 import Footer from './components/Footer';
 import { ThemeProvider } from './components/ThemeProvider';
 import { buildMetadata, buildOfferCatalogSchema } from './lib/seo';
@@ -34,9 +32,10 @@ export const metadata: Metadata = buildMetadata({
  * (Hero), prove it (ClientCases, one page-wide slide per case), which of my problems do you solve
  * (Services), who is accountable (Leadership, placed between the two text-heavy sections to break
  * them up), how do you deliver (HowWeWork), who else says so (Testimonials), and how do I talk to
- * you (Contact). Disclosures follow, with the certification
- * status last: it is in progress, so the team matters more (owner decision, 14 September 2026). The risk assessment is reachable from Services and its own page;
- * the homepage does not steer the visitor to one engagement (owner decision, 14 September 2026).
+ * you (Contact). The funding disclosure and the certification status live in the footer, on every
+ * page: certification is in progress, so the team matters more. The risk assessment is reachable
+ * from Services and its own page; the homepage does not steer the visitor to one engagement.
+ * (Owner decisions of 14 September 2026.)
  */
 export default function Home() {
   const offerCatalogSchema = buildOfferCatalogSchema();
@@ -56,8 +55,6 @@ export default function Home() {
         <HowWeWork />
         <Testimonials />
         <Contact />
-        <LiaaInfo />
-        <ComplianceNotice />
         <Footer />
       </main>
     </ThemeProvider>
