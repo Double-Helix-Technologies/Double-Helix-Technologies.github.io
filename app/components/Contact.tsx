@@ -20,7 +20,7 @@ export default function Contact() {
           <div className="mt-8 flex justify-center">
             <Button variant="cta" size="cta" asChild>
               <a href={siteConfig.booking.url} target="_blank" rel="noreferrer">
-                Book a consultation
+                Book a free consultation
                 <ArrowRight aria-hidden="true" />
               </a>
             </Button>

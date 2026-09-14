@@ -20,7 +20,7 @@ export default function Hero() {
         <div className="flex flex-wrap gap-3 md:gap-4">
           <Button variant="cta" size="cta" asChild>
             <a href={siteConfig.booking.url} target="_blank" rel="noreferrer">
-              Book a consultation
+              Book a free consultation
               <ArrowRight aria-hidden="true" />
             </a>
           </Button>
