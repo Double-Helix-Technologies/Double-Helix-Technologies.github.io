@@ -1,78 +1,59 @@
-'use client';
-import React from 'react';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion';
-import { ArrowRight, Asterisk, Sparkles } from 'lucide-react';
-import { servicesContents } from '../data/services';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/app/components/ui/card';
-import { Button } from '@/app/components/ui/button';
 import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
+import { getServicePath, servicesContents } from '../data/services';
 
+/**
+ * Business problems we solve. Every service shows its problem statement and description without
+ * a click; the detail page lists what is included and what is delivered. The AI solutions page
+ * stays reachable from here.
+ */
 export default function Services() {
   return (
-    <section id="services" className="section bg-gradient-to-b from-background to-background-alt">
+    <section id="services" className="section bg-background-alt">
       <div className="container-tight text-left">
-        <div className="mb-10">
-          <h2 className="section-heading mb-3 md:mb-5">
+        <div className="mb-10 max-w-3xl md:mb-14">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-text-secondary">
             What we do
-          </h2>
-          <p className="text-text-secondary max-w-2xl py-4">
-            We help life sciences and healthcare organizations streamline regulated operations through custom software, system integrations, and practical AI.
           </p>
-          <p className="text-text-secondary max-w-2xl">
-            Looking for a solution focused on AI-enabled workflows? Explore our{' '}
-            <Link href="/solutions/custom-ai-software-life-sciences/" className="text-primary underline-offset-4 hover:underline">
-              custom AI software solutions for life sciences
-            </Link>
-            {' '}page.
+          <h2 className="section-heading mb-5">Business problems we solve</h2>
+          <p className="text-text-secondary">
+            Six kinds of work for life sciences and healthcare operations. Each has a defined scope and a list of
+            deliverables on its own page, so you can see what you would receive before we talk.
           </p>
         </div>
 
-        <Accordion
-          type="single"
-          collapsible
-          className="w-full mx-auto border-b border-b-gray-700"
-        >
-          {servicesContents.map(({ key, slug, title, description }) => (
-            <AccordionItem key={key} value={key} className="w-full">
-              <AccordionTrigger>
-                <div className="flex gap-2">
-                  <Asterisk className="w-8 h-8 flex-shrink-0"/>
-                  {title}
-                </div>
-              </AccordionTrigger>
-              <AccordionContent className="flex flex-col gap-8">
-                <p>{description}</p>
-                <div className="flex flex-row justify-end">
-                  <Button variant="secondary">
-                    <Link href={`/services/${slug}/`}>
-                      learn more
-                    </Link>
-                    <ArrowRight size={11}/>
-                  </Button>
-                </div>
-              </AccordionContent>
-            </AccordionItem>
+        <ul className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {servicesContents.map((service) => (
+            <li key={service.slug} className="h-full">
+              <article className="flex h-full flex-col gap-4 rounded-2xl border border-border/30 bg-background p-6">
+                {service.problem && (
+                  <p className="text-sm font-medium text-accent-blue">{service.problem}</p>
+                )}
+                <h3 className="text-xl font-semibold leading-snug text-text-primary">{service.title}</h3>
+                <p className="text-sm leading-relaxed text-text-secondary md:text-base">{service.description}</p>
+                <Link
+                  href={getServicePath(service)}
+                  className="mt-auto inline-flex items-center gap-1 pt-2 text-sm font-medium text-text-primary underline-offset-4 hover:underline"
+                >
+                  What is included
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </Link>
+              </article>
+            </li>
           ))}
-        </Accordion>
-        <Card className="bg-gray-600/10 p-5 justify-items-center mt-12 md:mt-24 shadow-none">
-          <CardHeader>
-            <CardTitle className="text-2xl flex gap-3">
-              <Sparkles/> Need a custom solution?
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="flex gap-10">
-            We combine engineering, integration, and workflow expertise to solve operational bottlenecks in regulated environments.
-          </CardContent>
-          <CardFooter>
-            <Button variant="secondary" asChild>
-              <Link href="/solutions/custom-ai-software-life-sciences/">
-                See life sciences AI solutions
-                <ArrowRight size={11}/>
-              </Link>
-            </Button>
-          </CardFooter>
-        </Card>
+        </ul>
+
+        <p className="mt-8 text-sm text-text-secondary">
+          Looking specifically at AI-enabled workflows? See our{' '}
+          <Link
+            href="/solutions/custom-ai-software-life-sciences/"
+            className="underline underline-offset-4 hover:text-text-primary"
+          >
+            custom AI software solutions for life sciences
+          </Link>{' '}
+          page.
+        </p>
       </div>
     </section>
   );
-} 
+}
