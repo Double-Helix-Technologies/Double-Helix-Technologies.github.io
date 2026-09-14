@@ -1,6 +1,17 @@
 import { ClipboardCheck, LockKeyhole, ShieldCheck } from 'lucide-react';
 
-const complianceAreas = [
+/**
+ * Approved ISO wording (decision of 11 September 2026). Do not paraphrase: certification is in
+ * progress and nothing here may imply that a certificate exists. Replace with certificate number,
+ * scope and certification body once issued.
+ */
+export const complianceStatement = {
+  heading: 'ISO 9001 and ISO 27001 certification is in progress.',
+  body:
+    'We operate a quality and information security management system aligned with ISO 9001 and ISO 27001. The certification audit is scheduled for the end of October 2026; we will publish the certificate details here once issued.'
+} as const;
+
+export const complianceAreas = [
   {
     label: 'Quality management',
     icon: ClipboardCheck
@@ -15,6 +26,7 @@ const complianceAreas = [
   }
 ];
 
+/** Standalone compliance section. On the homepage the same statement is rendered inside Safeguards. */
 export default function ComplianceNotice() {
   return (
     <section className="section pt-10 pb-12" aria-labelledby="compliance-heading">
@@ -24,10 +36,10 @@ export default function ComplianceNotice() {
             Compliance
           </p>
           <h2 id="compliance-heading" className="mx-auto max-w-2xl text-3xl md:text-4xl">
-            ISO 9001 and ISO 27001 certification is in progress.
+            {complianceStatement.heading}
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-text-secondary">
-            We operate a quality and information security management system aligned with ISO 9001 and ISO 27001. The certification audit is scheduled for the end of October 2026; we will publish the certificate details here once issued.
+            {complianceStatement.body}
           </p>
 
           <div className="mt-8 flex flex-col items-center justify-center gap-4 md:flex-row md:gap-6">
