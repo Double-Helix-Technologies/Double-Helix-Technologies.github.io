@@ -1,12 +1,12 @@
 # Homepage rework for decision-makers: changes, owner-review list, verification
 
 Date: 14 September 2026
-Branch: `feat/homepage-decision-maker` (26 commits on top of `main` 87a431f; not pushed, not deployed)
+Branch: `feat/homepage-decision-maker` (33 commits on top of `main` 87a431f; not pushed, not deployed)
 Author: Claude (Cowork), at Alex's request. Draft until reviewed by a human.
 
 ## What changed and why it helps a decision-maker
 
-The homepage now answers, in order, the questions a managing director or operations lead asks: what do you do for me, prove it, which of my problems do you solve, how do you deliver, who is accountable, who else says so, how do I talk to you. The certification status comes last, with the disclosures, because it is in progress and the team matters more.
+The homepage now answers, in order, the questions a managing director or operations lead asks: what do you do for me, prove it, which of my problems do you solve, who is accountable, how do you deliver, who else says so, how do I talk to you. The team block sits between the two text-heavy sections to break them up, and section backgrounds alternate so every section start is visible. The funding disclosure and the certification status live in the footer, on every page, because certification is in progress and the team matters more.
 
 Owner review on 14 September 2026 changed the first version in these ways, all applied: the client case block became a page-wide carousel with one slide per case and the quote carousel is back (both fed from `work.ts`), the "defined first step" section is removed so the homepage does not decide for the visitor, the "working in regulated environments" section is folded into "How we work" with the compliance statement following it, the "(title at the time of the project)" suffix and the one-client sentence are removed, company details moved from the contact section to the About page, and the contact section is reduced to a heading, one sentence, the booking action and one line.
 
@@ -18,7 +18,7 @@ Services (`app/components/Services.tsx`). The six-row accordion that hid every d
 
 Delivery (`app/components/HowWeWork.tsx`). "How we work" keeps its four steps and gains one principle, "Show where regulatory risk sits; interpretation stays with your specialists", which was the only point the removed regulated-environments section added beyond what the steps already say.
 
-Compliance (`app/components/ComplianceNotice.tsx`). The approved ISO statement, unchanged in wording, sits at the bottom of the page after the funding disclosure (owner decision: not certified yet, so not a selling point).
+Disclosures (`app/components/Footer.tsx`). The LIAA export support agreement with its EU and NAP 2027 marks, and the approved ISO statement unchanged in wording (exported from `ComplianceNotice.tsx`), are small print in the footer above the copyright line, on every page. The former homepage sections `LiaaInfo` and `ComplianceNotice` are no longer rendered; `LiaaInfo.tsx` is removed.
 
 Accountability (`app/components/Leadership.tsx`, new). The four leaders from `team.ts` with role and opening biography line, framed with the /team/ wording: a small senior team, you work directly with the people building your solution, based in Riga. No headcount, no named delivery lead (owner items 4 and 5).
 
