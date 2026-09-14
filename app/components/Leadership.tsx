@@ -35,7 +35,7 @@ function Avatar({ person }: { person: TeamMember }) {
  */
 export default function Leadership() {
   return (
-    <section id="leadership" className="section bg-background" aria-labelledby="leadership-heading">
+    <section id="leadership" className="section bg-background-alt" aria-labelledby="leadership-heading">
       <div className="container-tight grid gap-12 lg:grid-cols-5 lg:gap-16">
         <div className="max-w-md lg:col-span-2">
           <h2 id="leadership-heading" className="section-heading mb-5">
