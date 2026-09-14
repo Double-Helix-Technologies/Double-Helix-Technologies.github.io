@@ -16,6 +16,7 @@ import { BANNER_COPY } from './CookieBanner.constants';
  */
 export default function CookieBanner() {
   const {
+    isReady,
     consentStatus,
     grantConsent,
     declineConsent,
@@ -26,7 +27,7 @@ export default function CookieBanner() {
   const bannerRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
-    if (consentStatus !== 'pending') return;
+    if (!isReady || consentStatus !== 'pending') return;
 
     const applyPadding = () => {
       const height = bannerRef.current?.offsetHeight ?? 0;
@@ -39,18 +40,20 @@ export default function CookieBanner() {
       window.removeEventListener('resize', applyPadding);
       document.body.style.paddingBottom = '';
     };
-  }, [consentStatus]);
+  }, [isReady, consentStatus]);
 
   useEffect(() => {
-    if (consentStatus === 'pending' && !hasPulsed) {
+    if (isReady && consentStatus === 'pending' && !hasPulsed) {
       const timer = setTimeout(() => {
         setHasPulsed(true);
       }, 500);
       return () => clearTimeout(timer);
     }
-  }, [consentStatus, hasPulsed]);
+  }, [isReady, consentStatus, hasPulsed]);
 
-  if (consentStatus !== 'pending') {
+  // Nothing is rendered until the stored consent has been read, so returning visitors never see
+  // the banner flash, and the server-rendered HTML carries page content rather than the banner.
+  if (!isReady || consentStatus !== 'pending') {
     return null;
   }
 
