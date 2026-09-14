@@ -29,7 +29,7 @@ export default function LogoMarquee() {
   const reduceMotion = useReducedMotion();
 
   return (
-    <section aria-label="Customers and partners" className="border-y border-divider bg-background py-6 md:py-8">
+    <section aria-label="Customers and partners" className="border-t border-divider py-6 md:py-8">
       <p className="mb-4 text-center text-xs font-semibold uppercase tracking-[0.18em] text-text-secondary">
         Customers and partners
       </p>

@@ -46,9 +46,15 @@ const config: Config = {
   			'accordion-down': 'accordion-down 0.2s ease-out',
   			'accordion-up': 'accordion-up 0.2s ease-out',
 				'icon-rotate': 'accordion-icon-rotate 0.2s ease-out forwards',
-				'float': 'float 2s ease-in-out infinite'
+				'float': 'float 2s ease-in-out infinite',
+				// Mesh gradient fields in the hero: a slow wander, never a bounce.
+				'drift': 'drift 24s ease-in-out infinite'
   		},
   		keyframes: {
+				drift: {
+					'0%, 100%': { transform: 'translate3d(0, 0, 0) scale(1)' },
+					'50%': { transform: 'translate3d(4%, -6%, 0) scale(1.08)' }
+				},
 				float: {
 					'0%, 100%': { transform: 'translateY(0)' },
 					'50%': { transform: 'translateY(-8px)' },
