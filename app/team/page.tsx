@@ -192,7 +192,7 @@ export default function TeamPage() {
                 Registered office: {siteConfig.address.streetAddress}, {siteConfig.address.addressLocality},{' '}
                 {siteConfig.address.postalCode}, Latvia
               </p>
-              <p>Registration number 50203351951, Register of Enterprises of the Republic of Latvia</p>
+              <p>Registration number 50203351951</p>
               <p>VAT LV50203351951</p>
               <p>
                 <a href={`mailto:${siteConfig.email}`} className="hover:text-text-primary">
