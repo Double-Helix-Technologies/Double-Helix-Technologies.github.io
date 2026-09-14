@@ -28,10 +28,10 @@ function Avatar({ person }: { person: TeamMember }) {
  * Leadership on the homepage. Names, roles and biographies come from `app/data/team.ts`; the
  * framing sentences are the ones already published on /team/.
  *
- * OWNER: Team size is not stated anywhere on the site and is treated as unconfirmed, so this
- * block describes a small senior team without a number. If a headcount is to be published,
- * confirm it and add it here and on /team/. Likewise, no single named delivery lead is stated on
- * the site; add one here only if the owner confirms who leads delivery on client engagements.
+ * Team size: "around 20" was added at the owner's request on 14 September 2026. It matches the
+ * sales deck ("team of 20") and the LIAA company profile (20 employees).
+ * OWNER: confirm the figure stays right as the team changes; it is stated only here. No single
+ * named delivery lead is stated on the site; add one only if confirmed.
  */
 export default function Leadership() {
   return (
@@ -42,14 +42,14 @@ export default function Leadership() {
             A small senior team for complex problems.
           </h2>
           <p className="text-lg text-text-secondary">
-            You work directly with the people building your solution. Based in Riga, working with customers across
-            Europe and North America.
+            A team of around 20, led by the four people here. You work directly with the people building your
+            solution. Based in Riga, working with customers across Europe and North America.
           </p>
           <Link
             href="/team/"
             className="mt-6 inline-flex items-center gap-1 font-medium text-text-primary underline-offset-4 hover:underline"
           >
-            Meet the team
+            Meet the rest of the team
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>
         </div>

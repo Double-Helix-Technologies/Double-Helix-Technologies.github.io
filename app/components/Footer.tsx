@@ -7,7 +7,6 @@ import { Button } from './ui/button';
 import { AtSign, Linkedin } from 'lucide-react';
 import { useTheme } from '@/app/components/ThemeProvider';
 import { useConsent } from './ConsentProvider';
-import { complianceStatement } from './ComplianceNotice';
 
 function CookieSettingsLink() {
   const { openConsentModal } = useConsent();
@@ -23,9 +22,8 @@ function CookieSettingsLink() {
 }
 
 /**
- * Site footer. Carries the two disclosures that used to be homepage sections: the LIAA export
- * support agreement with its EU and NAP 2027 marks, and the ISO statement in its approved wording
- * (see `complianceStatement`). Both now appear on every page.
+ * Site footer. The LIAA export support disclosure with its EU and NAP 2027 marks sits as a third
+ * column next to the Company and Legal links, on every page. The ISO statement lives on /team/.
  */
 export default function Footer() {
   const { logo } = useTheme();
@@ -108,26 +106,21 @@ export default function Footer() {
                 </li>
               </ul>
             </div>
-          </div>
-        </div>
-
-        <div className="mt-12 grid gap-8 border-t border-divider pt-8 text-sm text-text-secondary md:grid-cols-2 md:gap-12">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
-            <div className="flex shrink-0 items-center gap-4">
-              <Image src="/images/eu-flag.png" alt="European Union flag" width={147} height={98} className="h-9 w-auto" />
-              <Image src="/images/nap-logo.png" alt="NAP 2027 logo" width={153} height={127} className="h-11 w-auto" />
+            <div className="col-span-2 space-y-3">
+              <h3 className="text-lg">Export support</h3>
+              <p className="text-sm text-text-secondary">
+                Double Helix Technologies SIA has entered into Export Support Agreement No. 9.3&#8209;1&#8209;L&#8209;2025/254 with
+                the Investment and Development Agency of Latvia. Financed by European Union.
+              </p>
+              <div className="flex items-center gap-4 pt-1">
+                <Image src="/images/eu-flag.png" alt="European Union flag" width={147} height={98} className="h-9 w-auto" />
+                <Image src="/images/nap-logo.png" alt="NAP 2027 logo" width={153} height={127} className="h-11 w-auto" />
+              </div>
             </div>
-            <p>
-              Double Helix Technologies SIA has entered into Export Support Agreement No. 9.3&#8209;1&#8209;L&#8209;2025/254 with
-              the Investment and Development Agency of Latvia. Financed by European Union.
-            </p>
           </div>
-          <p>
-            <span className="font-medium text-text-primary">{complianceStatement.heading}</span> {complianceStatement.body}
-          </p>
         </div>
 
-        <div className="mt-8 border-t border-divider pt-6">
+        <div className="mt-12 border-t border-divider pt-6">
           <p className="text-sm text-text-secondary font-semibold">
             &copy; {new Date().getFullYear()} Double Helix Technologies SIA. All rights reserved.
           </p>

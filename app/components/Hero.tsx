@@ -17,7 +17,7 @@ export default function Hero() {
           Higher throughput. Lower running costs.
         </h1>
         <p className="max-w-2xl text-lg leading-relaxed text-text-secondary md:text-xl">
-          Custom software and system integration for life sciences and healthcare operations in Europe and North
+          Custom software and system integrations for life sciences and healthcare operations in Europe and North
           America.
         </p>
         <div className="flex flex-wrap gap-3 md:gap-4">

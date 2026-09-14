@@ -16,6 +16,7 @@ import Footer from '@/app/components/Footer';
 import AvatarPlaceholder from '@/app/components/ui/avatarPlaceholder';
 import { leadershipTeam, TeamMember } from '@/app/data/team';
 import { buildMetadata, siteConfig } from '../lib/seo';
+import { complianceStatement } from '@/app/components/ComplianceNotice';
 
 type Affiliation = {
   name: string;
@@ -209,6 +210,10 @@ export default function TeamPage() {
                 </Link>
               </p>
             </div>
+
+            {/* Approved ISO wording; see complianceStatement. Certification is in progress, nothing more is claimed. */}
+            <h2 className="text-3xl md:text-4xl mt-16 mb-3">{complianceStatement.heading}</h2>
+            <p className="text-text-secondary max-w-3xl">{complianceStatement.body}</p>
           </div>
         </section>
 

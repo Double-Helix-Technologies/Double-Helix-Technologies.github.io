@@ -12,9 +12,9 @@ import { ThemeProvider } from './components/ThemeProvider';
 import { buildMetadata, buildOfferCatalogSchema } from './lib/seo';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Custom Software and System Integration for Life Sciences Operations',
+  title: 'Custom Software and System Integrations for Life Sciences Operations',
   description:
-    'Custom software and system integration for life sciences and healthcare operations in Europe and North America: higher throughput, lower running costs, named client evidence.',
+    'Custom software and system integrations for life sciences and healthcare operations in Europe and North America: higher throughput, lower running costs, named client evidence.',
   path: '/',
   keywords: [
     'custom software ai solutions in life sciences',
