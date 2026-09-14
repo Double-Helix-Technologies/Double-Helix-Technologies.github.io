@@ -1,0 +1,57 @@
+'use client';
+
+import Image from 'next/image';
+import { useReducedMotion } from 'framer-motion';
+import { Marquee, MarqueeContent, MarqueeFade, MarqueeItem } from './ui/marquee';
+import { customers } from '@/app/data/work';
+import { partners } from '@/app/data/partners';
+
+/**
+ * Narrow band under the hero: customer and partner logos scrolling right to left, each linking to
+ * the organisation's site. Pauses while the pointer is on it and stands still for visitors who
+ * prefer reduced motion. Logos are shown in grey and colour on hover; in the dark theme they are
+ * rendered as light silhouettes so mixed brand colours do not fight the background.
+ *
+ * Customer logos: the owner confirmed on 14 September 2026 that Eurofins Genomics, Lifespin, Onyx
+ * Biotech, Mainos and Krafthub have each approved publication of their logo. Add a customer here
+ * only with the same confirmation; the list is `customers` in app/data/work.ts.
+ */
+const logos = [...customers, ...partners];
+
+export default function LogoMarquee() {
+  const reduceMotion = useReducedMotion();
+
+  return (
+    <section aria-label="Customers and partners" className="border-y border-divider bg-background py-6 md:py-8">
+      <p className="mb-4 text-center text-xs font-semibold uppercase tracking-[0.18em] text-text-secondary">
+        Customers and partners
+      </p>
+      <Marquee>
+        <MarqueeFade side="left" />
+        <MarqueeFade side="right" />
+        <MarqueeContent speed={40} play={!reduceMotion} gradient={false}>
+          {logos.map((item) => (
+            <MarqueeItem key={item.name} className="mx-6 sm:mx-8">
+              <a
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={item.name}
+                title={item.name}
+                className="flex h-12 w-32 items-center justify-center sm:w-40"
+              >
+                <Image
+                  src={item.logo}
+                  alt={item.name}
+                  width={item.logoWidth}
+                  height={item.logoHeight}
+                  className="h-auto max-h-full w-auto max-w-full object-contain opacity-80 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0 dark:brightness-0 dark:invert dark:hover:brightness-0 dark:hover:invert"
+                />
+              </a>
+            </MarqueeItem>
+          ))}
+        </MarqueeContent>
+      </Marquee>
+    </section>
+  );
+}

@@ -15,40 +15,10 @@ import Link from 'next/link';
 import Footer from '@/app/components/Footer';
 import AvatarPlaceholder from '@/app/components/ui/avatarPlaceholder';
 import { leadershipTeam, TeamMember } from '@/app/data/team';
+import { partners } from '@/app/data/partners';
 import { buildMetadata, siteConfig } from '../lib/seo';
 import { complianceStatement } from '@/app/components/ComplianceNotice';
 
-type Affiliation = {
-  name: string;
-  href: string;
-  logo: string;
-  logoWidth: number;
-  logoHeight: number;
-};
-
-const affiliations: Affiliation[] = [
-  {
-    name: 'Digital Health Association Latvia',
-    href: 'https://www.digitalaveseliba.lv/',
-    logo: '/images/partners/digital-health-latvia.svg',
-    logoWidth: 149,
-    logoHeight: 38
-  },
-  {
-    name: 'Latvian American Chamber of Commerce',
-    href: 'https://latvianchamber.com/',
-    logo: '/images/partners/latvian-american-chamber.svg',
-    logoWidth: 258,
-    logoHeight: 84
-  },
-  {
-    name: 'Latvian IT Cluster',
-    href: 'https://www.itbaltic.com/',
-    logo: '/images/partners/latvian-it-cluster.png',
-    logoWidth: 493,
-    logoHeight: 657
-  }
-];
 
 export const metadata: Metadata = buildMetadata({
   title: 'About us',
@@ -166,7 +136,7 @@ export default function TeamPage() {
               We&apos;re active members of Latvia&apos;s health tech and business communities.
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-              {affiliations.map((affiliation) => (
+              {partners.map((affiliation) => (
                 <a
                   key={affiliation.name}
                   href={affiliation.href}

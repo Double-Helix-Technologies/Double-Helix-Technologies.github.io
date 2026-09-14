@@ -2,7 +2,10 @@ import type { Config } from 'tailwindcss';
 import plugin from 'tailwindcss/plugin';
 
 const config: Config = {
-  darkMode: ['class', 'class'],
+  // The second element is the selector for the dark class. It used to be the literal 'class',
+  // which made Tailwind emit `:is(class *)` for every dark: utility, a selector that matches
+  // nothing; the dark theme only worked through the CSS variables in globals.css.
+  darkMode: ['class', '.dark'],
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
+import LogoMarquee from './components/LogoMarquee';
 import ClientCases from './components/ClientCases';
 import Services from './components/Services';
 import HowWeWork from './components/HowWeWork';
@@ -29,7 +30,7 @@ export const metadata: Metadata = buildMetadata({
 
 /**
  * Section order follows the questions a decision-maker asks in turn: what do you do for me
- * (Hero), prove it (ClientCases, one page-wide slide per case), which of my problems do you solve
+ * (Hero), who trusts you (LogoMarquee), prove it (ClientCases, one page-wide slide per case), which of my problems do you solve
  * (Services), who is accountable (Leadership, placed between the two text-heavy sections to break
  * them up), how do you deliver (HowWeWork), who else says so (Testimonials), and how do I talk to
  * you (Contact). The funding disclosure and the certification status live in the footer, on every
@@ -49,6 +50,7 @@ export default function Home() {
         />
         <Navigation />
         <Hero />
+        <LogoMarquee />
         <ClientCases />
         <Services />
         <Leadership />
