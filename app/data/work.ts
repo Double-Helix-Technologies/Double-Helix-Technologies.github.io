@@ -63,7 +63,7 @@ export interface ClientSolutionQuote {
   text: string;
   /**
    * Name, role and organisation exactly as approved for publication. Titles are the ones held at
-   * the time of the project and say so, because they may have changed since.
+   * the time of the project (owner decision of 14 September 2026: shown without a note).
    */
   attribution: string;
   /**
@@ -234,7 +234,7 @@ export const clientSolutions: ClientSolution[] = [
     quote: {
       text:
         'Working with this team was a game-changer. They don’t just code, they dive deep into your business, challenge assumptions, and co-create solutions that are both innovative and intuitive. I was impressed about their ability to translate very complex business processes into elegant, user-friendly solutions.',
-      attribution: 'Annika Schott, Project Management Team Lead NGS, Eurofins Genomics Europe (title at the time of the project)',
+      attribution: 'Annika Schott, Project Management Team Lead NGS, Eurofins Genomics Europe',
       tagline: 'Working with this team was a game-changer.'
     }
   },
@@ -299,7 +299,7 @@ export const clientSolutions: ClientSolution[] = [
     quote: {
       text:
         'Working with this team has been an exceptional experience. They delivered our project management application for multiple laboratories with remarkable speed and precision, all while maintaining the highest standards of quality. What truly impressed us was their communication: always clear, responsive, and collaborative. They didn’t just build software, they took the time to understand our entire business ecosystem, not just the immediate requirements. Their approach went beyond solving surface-level problems, they actively sought out root causes and designed solutions that support both current operations and future growth. Their dedication, insight, and professionalism make them a standout partner for any organization looking to build impactful, scalable digital solutions.',
-      attribution: 'Andreas Feldl, Global Business Product Owner, Eurofins Genomics (title at the time of the project)',
+      attribution: 'Andreas Feldl, Global Business Product Owner, Eurofins Genomics',
       tagline: 'Working with this team has been an exceptional experience.'
     }
   },
@@ -357,8 +357,8 @@ export const clientSolutions: ClientSolution[] = [
       text:
         'Collaborating with Double Helix Technologies has greatly enhanced the efficiency and reliability of our IT integration projects. Their strong technical expertise and proactive, customer-focused approach enabled us to address potential issues early and implement solutions perfectly aligned with our user needs. The team’s ability to listen carefully and anticipate challenges ensured a smooth and efficient integration that supports our business objectives. Double Helix Technologies is a dependable partner for any organization seeking innovative and client-centered IT integration services.',
       // OWNER: Confirm Reynald Vidili's current title. A third-party org chart lists him as President of
-      // Eurofins Genomics; the title below is the one approved with the quote and is now dated.
-      attribution: 'Reynald Vidili, Sales Director, Eurofins Genomics France SAS (title at the time of the project)',
+      // Eurofins Genomics; the title below is the one approved with the quote.
+      attribution: 'Reynald Vidili, Sales Director, Eurofins Genomics France SAS',
       tagline: 'Collaborating with Double Helix Technologies has greatly enhanced the efficiency and reliability of our IT integration projects.'
     }
   },
@@ -486,7 +486,7 @@ export const clientSolutions: ClientSolution[] = [
     quote: {
       text:
         'The IT team consistently demonstrates a solution-oriented approach and a commitment to building sustainable structures that enhance our workflow. Their valuable interactions and willingness to share knowledge significantly impact our projects. Their hard work and dedication are truly commendable, and I look forward to seeing our collective continued success.',
-      attribution: 'Nadine Tappe, Head of Oligonucleotides, Eurofins Genomics Europe (title at the time of the project)',
+      attribution: 'Nadine Tappe, Head of Oligonucleotides, Eurofins Genomics Europe',
       tagline: 'The IT team consistently demonstrates a solution-oriented approach and a commitment to building sustainable structures that enhance our workflow.'
     }
   },

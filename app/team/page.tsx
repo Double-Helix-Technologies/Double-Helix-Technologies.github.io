@@ -15,7 +15,7 @@ import Link from 'next/link';
 import Footer from '@/app/components/Footer';
 import AvatarPlaceholder from '@/app/components/ui/avatarPlaceholder';
 import { leadershipTeam, TeamMember } from '@/app/data/team';
-import { buildMetadata } from '../lib/seo';
+import { buildMetadata, siteConfig } from '../lib/seo';
 
 type Affiliation = {
   name: string;
@@ -183,6 +183,31 @@ export default function TeamPage() {
                   />
                 </a>
               ))}
+            </div>
+
+            <h2 className="text-3xl md:text-4xl mt-16 mb-3">Company details</h2>
+            <div className="text-text-secondary space-y-1">
+              <p className="font-semibold text-text-primary">{siteConfig.legalName}</p>
+              <p>
+                Registered office: {siteConfig.address.streetAddress}, {siteConfig.address.addressLocality},{' '}
+                {siteConfig.address.postalCode}, Latvia
+              </p>
+              <p>Registration number 50203351951, Register of Enterprises of the Republic of Latvia</p>
+              <p>VAT LV50203351951</p>
+              <p>
+                <a href={`mailto:${siteConfig.email}`} className="hover:text-text-primary">
+                  {siteConfig.email}
+                </a>
+                {', '}
+                <a href="tel:+37129636428" className="hover:text-text-primary">
+                  +371 29636428
+                </a>
+              </p>
+              <p className="pt-2 text-sm">
+                <Link href="/notice/" className="underline underline-offset-4 hover:text-text-primary">
+                  Full legal notice
+                </Link>
+              </p>
             </div>
           </div>
         </section>

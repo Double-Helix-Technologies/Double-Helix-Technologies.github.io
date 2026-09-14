@@ -26,12 +26,12 @@ export const complianceAreas = [
   }
 ];
 
-/** Standalone compliance section. On the homepage the same statement is rendered inside Safeguards. */
+/** Compliance section, shown on the homepage directly after "How we work". */
 export default function ComplianceNotice() {
   return (
     <section className="section pt-10 pb-12" aria-labelledby="compliance-heading">
       <div className="container-tight">
-        <div className="mx-auto max-w-3xl border-t border-border/30 px-6 py-10 text-center">
+        <div className="mx-auto max-w-3xl border-t border-divider px-6 py-10 text-center">
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-text-secondary">
             Compliance
           </p>
@@ -45,7 +45,7 @@ export default function ComplianceNotice() {
           <div className="mt-8 flex flex-col items-center justify-center gap-4 md:flex-row md:gap-6">
             {complianceAreas.map(({ label, icon: Icon }) => (
               <div key={label} className="flex flex-col items-center gap-3 text-text-secondary">
-                <span className="flex h-12 w-12 items-center justify-center rounded-full border border-border/40 bg-background-alt/70">
+                <span className="flex h-12 w-12 items-center justify-center rounded-full border border-divider bg-background-alt">
                   <Icon className="h-5 w-5" aria-hidden="true" />
                 </span>
                 <span className="text-sm">{label}</span>

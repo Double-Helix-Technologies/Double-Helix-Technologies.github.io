@@ -24,7 +24,7 @@ export default function Services() {
               <p className="mt-3 leading-relaxed text-text-secondary">{service.description}</p>
               <Link
                 href={getServicePath(service)}
-                className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-text-primary underline-offset-4 hover:underline"
+                className="mt-4 inline-flex items-center gap-1 font-medium text-text-primary underline-offset-4 hover:underline"
               >
                 What is included
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />

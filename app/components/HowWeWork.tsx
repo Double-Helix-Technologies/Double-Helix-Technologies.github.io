@@ -34,7 +34,8 @@ export default function HowWeWork() {
     'Work closely with domain experts and end users',
     'Iterate with stakeholders to land the right solution',
     'Consolidate findings into an actionable plan',
-    'Deliver only what’s essential, no bloat'
+    'Deliver only what’s essential, no bloat',
+    'Show where regulatory risk sits; interpretation stays with your specialists'
   ];
 
   return (

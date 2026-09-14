@@ -1,58 +1,103 @@
-import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
-import { clientSolutions, getPublishedQuotes } from '@/app/data/work';
+'use client';
+
+import { useEffect, useState } from 'react';
+import type { CarouselApi } from './ui/carousel';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from './ui/carousel';
+import AvatarPlaceholder from '@/app/components/ui/avatarPlaceholder';
+import { Card, CardContent, CardFooter, CardHeader } from '@/app/components/ui/card';
+import { getPublishedQuotes } from '@/app/data/work';
+
+/** "Name, role, organisation" is shown as a name line and a role line. */
+function splitAttribution(attribution: string) {
+  const separator = attribution.indexOf(',');
+  if (separator === -1) return { name: attribution, role: '' };
+  return {
+    name: attribution.slice(0, separator).trim(),
+    role: attribution.slice(separator + 1).trim()
+  };
+}
 
 /**
- * Client quotes, read from the case studies in `app/data/work.ts` through `getPublishedQuotes()`
- * so text and attribution cannot drift from the /work/ pages. Plain quotes in two columns; every
- * quote is visible without interaction and links to the case it came from.
+ * Client quotes carousel. Text and attribution come from the case studies in `app/data/work.ts`
+ * through `getPublishedQuotes()`, so the homepage cannot drift from the /work/ pages.
  */
 export default function Testimonials() {
-  const quotes = getPublishedQuotes();
-  const clientNames = Array.from(new Set(quotes.map((quote) => quote.clientName).filter(Boolean)));
-  const singleClient = clientNames.length === 1 ? clientNames[0] : undefined;
-  const casesForClient = clientSolutions.filter((solution) => solution.client?.name === singleClient).length;
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+  const testimonials = getPublishedQuotes();
+
+  useEffect(() => {
+    if (!api) return;
+
+    setCurrent(api.selectedScrollSnap());
+
+    api.on('select', () => {
+      setCurrent(api.selectedScrollSnap());
+    });
+  }, [api]);
+
+  useEffect(() => {
+    if (!api) return;
+
+    const interval = setInterval(() => {
+      api.scrollNext();
+    }, 7000);
+    return () => clearInterval(interval);
+  }, [api]);
 
   return (
-    <section id="testimonials" className="section bg-background">
+    <section id="testimonials" className="section">
       <div className="container-tight">
-        <div className="mb-12 max-w-2xl">
-          <h2 className="section-heading mb-5">In our clients&apos; words</h2>
-          {singleClient ? (
-            <p className="text-lg text-text-secondary">
-              All {quotes.length} quotes are from {singleClient}, where we delivered {casesForClient} of our{' '}
-              {clientSolutions.length} published cases: depth with one client group, not {quotes.length} separate
-              customers.
-            </p>
-          ) : (
-            <p className="text-lg text-text-secondary">
-              Quotes are shown with the name, role and organisation approved for publication.
-            </p>
-          )}
+        <div className="text-center mb-3 md:mb-5">
+          <h2 className="section-heading mb-5">What clients say</h2>
         </div>
+        <div className="relative md:mt-12 pb-12 max-w-5xl">
+          <Carousel
+            setApi={setApi}
+            opts={{
+              align: 'center',
+              loop: true
+            }}
+            className="w-full"
+          >
+            <CarouselContent className="items-center align-top">
+              {testimonials.map((testimonial) => {
+                const { name, role } = splitAttribution(testimonial.attribution);
+                return (
+                  <CarouselItem key={testimonial.slug} className="py-2 md:py-4 -ml-1 md:mr-1 basis-full md:basis-6/12">
+                    <Card className="bg-gray-600/10 max-w-xl">
+                      <CardHeader className="text-xl font-semibold">
+                        <h4 className="text-2xl md:text-1xl font-semibold">{`"${testimonial.tagline}"`}</h4>
+                      </CardHeader>
+                      <CardContent className="text-md text-text-secondary">{testimonial.body}</CardContent>
+                      <CardFooter className="flex gap-4 text-left items-center">
+                        <AvatarPlaceholder>{name[0]}</AvatarPlaceholder>
+                        <div>
+                          <p className="font-medium text-text-primary max-w-48 text-md">{name}</p>
+                          {role && <p className="text-text-secondary text-xs">{role}</p>}
+                        </div>
+                      </CardFooter>
+                    </Card>
+                  </CarouselItem>
+                );
+              })}
+            </CarouselContent>
 
-        <ul className="grid gap-x-12 gap-y-10 md:grid-cols-2">
-          {quotes.map((quote) => (
-            <li key={quote.slug} className="border-t border-divider pt-6">
-              <figure>
-                <blockquote>
-                  <p className="text-xl font-semibold leading-snug text-text-primary">{`“${quote.tagline}”`}</p>
-                  {quote.body && <p className="mt-3 leading-relaxed text-text-secondary">{quote.body}</p>}
-                </blockquote>
-                <figcaption className="mt-4 text-sm text-text-secondary">
-                  <p>{quote.attribution}</p>
-                  <Link
-                    href={quote.casePath}
-                    className="mt-1 inline-flex items-center gap-1 text-text-primary underline-offset-4 hover:underline"
-                  >
-                    Read the case: {quote.caseTitle}
-                    <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
-                  </Link>
-                </figcaption>
-              </figure>
-            </li>
-          ))}
-        </ul>
+            <CarouselPrevious className="hidden lg:flex -left-12 hover:bg-background text-text-primary" />
+            <CarouselNext className="hidden lg:flex -right-12 hover:bg-background text-text-primary" />
+          </Carousel>
+
+          <div className="flex justify-center gap-2 mt-8">
+            {testimonials.map((testimonial, idx) => (
+              <button
+                key={testimonial.slug}
+                onClick={() => api?.scrollTo(idx)}
+                className={`h-2 cursor-pointer rounded-full transition-all ${current === idx ? 'w-4 bg-gray-300' : 'w-2 bg-border'}`}
+                aria-label={`Go to slide ${idx + 1}`}
+              />
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

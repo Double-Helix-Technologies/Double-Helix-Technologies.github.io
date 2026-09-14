@@ -3,11 +3,10 @@ import Navigation from './components/Navigation';
 import Hero from './components/Hero';
 import ClientProof from './components/ClientProof';
 import Services from './components/Services';
-import StartingEngagement from './components/StartingEngagement';
 import HowWeWork from './components/HowWeWork';
+import ComplianceNotice from './components/ComplianceNotice';
 import Leadership from './components/Leadership';
-import Safeguards from './components/Safeguards';
-import CaseStudiesGrid from './components/CaseStudiesGrid';
+import CaseStudiesSlider from './components/CaseStudiesSlider';
 import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
 import LiaaInfo from './components/LiaaInfo';
@@ -33,10 +32,11 @@ export const metadata: Metadata = buildMetadata({
 
 /**
  * Section order follows the questions a decision-maker asks in turn: what do you do for me
- * (Hero), prove it (ClientProof), which of my problems do you solve (Services), how do I start
- * with limited risk (StartingEngagement), how do you deliver and who is accountable (HowWeWork,
- * Leadership), what about our regulated context (Safeguards, with the ISO statement), who else
- * says so (CaseStudiesGrid, Testimonials), and how do I talk to you (Contact). Disclosures follow.
+ * (Hero), prove it (ClientProof), which of my problems do you solve (Services), how do you deliver
+ * and where do you stand on certification (HowWeWork, ComplianceNotice), who is accountable
+ * (Leadership), who else says so (CaseStudiesSlider, Testimonials), and how do I talk to you
+ * (Contact). Disclosures follow. The risk assessment is reachable from Services and its own page;
+ * the homepage does not steer the visitor to one engagement (owner decision, 14 September 2026).
  */
 export default function Home() {
   const offerCatalogSchema = buildOfferCatalogSchema();
@@ -52,11 +52,10 @@ export default function Home() {
         <Hero />
         <ClientProof />
         <Services />
-        <StartingEngagement />
         <HowWeWork />
+        <ComplianceNotice />
         <Leadership />
-        <Safeguards />
-        <CaseStudiesGrid />
+        <CaseStudiesSlider />
         <Testimonials />
         <Contact />
         <LiaaInfo />
