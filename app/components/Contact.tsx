@@ -9,7 +9,7 @@ import { siteConfig } from '@/app/lib/seo';
  */
 export default function Contact() {
   return (
-    <section id="contact" className="section bg-gradient-to-b from-background to-background-alt">
+    <section id="contact" className="section bg-background">
       <div className="container-tight">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="section-heading mb-5">When systems don&apos;t talk, we listen.</h2>
