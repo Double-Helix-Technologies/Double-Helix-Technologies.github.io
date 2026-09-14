@@ -1,22 +1,11 @@
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-import AvatarPlaceholder from '@/app/components/ui/avatarPlaceholder';
 import { clientSolutions, getPublishedQuotes } from '@/app/data/work';
-
-/** "Name, role, organisation (note)" is shown as a name line and a role line. */
-function splitAttribution(attribution: string) {
-  const separator = attribution.indexOf(',');
-  if (separator === -1) return { name: attribution, role: '' };
-  return {
-    name: attribution.slice(0, separator).trim(),
-    role: attribution.slice(separator + 1).trim()
-  };
-}
 
 /**
  * Client quotes, read from the case studies in `app/data/work.ts` through `getPublishedQuotes()`
- * so text and attribution cannot drift from the /work/ pages. Shown as a static grid rather than a
- * carousel: every quote is visible without interaction, and each links to the case it came from.
+ * so text and attribution cannot drift from the /work/ pages. Plain quotes in two columns; every
+ * quote is visible without interaction and links to the case it came from.
  */
 export default function Testimonials() {
   const quotes = getPublishedQuotes();
@@ -25,68 +14,44 @@ export default function Testimonials() {
   const casesForClient = clientSolutions.filter((solution) => solution.client?.name === singleClient).length;
 
   return (
-    <section id="testimonials" className="section">
+    <section id="testimonials" className="section bg-background">
       <div className="container-tight">
-        <div className="max-w-3xl mb-10 md:mb-14">
-          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-text-secondary">
-            Client evidence
-          </p>
+        <div className="mb-12 max-w-2xl">
           <h2 className="section-heading mb-5">In our clients&apos; words</h2>
           {singleClient ? (
-            <p className="text-text-secondary">
-              All {quotes.length} quotes below come from people at {singleClient}, where we delivered {casesForClient} of
-              the {clientSolutions.length} client cases published on this site. Read them as depth within one client
-              group rather than as {quotes.length} independent customers. Our other cases are published without the client&apos;s name;{' '}
-              <Link href="/work/" className="underline underline-offset-4 hover:text-text-primary">
-                references are available on request
-              </Link>
-              .
+            <p className="text-lg text-text-secondary">
+              All {quotes.length} quotes are from {singleClient}, where we delivered {casesForClient} of our{' '}
+              {clientSolutions.length} published cases: depth with one client group, not {quotes.length} separate
+              customers.
             </p>
           ) : (
-            <p className="text-text-secondary">
-              Quotes are shown with the name, role and organisation approved for publication.{' '}
-              <Link href="/work/" className="underline underline-offset-4 hover:text-text-primary">
-                References are available on request
-              </Link>
-              .
+            <p className="text-lg text-text-secondary">
+              Quotes are shown with the name, role and organisation approved for publication.
             </p>
           )}
         </div>
 
-        <ul className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 items-start">
-          {quotes.map((quote) => {
-            const { name, role } = splitAttribution(quote.attribution);
-            return (
-              <li key={quote.slug} className="h-full">
-                <figure className="flex h-full flex-col gap-5 rounded-2xl border border-border/30 bg-background-alt/60 p-6 md:p-8">
-                  <blockquote className="flex flex-col gap-4">
-                    <p className="text-xl font-semibold leading-snug text-text-primary md:text-2xl">
-                      {`“${quote.tagline}”`}
-                    </p>
-                    {quote.body && (
-                      <p className="text-text-secondary leading-relaxed">{quote.body}</p>
-                    )}
-                  </blockquote>
-                  <figcaption className="mt-auto flex flex-col gap-4 border-t border-border/30 pt-5">
-                    <div className="flex items-center gap-4">
-                      <AvatarPlaceholder aria-hidden="true">{name[0]}</AvatarPlaceholder>
-                      <div className="min-w-0">
-                        <p className="font-medium text-text-primary">{name}</p>
-                        {role && <p className="text-xs text-text-secondary">{role}</p>}
-                      </div>
-                    </div>
-                    <Link
-                      href={quote.casePath}
-                      className="inline-flex items-center gap-1 text-sm font-medium text-text-primary underline-offset-4 hover:underline"
-                    >
-                      Read the case: {quote.caseTitle}
-                      <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                    </Link>
-                  </figcaption>
-                </figure>
-              </li>
-            );
-          })}
+        <ul className="grid gap-x-12 gap-y-10 md:grid-cols-2">
+          {quotes.map((quote) => (
+            <li key={quote.slug} className="border-t border-divider pt-6">
+              <figure>
+                <blockquote>
+                  <p className="text-xl font-semibold leading-snug text-text-primary">{`“${quote.tagline}”`}</p>
+                  {quote.body && <p className="mt-3 leading-relaxed text-text-secondary">{quote.body}</p>}
+                </blockquote>
+                <figcaption className="mt-4 text-sm text-text-secondary">
+                  <p>{quote.attribution}</p>
+                  <Link
+                    href={quote.casePath}
+                    className="mt-1 inline-flex items-center gap-1 text-text-primary underline-offset-4 hover:underline"
+                  >
+                    Read the case: {quote.caseTitle}
+                    <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+                  </Link>
+                </figcaption>
+              </figure>
+            </li>
+          ))}
         </ul>
       </div>
     </section>

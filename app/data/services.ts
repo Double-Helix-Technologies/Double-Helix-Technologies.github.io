@@ -3,8 +3,6 @@ export interface Service {
   title: string;
   key: string;
   slug: string;
-  /** The buyer's problem in one line, shown above the title on the homepage services grid. */
-  problem?: string;
   description: string;
   items: string[];
   deliverables: string[];
@@ -27,7 +25,6 @@ export const servicesContents: Service[] = [
     title: 'Operational Workflow Risk Assessment',
     key: 'Discovery',
     slug: 'operational-workflow-risk-assessment',
-    problem: 'You cannot see where delays, rework and compliance risk enter the workflow',
     description: 'We trace how work moves across teams, systems, spreadsheets, and handoffs so you can see where delays, rework, and compliance risk are introduced. The result is a prioritized remediation plan for healthcare and life sciences operations before incidents, audit findings, or missed deadlines force action.',
     timeline: '2-4 months',
     items: [
@@ -63,7 +60,6 @@ export const servicesContents: Service[] = [
     title: 'System Integrations & Data Flow Optimization',
     key: 'Integration',
     slug: 'system-integrations',
-    problem: 'The same data is entered by hand in several systems',
     description: 'We connect disconnected systems so critical data moves automatically, accurately, and with clear ownership. That means fewer manual handoffs, less duplicate entry, and a dependable source of truth across regulated workflows.',
     timeline: '2-4 months',
     items: [
@@ -101,7 +97,6 @@ export const servicesContents: Service[] = [
     title: 'Custom Software Development for Life Sciences & Healthcare',
     key: 'Architecture',
     slug: 'custom-software-development',
-    problem: 'Off-the-shelf tools do not fit the regulated workflow',
     description: 'We design and improve custom software for regulated operational workflows that off-the-shelf tools cannot support well. We identify architectural risk, delivery blockers, and integration constraints, then define practical next steps for life sciences and healthcare teams.',
     timeline: '2-4 months',
     items: [
@@ -138,7 +133,6 @@ export const servicesContents: Service[] = [
     title: 'Observability & Workflow Monitoring',
     key: 'System',
     slug: 'observability-workflow-monitoring',
-    problem: 'Users notice failures before IT does',
     description: 'We help teams see how workflows, integrations, and operational systems behave in real life. That includes the telemetry, dashboards, and alerting needed to spot failures early, trace issues across handoffs, and keep critical operational flows visible.',
     timeline: '1-2 months',
     items: [
@@ -174,7 +168,6 @@ export const servicesContents: Service[] = [
     title: 'Custom AI Solutions for Life Sciences & Healthcare',
     key: 'AI',
     slug: 'ai-adoption-solutions',
-    problem: 'AI is on the agenda, but the workflow and data are not ready for it',
     description: 'We help teams identify, shape, and govern practical AI solutions for regulated workflows. That includes use-case discovery, readiness assessment, human review controls, and rollout planning for life sciences and healthcare environments.',
     timeline: '1-2 months',
     items: [
@@ -213,7 +206,6 @@ export const servicesContents: Service[] = [
     title: 'Security, Compliance & AI Governance Readiness',
     key: 'Security',
     slug: 'ai-governance-compliance',
-    problem: 'An audit is coming and the controls have not been reviewed end to end',
     description: 'We assess the controls that protect systems, integrations, data flows, and AI-enabled processes. You get a prioritized plan to reduce operational risk, support audit readiness, and strengthen day-to-day governance in regulated environments.',
     timeline: '1-2 months',
     items: [

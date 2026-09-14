@@ -28,6 +28,9 @@ const config: Config = {
   			background: 'var(--background)',
   			'background-alt': 'var(--background-alt)',
   			border: 'var(--border)',
+  			// Opacity modifiers (border-border/40) do not work on var() colours in Tailwind 3 and silently
+  			// fall back to the preflight default. Use this token for hairline rules instead.
+  			divider: 'var(--divider)',
   			'accent-primary': 'var(--accent-primary)',
 				'accent-pink': 'var(--accent-comfort-pink)',
 				'accent-teal': 'var(--accent-science-teal)',

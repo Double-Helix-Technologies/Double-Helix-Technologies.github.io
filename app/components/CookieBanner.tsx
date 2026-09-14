@@ -93,7 +93,7 @@ export default function CookieBanner() {
             <div className="min-w-0 flex-1">
               <p className="text-sm font-medium leading-snug text-text-primary sm:text-base sm:leading-relaxed">
                 {BANNER_COPY.primaryMessage}{' '}
-                <span className="font-normal text-text-secondary">{BANNER_COPY.secondaryMessage}</span>{' '}
+                <span className="hidden font-normal text-text-secondary sm:inline">{BANNER_COPY.secondaryMessage}</span>{' '}
                 <a
                   href={BANNER_COPY.privacyPolicyUrl}
                   className="rounded text-text-secondary underline transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"

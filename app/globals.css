@@ -17,6 +17,7 @@
   --accent-digital-blue: #3382EF;
   --accent-novel-lilac: #886FF7;
   --accent-comfort-pink: #B96BFF;
+  --divider: rgba(90, 95, 115, 0.22); /* thin rules between list items and stats */
 }
 
 .dark {
@@ -29,6 +30,7 @@
   --border: #847d9e;        /* Slate Grey */
   --accent-primary: #5A5F73; /* Comet Grey */
   --accent-green: #976ffb;  /* Emerald Green */
+  --divider: rgba(214, 221, 255, 0.18);
 }
 
 @layer base {
