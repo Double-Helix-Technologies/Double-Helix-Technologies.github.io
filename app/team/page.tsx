@@ -16,6 +16,7 @@ import Footer from '@/app/components/Footer';
 import AvatarPlaceholder from '@/app/components/ui/avatarPlaceholder';
 import { leadershipTeam, TeamMember } from '@/app/data/team';
 import { partners } from '@/app/data/partners';
+import Wordmark from '@/app/components/Wordmark';
 import { buildMetadata, siteConfig } from '../lib/seo';
 import { complianceStatement } from '@/app/components/ComplianceNotice';
 
@@ -145,13 +146,16 @@ export default function TeamPage() {
                   aria-label={affiliation.name}
                   className="flex h-28 items-center justify-center rounded-xl border border-[var(--border)]/20 bg-white p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
                 >
-                  <Image
-                    src={affiliation.logo}
-                    alt={affiliation.name}
-                    width={affiliation.logoWidth}
-                    height={affiliation.logoHeight}
-                    className="h-full w-full object-contain"
-                  />
+                  {affiliation.logo && (
+                    <Image
+                      src={affiliation.logo}
+                      alt={affiliation.wordmark ? '' : affiliation.name}
+                      width={affiliation.logoWidth ?? 160}
+                      height={affiliation.logoHeight ?? 48}
+                      className={affiliation.wordmark ? 'h-10 w-auto object-contain' : 'h-full w-full object-contain'}
+                    />
+                  )}
+                  {affiliation.wordmark && <Wordmark segments={affiliation.wordmark} tone="plain" className="ml-3 text-2xl" />}
                 </a>
               ))}
             </div>

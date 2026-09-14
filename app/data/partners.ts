@@ -1,14 +1,24 @@
+/** One piece of a typeset wordmark. `accent` takes the brand-adjacent teal, `sup` is set small and raised. */
+export interface WordmarkSegment {
+  text: string;
+  accent?: boolean;
+  sup?: boolean;
+}
+
 /** A membership or partner organisation whose logo the company shows. */
 export interface Partner {
   name: string;
   href: string;
-  logo: string;
-  logoWidth: number;
-  logoHeight: number;
+  /** Logo image; omitted when the organisation is shown by its typeset wordmark alone. */
+  logo?: string;
+  logoWidth?: number;
+  logoHeight?: number;
+  /** Typeset next to the mark (or alone) in the site font when the organisation's logo is lettering. */
+  wordmark?: WordmarkSegment[];
 }
 
 /**
- * Memberships shown on the About page and in the homepage logo marquee.
+ * Memberships and partners shown on the About page and in the homepage logo marquee.
  * OWNER: the Digital Health Association Latvia and the Latvian American Chamber of Commerce could
  * not be confirmed from the organisations' own member listings (credibility review, 14 September
  * 2026). Keep them only while membership is current.
@@ -34,5 +44,24 @@ export const partners: Partner[] = [
     logo: '/images/partners/latvian-it-cluster.png',
     logoWidth: 493,
     logoHeight: 657
+  },
+  {
+    // Added at the owner's request on 14 September 2026 (same leadership as customer Krafthub).
+    // OWNER: the mark is redrawn from a screenshot and the name is typeset in the site font;
+    // replace with Veractis's original asset when available, and confirm they agree to being shown.
+    name: 'Veractis.io',
+    href: 'https://veractis.io',
+    logo: '/images/partners/veractis-mark.svg',
+    logoWidth: 100,
+    logoHeight: 100,
+    wordmark: [{ text: 'Veractis.io' }]
+  },
+  {
+    // Added at the owner's request on 14 September 2026 (same leadership as customer Krafthub).
+    // OWNER: the lettering is typeset in the site font from a screenshot; replace with the original
+    // asset when available, and confirm they agree to being shown.
+    name: 'helix.tech.bio',
+    href: 'https://www.helixtech.bio/en',
+    wordmark: [{ text: 'helix' }, { text: '.tech', accent: true }, { text: '.bio', sup: true }]
   }
 ];

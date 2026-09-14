@@ -3,8 +3,9 @@
 import Image from 'next/image';
 import { useReducedMotion } from 'framer-motion';
 import { Marquee, MarqueeContent, MarqueeFade, MarqueeItem } from './ui/marquee';
+import Wordmark from './Wordmark';
 import { customers } from '@/app/data/work';
-import { partners } from '@/app/data/partners';
+import { partners, type Partner } from '@/app/data/partners';
 
 /**
  * Narrow band under the hero: customer and partner logos scrolling right to left, each linking to
@@ -16,7 +17,7 @@ import { partners } from '@/app/data/partners';
  * Biotech, Mainos and Krafthub have each approved publication of their logo. Add a customer here
  * only with the same confirmation; the list is `customers` in app/data/work.ts.
  */
-const logos = [...customers, ...partners];
+const logos: Partner[] = [...customers, ...partners];
 
 export default function LogoMarquee() {
   const reduceMotion = useReducedMotion();
@@ -38,15 +39,20 @@ export default function LogoMarquee() {
                 rel="noopener noreferrer"
                 aria-label={item.name}
                 title={item.name}
-                className="flex h-12 w-32 items-center justify-center sm:w-40"
+                className="group flex h-12 min-w-32 items-center justify-center gap-2 sm:min-w-40"
               >
-                <Image
-                  src={item.logo}
-                  alt={item.name}
-                  width={item.logoWidth}
-                  height={item.logoHeight}
-                  className="h-auto max-h-full w-auto max-w-full object-contain opacity-80 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0 dark:brightness-0 dark:invert dark:hover:brightness-0 dark:hover:invert"
-                />
+                {item.logo && (
+                  <Image
+                    src={item.logo}
+                    alt={item.wordmark ? '' : item.name}
+                    width={item.logoWidth ?? 160}
+                    height={item.logoHeight ?? 48}
+                    className={`h-auto w-auto object-contain opacity-80 grayscale transition duration-300 group-hover:opacity-100 group-hover:grayscale-0 dark:brightness-0 dark:invert dark:group-hover:brightness-0 dark:group-hover:invert ${
+                      item.wordmark ? 'max-h-8 max-w-8' : 'max-h-full max-w-32 sm:max-w-40'
+                    }`}
+                  />
+                )}
+                {item.wordmark && <Wordmark segments={item.wordmark} tone="muted" className="text-xl opacity-80 group-hover:opacity-100" />}
               </a>
             </MarqueeItem>
           ))}
