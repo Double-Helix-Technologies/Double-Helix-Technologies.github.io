@@ -34,13 +34,6 @@ const affiliations: Affiliation[] = [
     logoHeight: 38
   },
   {
-    name: 'Latvian Startup Association "Startin.LV"',
-    href: 'https://startin.lv/',
-    logo: '/images/partners/startin-lv.png',
-    logoWidth: 263,
-    logoHeight: 138
-  },
-  {
     name: 'Latvian American Chamber of Commerce',
     href: 'https://latvianchamber.com/',
     logo: '/images/partners/latvian-american-chamber.svg',
@@ -171,7 +164,7 @@ export default function TeamPage() {
             <p className="text-text-secondary mb-8">
               We&apos;re active members of Latvia&apos;s health tech and business communities.
             </p>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
               {affiliations.map((affiliation) => (
                 <a
                   key={affiliation.name}
