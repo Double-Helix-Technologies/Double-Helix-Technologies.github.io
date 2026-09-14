@@ -100,10 +100,10 @@ export default function ClientCases() {
 
                   {solution.quote && (
                     <figure className="max-w-3xl">
-                      <blockquote className="text-xl leading-relaxed text-text-primary md:text-2xl">
+                      <blockquote className="text-base leading-relaxed text-text-primary md:text-lg">
                         {`“${solution.quote.text}”`}
                       </blockquote>
-                      <figcaption className="mt-4 text-sm text-text-secondary">{solution.quote.attribution}</figcaption>
+                      <figcaption className="mt-3 text-sm text-text-secondary">{solution.quote.attribution}</figcaption>
                     </figure>
                   )}
 
