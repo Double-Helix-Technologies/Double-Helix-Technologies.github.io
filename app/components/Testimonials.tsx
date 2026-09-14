@@ -46,7 +46,7 @@ export default function Testimonials() {
   }, [api]);
 
   return (
-    <section id="testimonials" className="section">
+    <section id="testimonials" className="section bg-background-alt">
       <div className="container-tight">
         <div className="text-center mb-3 md:mb-5">
           <h2 className="section-heading mb-5">What clients say</h2>
