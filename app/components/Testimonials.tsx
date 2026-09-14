@@ -1,122 +1,93 @@
-'use client';
-
-import { useEffect, useState } from 'react';
-import type { CarouselApi } from './ui/carousel';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from './ui/carousel';
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 import AvatarPlaceholder from '@/app/components/ui/avatarPlaceholder';
-import { Card, CardContent, CardFooter, CardHeader } from '@/app/components/ui/card';
+import { clientSolutions, getPublishedQuotes } from '@/app/data/work';
 
+/** "Name, role, organisation (note)" is shown as a name line and a role line. */
+function splitAttribution(attribution: string) {
+  const separator = attribution.indexOf(',');
+  if (separator === -1) return { name: attribution, role: '' };
+  return {
+    name: attribution.slice(0, separator).trim(),
+    role: attribution.slice(separator + 1).trim()
+  };
+}
+
+/**
+ * Client quotes, read from the case studies in `app/data/work.ts` through `getPublishedQuotes()`
+ * so text and attribution cannot drift from the /work/ pages. Shown as a static grid rather than a
+ * carousel: every quote is visible without interaction, and each links to the case it came from.
+ */
 export default function Testimonials() {
-  const [api, setApi] = useState<CarouselApi>();
-  const [current, setCurrent] = useState(0);
-
-  const testimonials = [
-    {
-      tagline: 'Collaborating with Double Helix Technologies has greatly enhanced the efficiency and reliability of our IT integration projects.',
-      quote: 'Their strong technical expertise and proactive, customer-focused approach enabled us to address potential issues early and implement solutions perfectly aligned with our user needs. The team’s ability to listen carefully and anticipate challenges ensured a smooth and efficient integration that supports our business objectives. Double Helix Technologies is a dependable partner for any organization seeking innovative and client-centered IT integration services.',
-      author: 'Reynald Vidili',
-      position: 'Sales Director, Eurofins Genomics France SAS'
-    },
-    {
-      tagline: 'Working with this team was a game-changer.',
-      quote: 'They don’t just code, they dive deep into your business, challenge assumptions, and co-create solutions that are both innovative and intuitive. I was impressed about their ability to translate very complex business processes into elegant, user-friendly solutions.',
-      author: 'Annika Schott',
-      position: 'Eurofins Genomics Europe Project Management Team Lead NGS'
-    },
-    {
-      tagline: 'The IT team consistently demonstrates a solution-oriented approach and a commitment to building sustainable structures that enhance our workflow.',
-      quote: 'Their valuable interactions and willingness to share knowledge significantly impact our projects. Their hard work and dedication are truly commendable, and I look forward to seeing our collective continued success.',
-      author: 'Nadine Tappe',
-      position: 'Eurofins Genomics Europe Head of Oligonucleotides'
-    },
-    {
-      tagline: 'Working with this team has been an exceptional experience.',
-      quote: 'They delivered our project management application for multiple laboratories with remarkable speed and precision, all while maintaining the highest standards of quality. What truly impressed us was their communication: always clear, responsive, and collaborative. They didn’t just build software, they took the time to understand our entire business ecosystem, not just the immediate requirements. Their approach went beyond solving surface-level problems, they actively sought out root causes and designed solutions that support both current operations and future growth. Their dedication, insight, and professionalism make them a standout partner for any organization looking to build impactful, scalable digital solutions.',
-      author: 'Andreas Feldl',
-      position: 'Eurofins Genomics Europe Global Business Product Owner'
-    }
-  ];
-
-  useEffect(() => {
-    if (!api) return;
-
-    setCurrent(api.selectedScrollSnap());
-
-    api.on('select', () => {
-      setCurrent(api.selectedScrollSnap());
-    });
-  }, [api]);
-
-  useEffect(() => {
-    if (!api) return;
-
-    const interval = setInterval(() => {
-      api.scrollNext();
-    }, 7000);
-    return () => clearInterval(interval);
-  }, [api]);
+  const quotes = getPublishedQuotes();
+  const clientNames = Array.from(new Set(quotes.map((quote) => quote.clientName).filter(Boolean)));
+  const singleClient = clientNames.length === 1 ? clientNames[0] : undefined;
+  const casesForClient = clientSolutions.filter((solution) => solution.client?.name === singleClient).length;
 
   return (
     <section id="testimonials" className="section">
       <div className="container-tight">
-        <div className="text-center mb-3 md:mb-5">
-          <h2 className="section-heading mb-5">What clients say</h2>
-          <p className="text-text-secondary max-w-2xl mx-auto">
-            Don't just take our word for it. Hear what our clients have to say about their experience working with us.
+        <div className="max-w-3xl mb-10 md:mb-14">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-text-secondary">
+            Client evidence
           </p>
+          <h2 className="section-heading mb-5">In our clients&apos; words</h2>
+          {singleClient ? (
+            <p className="text-text-secondary">
+              All {quotes.length} quotes below come from people at {singleClient}, where we delivered {casesForClient} of
+              the {clientSolutions.length} client cases published on this site. Read them as depth within one client
+              group rather than as {quotes.length} independent customers. Our other cases are published without the client&apos;s name;{' '}
+              <Link href="/work/" className="underline underline-offset-4 hover:text-text-primary">
+                references are available on request
+              </Link>
+              .
+            </p>
+          ) : (
+            <p className="text-text-secondary">
+              Quotes are shown with the name, role and organisation approved for publication.{' '}
+              <Link href="/work/" className="underline underline-offset-4 hover:text-text-primary">
+                References are available on request
+              </Link>
+              .
+            </p>
+          )}
         </div>
-        <div className="relative md:mt-12 pb-12 max-w-5xl">
-          <Carousel
-            setApi={setApi}
-            opts={{
-              align: 'center',
-              loop: true
-            }}
-            className="w-full"
-          >
-            <CarouselContent className="items-center align-top">
-              {testimonials.map((testimonial) => (
-                <CarouselItem key={testimonial.author} className="py-2 md:py-4 -ml-1 md:mr-1 basis-full md:basis-6/12">
-                  <Card className="bg-gray-600/10 max-w-xl">
-                    <CardHeader className="text-xl font-semibold">
-                      <h4 className="text-2xl md:text-1xl font-semibold">{`"${testimonial.tagline}"`}</h4>
-                    </CardHeader>
-                    <CardContent className="text-md text-text-secondary">
-                      {testimonial.quote}
-                    </CardContent>
-                    <CardFooter className="flex gap-4 text-left items-center">
-                      <AvatarPlaceholder>
-                        {testimonial.author[0]}
-                      </AvatarPlaceholder>
-                      <div>
-                        <p className="font-medium text-text-primary max-w-48 text-md">{testimonial.author}</p>
-                        <p className="text-text-secondary text-xs">{testimonial.position}</p>
+
+        <ul className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 items-start">
+          {quotes.map((quote) => {
+            const { name, role } = splitAttribution(quote.attribution);
+            return (
+              <li key={quote.slug} className="h-full">
+                <figure className="flex h-full flex-col gap-5 rounded-2xl border border-border/30 bg-background-alt/60 p-6 md:p-8">
+                  <blockquote className="flex flex-col gap-4">
+                    <p className="text-xl font-semibold leading-snug text-text-primary md:text-2xl">
+                      {`“${quote.tagline}”`}
+                    </p>
+                    {quote.body && (
+                      <p className="text-text-secondary leading-relaxed">{quote.body}</p>
+                    )}
+                  </blockquote>
+                  <figcaption className="mt-auto flex flex-col gap-4 border-t border-border/30 pt-5">
+                    <div className="flex items-center gap-4">
+                      <AvatarPlaceholder aria-hidden="true">{name[0]}</AvatarPlaceholder>
+                      <div className="min-w-0">
+                        <p className="font-medium text-text-primary">{name}</p>
+                        {role && <p className="text-xs text-text-secondary">{role}</p>}
                       </div>
-                    </CardFooter>
-                  </Card>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-
-            <CarouselPrevious
-              className="hidden lg:flex -left-12 hover:bg-background text-text-primary"/>
-            <CarouselNext
-              className="hidden lg:flex -right-12 hover:bg-background text-text-primary"/>
-          </Carousel>
-
-          <div className="flex justify-center gap-2 mt-8">
-            {testimonials.map((_, idx) => (
-              <button
-                key={_.tagline}
-                onClick={() => api?.scrollTo(idx)}
-                className={`h-2 cursor-pointer rounded-full transition-all ${
-                  current === idx ? 'w-4 bg-gray-300' : 'w-2 bg-border'
-                }`}
-                aria-label={`Go to slide ${idx + 1}`}
-              />
-            ))}
-          </div>
-        </div>
+                    </div>
+                    <Link
+                      href={quote.casePath}
+                      className="inline-flex items-center gap-1 text-sm font-medium text-text-primary underline-offset-4 hover:underline"
+                    >
+                      Read the case: {quote.caseTitle}
+                      <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                    </Link>
+                  </figcaption>
+                </figure>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </section>
   );

@@ -59,9 +59,18 @@ export interface HighlightStat {
 }
 
 export interface ClientSolutionQuote {
+  /** Full quote exactly as approved for publication. Never edit; it is reconciled with the sales deck. */
   text: string;
-  /** Name, role and organisation exactly as approved for publication. */
+  /**
+   * Name, role and organisation exactly as approved for publication. Titles are the ones held at
+   * the time of the project and say so, because they may have changed since.
+   */
   attribution: string;
+  /**
+   * Optional pull-quote for the homepage testimonials: the opening sentence of `text`, shown as the
+   * card heading with the remainder of `text` as the body. Must be a verbatim prefix of `text`.
+   */
+  tagline?: string;
 }
 
 /** Named client. Only set when the client has approved being named on this case study. */
@@ -225,7 +234,8 @@ export const clientSolutions: ClientSolution[] = [
     quote: {
       text:
         'Working with this team was a game-changer. They don’t just code, they dive deep into your business, challenge assumptions, and co-create solutions that are both innovative and intuitive. I was impressed about their ability to translate very complex business processes into elegant, user-friendly solutions.',
-      attribution: 'Annika Schott, Project Management Team Lead NGS, Eurofins Genomics Europe'
+      attribution: 'Annika Schott, Project Management Team Lead NGS, Eurofins Genomics Europe (title at the time of the project)',
+      tagline: 'Working with this team was a game-changer.'
     }
   },
   {
@@ -289,7 +299,8 @@ export const clientSolutions: ClientSolution[] = [
     quote: {
       text:
         'Working with this team has been an exceptional experience. They delivered our project management application for multiple laboratories with remarkable speed and precision, all while maintaining the highest standards of quality. What truly impressed us was their communication: always clear, responsive, and collaborative. They didn’t just build software, they took the time to understand our entire business ecosystem, not just the immediate requirements. Their approach went beyond solving surface-level problems, they actively sought out root causes and designed solutions that support both current operations and future growth. Their dedication, insight, and professionalism make them a standout partner for any organization looking to build impactful, scalable digital solutions.',
-      attribution: 'Andreas Feldl, Global Business Product Owner, Eurofins Genomics'
+      attribution: 'Andreas Feldl, Global Business Product Owner, Eurofins Genomics (title at the time of the project)',
+      tagline: 'Working with this team has been an exceptional experience.'
     }
   },
   {
@@ -345,7 +356,10 @@ export const clientSolutions: ClientSolution[] = [
     quote: {
       text:
         'Collaborating with Double Helix Technologies has greatly enhanced the efficiency and reliability of our IT integration projects. Their strong technical expertise and proactive, customer-focused approach enabled us to address potential issues early and implement solutions perfectly aligned with our user needs. The team’s ability to listen carefully and anticipate challenges ensured a smooth and efficient integration that supports our business objectives. Double Helix Technologies is a dependable partner for any organization seeking innovative and client-centered IT integration services.',
-      attribution: 'Reynald Vidili, Sales Director, Eurofins Genomics France SAS'
+      // OWNER: Confirm Reynald Vidili's current title. A third-party org chart lists him as President of
+      // Eurofins Genomics; the title below is the one approved with the quote and is now dated.
+      attribution: 'Reynald Vidili, Sales Director, Eurofins Genomics France SAS (title at the time of the project)',
+      tagline: 'Collaborating with Double Helix Technologies has greatly enhanced the efficiency and reliability of our IT integration projects.'
     }
   },
   {
@@ -472,7 +486,8 @@ export const clientSolutions: ClientSolution[] = [
     quote: {
       text:
         'The IT team consistently demonstrates a solution-oriented approach and a commitment to building sustainable structures that enhance our workflow. Their valuable interactions and willingness to share knowledge significantly impact our projects. Their hard work and dedication are truly commendable, and I look forward to seeing our collective continued success.',
-      attribution: 'Nadine Tappe, Head of Oligonucleotides, Eurofins Genomics Europe'
+      attribution: 'Nadine Tappe, Head of Oligonucleotides, Eurofins Genomics Europe (title at the time of the project)',
+      tagline: 'The IT team consistently demonstrates a solution-oriented approach and a commitment to building sustainable structures that enhance our workflow.'
     }
   },
   {
@@ -681,6 +696,51 @@ export function getClientSolutionBySlug(slug: string) {
 
 export function getProductBySlug(slug: string) {
   return products.find((product) => product.slug === slug);
+}
+
+/**
+ * A client quote ready for the homepage testimonials. `body` is `text` with the `tagline` removed
+ * when the tagline is its opening sentence, so the two are never shown twice.
+ */
+export interface PublishedQuote {
+  slug: string;
+  caseTitle: string;
+  casePath: string;
+  /** Client name when the client may be named; undefined for anonymous cases. */
+  clientName?: string;
+  text: string;
+  tagline?: string;
+  body: string;
+  attribution: string;
+}
+
+/**
+ * Quotes for the homepage, read from the case studies so text and attribution cannot drift from
+ * the /work/ pages. Only quotes with a `tagline` are returned; that is the homepage presentation
+ * (heading plus body). Quotes without one stay on their case study page.
+ */
+export function getPublishedQuotes(): PublishedQuote[] {
+  return clientSolutions.flatMap((solution) => {
+    const quote = solution.quote;
+    if (!quote?.tagline) return [];
+
+    const body = quote.text.startsWith(quote.tagline)
+      ? quote.text.slice(quote.tagline.length).trim()
+      : quote.text;
+
+    return [
+      {
+        slug: solution.slug,
+        caseTitle: solution.title,
+        casePath: getClientSolutionPath(solution),
+        clientName: solution.client?.name,
+        text: quote.text,
+        tagline: quote.tagline,
+        body,
+        attribution: quote.attribution
+      }
+    ];
+  });
 }
 
 /**
