@@ -1,56 +1,66 @@
-'use client';
-
-import { Button } from '@/app/components/ui/button';
 import Link from 'next/link';
-import React from 'react';
+import { ArrowRight } from 'lucide-react';
+import { Button } from '@/app/components/ui/button';
+import { siteConfig } from '@/app/lib/seo';
 
+/**
+ * Invitation to discuss a relevant problem. The call description matches the booking page
+ * (see `siteConfig.booking`). Company details repeat only confirmed facts.
+ */
 export default function Contact() {
   return (
     <section id="contact" className="section bg-gradient-to-b from-background to-background-alt">
       <div className="container-tight">
         <div className="mb-8 text-center">
-          <h2 className="section-heading mb-5">When systems don’t talk, we listen.</h2>
-          <p className="text-text-secondary max-w-2xl mx-auto">
-            Tell us what’s broken, missing or worth building. We’ll suggest a way forward.
+          <h2 className="section-heading mb-5">When systems don&apos;t talk, we listen.</h2>
+          <p className="mx-auto max-w-2xl text-text-secondary">
+            Tell us which workflow, integration or system is costing your team time. We will ask about it and suggest
+            a sensible first step, whether that is the assessment, a scoped project, or nothing yet.
           </p>
         </div>
-        <div className="max-w-3xl mx-auto">
-          <div className="bp-8 md:pb-10 rounded-2xl text-center">
-            <Button variant="gradient">
-              <a
-                href="https://cal.com/aleksandrs-gusevs/let-s-meet"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Book a free consultation
+        <div className="mx-auto max-w-3xl">
+          <div className="rounded-2xl text-center md:pb-10">
+            <Button variant="cta" className="h-11 px-6 text-base" asChild>
+              <a href={siteConfig.booking.url} target="_blank" rel="noreferrer">
+                Book a consultation
+                <ArrowRight aria-hidden="true" />
               </a>
             </Button>
-            <p className="mt-2 text-text-secondary text-xs">
-              Free consultation (15–30 min)
+            <p className="mt-3 text-sm text-text-secondary">
+              Free introductory call, {siteConfig.booking.durationLabel} on {siteConfig.booking.channel}. You choose
+              the length when booking.
             </p>
-            <p className="mt-2 text-text-secondary text-xs">
-              Prefer typing to talking? Email us:{' '}
-              <a href="mailto:aleksandrs.gusevs@doublehelix.dev" className="underline">
+            <p className="mt-2 text-sm text-text-secondary">
+              Prefer typing to talking? Email{' '}
+              <a href="mailto:aleksandrs.gusevs@doublehelix.dev" className="underline underline-offset-4">
                 aleksandrs.gusevs@doublehelix.dev
               </a>
+              . For procurement or RFP questions, write to{' '}
+              <a href={`mailto:${siteConfig.email}`} className="underline underline-offset-4">
+                {siteConfig.email}
+              </a>
+              .
             </p>
           </div>
-          <div className="mt-8 pt-8 border-t border-border text-center text-text-secondary text-sm">
-            <p className="font-semibold text-text-primary">Double Helix Technologies SIA</p>
-            <p>Bauskas iela 203 - 35, Riga, Latvia</p>
+          <div className="mt-8 border-t border-border pt-8 text-center text-sm text-text-secondary">
+            <p className="font-semibold text-text-primary">{siteConfig.legalName}</p>
             <p>
-              <a href="mailto:hello@doublehelix.dev" className="hover:text-primary transition-colors">
-                hello@doublehelix.dev
+              {siteConfig.address.streetAddress}, {siteConfig.address.addressLocality}, {siteConfig.address.postalCode},
+              Latvia
+            </p>
+            <p>
+              <a href={`mailto:${siteConfig.email}`} className="transition-colors hover:text-primary">
+                {siteConfig.email}
               </a>
             </p>
             <p>
-              <a href="tel:+37129636428" className="hover:text-primary transition-colors">
+              <a href="tel:+37129636428" className="transition-colors hover:text-primary">
                 +371 29636428
               </a>
             </p>
-            <p>VAT: LV50203351951</p>
+            <p>Registration number 50203351951, VAT LV50203351951</p>
             <p className="mt-2 text-xs">
-              <Link href="/notice" className="underline hover:text-primary transition-colors">
+              <Link href="/notice/" className="underline transition-colors hover:text-primary">
                 Full legal notice
               </Link>
             </p>

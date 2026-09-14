@@ -3,7 +3,7 @@ import React from 'react';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import { ThemeProvider } from '../components/ThemeProvider';
-import { buildMetadata } from '../lib/seo';
+import { buildMetadata, siteConfig } from '../lib/seo';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Legal Notice',
@@ -15,7 +15,7 @@ export const metadata: Metadata = buildMetadata({
 /*
  * Company facts below were confirmed against the Register of Enterprises of the Republic of
  * Latvia (Lursoft) and the LIAA company profile on 14 September 2026: legal form and name,
- * registration number, register, VAT number.
+ * registration number, register, VAT number, registered office (confirmed by the owner the same day).
  */
 const Notice = () => {
   return (
@@ -40,18 +40,12 @@ const Notice = () => {
                 Register: Register of Enterprises of the Republic of Latvia (Latvijas Republikas Uzņēmumu reģistrs)
               </p>
 
-              <h2 className="text-2xl font-semibold text-text-primary mt-8 mb-4">Address</h2>
-              {/*
-                OWNER: Confirm which address is the registered office. The company register shows
-                Lastādijas iela 12 k-3, Riga, LV-1050; this site, app/lib/seo.ts (siteConfig.address)
-                and app/components/Contact.tsx show Bauskas iela 203-35, Riga (LV-1076 on business.gov.lv).
-                The existing published address is kept unchanged here until confirmed. Once confirmed,
-                update this notice, siteConfig.address in app/lib/seo.ts and Contact.tsx together so
-                all three carry the same address with postal code.
-              */}
+              <h2 className="text-2xl font-semibold text-text-primary mt-8 mb-4">Registered office</h2>
+              {/* Confirmed by the owner on 14 September 2026; matches siteConfig.address in app/lib/seo.ts. */}
               <p className="text-text-secondary mb-6">
-                Bauskas iela 203 - 35<br />
-                Riga, Latvia
+                {siteConfig.address.streetAddress}<br />
+                {siteConfig.address.addressLocality}, {siteConfig.address.postalCode}<br />
+                Latvia
               </p>
 
               {/*

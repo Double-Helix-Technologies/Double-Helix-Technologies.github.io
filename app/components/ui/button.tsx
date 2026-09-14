@@ -22,6 +22,8 @@ const buttonVariants = cva(
           "bg-background-alt shadow-sm text-primary-foreground hover:text-white hover:bg-gray-600/80 duration-0",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         gradient: "bg-gray-700/50 text-white hover:text-white hover:bg-gradient-to-tr from-accent-pink to-accent-blue",
+        // Primary call to action: visible in both themes without hover (the gradient variant only colours on hover).
+        cta: "bg-gradient-to-tr from-accent-pink to-accent-blue text-white shadow-sm hover:brightness-110 focus-visible:ring-2 focus-visible:ring-accent-lilac focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         link: "text-text-primary hover:text-primary",
       },
       size: {

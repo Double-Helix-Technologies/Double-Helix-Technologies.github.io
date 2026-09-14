@@ -10,9 +10,20 @@ export const siteConfig = {
   ogImage: '/images/logo.png',
   email: 'hello@doublehelix.dev',
   phone: '+37129636428',
+  /**
+   * Consultation booking. Wording must match the booking page, which on 14 September 2026 offered
+   * "Let's meet" as a 30, 45 or 60 minute Google Meet call and nothing else.
+   */
+  booking: {
+    url: 'https://cal.com/aleksandrs-gusevs/let-s-meet',
+    durationLabel: '30 to 60 minutes',
+    channel: 'Google Meet'
+  },
+  // Registered office, confirmed by the owner on 14 September 2026 against the Register of Enterprises.
   address: {
-    streetAddress: 'Bauskas iela 203 - 35',
+    streetAddress: 'Lastādijas iela 12 k-3',
     addressLocality: 'Riga',
+    postalCode: 'LV-1050',
     addressCountry: 'LV'
   }
 } as const;
@@ -116,6 +127,7 @@ export const organizationSchema = {
     '@type': 'PostalAddress',
     streetAddress: siteConfig.address.streetAddress,
     addressLocality: siteConfig.address.addressLocality,
+    postalCode: siteConfig.address.postalCode,
     addressCountry: siteConfig.address.addressCountry
   },
   areaServed: ['Europe', 'Germany', 'Austria', 'Belgium', 'Switzerland', 'Netherlands', 'United States'],
