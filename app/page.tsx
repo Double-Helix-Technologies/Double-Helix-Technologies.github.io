@@ -11,19 +11,25 @@ import Footer from './components/Footer';
 import { ThemeProvider } from './components/ThemeProvider';
 import { buildMetadata, buildOfferCatalogSchema } from './lib/seo';
 
+/**
+ * The root page shares its segment with the root layout, so the layout's title template does not
+ * apply here; the company name is therefore part of the title itself. Title and description restate
+ * the hero; the keywords name the kinds of work in the published cases (`app/data/work.ts`).
+ */
 export const metadata: Metadata = buildMetadata({
-  title: 'Custom Software and System Integrations for Life Sciences Operations',
+  title: 'Custom Software and System Integrations for Life Sciences | Double Helix Technologies',
   description:
-    'Custom software and system integrations for life sciences and healthcare operations in Europe and North America: higher throughput, lower running costs, named client evidence.',
+    'Custom software and system integrations for life sciences and healthcare operations in Europe and North America. LIMS and ERP integration, NGS data delivery, API onboarding.',
   path: '/',
   keywords: [
-    'custom software ai solutions in life sciences',
-    'life sciences custom software development',
-    'life sciences AI software solutions',
-    'healthcare software development',
-    'system integrations for healthcare',
-    'LIMS integration',
-    'laboratory workflow automation'
+    'LIMS and ERP integration',
+    'NGS data delivery automation',
+    'customer API onboarding',
+    'forensics system integration',
+    'IT operations cost reduction',
+    'SRE and observability improvement',
+    'rapid MVP development',
+    'custom software for regulated operations'
   ]
 });
 

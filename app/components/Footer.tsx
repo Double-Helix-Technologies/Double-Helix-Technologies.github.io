@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Separator } from '@radix-ui/react-separator';
 import { Button } from './ui/button';
 import { AtSign, Linkedin } from 'lucide-react';
-import { useTheme } from '@/app/components/ThemeProvider';
+import BrandLogo from './BrandLogo';
 import { useConsent } from './ConsentProvider';
 
 function CookieSettingsLink() {
@@ -26,8 +26,6 @@ function CookieSettingsLink() {
  * column next to the Company and Legal links, on every page. The ISO statement lives on /team/.
  */
 export default function Footer() {
-  const { logo } = useTheme();
-
   return (
     <footer className="pt-16 pb-8" aria-labelledby="footer-heading">
       <Separator />
@@ -37,14 +35,16 @@ export default function Footer() {
       <div className="container-wide">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="flex flex-col gap-6 md:max-w-52">
-            <Image src={logo} alt="Double Helix Technologies Logo" width={180} height={0} className="h-auto mr-5 opacity-80" />
+            <div>
+              <BrandLogo className="mr-5 opacity-80" />
+            </div>
             <div className="flex gap-2">
-              <Button size="icon" variant="secondary">
+              <Button size="icon" variant="secondary" asChild>
                 <a href="https://www.linkedin.com/company/double-helix-technologies" aria-label="Double Helix Technologies on LinkedIn">
                   <Linkedin />
                 </a>
               </Button>
-              <Button size="icon" variant="secondary">
+              <Button size="icon" variant="secondary" asChild>
                 <a href="mailto:hello@doublehelix.dev" aria-label="Email hello@doublehelix.dev">
                   <AtSign />
                 </a>

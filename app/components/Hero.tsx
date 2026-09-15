@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { useReducedMotion } from 'framer-motion';
@@ -23,6 +24,10 @@ import { siteConfig } from '@/app/lib/seo';
 export default function Hero() {
   const reduceMotion = useReducedMotion();
   const { theme } = useTheme();
+  // The sparkle canvas is client-only. Mounting it after hydration keeps the server HTML and the
+  // first client render identical whatever the visitor's motion preference (no hydration error).
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
   const sparkleColor = theme === 'dark' ? '#ffffff' : '#6E5AFB';
 
   return (
@@ -32,7 +37,7 @@ export default function Hero() {
       <div className="relative flex flex-1 items-center px-0 pb-14 pt-28 sm:px-6 md:px-8 md:pt-32">
         {/* Sparkles rise from the line where the marquee begins and fade out on the way up. */}
         <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-[62%]">
-          {!reduceMotion && (
+          {mounted && !reduceMotion && (
             <div className="absolute inset-0 [mask-image:linear-gradient(to_top,black_0%,black_20%,transparent_100%)]">
               {/* Keyed by theme so the canvas is rebuilt with the new colour instead of reusing the old one. */}
               <Sparkles

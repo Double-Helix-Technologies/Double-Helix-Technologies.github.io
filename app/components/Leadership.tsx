@@ -1,6 +1,5 @@
 import Image from 'next/image';
-import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { Linkedin } from 'lucide-react';
 import AvatarPlaceholder from '@/app/components/ui/avatarPlaceholder';
 import { leadershipTeam, type TeamMember } from '@/app/data/team';
 import { SectionBackdrop } from './ui/section-backdrop';
@@ -22,7 +21,8 @@ function Avatar({ person }: { person: TeamMember }) {
 /**
  * Leadership on the homepage: the four people, each with photo, role and the full biography from
  * `app/data/team.ts` (the same text as on /team/; the owner asked for the complete biographies here
- * on 14 September 2026). The framing sentences are the ones already published on /team/.
+ * on 14 September 2026). The framing sentences are the ones already published on /team/. "Meet the rest
+ * of the team" goes to the company's LinkedIn people page, as on /team/ (owner request, 15 September 2026).
  *
  * Team size: "around 20" was added at the owner's request on 14 September 2026. It matches the
  * sales deck ("team of 20") and the LIAA company profile (20 employees).
@@ -48,13 +48,15 @@ export default function Leadership() {
               solution. Based in Riga, working with customers across Europe and North America.
             </p>
           </div>
-          <Link
-            href="/team/"
-            className="inline-flex shrink-0 items-center gap-1 font-medium text-text-primary underline-offset-4 hover:underline"
+          <a
+            href="https://www.linkedin.com/company/double-helix-technologies/people/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex shrink-0 items-center gap-2 font-medium text-text-primary underline-offset-4 hover:underline"
           >
+            <Linkedin className="h-5 w-5" aria-hidden="true" />
             Meet the rest of the team
-            <ArrowRight className="h-4 w-4" aria-hidden="true" />
-          </Link>
+          </a>
         </div>
 
         <ul className="grid gap-10 md:grid-cols-2 lg:gap-x-16 lg:gap-y-14">

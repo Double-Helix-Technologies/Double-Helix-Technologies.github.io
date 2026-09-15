@@ -6,7 +6,7 @@ import { ConsentProvider } from './components/ConsentProvider';
 import CookieBanner from './components/CookieBanner';
 import CookiePreferencesModal from './components/CookiePreferencesModal';
 import GA4Script from './components/GA4Script';
-import { absoluteUrl, organizationSchema, siteConfig, websiteSchema } from './lib/seo';
+import { absoluteUrl, ogImage, organizationSchema, siteConfig, twitterCard, websiteSchema } from './lib/seo';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -37,17 +37,13 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     locale: 'en_US',
     type: 'website',
-    images: [
-      {
-        url: absoluteUrl(siteConfig.ogImage)
-      }
-    ]
+    images: [ogImage]
   },
   twitter: {
-    card: 'summary_large_image',
+    card: twitterCard,
     title: `${siteConfig.name} | ${siteConfig.defaultTitle}`,
     description: siteConfig.description,
-    images: [absoluteUrl(siteConfig.ogImage)]
+    images: [ogImage.url]
   }
 };
 
