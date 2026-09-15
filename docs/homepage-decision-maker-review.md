@@ -1,7 +1,7 @@
 # Homepage rework for decision-makers: changes, owner-review list, verification
 
-Date: 14 September 2026
-Branch: `feat/homepage-decision-maker` (47 commits on top of `main` 87a431f; not pushed, not deployed)
+Date: 14 September 2026, follow-up 15 September 2026
+Branch: `feat/homepage-decision-maker` (49 commits on top of `main` 87a431f; not pushed, not deployed)
 Author: Claude (Cowork), at Alex's request. Draft until reviewed by a human.
 
 ## What changed and why it helps a decision-maker
@@ -34,6 +34,14 @@ Design. After a first pass that the owner found crowded, nested boxes were remov
 
 Open point from the owner: small text under "What we help with" looked pixelated when running locally. Not reproduced in headless Chromium renders (which used fallback fonts). The service links were raised from 14 px to 16 px. If it persists, a screenshot and the display type (Retina or not) would narrow it down; the global `-webkit-font-smoothing: antialiased` on `body` is the usual suspect on non-Retina displays.
 
+## Follow-up after the independent assessment (15 September 2026)
+
+An independent assessment of the export (`docs/homepage-independent-assessment.md`) was read with the owner on 15 September 2026. Outcomes: the server-rendered header carried the dark theme's logo and toggle, so light-theme visitors saw a white logo on white before hydration and permanently without JavaScript; fixed by `BrandLogo` and `ThemeToggle`, which put both variants in the HTML and let the `dark` class set by the pre-paint script choose, and by `ThemeProvider` reading that class instead of defaulting to dark. Reduced-motion visitors got a React hydration error because the hero rendered the sparkle wrapper on the server and omitted it on the client; the canvas now mounts after hydration. The footer's LinkedIn and email icons were links inside buttons; they are now links styled as buttons. "Meet the rest of the team" on the homepage goes to the company's LinkedIn people page with the LinkedIn mark, as on /team/ (owner decision; the About page shows the same four leaders, so an internal link led nowhere new). Metadata: the homepage title now carries the company name (the root page shares its segment with the root layout, so the layout's title template does not apply to it), the description and keywords restate the hero and the kinds of work in `work.ts`, the site-wide defaults follow suit, ISO is out of the keywords, the Organization schema's `knowsAbout` matches the six services, the OfferCatalog is built from all six services in `services.ts`, and the Twitter card is `summary` because the only social image is the square logo (owner item 14). Verified on the rebuilt export: correct logo and toggle in light, dark and no-JavaScript renders, no console errors with or without reduced motion, all six offers and the new title, description and keywords in the HTML.
+
+Declined by the owner, recorded here for traceability: a security and data-handling page and additions to the privacy policy (controller address, retention periods, the booking processor). The owner's position is that the website itself handles no customer data, so those pages do not belong on it. The assessment's point was about what a regulated buyer asks before an engagement rather than about the website's own processing; it remains open as a business decision. Whether the privacy policy's current content meets the information duties for the website's own analytics is for whoever owns the legal content to check against the authoritative source.
+
+Not yet acted on from the assessment: the marquee's off-sector customer logos and the helixtech.bio wordmark spelling (owner decision), quotes appearing twice on the page, mixed British and American spelling, 8 pixel carousel dots, marquee clones exposed to keyboard and screen readers, "How we work" step headings that contain only a digit, and a citable basis for "Europe and North America".
+
 ## Defects fixed
 
 1. `/about/` returned 404 while still indexed. `app/about/page.tsx` renders `LegacyRedirect` to `/team/`, noindex, canonical `/team/`, not in the sitemap.
@@ -60,7 +68,8 @@ Each item has a `// OWNER:` comment at the spot in the code unless stated otherw
 10. The contact section no longer names a procurement mailbox; the credibility review's point that procurement teams have no obvious route stands. hello@doublehelix.dev is on the About page and in the footer.
 11. Partner artwork: the Veractis.io mark is redrawn and both Veractis.io and helix.tech.bio names are typeset in the site font from screenshots, because both domains are blocked by the machine's proxy. Replace with the organisations' original assets and confirm their agreement to appear (`app/data/partners.ts`).
 12. Lifespin and Onyx Biotech are hidden from the marquee and the /work customers grid is hidden, both marked temporary by the owner; decide when to show them again (`HIDDEN_FROM_MARQUEE`, `SHOW_CUSTOMERS_GRID`).
-13. Untracked folders left in the working tree, not touched by this work: `_to_delete/`, `docs/prompts/`, `docs/homepage-credibility-review.md`, and `Claude outputs/` (created by the desktop app during this session). Decide what to commit or remove.
+13. Social preview image: `public/images/logo.png` (1244 by 1300) is the only image used for Open Graph and Twitter cards. A purpose-made 1200 by 630 image with the headline would preview better on LinkedIn.
+14. Untracked folders left in the working tree, not touched by this work: `_to_delete/`, `docs/prompts/`, `docs/homepage-credibility-review.md`, and `Claude outputs/` (created by the desktop app during this session). Decide what to commit or remove.
 
 Owner tasks outside the code, from the brief: confirm the representing board members; confirm the four Eurofins titles against LinkedIn; confirm team size if it is to be stated; confirm the risk-assessment tiers, timelines and currency, or take them off the assessment page; ask LIAA to correct the net turnover on the English business.gov.lv company page; ask the Digital Health Association Latvia and the Latvian American Chamber of Commerce to list the company if membership is current, or remove those logos from the About page; obtain logo permission from Eurofins Genomics and any other client before any logo row is built.
 
