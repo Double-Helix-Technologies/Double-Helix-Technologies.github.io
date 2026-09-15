@@ -15,39 +15,11 @@ import Link from 'next/link';
 import Footer from '@/app/components/Footer';
 import AvatarPlaceholder from '@/app/components/ui/avatarPlaceholder';
 import { leadershipTeam, TeamMember } from '@/app/data/team';
-import { buildMetadata } from '../lib/seo';
+import { memberships } from '@/app/data/partners';
+import Wordmark from '@/app/components/Wordmark';
+import { buildMetadata, siteConfig } from '../lib/seo';
+import { complianceStatement } from '@/app/components/ComplianceNotice';
 
-type Affiliation = {
-  name: string;
-  href: string;
-  logo: string;
-  logoWidth: number;
-  logoHeight: number;
-};
-
-const affiliations: Affiliation[] = [
-  {
-    name: 'Digital Health Association Latvia',
-    href: 'https://www.digitalaveseliba.lv/',
-    logo: '/images/partners/digital-health-latvia.svg',
-    logoWidth: 149,
-    logoHeight: 38
-  },
-  {
-    name: 'Latvian American Chamber of Commerce',
-    href: 'https://latvianchamber.com/',
-    logo: '/images/partners/latvian-american-chamber.svg',
-    logoWidth: 258,
-    logoHeight: 84
-  },
-  {
-    name: 'Latvian IT Cluster',
-    href: 'https://www.itbaltic.com/',
-    logo: '/images/partners/latvian-it-cluster.png',
-    logoWidth: 493,
-    logoHeight: 657
-  }
-];
 
 export const metadata: Metadata = buildMetadata({
   title: 'About us',
@@ -165,7 +137,7 @@ export default function TeamPage() {
               We&apos;re active members of Latvia&apos;s health tech and business communities.
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-              {affiliations.map((affiliation) => (
+              {memberships.map((affiliation) => (
                 <a
                   key={affiliation.name}
                   href={affiliation.href}
@@ -174,15 +146,50 @@ export default function TeamPage() {
                   aria-label={affiliation.name}
                   className="flex h-28 items-center justify-center rounded-xl border border-[var(--border)]/20 bg-white p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
                 >
-                  <Image
-                    src={affiliation.logo}
-                    alt={affiliation.name}
-                    width={affiliation.logoWidth}
-                    height={affiliation.logoHeight}
-                    className="h-full w-full object-contain"
-                  />
+                  {affiliation.logo && (
+                    <Image
+                      src={affiliation.logo}
+                      alt={affiliation.wordmark ? '' : affiliation.name}
+                      width={affiliation.logoWidth ?? 160}
+                      height={affiliation.logoHeight ?? 48}
+                      className={affiliation.wordmark ? 'h-10 w-auto object-contain' : 'h-full w-full object-contain'}
+                    />
+                  )}
+                  {affiliation.wordmark && <Wordmark segments={affiliation.wordmark} tone="plain" className="ml-3 text-2xl" />}
                 </a>
               ))}
+            </div>
+
+            {/* Small print: company details and the approved ISO wording (complianceStatement), side by side. */}
+            <div className="mt-16 grid gap-8 border-t border-divider pt-8 text-sm text-text-secondary md:grid-cols-2 md:gap-12">
+              <div className="space-y-1">
+                <h2 className="text-sm font-semibold uppercase tracking-[0.16em] text-text-primary">Company details</h2>
+                <p className="pt-2 font-medium text-text-primary">{siteConfig.legalName}</p>
+                <p>
+                  Registered office: {siteConfig.address.streetAddress}, {siteConfig.address.addressLocality},{' '}
+                  {siteConfig.address.postalCode}, Latvia
+                </p>
+                <p>Registration number 50203351951, VAT LV50203351951</p>
+                <p>
+                  <a href={`mailto:${siteConfig.email}`} className="hover:text-text-primary">
+                    {siteConfig.email}
+                  </a>
+                  {', '}
+                  <a href="tel:+37129636428" className="hover:text-text-primary">
+                    +371 29636428
+                  </a>
+                </p>
+                <p className="pt-1">
+                  <Link href="/notice/" className="underline underline-offset-4 hover:text-text-primary">
+                    Full legal notice
+                  </Link>
+                </p>
+              </div>
+              <div className="space-y-1">
+                <h2 className="text-sm font-semibold uppercase tracking-[0.16em] text-text-primary">Quality and information security</h2>
+                <p className="pt-2 font-medium text-text-primary">{complianceStatement.heading}</p>
+                <p>{complianceStatement.body}</p>
+              </div>
             </div>
           </div>
         </section>

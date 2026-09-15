@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import Link from 'next/link';
 import { ChevronRight } from 'lucide-react';
 import Navigation from '@/app/components/Navigation';
@@ -48,7 +49,10 @@ export default function ContactConfirmationPage() {
               </BreadcrumbList>
             </Breadcrumb>
 
-            <ContactConfirmationContent />
+            {/* useSearchParams() inside needs a Suspense boundary to prerender statically. */}
+            <Suspense fallback={null}>
+              <ContactConfirmationContent />
+            </Suspense>
           </div>
         </section>
 

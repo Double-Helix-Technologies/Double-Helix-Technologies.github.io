@@ -1,60 +1,44 @@
-'use client';
-
+import { ArrowRight } from 'lucide-react';
 import { Button } from '@/app/components/ui/button';
-import Link from 'next/link';
-import React from 'react';
+import { siteConfig } from '@/app/lib/seo';
+import { SectionBackdrop } from './ui/section-backdrop';
 
+/**
+ * Invitation to talk, sized to carry a screen of its own: heading, one sentence, the booking action
+ * and one line of practicalities. The call description matches the booking page (see
+ * `siteConfig.booking`). Company details live on the About page and in the legal notice, not here.
+ */
 export default function Contact() {
   return (
-    <section id="contact" className="section bg-gradient-to-b from-background to-background-alt">
-      <div className="container-tight">
-        <div className="mb-8 text-center">
-          <h2 className="section-heading mb-5">When systems don’t talk, we listen.</h2>
-          <p className="text-text-secondary max-w-2xl mx-auto">
-            Tell us what’s broken, missing or worth building. We’ll suggest a way forward.
+    <section
+      id="contact"
+      className="section relative isolate overflow-hidden bg-background lg:flex lg:min-h-[90svh] lg:items-center"
+      aria-labelledby="contact-heading"
+    >
+      <SectionBackdrop variant="mesh" />
+      <div className="container-tight w-full">
+        <div className="mx-auto max-w-4xl text-center">
+          <h2 id="contact-heading" className="section-heading mb-6 text-balance leading-[1.08] lg:text-7xl">
+            When systems don&apos;t talk, we listen.
+          </h2>
+          <p className="mx-auto max-w-3xl text-xl leading-relaxed text-text-secondary md:text-2xl">
+            Tell us which workflow, integration or system is costing your team time. We will suggest a sensible first
+            step.
           </p>
-        </div>
-        <div className="max-w-3xl mx-auto">
-          <div className="bp-8 md:pb-10 rounded-2xl text-center">
-            <Button variant="gradient">
-              <a
-                href="https://cal.com/aleksandrs-gusevs/let-s-meet"
-                target="_blank"
-                rel="noreferrer"
-              >
+          <div className="mt-10 flex justify-center">
+            <Button variant="cta" size="hero" asChild>
+              <a href={siteConfig.booking.url} target="_blank" rel="noreferrer">
                 Book a free consultation
+                <ArrowRight aria-hidden="true" />
               </a>
             </Button>
-            <p className="mt-2 text-text-secondary text-xs">
-              Free consultation (15–30 min)
-            </p>
-            <p className="mt-2 text-text-secondary text-xs">
-              Prefer typing to talking? Email us:{' '}
-              <a href="mailto:aleksandrs.gusevs@doublehelix.dev" className="underline">
-                aleksandrs.gusevs@doublehelix.dev
-              </a>
-            </p>
           </div>
-          <div className="mt-8 pt-8 border-t border-border text-center text-text-secondary text-sm">
-            <p className="font-semibold text-text-primary">Double Helix Technologies SIA</p>
-            <p>Bauskas iela 203 - 35, Riga, Latvia</p>
-            <p>
-              <a href="mailto:hello@doublehelix.dev" className="hover:text-primary transition-colors">
-                hello@doublehelix.dev
-              </a>
-            </p>
-            <p>
-              <a href="tel:+37129636428" className="hover:text-primary transition-colors">
-                +371 29636428
-              </a>
-            </p>
-            <p>VAT: LV50203351951</p>
-            <p className="mt-2 text-xs">
-              <Link href="/notice" className="underline hover:text-primary transition-colors">
-                Full legal notice
-              </Link>
-            </p>
-          </div>
+          <p className="mt-6 text-base text-text-secondary">
+            Free introductory call, {siteConfig.booking.durationLabel} on {siteConfig.booking.channel}. Prefer email?{' '}
+            <a href="mailto:aleksandrs.gusevs@doublehelix.dev" className="underline underline-offset-4">
+              aleksandrs.gusevs@doublehelix.dev
+            </a>
+          </p>
         </div>
       </div>
     </section>

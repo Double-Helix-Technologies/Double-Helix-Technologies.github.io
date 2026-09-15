@@ -17,6 +17,7 @@
   --accent-digital-blue: #3382EF;
   --accent-novel-lilac: #886FF7;
   --accent-comfort-pink: #B96BFF;
+  --divider: rgba(90, 95, 115, 0.22); /* thin rules between list items and stats */
 }
 
 .dark {
@@ -29,6 +30,7 @@
   --border: #847d9e;        /* Slate Grey */
   --accent-primary: #5A5F73; /* Comet Grey */
   --accent-green: #976ffb;  /* Emerald Green */
+  --divider: rgba(214, 221, 255, 0.18);
 }
 
 @layer base {
@@ -77,12 +79,15 @@
     @apply bg-[var(--accent-primary)] text-[var(--text-button)] py-2 px-4 rounded-xl font-medium transition-all duration-300 hover:brightness-95 focus:outline-none focus:ring-2 focus:ring-[var(--accent-primary)] focus:ring-opacity-50;
   }
 
+  /* Every .section and .top-section wraps a .container-* child, which already carries the 24px
+     mobile gutter. Adding the section's own padding on phones halved the reading width, so the
+     section padding now starts at the sm breakpoint. */
   .section {
-    @apply py-16 lg:py-20 px-6 md:px-8 bg-[var(--background)];
+    @apply py-16 lg:py-20 px-0 sm:px-6 md:px-8 bg-[var(--background)];
   }
 
   .top-section {
-    @apply pt-40 lg:pt-48 pb-16 lg:pb-20 px-6 md:px-8 bg-[var(--background)];
+    @apply pt-40 lg:pt-48 pb-16 lg:pb-20 px-0 sm:px-6 md:px-8 bg-[var(--background)];
   }
 
   .container-tight {

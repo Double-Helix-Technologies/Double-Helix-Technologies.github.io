@@ -1,28 +1,37 @@
 'use client';
 
 import { createContext, ReactNode, useContext, useEffect, useMemo, useState } from 'react';
-import darkLogoSrc from '@/images/logo-full-dark.svg';
-import lightLogoSrc from '@/images/logo-full-light.svg';
 
 type Theme = 'light' | 'dark'
 
 interface ThemeContextType {
   theme: Theme
-  setTheme: (theme: 'light' | 'dark') => void
-  logo: string,
+  setTheme: (theme: Theme) => void
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
+/**
+ * The theme the pre-paint script in `app/layout.tsx` has already applied to <html> (stored choice,
+ * otherwise the system preference). On the server there is no document, so the answer is 'light';
+ * nothing rendered on the server may depend on it. Theme-specific markup (the wordmark, the toggle
+ * icon) is therefore switched by the `dark` class in CSS, see `BrandLogo` and `ThemeToggle`.
+ */
+function themeFromDocument(): Theme {
+  if (typeof document === 'undefined') return 'light';
+  return document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+}
+
 export function ThemeProvider({ children }: Readonly<{ children: ReactNode }>) {
-  const [theme, setTheme] = useState<Theme>('dark');
+  const [theme, setTheme] = useState<Theme>(themeFromDocument);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const storedTheme = localStorage.getItem('theme') as Theme;
+    // Same rule as the pre-paint script, re-applied after mount in case that script did not run.
+    const storedTheme = localStorage.getItem('theme');
     const systemTheme = globalThis.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 
-    setTheme(storedTheme || systemTheme);
+    setTheme(storedTheme === 'dark' || storedTheme === 'light' ? storedTheme : systemTheme);
     setMounted(true);
   }, []);
 
@@ -31,15 +40,12 @@ export function ThemeProvider({ children }: Readonly<{ children: ReactNode }>) {
 
     document.documentElement.classList.toggle('dark', theme === 'dark');
     localStorage.setItem('theme', theme);
-  }, [theme]);
-
-  const logo = theme === 'dark' ? lightLogoSrc : darkLogoSrc;
+  }, [mounted, theme]);
 
   const value = useMemo(() => ({
     theme,
-    setTheme,
-    logo
-  }), [logo, theme]);
+    setTheme
+  }), [theme]);
 
   return (
     <ThemeContext.Provider value={value}>
@@ -56,4 +62,4 @@ export function useTheme() {
   }
 
   return context;
-} 
+}

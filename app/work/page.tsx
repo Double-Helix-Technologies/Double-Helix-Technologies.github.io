@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { ChevronRight } from 'lucide-react';
 import Navigation from '@/app/components/Navigation';
@@ -12,7 +13,7 @@ import {
   BreadcrumbSeparator
 } from '@/app/components/ui/breadcrumb';
 import { absoluteUrl, buildBreadcrumbSchema, buildMetadata } from '@/app/lib/seo';
-import { getWorkListItems } from '@/app/data/work';
+import { customers, getWorkListItems } from '@/app/data/work';
 import WorkShowcase from './WorkShowcase';
 
 export const metadata: Metadata = buildMetadata({
@@ -28,6 +29,9 @@ export const metadata: Metadata = buildMetadata({
     'healthcare software products'
   ]
 });
+
+/** Temporarily hidden at the owner's request (14 September 2026). Set to true to show the grid again. */
+const SHOW_CUSTOMERS_GRID = false;
 
 export default function WorkPage() {
   const workItems = getWorkListItems();
@@ -99,7 +103,7 @@ export default function WorkPage() {
               <WorkShowcase items={workItems} />
             </div>
 
-            {/* Temporarily hidden - customers section
+            {SHOW_CUSTOMERS_GRID && (
             <div className="mt-20">
               <h2 className="text-3xl md:text-4xl mb-8">Teams we&rsquo;ve worked with</h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
@@ -123,7 +127,7 @@ export default function WorkPage() {
                 ))}
               </div>
             </div>
-            */}
+            )}
           </div>
         </section>
       </main>

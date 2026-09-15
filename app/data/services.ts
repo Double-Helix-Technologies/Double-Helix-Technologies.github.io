@@ -44,10 +44,12 @@ export const servicesContents: Service[] = [
       'Board-ready one-page memo'    
     ],
     seo: {
-      title: 'Operational Workflow & Risk Assessment',
+      title: 'Laboratory Workflow Assessment and Operational Risk Review',
       description:
-        'Map workflows, uncover hidden handoff risk, and identify data bottlenecks across life sciences and healthcare operations.',
+        'Map laboratory workflows, uncover hidden handoff risk, and identify data bottlenecks across life sciences and healthcare operations.',
       keywords: [
+        'laboratory workflow assessment',
+        'laboratory process improvement consulting',
         'operational workflow assessment',
         'workflow bottleneck analysis',
         'process risk assessment',
@@ -80,15 +82,22 @@ export const servicesContents: Service[] = [
       'Handover documentation',
     ],
     seo: {
-      title: 'System Integration & Data Flow Optimization',
+      title: 'LIMS Integration Services and Laboratory Data Flow Optimization',
       description:
-        'Reduce manual handoffs, connect fragmented systems, and create a reliable single source of truth with end-to-end integration services.',
+        'Connect LIMS with ERP, e-commerce and reporting systems, reduce manual handoffs, and create a reliable single source of truth across laboratory workflows.',
       keywords: [
-        'system integration consulting',
+        'LIMS integration services',
+        'LIMS integration company',
+        'LIMS ERP integration',
+        'LIMS API integration',
+        'laboratory information management system integration',
+        'laboratory ecommerce integration',
+        'laboratory reporting automation',
+        'laboratory systems integration',
+        'laboratory data integration',
+        'healthcare system integration services',
         'single source of truth',
-        'data flow bottlenecks',
-        'manual handoff reduction',
-        'healthcare system integrations'
+        'manual handoff reduction'
       ],
       category: 'system-integrations'
     }
@@ -116,15 +125,20 @@ export const servicesContents: Service[] = [
       'Decision memo for leadership',      
     ],
     seo: {
-      title: 'Custom Software Development for Life Sciences & Healthcare',
+      title: 'Custom Laboratory Software Development for Life Sciences and Healthcare',
       description:
-        'Design, modernize, and improve custom software for life sciences and healthcare workflows where off-the-shelf tools fall short.',
+        'Design, modernize, and improve custom laboratory software for life sciences and healthcare workflows where off-the-shelf tools fall short.',
       keywords: [
-        'custom software ai solutions in life sciences',
-        'custom software development consulting',
-        'software architecture assessment',
+        'custom laboratory software development',
+        'laboratory software development',
+        'custom sample management software',
+        'laboratory sample tracking software development',
+        'laboratory workflow software development',
+        'laboratory project management software',
+        'laboratory customer portal development',
+        'life sciences software development',
         'healthcare software architecture',
-        'life sciences software development'
+        'software architecture assessment'
       ],
       category: 'custom-software-development'
     }
@@ -152,10 +166,12 @@ export const servicesContents: Service[] = [
       'Operational reporting template',
     ],
     seo: {
-      title: 'Observability & Workflow Monitoring',
+      title: 'Laboratory Integration Monitoring and Workflow Observability',
       description:
-        'Improve workflow visibility, observability, and operational telemetry across connected systems in healthcare and life sciences.',
+        'Keep laboratory integrations and operational workflows visible with the telemetry, dashboards, and alerting that catch failures early.',
       keywords: [
+        'laboratory integration monitoring',
+        'laboratory workflow monitoring',
         'workflow monitoring',
         'observability consulting',
         'operational telemetry',
@@ -187,15 +203,15 @@ export const servicesContents: Service[] = [
       'AI adoption roadmap',
     ],
     seo: {
-      title: 'Custom AI Solutions for Life Sciences & Healthcare',
+      title: 'AI Workflow Automation for Life Sciences and Healthcare',
       description:
         'Identify, design, and roll out practical AI solutions safely across life sciences and healthcare workflows.',
       keywords: [
-        'custom software ai solutions in life sciences',
+        'AI workflow automation for life sciences',
         'custom AI solutions for life sciences',
+        'life sciences AI software solutions',
         'AI adoption consulting',
         'healthcare AI adoption',
-        'life sciences AI consulting',
         'AI readiness assessment',
         'AI implementation roadmap'
       ],
@@ -229,10 +245,11 @@ export const servicesContents: Service[] = [
       description:
         'Assess security, compliance, and governance risks across systems, integrations, and data flows in regulated healthcare and life sciences environments.',
       keywords: [
-        'healthcare IT security',
+        'AI governance readiness',
         'compliance risk assessment',
         'regulated system governance',
-        'AI governance readiness'
+        'custom software for regulated operations',
+        'healthcare IT security'
       ],
       category: 'security-compliance'
     }

@@ -2,7 +2,10 @@ import type { Config } from 'tailwindcss';
 import plugin from 'tailwindcss/plugin';
 
 const config: Config = {
-  darkMode: ['class', 'class'],
+  // The second element is the selector for the dark class. It used to be the literal 'class',
+  // which made Tailwind emit `:is(class *)` for every dark: utility, a selector that matches
+  // nothing; the dark theme only worked through the CSS variables in globals.css.
+  darkMode: ['class', '.dark'],
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -28,6 +31,9 @@ const config: Config = {
   			background: 'var(--background)',
   			'background-alt': 'var(--background-alt)',
   			border: 'var(--border)',
+  			// Opacity modifiers (border-border/40) do not work on var() colours in Tailwind 3 and silently
+  			// fall back to the preflight default. Use this token for hairline rules instead.
+  			divider: 'var(--divider)',
   			'accent-primary': 'var(--accent-primary)',
 				'accent-pink': 'var(--accent-comfort-pink)',
 				'accent-teal': 'var(--accent-science-teal)',
@@ -40,9 +46,15 @@ const config: Config = {
   			'accordion-down': 'accordion-down 0.2s ease-out',
   			'accordion-up': 'accordion-up 0.2s ease-out',
 				'icon-rotate': 'accordion-icon-rotate 0.2s ease-out forwards',
-				'float': 'float 2s ease-in-out infinite'
+				'float': 'float 2s ease-in-out infinite',
+				// Mesh gradient fields in the hero: a slow wander, never a bounce.
+				'drift': 'drift 24s ease-in-out infinite'
   		},
   		keyframes: {
+				drift: {
+					'0%, 100%': { transform: 'translate3d(0, 0, 0) scale(1)' },
+					'50%': { transform: 'translate3d(4%, -6%, 0) scale(1.08)' }
+				},
 				float: {
 					'0%, 100%': { transform: 'translateY(0)' },
 					'50%': { transform: 'translateY(-8px)' },

@@ -2,14 +2,12 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import ThemeToggle from './ThemeToggle';
-import { useTheme } from '@/app/components/ThemeProvider';
+import BrandLogo from './BrandLogo';
 import { Button } from '@/app/components/ui/button';
 import { X } from 'lucide-react';
 
 export default function Navigation() {
-  const { logo } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -31,14 +29,7 @@ export default function Navigation() {
 
   const getLogo = () => {
     return <Link href="/" className="flex items-center gap-0">
-      <Image
-        src={logo}
-        alt="Double Helix Technologies Logo"
-        width={180}
-        height={0}
-        priority={true}
-        className="h-auto mr-5 opacity-80"
-      />
+      <BrandLogo priority className="mr-5 opacity-80" />
     </Link>;
   };
 

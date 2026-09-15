@@ -13,6 +13,11 @@ import { clearAnalyticsCookies } from '@/app/lib/consent';
 
 interface ConsentContextType {
   hasConsent: boolean;
+  /**
+   * True once the stored consent has been read on the client. Consent UI (the banner) waits for
+   * this so visitors who already answered never see it flash; page content does not wait.
+   */
+  isReady: boolean;
   consentStatus: ConsentStatus;
   preferences: ConsentPreferences;
   grantConsent: () => void;
@@ -92,6 +97,7 @@ export function ConsentProvider({ children }: { children: ReactNode }) {
   return (
     <ConsentContext.Provider value={{ 
       hasConsent, 
+      isReady: mounted,
       consentStatus, 
       preferences,
       grantConsent, 
@@ -102,7 +108,12 @@ export function ConsentProvider({ children }: { children: ReactNode }) {
       closeConsentModal,
       isModalOpen,
     }}>
-      {mounted ? children : <div className="min-h-screen bg-background" />}
+      {/*
+        Children render on the server as well. Gating them on `mounted` (as before) left every
+        exported page with an empty <body>: no content for crawlers that do not run JavaScript,
+        reader mode, link previews or the meta-refresh fallback on redirect pages.
+      */}
+      {children}
     </ConsentContext.Provider>
   );
 }

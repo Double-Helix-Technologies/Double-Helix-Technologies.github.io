@@ -59,9 +59,18 @@ export interface HighlightStat {
 }
 
 export interface ClientSolutionQuote {
+  /** Full quote exactly as approved for publication. Never edit; it is reconciled with the sales deck. */
   text: string;
-  /** Name, role and organisation exactly as approved for publication. */
+  /**
+   * Name, role and organisation exactly as approved for publication. Titles are the ones held at
+   * the time of the project (owner decision of 14 September 2026: shown without a note).
+   */
   attribution: string;
+  /**
+   * Optional pull-quote for the homepage testimonials: the opening sentence of `text`, shown as the
+   * card heading with the remainder of `text` as the body. Must be a verbatim prefix of `text`.
+   */
+  tagline?: string;
 }
 
 /** Named client. Only set when the client has approved being named on this case study. */
@@ -172,11 +181,12 @@ export const clientSolutions: ClientSolution[] = [
         'See how Double Helix connected LIMS, ERP, e-commerce and reporting systems for Eurofins Genomics, cut data entry points from 7 to 1 and freed 50% of team capacity.',
       keywords: [
         'LIMS integration case study',
+        'LIMS ERP integration',
+        'laboratory data integration',
+        'laboratory ecommerce integration',
+        'laboratory workflow automation',
         'process automation life sciences',
-        'ERP LIMS integration',
-        'workflow automation case study',
         'sample management automation',
-        'Sample Management System',
         'sequencing workflow automation'
       ]
     },
@@ -225,7 +235,8 @@ export const clientSolutions: ClientSolution[] = [
     quote: {
       text:
         'Working with this team was a game-changer. They don’t just code, they dive deep into your business, challenge assumptions, and co-create solutions that are both innovative and intuitive. I was impressed about their ability to translate very complex business processes into elegant, user-friendly solutions.',
-      attribution: 'Annika Schott, Project Management Team Lead NGS, Eurofins Genomics Europe'
+      attribution: 'Annika Schott, Project Management Team Lead NGS, Eurofins Genomics Europe',
+      tagline: 'Working with this team was a game-changer.'
     }
   },
   {
@@ -248,11 +259,12 @@ export const clientSolutions: ClientSolution[] = [
         'See how Double Helix automated NGS data delivery and archival for Eurofins Genomics, cutting delivery time from 1.5 days to 3 hours with monitoring and an optional 4-eyes approval.',
       keywords: [
         'NGS data delivery automation',
-        'genomics data pipeline automation',
-        'sequencing data archival',
+        'sequencing data delivery automation',
+        'sequencing data transfer automation',
+        'sequencing data archiving',
+        'genomics workflow automation',
+        'genomics data integration',
         'FASTQ delivery automation',
-        'cloud storage tiering case study',
-        'Sanger sequencing data delivery',
         'NGS data delivery pipeline'
       ]
     },
@@ -289,7 +301,8 @@ export const clientSolutions: ClientSolution[] = [
     quote: {
       text:
         'Working with this team has been an exceptional experience. They delivered our project management application for multiple laboratories with remarkable speed and precision, all while maintaining the highest standards of quality. What truly impressed us was their communication: always clear, responsive, and collaborative. They didn’t just build software, they took the time to understand our entire business ecosystem, not just the immediate requirements. Their approach went beyond solving surface-level problems, they actively sought out root causes and designed solutions that support both current operations and future growth. Their dedication, insight, and professionalism make them a standout partner for any organization looking to build impactful, scalable digital solutions.',
-      attribution: 'Andreas Feldl, Global Business Product Owner, Eurofins Genomics'
+      attribution: 'Andreas Feldl, Global Business Product Owner, Eurofins Genomics',
+      tagline: 'Working with this team has been an exceptional experience.'
     }
   },
   {
@@ -311,10 +324,11 @@ export const clientSolutions: ClientSolution[] = [
       description:
         'See how Double Helix built a standardised API and onboarding process for Eurofins Genomics that cut B2B customer onboarding from months to under two weeks.',
       keywords: [
-        'API onboarding case study',
+        'laboratory customer API onboarding',
+        'LIMS API integration',
         'B2B LIMS integration',
+        'laboratory customer portal development',
         'customer integration automation',
-        'sample lifecycle visibility',
         'standardized API integration'
       ]
     },
@@ -345,7 +359,10 @@ export const clientSolutions: ClientSolution[] = [
     quote: {
       text:
         'Collaborating with Double Helix Technologies has greatly enhanced the efficiency and reliability of our IT integration projects. Their strong technical expertise and proactive, customer-focused approach enabled us to address potential issues early and implement solutions perfectly aligned with our user needs. The team’s ability to listen carefully and anticipate challenges ensured a smooth and efficient integration that supports our business objectives. Double Helix Technologies is a dependable partner for any organization seeking innovative and client-centered IT integration services.',
-      attribution: 'Reynald Vidili, Sales Director, Eurofins Genomics France SAS'
+      // OWNER: Confirm Reynald Vidili's current title. A third-party org chart lists him as President of
+      // Eurofins Genomics; the title below is the one approved with the quote.
+      attribution: 'Reynald Vidili, Sales Director, Eurofins Genomics France SAS',
+      tagline: 'Collaborating with Double Helix Technologies has greatly enhanced the efficiency and reliability of our IT integration projects.'
     }
   },
   {
@@ -367,9 +384,9 @@ export const clientSolutions: ClientSolution[] = [
       description:
         'See how Double Helix formed a new delivery team and launched an MVP integration that let a customer be first to launch in a government forensics digitalization initiative, two years behind schedule.',
       keywords: [
+        'forensic laboratory systems integration',
         'forensics digitalization case study',
         'law enforcement systems integration',
-        'MVP integration case study',
         'DNA analysis workflow digitalization',
         'digital forensics portal'
       ]
@@ -424,9 +441,10 @@ export const clientSolutions: ClientSolution[] = [
         'See how Double Helix reworked IT processes and application ownership across 10+ applications at Eurofins Genomics, cutting repeat incidents by 95% and IT costs by 37%.',
       keywords: [
         'IT reorganization case study',
+        'laboratory IT operations improvement',
         'IT operations transformation',
-        'root cause analysis IT',
         'IT incident reduction',
+        'root cause analysis IT',
         'application ownership case study'
       ]
     },
@@ -472,7 +490,8 @@ export const clientSolutions: ClientSolution[] = [
     quote: {
       text:
         'The IT team consistently demonstrates a solution-oriented approach and a commitment to building sustainable structures that enhance our workflow. Their valuable interactions and willingness to share knowledge significantly impact our projects. Their hard work and dedication are truly commendable, and I look forward to seeing our collective continued success.',
-      attribution: 'Nadine Tappe, Head of Oligonucleotides, Eurofins Genomics Europe'
+      attribution: 'Nadine Tappe, Head of Oligonucleotides, Eurofins Genomics Europe',
+      tagline: 'The IT team consistently demonstrates a solution-oriented approach and a commitment to building sustainable structures that enhance our workflow.'
     }
   },
   {
@@ -681,6 +700,51 @@ export function getClientSolutionBySlug(slug: string) {
 
 export function getProductBySlug(slug: string) {
   return products.find((product) => product.slug === slug);
+}
+
+/**
+ * A client quote ready for the homepage testimonials. `body` is `text` with the `tagline` removed
+ * when the tagline is its opening sentence, so the two are never shown twice.
+ */
+export interface PublishedQuote {
+  slug: string;
+  caseTitle: string;
+  casePath: string;
+  /** Client name when the client may be named; undefined for anonymous cases. */
+  clientName?: string;
+  text: string;
+  tagline?: string;
+  body: string;
+  attribution: string;
+}
+
+/**
+ * Quotes for the homepage, read from the case studies so text and attribution cannot drift from
+ * the /work/ pages. Only quotes with a `tagline` are returned; that is the homepage presentation
+ * (heading plus body). Quotes without one stay on their case study page.
+ */
+export function getPublishedQuotes(): PublishedQuote[] {
+  return clientSolutions.flatMap((solution) => {
+    const quote = solution.quote;
+    if (!quote?.tagline) return [];
+
+    const body = quote.text.startsWith(quote.tagline)
+      ? quote.text.slice(quote.tagline.length).trim()
+      : quote.text;
+
+    return [
+      {
+        slug: solution.slug,
+        caseTitle: solution.title,
+        casePath: getClientSolutionPath(solution),
+        clientName: solution.client?.name,
+        text: quote.text,
+        tagline: quote.tagline,
+        body,
+        attribution: quote.attribution
+      }
+    ];
+  });
 }
 
 /**
