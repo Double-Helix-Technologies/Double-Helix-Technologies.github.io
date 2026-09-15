@@ -1,7 +1,7 @@
 # Homepage rework for decision-makers: changes, owner-review list, verification
 
 Date: 14 September 2026, follow-up 15 September 2026
-Branch: `feat/homepage-decision-maker` (49 commits on top of `main` 87a431f; not pushed, not deployed)
+Branch: `feat/homepage-decision-maker` (50 commits on top of `main` 87a431f; not pushed, not deployed)
 Author: Claude (Cowork), at Alex's request. Draft until reviewed by a human.
 
 ## What changed and why it helps a decision-maker
@@ -42,6 +42,20 @@ Declined by the owner, recorded here for traceability: a security and data-handl
 
 Not yet acted on from the assessment: the marquee's off-sector customer logos and the helixtech.bio wordmark spelling (owner decision), quotes appearing twice on the page, mixed British and American spelling, 8 pixel carousel dots, marquee clones exposed to keyboard and screen readers, "How we work" step headings that contain only a digit, and a citable basis for "Europe and North America".
 
+## Findability for search engines and AI assistants (15 September 2026)
+
+A review of the export for search and AI answer engines found the fundamentals in place (static HTML with the content in the markup, one h1, unique titles and descriptions, canonicals, Organization, WebSite, OfferCatalog, Service, Article, BreadcrumbList and FAQPage structured data, a sitemap and an open robots file) and four gaps worth closing cheaply. Three were closed on the owner's instruction:
+
+`/llms.txt` (`app/llms.txt/route.ts`), after the llmstxt.org convention: one plain-text file at the site root saying what the company is, listing the six services, all seven client cases with their published figures, the product, the customers and partners, the four leaders and the approved ISO statement, each with its URL. It is generated at build time from `services.ts`, `work.ts`, `team.ts`, `partners.ts` and `seo.ts`, so it cannot state anything the pages do not, and it names a client only where `client` is set. The convention is emerging rather than standard; the cost is one static file.
+
+`robots.txt` (`app/robots.ts`) now names the AI search and assistant crawlers (OAI-SearchBot, ChatGPT-User, GPTBot, ClaudeBot, Claude-SearchBot, Claude-User, PerplexityBot, Perplexity-User, DuckAssistBot, Amazonbot, Bingbot, Applebot) and, in a separate group, the training crawlers (Google-Extended, Applebot-Extended, CCBot, Bytespider, meta-externalagent). All are allowed, as they already were under the wildcard rule; listing them records the intent. OWNER: whether the company wants its content used for model training is a decision to make and record; if the answer is no, change the training group to `disallow` (owner item 15).
+
+Sitemap `lastmod` (`app/sitemap.ts`): each entry now carries the date of the last commit that touched the files the route renders from, read from git at build time and omitted rather than invented when git is unavailable. The deployment workflow gained `fetch-depth: 0` so a shallow clone does not collapse every date to the deploy commit.
+
+Customer and partner names in the HTML (`app/components/LogoMarquee.tsx`): the scrolling band renders only in the browser, so no crawler could see who the customers are. The names and links are now a list in the server-rendered HTML, visually hidden until one of its links takes keyboard focus, at which point the row appears above the band with a visible focus indicator. The band itself is `aria-hidden` with its links out of the tab order, which also removes the sixteen moving tab stops the independent assessment flagged. Verified: the list measures 1 by 1 pixel until focused, the hero is unchanged, and tabbing from the top reaches eight named links instead of sixteen logo clones.
+
+Left for later, with the owner: `Person` schema for the four leaders on /team/, `datePublished` and `dateModified` on the case Article schema, `foundingDate` and `numberOfEmployees` on the Organization schema, descriptive suffixes on the seven "Read the full case study" and six "What is included" links, a plain entity sentence on the homepage (what the company is, where, since when), a purpose-made social preview image, and splitting the sparkles library out of the initial JavaScript (about 130 KB of the 283 KB gzipped).
+
 ## Defects fixed
 
 1. `/about/` returned 404 while still indexed. `app/about/page.tsx` renders `LegacyRedirect` to `/team/`, noindex, canonical `/team/`, not in the sitemap.
@@ -69,7 +83,8 @@ Each item has a `// OWNER:` comment at the spot in the code unless stated otherw
 11. Partner artwork: the Veractis.io mark is redrawn and both Veractis.io and helix.tech.bio names are typeset in the site font from screenshots, because both domains are blocked by the machine's proxy. Replace with the organisations' original assets and confirm their agreement to appear (`app/data/partners.ts`).
 12. Lifespin and Onyx Biotech are hidden from the marquee and the /work customers grid is hidden, both marked temporary by the owner; decide when to show them again (`HIDDEN_FROM_MARQUEE`, `SHOW_CUSTOMERS_GRID`).
 13. Social preview image: `public/images/logo.png` (1244 by 1300) is the only image used for Open Graph and Twitter cards. A purpose-made 1200 by 630 image with the headline would preview better on LinkedIn.
-14. Untracked folders left in the working tree, not touched by this work: `_to_delete/`, `docs/prompts/`, `docs/homepage-credibility-review.md`, and `Claude outputs/` (created by the desktop app during this session). Decide what to commit or remove.
+14. AI training crawlers (Google-Extended, Applebot-Extended, CCBot, Bytespider, meta-externalagent) are allowed in `robots.txt`. Decide whether the company wants its content used for model training and record the decision; the rule group is one line to change.
+15. Untracked folders left in the working tree, not touched by this work: `_to_delete/`, `docs/prompts/`, `docs/homepage-credibility-review.md`, and `Claude outputs/` (created by the desktop app during this session). Decide what to commit or remove.
 
 Owner tasks outside the code, from the brief: confirm the representing board members; confirm the four Eurofins titles against LinkedIn; confirm team size if it is to be stated; confirm the risk-assessment tiers, timelines and currency, or take them off the assessment page; ask LIAA to correct the net turnover on the English business.gov.lv company page; ask the Digital Health Association Latvia and the Latvian American Chamber of Commerce to list the company if membership is current, or remove those logos from the About page; obtain logo permission from Eurofins Genomics and any other client before any logo row is built.
 
