@@ -9,28 +9,21 @@ import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import { ThemeProvider } from './components/ThemeProvider';
+import { pageKeywords } from './lib/keywords';
 import { buildMetadata, buildOfferCatalogSchema } from './lib/seo';
 
 /**
  * The root page shares its segment with the root layout, so the layout's title template does not
- * apply here; the company name is therefore part of the title itself. Title and description restate
- * the hero; the keywords name the kinds of work in the published cases (`app/data/work.ts`).
+ * apply here; the company name is therefore part of the title itself. The title and description
+ * carry the homepage's target topic, laboratory software development and systems integration, in
+ * the words the hero already uses; the keywords come from `app/lib/keywords.ts`.
  */
 export const metadata: Metadata = buildMetadata({
-  title: 'Custom Software and System Integrations for Life Sciences | Double Helix Technologies',
+  title: 'Laboratory Software Development and Systems Integration | Double Helix Technologies',
   description:
-    'Custom software and system integrations for life sciences and healthcare operations in Europe and North America. LIMS and ERP integration, NGS data delivery, API onboarding.',
+    'Custom laboratory software and systems integration for life sciences and healthcare operations in Europe and North America. LIMS and ERP integration, workflow automation.',
   path: '/',
-  keywords: [
-    'LIMS and ERP integration',
-    'NGS data delivery automation',
-    'customer API onboarding',
-    'forensics system integration',
-    'IT operations cost reduction',
-    'SRE and observability improvement',
-    'rapid MVP development',
-    'custom software for regulated operations'
-  ]
+  keywords: pageKeywords.home
 });
 
 /**

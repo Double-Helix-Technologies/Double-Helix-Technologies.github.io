@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { getServicePath, servicesContents } from '../data/services';
+import { siteKeywords } from './keywords';
 
 export const siteConfig = {
   name: 'Double Helix Technologies',
@@ -31,24 +32,11 @@ export const siteConfig = {
 } as const;
 
 /**
- * Site-wide keywords, one per service in `app/data/services.ts` plus the two sector phrases.
- * Search engines give this tag little or no weight; it is kept honest rather than long. It no
- * longer names ISO certification: the only approved wording on that subject is in
- * `ComplianceNotice.tsx` (certification is in progress).
+ * Site-wide keywords, added to every page. The library they come from, and the reasoning behind
+ * the targets, are in `app/lib/keywords.ts` and `docs/keyword-targeting.md`.
  */
-const defaultKeywords = [
-  'life sciences software development',
-  'healthcare software development',
-  'system integrations for life sciences and healthcare',
-  'LIMS integration',
-  'laboratory workflow automation',
-  'operational workflow risk assessment',
-  'observability and workflow monitoring',
-  'custom AI solutions for life sciences and healthcare',
-  'security, compliance and AI governance readiness',
-  'life sciences software consulting',
-  'healthcare software consulting'
-];
+const defaultKeywords = siteKeywords;
+
 
 export function absoluteUrl(path = '/') {
   return new URL(path, siteConfig.url).toString();

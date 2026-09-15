@@ -181,11 +181,12 @@ export const clientSolutions: ClientSolution[] = [
         'See how Double Helix connected LIMS, ERP, e-commerce and reporting systems for Eurofins Genomics, cut data entry points from 7 to 1 and freed 50% of team capacity.',
       keywords: [
         'LIMS integration case study',
+        'LIMS ERP integration',
+        'laboratory data integration',
+        'laboratory ecommerce integration',
+        'laboratory workflow automation',
         'process automation life sciences',
-        'ERP LIMS integration',
-        'workflow automation case study',
         'sample management automation',
-        'Sample Management System',
         'sequencing workflow automation'
       ]
     },
@@ -258,11 +259,12 @@ export const clientSolutions: ClientSolution[] = [
         'See how Double Helix automated NGS data delivery and archival for Eurofins Genomics, cutting delivery time from 1.5 days to 3 hours with monitoring and an optional 4-eyes approval.',
       keywords: [
         'NGS data delivery automation',
-        'genomics data pipeline automation',
-        'sequencing data archival',
+        'sequencing data delivery automation',
+        'sequencing data transfer automation',
+        'sequencing data archiving',
+        'genomics workflow automation',
+        'genomics data integration',
         'FASTQ delivery automation',
-        'cloud storage tiering case study',
-        'Sanger sequencing data delivery',
         'NGS data delivery pipeline'
       ]
     },
@@ -322,10 +324,11 @@ export const clientSolutions: ClientSolution[] = [
       description:
         'See how Double Helix built a standardised API and onboarding process for Eurofins Genomics that cut B2B customer onboarding from months to under two weeks.',
       keywords: [
-        'API onboarding case study',
+        'laboratory customer API onboarding',
+        'LIMS API integration',
         'B2B LIMS integration',
+        'laboratory customer portal development',
         'customer integration automation',
-        'sample lifecycle visibility',
         'standardized API integration'
       ]
     },
@@ -381,9 +384,9 @@ export const clientSolutions: ClientSolution[] = [
       description:
         'See how Double Helix formed a new delivery team and launched an MVP integration that let a customer be first to launch in a government forensics digitalization initiative, two years behind schedule.',
       keywords: [
+        'forensic laboratory systems integration',
         'forensics digitalization case study',
         'law enforcement systems integration',
-        'MVP integration case study',
         'DNA analysis workflow digitalization',
         'digital forensics portal'
       ]
@@ -438,9 +441,10 @@ export const clientSolutions: ClientSolution[] = [
         'See how Double Helix reworked IT processes and application ownership across 10+ applications at Eurofins Genomics, cutting repeat incidents by 95% and IT costs by 37%.',
       keywords: [
         'IT reorganization case study',
+        'laboratory IT operations improvement',
         'IT operations transformation',
-        'root cause analysis IT',
         'IT incident reduction',
+        'root cause analysis IT',
         'application ownership case study'
       ]
     },
