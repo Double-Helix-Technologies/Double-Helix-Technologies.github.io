@@ -11,7 +11,9 @@ import { partners, type Partner } from '@/app/data/partners';
  * Narrow band under the hero: customer and partner logos scrolling right to left, each linking to
  * the organisation's site. Pauses while the pointer is on it and stands still for visitors who
  * prefer reduced motion. Logos are shown in grey and colour on hover; in the dark theme they are
- * rendered as light silhouettes so mixed brand colours do not fight the background.
+ * rendered as light silhouettes so mixed brand colours do not fight the background. An entry with
+ * a `brandColor` follows the same rule: grey at rest, the partner's own colour on hover, in the
+ * dark theme too, so its mark and its lettering change together.
  *
  * The scrolling band renders only in the browser (react-fast-marquee measures its content), so the
  * names and links are also in a visually hidden list that is in the server-rendered HTML. That list
@@ -69,12 +71,22 @@ export default function LogoMarquee() {
                     alt={item.wordmark ? '' : item.name}
                     width={item.logoWidth ?? 160}
                     height={item.logoHeight ?? 48}
-                    className={`h-auto w-auto object-contain opacity-80 grayscale transition duration-300 group-hover:opacity-100 group-hover:grayscale-0 dark:brightness-0 dark:invert dark:group-hover:brightness-0 dark:group-hover:invert ${
-                      item.wordmark ? 'max-h-8 max-w-8' : 'max-h-full max-w-32 sm:max-w-40'
-                    }`}
+                    className={`h-auto w-auto object-contain opacity-80 grayscale transition duration-300 group-hover:opacity-100 group-hover:grayscale-0 dark:brightness-0 dark:invert ${
+                      item.brandColor
+                        ? 'dark:group-hover:brightness-100 dark:group-hover:invert-0'
+                        : 'dark:group-hover:brightness-0 dark:group-hover:invert'
+                    } ${item.wordmark ? 'max-h-7 max-w-7' : 'max-h-full max-w-32 sm:max-w-40'}`}
                   />
                 )}
-                {item.wordmark && <Wordmark segments={item.wordmark} tone="muted" className="text-xl opacity-80 group-hover:opacity-100" />}
+                {item.wordmark && (
+                  <Wordmark
+                    segments={item.wordmark}
+                    tone="muted"
+                    accentColor={item.brandColor}
+                    tagline={item.tagline}
+                    className={`opacity-80 group-hover:opacity-100 ${item.tagline ? 'text-lg' : 'text-xl'}`}
+                  />
+                )}
               </a>
             </MarqueeItem>
           ))}

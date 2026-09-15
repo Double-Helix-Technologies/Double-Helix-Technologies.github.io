@@ -17,6 +17,14 @@ export interface Partner {
   logoHeight?: number;
   /** Typeset next to the mark (or alone) in the site font when the organisation's logo is lettering. */
   wordmark?: WordmarkSegment[];
+  /** Second line under the wordmark, as the organisation sets it themselves. */
+  tagline?: string;
+  /**
+   * The organisation's own accent colour. Where it is set, the marquee shows that entry in the
+   * partner's colours instead of the grey treatment it gives every other logo, so set it only
+   * where the owner has asked for it.
+   */
+  brandColor?: string;
 }
 
 /**
@@ -72,6 +80,23 @@ export const partners: Partner[] = [
     kind: 'partner',
     href: 'https://www.helixtech.bio/en',
     wordmark: [{ text: 'helix' }, { text: '.tech', accent: true }, { text: '.bio', sup: true }]
+  },
+  {
+    // Added at the owner's request on 15 September 2026. Offensive security (IT security audits and
+    // penetration testing), which sits next to our security and compliance readiness work.
+    // OWNER: the crosshair is redrawn from the logo the owner supplied and the name is typeset in
+    // the site font; replace with Pentests.lv's original asset when available, and confirm they
+    // agree to being shown.
+    name: 'Pentests.lv',
+    kind: 'partner',
+    href: 'https://pentests.lv',
+    logo: '/images/partners/pentests-mark.svg',
+    logoWidth: 100,
+    logoHeight: 100,
+    wordmark: [{ text: 'PENTESTS' }, { text: '.LV', accent: true }],
+    tagline: 'Offensive security',
+    // Sampled from the logo the owner supplied; OWNER: confirm the exact brand red.
+    brandColor: '#D83236'
   }
 ];
 
