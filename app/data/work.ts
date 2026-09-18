@@ -438,7 +438,7 @@ export const clientSolutions: ClientSolution[] = [
   {
     slug: 'forensics-integration',
     title: 'Forensics integration',
-    headline: '2 years late. First to launch.',
+    headline: 'First to launch, despite joining two years late',
     tags: ['MVP', 'Integration', 'Digitalization'],
     categories: ['automation-integration', 'custom-software'],
     summary:
@@ -1060,12 +1060,14 @@ export function getProductBySlug(slug: string) {
 }
 
 /**
- * Cases shown in the homepage carousel, in this order. Owner decision of 18 September 2026: the homepage
- * keeps the seven cases it had; cases added since then (security assessment, industrial dashboards, ELN,
- * patient registration) appear on /work/ only. To feature a case on the homepage, add its slug here.
+ * Cases shown in the homepage carousel, in this order. Owner decisions of 18 September 2026: the homepage
+ * keeps the seven cases it had, plus the Electronic Laboratory Notebook case in second place; the other
+ * cases added that day (security assessment, industrial dashboards, patient registration) appear on
+ * /work/ only. To feature a case on the homepage, add its slug here.
  */
 export const homepageCaseSlugs = [
   'process-automation-lims-integration',
+  'electronic-laboratory-notebook-bioprocessing',
   'ngs-data-delivery-automation',
   'customer-integration-api-onboarding',
   'forensics-integration',

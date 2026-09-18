@@ -28,7 +28,7 @@ Quotes. The FactoryDB.io quote is an excerpt of the reference letter with one ch
 
 The two anonymous cases carry no quote. Their consent documents contain a proposed testimonial each, but the documents are unsigned, so the testimonials, names and logos stay unpublished. When a signed consent arrives: set `client`, remove `cardLabel`, add the approved `quote`, and lift the corresponding hide in `LogoMarquee.tsx` and `llms.txt/route.ts` if the logo is to be shown.
 
-Homepage. The carousel keeps the seven cases it had. The homepage now reads `getHomepageClientSolutions()` (an explicit slug list, `homepageCaseSlugs` in `work.ts`) instead of every case in `clientSolutions`. Reason: the two named new cases are outside life sciences, and eleven slides at twelve seconds each is too long. To feature a case on the homepage, add its slug to the list and, optionally, a prose heading in `RESULT_HEADINGS` in `ClientCases.tsx`.
+Homepage. The carousel keeps the seven cases it had, plus the Electronic Laboratory Notebook case in second place (added later the same day at Alex's request). The homepage now reads `getHomepageClientSolutions()` (an explicit slug list, `homepageCaseSlugs` in `work.ts`) instead of every case in `clientSolutions`. Reason: the two named new cases are outside life sciences, and eleven slides at twelve seconds each is too long. Also that day, the forensics result was reworded from "2 years late. First to launch." to the homepage's prose form, "First to launch, despite joining two years late", so the card, the case page and the carousel now say it the same way. To feature a case on the homepage, add its slug to the list and, optionally, a prose heading in `RESULT_HEADINGS` in `ClientCases.tsx`.
 
 ## Model changes
 
