@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import type { MouseEvent } from 'react';
 import Link from 'next/link';
 import {
@@ -13,19 +13,20 @@ import {
   useTransform
 } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
-import type { WorkListItem, WorkTag } from '@/app/data/work';
+import { workCategories, type WorkCategory, type WorkListItem, type WorkTag } from '@/app/data/work';
 
 type WorkShowcaseProps = {
   items: WorkListItem[];
 };
 
-const FILTERS: Array<WorkTag | 'All'> = ['All', 'for clients', 'Our products'];
+type Filter = WorkCategory | 'All';
 
-const FILTER_LABELS: Record<WorkTag | 'All', string> = {
-  All: 'All',
-  'for clients': 'For clients',
-  'Our products': 'Our products'
-};
+/** Query parameter that carries the active filter, so a filtered view can be linked to (`/work/?type=custom-software`). */
+const FILTER_PARAM = 'type';
+
+function isWorkCategory(value: string | null): value is WorkCategory {
+  return workCategories.some((category) => category.id === value);
+}
 
 type Accent = {
   /** Highlight that slides between cards on hover. */
@@ -68,34 +69,95 @@ const TILT_DEGREES = 5;
  * (shared layout animation, after Aceternity UI's Card Hover Effect and 3D Card). On touch devices
  * there is no hover, so the further outcomes are shown stacked under the result and the decorations
  * stay off. Motion is disabled when the visitor prefers reduced motion.
+ *
+ * The filter groups entries by type of work (`workCategories` in work.ts): text options on one
+ * hairline, an underline that slides to the selected one, and a one-line description of the
+ * selection as a caption. No box, no counts on the options and nothing added to the cards
+ * themselves (owner decisions of 18 September 2026).
  */
 export default function WorkShowcase({ items }: WorkShowcaseProps) {
-  const [activeFilter, setActiveFilter] = useState<WorkTag | 'All'>('All');
+  const [activeFilter, setActiveFilter] = useState<Filter>('All');
   const [hoveredSlug, setHoveredSlug] = useState<string | null>(null);
+
+  // The filter is mirrored in `?type=` so a filtered view can be linked to. The static HTML always
+  // shows every card; the parameter is read after hydration and written back without a navigation.
+  useEffect(() => {
+    const requested = new URLSearchParams(window.location.search).get(FILTER_PARAM);
+    if (isWorkCategory(requested)) setActiveFilter(requested);
+  }, []);
+
+  function selectFilter(filter: Filter) {
+    setActiveFilter(filter);
+    const url = new URL(window.location.href);
+    if (filter === 'All') url.searchParams.delete(FILTER_PARAM);
+    else url.searchParams.set(FILTER_PARAM, filter);
+    window.history.replaceState(null, '', url);
+  }
+
+  // One chip per type of work that has at least one entry. No counts: a case can sit in two
+  // categories, so per-chip numbers would not add up to the total (owner decision, 18 September 2026).
+  const filters = useMemo(
+    () => [
+      {
+        id: 'All' as const,
+        label: 'All',
+        description: 'Everything we have delivered for clients, and the products we build ourselves.'
+      },
+      ...workCategories.filter((category) => items.some((item) => item.categories.includes(category.id)))
+    ],
+    [items]
+  );
+
+  const activeDescription = filters.find((filter) => filter.id === activeFilter)?.description;
+  const reduceMotion = useReducedMotion();
 
   const filteredItems = useMemo(() => {
     if (activeFilter === 'All') return items;
-    return items.filter((item) => item.tag === activeFilter);
+    return items.filter((item) => item.categories.includes(activeFilter));
   }, [items, activeFilter]);
 
   return (
     <div className="space-y-8">
-      <div className="flex flex-wrap gap-3">
-        {FILTERS.map((filter) => (
-          <button
-            key={filter}
-            type="button"
-            onClick={() => setActiveFilter(filter)}
-            aria-pressed={activeFilter === filter}
-            className={`rounded-full border px-4 py-2 text-sm font-medium transition-colors ${
-              activeFilter === filter
-                ? 'border-transparent bg-text-primary text-background'
-                : 'border-border/40 text-text-secondary hover:border-border hover:text-text-primary'
-            }`}
-          >
-            {FILTER_LABELS[filter]}
-          </button>
-        ))}
+      {/* Filter: text options on one hairline with an underline that slides to the selection (shared
+          layout animation, like the highlight between cards), and the description of the selected type
+          of work as a caption beneath. No box or fill, so the control adds no weight to the page. */}
+      <div>
+        <div className="flex flex-wrap gap-x-7 gap-y-1 border-b border-divider" role="group" aria-label="Filter by type of work">
+          {filters.map((filter) => {
+            const active = activeFilter === filter.id;
+            return (
+              <button
+                key={filter.id}
+                type="button"
+                onClick={() => selectFilter(filter.id)}
+                aria-pressed={active}
+                className={`relative -mb-px py-3 text-sm font-medium outline-none transition-colors focus-visible:text-text-primary ${
+                  active ? 'text-text-primary' : 'text-text-secondary hover:text-text-primary'
+                }`}
+              >
+                {filter.label}
+                {active && (
+                  <motion.span
+                    aria-hidden="true"
+                    layoutId="work-filter-underline"
+                    className="absolute inset-x-0 bottom-0 h-0.5 bg-accent-blue"
+                    transition={reduceMotion ? { duration: 0 } : { type: 'spring', stiffness: 500, damping: 40 }}
+                  />
+                )}
+              </button>
+            );
+          })}
+        </div>
+        <motion.p
+          key={activeFilter}
+          initial={reduceMotion ? false : { opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.25 }}
+          className="mt-4 max-w-3xl text-sm text-text-secondary"
+          aria-live="polite"
+        >
+          {activeDescription}
+        </motion.p>
       </div>
 
       {filteredItems.length === 0 ? (

@@ -2,6 +2,62 @@ export type ClientSolutionStatus = 'completed' | 'ongoing';
 export type ProductStatus = 'live' | 'pilot' | 'in-development';
 export type WorkTag = 'for clients' | 'Our products';
 
+/**
+ * Type of work, the one grouping the /work overview filters by (owner decision of 18 September 2026:
+ * filter by what we did, not by sector, and show nothing extra on the cards). A client case carries
+ * one or two categories, primary first; a product is always `own-products`.
+ */
+export type WorkCategory =
+  | 'automation-integration'
+  | 'custom-software'
+  | 'reliability-operations'
+  | 'security-data-protection'
+  | 'own-products';
+
+export interface WorkCategoryInfo {
+  id: WorkCategory;
+  label: string;
+  /** One sentence shown under the filter row while this category is selected. */
+  description: string;
+}
+
+export const workCategories: WorkCategoryInfo[] = [
+  {
+    id: 'automation-integration',
+    label: 'Automation & integration',
+    description:
+      'Connecting LIMS, ERP, e-commerce, customer systems and portals so that data moves between them without manual re-entry.'
+  },
+  {
+    id: 'custom-software',
+    label: 'Custom software & MVPs',
+    description:
+      'Software built for a specific workflow, from an MVP in under a week to full platforms with cloud infrastructure: notebooks, portals, dashboards.'
+  },
+  {
+    id: 'reliability-operations',
+    label: 'Reliability & IT operations',
+    description: 'Making existing systems dependable: monitoring, alerting, root-cause analysis, ownership and IT processes.'
+  },
+  {
+    id: 'security-data-protection',
+    label: 'Security & data protection',
+    description:
+      'Security reviews with the fixes implemented, and architectures that keep personal data isolated from operational systems.'
+  },
+  {
+    id: 'own-products',
+    label: 'Our products',
+    description: 'Software we build and run ourselves.'
+  }
+];
+
+export function getWorkCategory(id: WorkCategory): WorkCategoryInfo {
+  const category = workCategories.find((entry) => entry.id === id);
+  if (!category) throw new Error(`Unknown work category: ${id}`);
+  return category;
+}
+
 export interface Customer {
   name: string;
   href: string;
@@ -84,8 +140,9 @@ export interface EngagementFact {
 }
 
 /**
- * The single number shown on the homepage slider card, animated from `from` to `value`.
- * Keep `label` to one short line; the card shows nothing else.
+ * A single headline number for a compact card, animated from `from` to `value`. Not rendered anywhere at
+ * the moment (the homepage carousel shows `highlightStats` instead); kept for cases that have a real figure.
+ * Never set it for a case without a numeric result.
  */
 export interface FeaturedStat {
   value: number;
@@ -105,6 +162,8 @@ export interface ClientSolution {
   /** Further results beyond `headline`, revealed on the overview card on hover. Must not repeat `headline`. */
   moreOutcomes: string;
   tags: string[];
+  /** Type of work for the overview filters: one or two of `workCategories`, primary first. */
+  categories: WorkCategory[];
   sector: string;
   /** Short label for the overview card when the client is not named. Falls back to `sector`. */
   cardLabel?: string;
@@ -120,11 +179,16 @@ export interface ClientSolution {
   problem: string;
   approach?: string;
   dataFlow?: string;
+  /**
+   * How access control, audit trails, data separation or similar controls were handled, as a description of
+   * what was built. Rendered as "Security and traceability". Describe; never assert compliance with a standard.
+   */
+  regulatedContext?: string;
   users: string[];
   whatWasDelivered: string[];
   outcomes: string[];
   highlightStats: HighlightStat[];
-  featuredStat: FeaturedStat;
+  featuredStat?: FeaturedStat;
   engagementFacts?: EngagementFact[];
   relatedServiceSlugs: string[];
   quote?: ClientSolutionQuote;
@@ -157,7 +221,10 @@ export interface Product {
 /**
  * Content source of truth: the Double Helix sales deck "IT service partner for life sciences
  * and healthcare" and the company one-pager. Figures and quotes must match those documents.
- * Clients are named only where `client` is set; everything else stays anonymous.
+ * The four cases added in September 2026 (security assessment, industrial dashboards, ELN, patient
+ * registration) come from client reference letters and the case-study consent documents held by the owner;
+ * nothing in them goes beyond those sources. Clients are named only where `client` is set; everything else
+ * stays anonymous, and no comment in this file may link an anonymous case to a client (the repository is public).
  */
 export const clientSolutions: ClientSolution[] = [
   {
@@ -165,6 +232,7 @@ export const clientSolutions: ClientSolution[] = [
     title: 'Process automation & LIMS integration',
     headline: '7 data entry points → 1',
     tags: ['Automation', 'Integration', 'LIMS'],
+    categories: ['automation-integration'],
     summary:
       'Connected e-commerce, LIMS, ERP and reporting systems in an NGS operation, automated the workflow between them, and gave project managers and Customer Care one place to manage projects and samples.',
     preview:
@@ -244,6 +312,7 @@ export const clientSolutions: ClientSolution[] = [
     title: 'NGS data delivery automation',
     headline: '1.5 days → 3 hours',
     tags: ['Automation', 'Data', 'Cloud', 'Monitoring'],
+    categories: ['automation-integration'],
     summary:
       'Automated, monitored and auditable delivery and archival of sequencing data, replacing manual command-line file transfers.',
     preview: 'A critical data delivery process depended on people copying FASTQ files through command-line tools.',
@@ -310,6 +379,7 @@ export const clientSolutions: ClientSolution[] = [
     title: 'Customer integration & API onboarding',
     headline: 'Months → under 2 weeks',
     tags: ['APIs', 'Integration', 'Onboarding'],
+    categories: ['automation-integration'],
     summary:
       'Built a standardised API and onboarding process connecting B2B customer systems with the service provider’s LIMS.',
     preview: 'Every new customer integration was becoming its own project.',
@@ -370,6 +440,7 @@ export const clientSolutions: ClientSolution[] = [
     title: 'Forensics integration',
     headline: '2 years late. First to launch.',
     tags: ['MVP', 'Integration', 'Digitalization'],
+    categories: ['automation-integration', 'custom-software'],
     summary:
       'Formed a new team, delivered an MVP integration and replaced email and paper-based workflows with a connected portal.',
     preview: 'A customer joined a government digitalisation initiative two years behind schedule.',
@@ -427,6 +498,7 @@ export const clientSolutions: ClientSolution[] = [
     title: 'IT reorganization',
     headline: '95% fewer repeat incidents',
     tags: ['IT Operations', 'Reliability', 'Support'],
+    categories: ['reliability-operations'],
     summary: 'Reworked IT processes, application ownership, monitoring and root-cause analysis across 10+ applications.',
     preview: 'IT was spending too much time fixing the same problems, while users had little idea what was going on.',
     moreOutcomes: '37% lower annual IT costs, internal IT NPS from -25 to +72, issue resolution from 20+ days to 3',
@@ -499,6 +571,7 @@ export const clientSolutions: ClientSolution[] = [
     title: 'Observability improvement',
     headline: '80% fewer alerts. 4× faster response.',
     tags: ['SRE', 'Observability', 'Monitoring'],
+    categories: ['reliability-operations'],
     summary: 'Built an SRE function, mapped critical systems and redesigned monitoring around business impact.',
     preview: '30+ live systems were generating more than 200 alerts every day. The important ones were getting lost in the noise.',
     moreOutcomes: '40% fewer incidents, false positives eliminated, SLAs and system ownership defined',
@@ -567,6 +640,7 @@ export const clientSolutions: ClientSolution[] = [
     title: 'Rapid MVP development',
     headline: 'Idea → working MVP in under a week',
     tags: ['MVP', 'Discovery', 'Product Development'],
+    categories: ['custom-software'],
     summary: 'Ran discovery workshops, built a working prototype and put it in the hands of real users.',
     preview: 'The business wanted to field-test a new digital work-scheduling process without disrupting existing operations.',
     moreOutcomes: 'Pilot live in two months with no disruption to existing operations',
@@ -614,6 +688,289 @@ export const clientSolutions: ClientSolution[] = [
     ],
     featuredStat: { value: 1, from: 10, prefix: 'Under ', suffix: ' week', label: 'from idea to working MVP' },
     relatedServiceSlugs: ['custom-software-development', 'ai-adoption-solutions']
+  },
+  {
+    slug: 'marketplace-security-assessment-hardening',
+    title: 'Security assessment & infrastructure hardening',
+    headline: 'Reviewed, prioritised, hardened.',
+    tags: ['Security', 'Infrastructure', 'CI/CD'],
+    categories: ['security-data-protection'],
+    summary:
+      'Assessed the application, infrastructure and development process of an online marketplace, prioritised the risks and implemented the fixes, including infrastructure hardening.',
+    preview:
+      'A growing marketplace platform wanted its application, infrastructure and delivery pipeline checked against current security requirements, with the findings fixed rather than filed.',
+    moreOutcomes:
+      'Code, access control, APIs, CI/CD and infrastructure reviewed; recommendations implemented, not just handed over',
+    sector: 'E-commerce / online marketplace',
+    status: 'completed',
+    client: { name: 'Mainos' },
+    primaryCategory: 'Application & infrastructure security assessment',
+    supportingThemes: [
+      'Code and security architecture review',
+      'Authentication and access control',
+      'API and data handling security',
+      'CI/CD pipeline security',
+      'Infrastructure hardening'
+    ],
+    seo: {
+      title: 'Security Assessment & Infrastructure Hardening Case Study',
+      description:
+        'See how Double Helix reviewed the application, infrastructure and CI/CD pipeline of the mainos.lv marketplace, prioritised the risks and implemented the fixes and infrastructure hardening.',
+      keywords: [
+        'application security assessment case study',
+        'security audit case study',
+        'infrastructure hardening',
+        'CI/CD security review',
+        'web application security review',
+        'marketplace platform security'
+      ]
+    },
+    problem:
+      'Mainos runs mainos.lv, an online second-hand marketplace. Its operation depends on a secure and stable IT infrastructure, modern deployment environments and reliable software development processes. To reduce potential security risks and bring the system in line with current security requirements, the company wanted a comprehensive security assessment covering the application, the infrastructure and the development process, and it wanted the findings addressed, not only listed.',
+    approach:
+      'Double Helix reviewed the application code and security architecture, the authentication, authorisation and access-control mechanisms, the security of API integrations and data processing, and the CI/CD process and infrastructure. Findings were prioritised by risk so that the most significant exposures were dealt with first. The engagement then moved from review to implementation: infrastructure hardening, security configuration improvements and the recommended changes were carried out by the same team.',
+    users: ['Engineering team', 'Management'],
+    whatWasDelivered: [
+      'Review of the application code and security architecture',
+      'Review of authentication, authorisation and access-control mechanisms',
+      'Security assessment of API integrations and data processing',
+      'Security analysis of the CI/CD process and infrastructure',
+      'Vulnerabilities identified and risks prioritised',
+      'Infrastructure hardening and improved security configuration',
+      'Security recommendations prepared and implemented'
+    ],
+    outcomes: [
+      'The most significant security risks were identified quickly and addressed in priority order',
+      'Recommendations were implemented as part of the engagement, so the review produced changes rather than a report',
+      'Infrastructure hardened and security configuration improved',
+      'The overall security resilience of the platform improved'
+    ],
+    highlightStats: [],
+    engagementFacts: [
+      { label: 'Scope', value: 'Application, infrastructure and development process' },
+      { label: 'Reference', value: 'Written reference from the client, June 2026' }
+    ],
+    relatedServiceSlugs: ['ai-governance-compliance', 'custom-software-development', 'system-integrations'],
+    quote: {
+      // OWNER: translated from the Latvian reference letter of 26 June 2026 (SIA MAINOS atsauksme). Approve the
+      // translation before publishing; the Latvian original is the authoritative text.
+      text:
+        'The team was able to quickly identify the most significant security risks, understand the system’s technical architecture and propose practical solutions that matched our business and technical needs. We particularly value Double Helix Technologies’ competence in application security, infrastructure protection and security risk management. The cooperation was constructive, communication was clear and timely, and the work was delivered to a high standard with a focus on long-term results.',
+      attribution: 'Marta Būmane, Board Member, SIA Mainos (translated from Latvian)'
+    }
+  },
+  {
+    slug: 'industrial-data-visualisation-dashboards',
+    title: 'Industrial data visualisation dashboards',
+    headline: 'Fragmented machine data → real-time dashboards',
+    tags: ['Data visualisation', 'Dashboards', 'Product Development'],
+    categories: ['custom-software'],
+    summary:
+      'Designed and built the user interface and real-time dashboards of an industrial data platform, so that data from PLC, SCADA, CNC and other production systems is readable by the people who run production.',
+    preview:
+      'An industrial data platform needed a user interface that shows sensor and machine data in real time, structured so that end users understand it.',
+    moreOutcomes: 'Real-time dashboards for PLC, SCADA and CNC data, delivered on time and with high quality',
+    sector: 'Industrial data platform / manufacturing',
+    status: 'completed',
+    client: { name: 'FactoryDB.io' },
+    primaryCategory: 'Data visualisation & UI development',
+    supportingThemes: [
+      'Real-time dashboards',
+      'Sensor data visualisation',
+      'Usability for production teams',
+      'Requirements work with the product team'
+    ],
+    seo: {
+      title: 'Industrial Data Visualisation Dashboards Case Study',
+      description:
+        'See how Double Helix built the user interface and real-time dashboards for the FactoryDB.io industrial data platform, turning PLC, SCADA and CNC sensor data into views production teams can read.',
+      keywords: [
+        'industrial data visualisation case study',
+        'real-time dashboard development',
+        'sensor data dashboard',
+        'manufacturing data platform UI',
+        'industrial IoT dashboard development',
+        'data visualisation software development'
+      ]
+    },
+    problem:
+      'FactoryDB.io develops an industrial data platform that helps manufacturing companies consolidate and analyse data from machines and systems on the production floor, including PLC, SCADA and CNC equipment. Its purpose is to turn complex, fragmented data into information people can act on: more transparent processes, lower downtime risk and data-driven decisions. That depends on the interface. The platform needed a graphical user interface and dashboards that display data arriving from sensors and industrial systems in real time, structured so that end users understand it.',
+    approach:
+      'Double Helix worked with the FactoryDB.io team to clarify the requirements and then designed and built the user interface and the real-time dashboard solutions. The work concentrated on usability: turning streams of sensor data into structured views that make production data transparent to the people who work with it every day.',
+    users: ['Production and operations teams at manufacturing companies', 'FactoryDB.io product team'],
+    whatWasDelivered: [
+      'User interface for industrial data visualisation',
+      'Real-time dashboards for data from sensors and industrial systems',
+      'Structured, understandable presentation of sensor data for end users',
+      'Usability and transparency improvements for working with production data',
+      'Requirements clarified and implemented together with the client’s team'
+    ],
+    outcomes: [
+      'Data from PLC, SCADA, CNC and other production systems is displayed in real time in dashboards end users can read',
+      'Production data is more transparent and easier to work with for the platform’s users',
+      'Work delivered on time and with high quality, as confirmed in the client’s reference',
+      'The interface supports what the platform is for: process transparency, lower downtime risk and data-driven decisions'
+    ],
+    highlightStats: [],
+    engagementFacts: [
+      { label: 'Data sources', value: 'PLC, SCADA, CNC and other production systems' },
+      { label: 'Reference', value: 'Written reference from the client, June 2026' }
+    ],
+    relatedServiceSlugs: ['custom-software-development', 'observability-workflow-monitoring', 'system-integrations'],
+    quote: {
+      // OWNER: excerpt from the reference letter of 18 June 2026. One change from the letter’s wording: “SIA
+      // “Double Helix Technologies” ability” is rendered as “Double Helix Technologies’ ability”. Revert if the
+      // client should be quoted exactly.
+      text:
+        'The team was able to understand both the technical requirements and the specifics of the industrial data environment, offering practical solutions aligned with the product development needs. We particularly value Double Helix Technologies’ ability to work with complex data visualization, improve user experience, and adapt technical solutions to real business needs. The cooperation was constructive, communication was clear, and the work was delivered on time and with high quality.',
+      attribution: 'Arturs Lundbergs, Associate and President of the Direction, DFTechnology Group GmbH (FactoryDB.io)'
+    }
+  },
+  {
+    slug: 'electronic-laboratory-notebook-bioprocessing',
+    title: 'Electronic Laboratory Notebook for bioprocessing R&D',
+    headline: 'Working ELN in under a month',
+    tags: ['ELN', 'Product Development', 'Cloud'],
+    categories: ['custom-software'],
+    summary:
+      'Designed and built a web-based Electronic Laboratory Notebook that brings experiments, projects, laboratory notes, structured scientific data and simulation together in one environment for researchers.',
+    preview:
+      'Researchers needed more than digital note-taking: one structured place for experiments, scientific data and simulation-driven work, with traceability built in.',
+    moreOutcomes: 'Audit trails, controlled access and an architecture ready for continued product development',
+    sector: 'Biotech / bioprocessing R&D',
+    cardLabel: 'Bioprocessing R&D',
+    status: 'completed',
+    // OWNER: client name, logo and testimonial are pending signed consent. Keep this case anonymous until then.
+    primaryCategory: 'Custom laboratory software / ELN',
+    supportingThemes: [
+      'Experiment and project management',
+      'Structured scientific data',
+      'Simulation-connected workflows',
+      'Audit trails and access control',
+      'Full-cycle delivery'
+    ],
+    seo: {
+      title: 'Electronic Laboratory Notebook Development Case Study',
+      description:
+        'See how Double Helix designed and built a web-based Electronic Laboratory Notebook for a bioprocessing R&D team in under a month, with audit trails, controlled access and simulation-connected workflows.',
+      keywords: [
+        'electronic laboratory notebook development',
+        'custom ELN development',
+        'ELN software case study',
+        'laboratory notebook software',
+        'bioprocessing R&D software',
+        'custom laboratory software development',
+        'simulation-driven R&D workflow software'
+      ]
+    },
+    problem:
+      'A biotech company developing simulation technology for bioprocessing needed an Electronic Laboratory Notebook for researchers working with experiments, scientific data and simulation-based workflows. Basic laboratory note-taking was not enough. Researchers needed a structured environment where experiments, projects, observations and supporting data are managed consistently, and where laboratory work connects to the company’s existing simulation capabilities. Traceability, controlled access and a user experience that holds up in daily scientific work were requirements from the outset.',
+    approach:
+      'Double Helix ran the full delivery cycle as one integrated project: requirements analysis, UX/UI design, software architecture, front-end and back-end development, integrations and cloud infrastructure. The ELN was designed as part of the broader scientific workflow rather than as a standalone notebook, so experimental work and simulation-driven research coexist on the same platform. A functional web-based ELN was delivered in under a month from project start.',
+    regulatedContext:
+      'Access to the ELN is authenticated and controlled per user, and audit trails support the traceability of laboratory documentation. Both were requirements from the outset and were built into the platform rather than added afterwards.',
+    users: ['Researchers', 'R&D and product teams'],
+    whatWasDelivered: [
+      'Web-based Electronic Laboratory Notebook tailored to the company’s R&D workflows',
+      'Experiment and project management with structured electronic laboratory notes and annotations',
+      'Structured scientific data and simulation functionality in one environment',
+      'Authentication and controlled user access',
+      'Audit trails to support traceability',
+      'Requirements analysis, UX/UI design, architecture, development, integrations and cloud infrastructure as one integrated delivery'
+    ],
+    outcomes: [
+      'Functional web-based ELN delivered in under one month from project start',
+      'Experiments, projects and laboratory documentation centralised in one place',
+      'Experimental workflows connected with simulation functionality',
+      'Traceability supported by audit trails, with access controlled per user',
+      'Scalable architecture in place for continued product development'
+    ],
+    highlightStats: [
+      {
+        value: 'Under 1 month',
+        label: 'from project start to a working ELN',
+        detail: 'Requirements, design, development and cloud infrastructure were delivered as one integrated project.'
+      }
+    ],
+    featuredStat: { value: 1, from: 6, prefix: 'Under ', suffix: ' month', label: 'from project start to a working ELN' },
+    engagementFacts: [
+      {
+        label: 'Scope',
+        value: 'Full cycle: requirements, UX/UI, architecture, front-end, back-end, integrations, cloud infrastructure'
+      }
+    ],
+    relatedServiceSlugs: ['custom-software-development', 'system-integrations', 'ai-governance-compliance']
+  },
+  {
+    slug: 'patient-registration-test-kit-activation',
+    title: 'Patient registration & test kit activation platform',
+    headline: 'Identity data isolated. One connected workflow.',
+    tags: ['Patient portal', 'Data protection', 'Integration', 'Cloud'],
+    categories: ['custom-software', 'security-data-protection'],
+    summary:
+      'Built the digital journey from patient registration and test kit activation to laboratory handover, with a dedicated vault for personally identifiable information (PII) that keeps identity data out of laboratory and operational systems.',
+    preview:
+      'Patients had to register and activate physical test kits online before samples entered the laboratory, without identity data spreading into downstream systems.',
+    moreOutcomes:
+      'Barcode-linked kits, digital questionnaires and consent, identity data kept in a separate encrypted vault',
+    sector: 'Diagnostics / laboratory testing services',
+    cardLabel: 'Diagnostics',
+    status: 'completed',
+    // OWNER: client name, logo and testimonial are pending signed consent. Keep this case anonymous until then.
+    primaryCategory: 'Patient-facing platform & personal data isolation',
+    supportingThemes: [
+      'Test kit activation',
+      'Digital questionnaires and consent',
+      'Personal data vault and pseudonymisation',
+      'Laboratory and order-system integration',
+      'Authentication and traceability'
+    ],
+    seo: {
+      title: 'Patient Registration & Test Kit Activation Platform Case Study',
+      description:
+        'See how Double Helix built a patient registration and test kit activation platform for a diagnostics company, with a dedicated vault for personally identifiable information (PII) that separates identity data from laboratory workflows.',
+      keywords: [
+        'patient registration platform development',
+        'test kit activation software',
+        'PII vault architecture',
+        'pseudonymisation in healthcare software',
+        'diagnostics patient portal development',
+        'laboratory order integration',
+        'healthcare data separation architecture'
+      ]
+    },
+    problem:
+      'A diagnostics company needed a digital platform through which patients register and activate physical test kits before samples enter the laboratory workflow. The platform had to connect each patient, test kit and set of required information correctly and provide test results, while maintaining strong security and traceability across the process. The hardest architectural question was how to handle personally identifiable and health-related data without exposing it unnecessarily to downstream laboratory systems: patient identity and laboratory operations had to be clearly separated, and the complete workflow still had to run as one seamless process.',
+    approach:
+      'Double Helix designed and developed the platform covering the digital journey from patient registration to laboratory handover. Patients register, activate their test kit, complete the required questionnaires and give digital consent in a structured web-based process. Behind the patient-facing experience, the platform manages barcode and test-kit information and connects registration and activation with the downstream laboratory and order-processing systems. Delivery covered UX/UI, software architecture, front-end and back-end development, integrations, testing and cloud infrastructure.',
+    regulatedContext:
+      'Personally identifiable information is held in a dedicated PII vault, where it is encrypted and isolated from laboratory logistics and operational systems. The other components work primarily with pseudonymous identifiers, and access to identity data is controlled through the vault and an orchestration layer. Authentication, authorisation and traceability apply across the platform. The result is less unnecessary exposure of sensitive data, while patient registration, test activation and laboratory workflows still operate as one connected process.',
+    users: ['Patients', 'Laboratory and order-processing teams', 'The client’s product team'],
+    whatWasDelivered: [
+      'Patient registration and test kit activation as a structured web-based journey',
+      'Barcode-based linking of patients and test kits',
+      'Digital questionnaires and consent management',
+      'Integration with downstream laboratory and order-processing systems',
+      'Dedicated PII vault: identity data encrypted and isolated, pseudonymous identifiers everywhere else',
+      'Authentication, authorisation and traceability across the platform',
+      'UX/UI, architecture, front-end, back-end, integrations, testing and cloud infrastructure as one delivery'
+    ],
+    outcomes: [
+      'Patients register and activate physical test kits online before samples reach the laboratory',
+      'Patient onboarding is connected to the laboratory workflow through barcode-based processes',
+      'Identity data is separated from laboratory logistics and operational data, reducing unnecessary exposure of personal data across connected systems',
+      'Access to sensitive patient information is controlled and traceable',
+      'Patient-facing and laboratory systems are integrated without compromising the data separation',
+      'Scalable cloud infrastructure in place for continued development of the platform'
+    ],
+    highlightStats: [],
+    engagementFacts: [
+      {
+        label: 'Scope',
+        value: 'Full cycle: UX/UI, architecture, front-end, back-end, integrations, testing, cloud infrastructure'
+      }
+    ],
+    relatedServiceSlugs: ['custom-software-development', 'system-integrations', 'ai-governance-compliance']
   }
 ];
 
@@ -703,6 +1060,27 @@ export function getProductBySlug(slug: string) {
 }
 
 /**
+ * Cases shown in the homepage carousel, in this order. Owner decision of 18 September 2026: the homepage
+ * keeps the seven cases it had; cases added since then (security assessment, industrial dashboards, ELN,
+ * patient registration) appear on /work/ only. To feature a case on the homepage, add its slug here.
+ */
+export const homepageCaseSlugs = [
+  'process-automation-lims-integration',
+  'ngs-data-delivery-automation',
+  'customer-integration-api-onboarding',
+  'forensics-integration',
+  'it-reorganization',
+  'observability-improvement',
+  'rapid-mvp-development'
+];
+
+export function getHomepageClientSolutions(): ClientSolution[] {
+  return homepageCaseSlugs
+    .map(getClientSolutionBySlug)
+    .filter((solution): solution is ClientSolution => solution !== undefined);
+}
+
+/**
  * A client quote ready for the homepage testimonials. `body` is `text` with the `tagline` removed
  * when the tagline is its opening sentence, so the two are never shown twice.
  */
@@ -764,6 +1142,8 @@ export interface WorkListItem {
   resultLabel: string;
   result: string;
   resultMore: string;
+  /** Types of work, primary first; drives the overview filters. */
+  categories: WorkCategory[];
 }
 
 export function getWorkListItems(): WorkListItem[] {
@@ -778,7 +1158,8 @@ export function getWorkListItems(): WorkListItem[] {
       problem: solution.preview,
       resultLabel: 'Result',
       result: solution.headline,
-      resultMore: solution.moreOutcomes
+      resultMore: solution.moreOutcomes,
+      categories: solution.categories
     })),
     ...products.map((product) => ({
       slug: product.slug,
@@ -790,7 +1171,8 @@ export function getWorkListItems(): WorkListItem[] {
       problem: product.preview,
       resultLabel: 'Status',
       result: 'In development',
-      resultMore: 'Prototype walkthroughs and early access conversations available'
+      resultMore: 'Prototype walkthroughs and early access conversations available',
+      categories: ['own-products' as const]
     }))
   ];
 }

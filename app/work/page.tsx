@@ -19,7 +19,7 @@ import WorkShowcase from './WorkShowcase';
 export const metadata: Metadata = buildMetadata({
   title: 'Client Solutions & Software Products',
   description:
-    'Delivered client work from Double Helix Technologies in genomics, forensics and lab operations: workflow automation, LIMS and system integration, sequencing data delivery, observability and IT operations, plus our own software products.',
+    'Delivered client work from Double Helix Technologies in genomics, diagnostics, bioprocessing R&D, forensics and lab operations: workflow automation, LIMS and system integration, sequencing data delivery, laboratory and patient-facing software, security assessments, observability and IT operations, plus our own software products.',
   path: '/work/',
   keywords: [
     'life sciences client solutions',
@@ -92,8 +92,9 @@ export default function WorkPage() {
 
             <h1 className="section-heading max-w-4xl">Delivered client solutions and our own products</h1>
             <p className="max-w-3xl text-lg text-text-secondary">
-              Workflow automation, LIMS and system integration, sequencing data delivery, observability and IT operations,
-              delivered for genomics, forensics and other regulated environments.
+              Workflow automation, LIMS and system integration, sequencing data delivery, laboratory and patient-facing
+              software, security assessments, observability and IT operations, delivered for genomics, diagnostics,
+              bioprocessing R&amp;D, forensics and other environments where reliability and data protection matter.
             </p>
             <p className="max-w-3xl text-text-secondary">
               Clients are named where we have their permission to do so. References are available on request.
