@@ -235,6 +235,13 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
                     </div>
                   )}
 
+                  {solution.regulatedContext && (
+                    <div>
+                      <h2 className="text-3xl mb-6">Security and traceability</h2>
+                      <p className="text-lg text-text-secondary">{solution.regulatedContext}</p>
+                    </div>
+                  )}
+
                   <div>
                     <h2 className="text-3xl mb-6">What changed operationally</h2>
                     <ul className="space-y-4">

@@ -2,7 +2,7 @@ import { complianceStatement } from '@/app/components/ComplianceNotice';
 import { partners } from '@/app/data/partners';
 import { getServicePath, servicesContents } from '@/app/data/services';
 import { leadershipTeam } from '@/app/data/team';
-import { clientSolutions, customers, getClientSolutionPath, getProductPath, products } from '@/app/data/work';
+import { clientSolutions, customers, getClientSolutionPath, getProductPath, getWorkCategory, products } from '@/app/data/work';
 import { absoluteUrl, siteConfig } from '@/app/lib/seo';
 
 export const dynamic = 'force-static';
@@ -21,8 +21,10 @@ const HIDDEN_CUSTOMERS = new Set(['Lifespin', 'Onyx Biotech']); // same temporar
 function caseEntry(solution: (typeof clientSolutions)[number]) {
   const headline = /[.!?]$/.test(solution.headline) ? solution.headline : `${solution.headline}.`;
   const who = solution.client ? `Client: ${solution.client.name}.` : `Sector: ${solution.sector}.`;
+  const kind = `Type of work: ${solution.categories.map((category) => getWorkCategory(category).label).join(', ')}.`;
   const figures = solution.highlightStats.map((stat) => `${stat.value} ${stat.label}`).join('; ');
-  return `- [${solution.title}](${absoluteUrl(getClientSolutionPath(solution))}): ${headline} ${who} ${solution.summary} Figures: ${figures}.`;
+  const figuresLine = figures ? ` Figures: ${figures}.` : '';
+  return `- [${solution.title}](${absoluteUrl(getClientSolutionPath(solution))}): ${headline} ${who} ${kind} ${solution.summary}${figuresLine}`;
 }
 
 function buildLlmsTxt() {

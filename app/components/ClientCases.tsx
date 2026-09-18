@@ -6,7 +6,7 @@ import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { useReducedMotion } from 'framer-motion';
 import type { CarouselApi } from './ui/carousel';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from './ui/carousel';
-import { clientSolutions, getClientSolutionPath, type ClientSolution } from '@/app/data/work';
+import { getClientSolutionPath, getHomepageClientSolutions, type ClientSolution } from '@/app/data/work';
 import { SectionBackdrop } from './ui/section-backdrop';
 
 /**
@@ -30,7 +30,8 @@ function eyebrowFor(solution: ClientSolution) {
 /**
  * Client cases as a page-wide carousel that fills the screen: one slide per case, each in the same
  * calm layout (client or sector, result heading, one sentence, the figures, the attributed quote
- * where one exists, and a link to the full case). Everything is read from `app/data/work.ts`. All
+ * where one exists, and a link to the full case). The cases shown are `homepageCaseSlugs` in
+ * `app/data/work.ts`; the rest of the content is read from the same file. All
  * slides are in the server-rendered HTML. The carousel advances by itself every 12 seconds, pauses
  * while the pointer or keyboard focus is on it so nobody loses their place while reading, and stays
  * still for visitors who prefer reduced motion. Vertical scrolling is never captured: the visitor
@@ -38,6 +39,7 @@ function eyebrowFor(solution: ClientSolution) {
  */
 const AUTO_ADVANCE_MS = 12000;
 export default function ClientCases() {
+  const clientSolutions = getHomepageClientSolutions();
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [paused, setPaused] = useState(false);
