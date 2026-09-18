@@ -17,7 +17,7 @@ const RESULT_HEADINGS: Record<string, string> = {
   'process-automation-lims-integration': 'From seven data entry points to one',
   'ngs-data-delivery-automation': 'Data delivery from 1.5 days to 3 hours',
   'customer-integration-api-onboarding': 'Customer onboarding from months to under two weeks',
-  'forensics-integration': 'First to launch, despite joining two years late',
+  'electronic-laboratory-notebook-bioprocessing': 'A working Electronic Laboratory Notebook in under a month',
   'it-reorganization': '95% fewer repeat incidents',
   'observability-improvement': '80% fewer alerts, 4× faster incident response',
   'rapid-mvp-development': 'From idea to a working MVP in under a week'
