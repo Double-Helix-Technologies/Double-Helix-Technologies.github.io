@@ -33,6 +33,7 @@ const HOMEPAGE_SOURCES = [
   'app/data/services.ts',
   'app/data/team.ts',
   'app/data/partners.ts',
+  'app/data/events.ts',
   'app/data/whyUs.ts',
   'app/lib/seo.ts'
 ];

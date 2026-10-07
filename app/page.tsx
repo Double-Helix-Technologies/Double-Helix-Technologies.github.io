@@ -7,6 +7,7 @@ import Services from './components/Services';
 import HowWeWork from './components/HowWeWork';
 import Leadership from './components/Leadership';
 import Testimonials from './components/Testimonials';
+import Media from './components/Media';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import { ThemeProvider } from './components/ThemeProvider';
@@ -31,11 +32,12 @@ export const metadata: Metadata = buildMetadata({
  * Section order follows the questions a decision-maker asks in turn: what do you do for me
  * (Hero, with the customer and partner marquee at the foot of the first screen), prove it (ClientCases, one page-wide slide per case), why you and not a large consultancy or a freelancer (WhyUs, added 7 October 2026), which of my problems do you solve
  * (Services), who is accountable (Leadership, placed between the two text-heavy sections to break
- * them up), how do you deliver (HowWeWork), who else says so (Testimonials), and how do I talk to
- * you (Contact). The funding disclosure and the certification status live in the footer, on every
- * page: certification is in progress, so the team matters more. The risk assessment is reachable
- * from Services and its own page; the homepage does not steer the visitor to one engagement.
- * (Owner decisions of 14 September 2026.)
+ * them up), how do you deliver (HowWeWork), who else says so (Testimonials), where have you been
+ * seen (Media: photographs and a video from the LIAA delegations, added 7 October 2026), and how
+ * do I talk to you (Contact). The funding disclosure and the certification status live in the
+ * footer, on every page: certification is in progress, so the team matters more. The risk
+ * assessment is reachable from Services and its own page; the homepage does not steer the visitor
+ * to one engagement. (Owner decisions of 14 September 2026.)
  */
 export default function Home() {
   const offerCatalogSchema = buildOfferCatalogSchema();
@@ -55,6 +57,7 @@ export default function Home() {
         <Leadership />
         <HowWeWork />
         <Testimonials />
+        <Media />
         <Contact />
         <Footer />
       </main>
