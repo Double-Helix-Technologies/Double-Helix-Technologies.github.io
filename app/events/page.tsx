@@ -1,11 +1,9 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowRight, CalendarDays, ChevronRight, MapPin } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 import Navigation from '@/app/components/Navigation';
 import Footer from '@/app/components/Footer';
 import { ThemeProvider } from '@/app/components/ThemeProvider';
-import { Button } from '@/app/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/app/components/ui/card';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -14,81 +12,81 @@ import {
   BreadcrumbSeparator
 } from '@/app/components/ui/breadcrumb';
 import { buildMetadata } from '@/app/lib/seo';
-import { eventParticipation, formatEventDate } from '@/app/data/events';
+import { eventParticipation, formatEventDate, getEventsWithMedia } from '@/app/data/events';
+import PhotoGallery from '@/app/components/PhotoGallery';
+import VideoEmbed from '@/app/components/VideoEmbed';
+import EventsList, { type EventCardData } from './EventsList';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Healthcare & Life Sciences Events',
   description:
-    'Upcoming and past healthcare, biotech, and life sciences events where Double Helix Technologies meets teams improving regulated workflows.',
+    'Upcoming and past healthcare, biotech, and life sciences events where Double Helix Technologies meets teams improving regulated workflows, with photos and videos from the LIAA delegations to Berlin and the US West Coast.',
   path: '/events/'
 });
 
-const byStartDateAscending = (a: (typeof eventParticipation)[number], b: (typeof eventParticipation)[number]) =>
-  new Date(a.startDate).getTime() - new Date(b.startDate).getTime();
+const galleryId = (slug: string) => `gallery-${slug}`;
 
-const byStartDateDescending = (a: (typeof eventParticipation)[number], b: (typeof eventParticipation)[number]) =>
-  new Date(b.startDate).getTime() - new Date(a.startDate).getTime();
+/** The cards' data, without the galleries' photo and video lists (those render on the server below). */
+const eventCards: EventCardData[] = eventParticipation.map((event) => ({
+  slug: event.slug,
+  name: event.name,
+  status: event.status,
+  startDate: event.startDate,
+  endDate: event.endDate,
+  city: event.city,
+  country: event.country,
+  venue: event.venue,
+  summary: event.summary,
+  focus: event.focus,
+  ctaLabel: event.ctaLabel,
+  ctaHref: event.ctaHref,
+  coverage: event.coverage,
+  hasMedia: (event.photos?.length ?? 0) > 0 || (event.videos?.length ?? 0) > 0
+}));
 
-const upcomingEvents = eventParticipation
-  .filter((event) => event.status === 'upcoming')
-  .sort(byStartDateAscending);
+const eventsWithMedia = getEventsWithMedia();
 
-const pastEvents = eventParticipation
-  .filter((event) => event.status === 'past')
-  .sort(byStartDateDescending);
-
-function EventCard({ event }: { event: (typeof eventParticipation)[number] }) {
+/**
+ * One event's photographs and videos: the videos first (they carry the most), then the grid of
+ * thumbnails with the lightbox, then the credit line. Reached from the "Photos and videos" action
+ * on the event's card and from the homepage media section.
+ */
+function EventGallery({ event }: { event: (typeof eventParticipation)[number] }) {
+  const videos = event.videos ?? [];
+  const photos = event.photos ?? [];
   return (
-    <Card className="bg-background shadow-none">
-      <CardHeader>
-        <div className="mb-4 flex flex-wrap gap-4 text-sm text-text-secondary">
-          <span className="inline-flex items-center gap-2">
-            <CalendarDays className="h-4 w-4" aria-hidden="true" />
-            {formatEventDate(event)}
-          </span>
-          <span className="inline-flex items-center gap-2">
-            <MapPin className="h-4 w-4" aria-hidden="true" />
-            {event.venue ? `${event.venue}, ` : ''}{event.city}, {event.country}
-          </span>
-        </div>
-        <CardTitle>
-          <h2 className="text-2xl md:text-3xl">{event.name}</h2>
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-5">
-        <p className="text-text-secondary">{event.summary}</p>
-        <p className="text-sm text-text-secondary">
-          <span className="font-semibold text-text-primary">Focus:</span> {event.focus}
+    <article id={galleryId(event.slug)} className="scroll-mt-28" aria-labelledby={`${galleryId(event.slug)}-heading`}>
+      <div className="mb-6 max-w-3xl">
+        <h3 id={`${galleryId(event.slug)}-heading`} className="text-3xl">
+          {event.name}
+        </h3>
+        <p className="mt-2 text-sm text-text-secondary">
+          {formatEventDate(event)}, {event.city}, {event.country}
         </p>
-        {event.ctaHref && event.ctaLabel && (
-          <Button asChild variant="secondary">
-            <a href={event.ctaHref} target="_blank" rel="noopener noreferrer">
-              {event.ctaLabel}
-              <ArrowRight size={11} aria-hidden="true" />
-            </a>
-          </Button>
-        )}
-      </CardContent>
-    </Card>
-  );
-}
-
-function EmptyEventsState({ label }: { label: string }) {
-  return (
-    <Card className="bg-gray-600/10 p-6 shadow-none hover:scale-100">
-      <div className="flex flex-col gap-4">
-        <h2 className="text-2xl">{label}</h2>
-        <p className="max-w-2xl text-text-secondary">
-          Confirmed event participation will be published here with the event context, focus, and relevant follow-up resources.
-        </p>
-        <Button asChild variant="secondary" className="w-fit">
-          <a href="mailto:hello@doublehelix.dev?subject=Event%20collaboration">
-            Suggest an event or meeting
-            <ArrowRight size={11} aria-hidden="true" />
-          </a>
-        </Button>
       </div>
-    </Card>
+
+      {videos.length > 0 && (
+        <div className={`mb-8 grid gap-8 ${videos.length > 1 ? 'sm:grid-cols-2 lg:grid-cols-3' : ''}`}>
+          {videos.map((video) => (
+            <VideoEmbed key={video.youtubeId} video={video} />
+          ))}
+        </div>
+      )}
+
+      {photos.length > 0 && <PhotoGallery photos={photos} label={`Photos: ${event.name}`} />}
+
+      {event.photoCredit && (
+        <p className="mt-4 text-xs text-text-secondary">
+          {event.photoCreditUrl ? (
+            <a href={event.photoCreditUrl} target="_blank" rel="noopener noreferrer" className="underline-offset-2 hover:underline">
+              {event.photoCredit}
+            </a>
+          ) : (
+            event.photoCredit
+          )}
+        </p>
+      )}
+    </article>
   );
 }
 
@@ -142,31 +140,30 @@ export default function EventsPage() {
               </p>
             </div>
 
-            <div className="grid gap-8 lg:grid-cols-2">
-              <section aria-labelledby="upcoming-events" className="space-y-4">
-                <h3 id="upcoming-events" className="text-3xl">
-                  Upcoming events
-                </h3>
-                <div className="space-y-4">
-                  {upcomingEvents.length > 0
-                    ? upcomingEvents.map((event) => <EventCard key={event.slug} event={event} />)
-                    : <EmptyEventsState label="No upcoming events announced yet." />}
-                </div>
-              </section>
-
-              <section aria-labelledby="past-events" className="space-y-4">
-                <h3 id="past-events" className="text-3xl">
-                  Past participation
-                </h3>
-                <div className="space-y-4">
-                  {pastEvents.length > 0
-                    ? pastEvents.map((event) => <EventCard key={event.slug} event={event} />)
-                    : <EmptyEventsState label="Past event recaps will appear here." />}
-                </div>
-              </section>
-            </div>
+            <EventsList events={eventCards} />
           </div>
         </section>
+
+        {eventsWithMedia.length > 0 && (
+          <section className="section bg-background-alt" aria-labelledby="events-media">
+            <div className="container-tight">
+              <div className="mb-10 max-w-3xl">
+                <h2 id="events-media" className="section-heading mb-3">
+                  Photos and videos
+                </h2>
+                <p className="text-text-secondary">
+                  From the conferences, delegations and site visits we have taken part in. Captions name the
+                  organisation, the place and the date.
+                </p>
+              </div>
+              <div className="space-y-16 lg:space-y-20">
+                {eventsWithMedia.map((event) => (
+                  <EventGallery key={event.slug} event={event} />
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
         <Footer />
       </main>
     </ThemeProvider>
