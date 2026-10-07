@@ -4,6 +4,7 @@ import { getServicePath, servicesContents } from '@/app/data/services';
 import { leadershipTeam } from '@/app/data/team';
 import { clientSolutions, customers, getClientSolutionPath, getProductPath, getWorkCategory, products } from '@/app/data/work';
 import { absoluteUrl, siteConfig } from '@/app/lib/seo';
+import { whyUs, whyUsLargeOrganisationsText } from '@/app/data/whyUs';
 
 export const dynamic = 'force-static';
 
@@ -40,6 +41,12 @@ function buildLlmsTxt() {
     `Website: ${siteConfig.url}`,
     `Contact: ${siteConfig.email}, ${siteConfig.phone}. Free introductory call (${siteConfig.booking.durationLabel}, ${siteConfig.booking.channel}): ${siteConfig.booking.url}`,
     `Registered office: ${siteConfig.address.streetAddress}, ${siteConfig.address.addressLocality}, ${siteConfig.address.postalCode}, Latvia. Company details and legal notice: ${absoluteUrl('/notice/')}`,
+    '',
+    '## Why choose us',
+    '',
+    `${whyUs.headline} ${whyUs.forYou.text} ${whyUs.forYou.emphasis}`,
+    '',
+    whyUsLargeOrganisationsText(),
     '',
     '## Services',
     '',
