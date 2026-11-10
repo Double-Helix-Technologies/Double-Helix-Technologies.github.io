@@ -47,6 +47,12 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  /* Self-hosted fonts (app/layout.tsx): latin first, latin-ext for the letters latin lacks. */
+  body {
+    --font-inter: var(--font-inter-latin), var(--font-inter-latin-ext);
+    --font-outfit: var(--font-outfit-latin), var(--font-outfit-latin-ext);
+  }
+
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-outfit), sans-serif;
     font-weight: 500;
