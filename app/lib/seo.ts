@@ -143,7 +143,7 @@ export const organizationSchema = {
     'Observability, workflow monitoring and site reliability engineering',
     'Operational workflow risk assessment',
     'Custom AI solutions and AI governance readiness for regulated operations',
-    'ISO 9001 and ISO 27001 certification in progress'
+    'Quality and information security management certified to ISO 9001:2015 and ISO/IEC 27001:2022 (scope: design, development and maintenance of IT solutions)'
   ]
 };
 

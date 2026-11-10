@@ -6,6 +6,8 @@ import { Separator } from '@radix-ui/react-separator';
 import { Button } from './ui/button';
 import { AtSign, Linkedin } from 'lucide-react';
 import BrandLogo from './BrandLogo';
+import CertificationMark from './CertificationMark';
+import { complianceStatement } from './ComplianceNotice';
 import { useConsent } from './ConsentProvider';
 
 function CookieSettingsLink() {
@@ -23,7 +25,10 @@ function CookieSettingsLink() {
 
 /**
  * Site footer. The LIAA export support disclosure with its EU and NAP 2027 marks sits as a third
- * column next to the Company and Legal links, on every page. The ISO statement lives on /team/.
+ * column next to the Company and Legal links, on every page. The BM Certification ISO mark sits in
+ * the bottom bar opposite the copyright line, with the certification sentence beside it (owner
+ * decision, 10 November 2026). The guidelines require it in the same footer as our logo and at most
+ * 75% of its size (sizes in `CertificationMark.tsx`); it links to /team/#certification.
  */
 export default function Footer() {
   return (
@@ -34,9 +39,10 @@ export default function Footer() {
       </h2>
       <div className="container-wide">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="flex flex-col gap-6 md:max-w-52">
-            <div>
-              <BrandLogo className="mr-5 opacity-80" />
+          <div className="flex flex-col gap-6 md:max-w-60">
+            <div className="flex flex-col gap-6">
+              {/* Logo 220 x 54 px; the mark in the bottom bar is sized against it (see CertificationMark.tsx). */}
+              <BrandLogo className="w-[220px] opacity-80" />
             </div>
             <div className="flex gap-2">
               <Button size="icon" variant="secondary" asChild>
@@ -120,10 +126,14 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 border-t border-divider pt-6">
+        <div className="mt-12 flex flex-col gap-6 border-t border-divider pt-6 md:flex-row md:items-center md:justify-between">
           <p className="text-sm text-text-secondary font-semibold">
             &copy; {new Date().getFullYear()} Double Helix Technologies SIA. All rights reserved.
           </p>
+          <div className="flex items-center gap-4">
+            <p className="max-w-xs text-sm text-text-secondary md:text-right">{complianceStatement.body}</p>
+            <CertificationMark />
+          </div>
         </div>
       </div>
     </footer>

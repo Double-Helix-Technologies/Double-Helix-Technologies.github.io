@@ -34,8 +34,8 @@ export const metadata: Metadata = buildMetadata({
  * (Services), who is accountable (Leadership, placed between the two text-heavy sections to break
  * them up), how do you deliver (HowWeWork), who else says so (Testimonials), where have you been
  * seen (Media: photographs and a video from the LIAA delegations, added 7 October 2026), and how
- * do I talk to you (Contact). The funding disclosure and the certification status live in the
- * footer, on every page: certification is in progress, so the team matters more. The risk
+ * do I talk to you (Contact). The funding disclosure and the ISO certification mark live in the
+ * footer, on every page, with the certificate details on /team/ (certified 10 November 2026). The risk
  * assessment is reachable from Services and its own page; the homepage does not steer the visitor
  * to one engagement. (Owner decisions of 14 September 2026.)
  */

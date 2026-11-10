@@ -18,7 +18,8 @@ import { leadershipTeam, TeamMember } from '@/app/data/team';
 import { memberships } from '@/app/data/partners';
 import Wordmark from '@/app/components/Wordmark';
 import { buildMetadata, siteConfig } from '../lib/seo';
-import { complianceStatement } from '@/app/components/ComplianceNotice';
+import { certification, complianceStatement } from '@/app/components/ComplianceNotice';
+import CertificationMark from '@/app/components/CertificationMark';
 
 
 export const metadata: Metadata = buildMetadata({
@@ -160,7 +161,7 @@ export default function TeamPage() {
               ))}
             </div>
 
-            {/* Small print: company details and the approved ISO wording (complianceStatement), side by side. */}
+            {/* Small print: company details and the ISO certificate statement (complianceStatement), side by side. The footer mark links to #certification. */}
             <div className="mt-16 grid gap-8 border-t border-divider pt-8 text-sm text-text-secondary md:grid-cols-2 md:gap-12">
               <div className="space-y-1">
                 <h2 className="text-sm font-semibold uppercase tracking-[0.16em] text-text-primary">Company details</h2>
@@ -185,10 +186,22 @@ export default function TeamPage() {
                   </Link>
                 </p>
               </div>
-              <div className="space-y-1">
+              <div id="certification" className="scroll-mt-24 space-y-1">
                 <h2 className="text-sm font-semibold uppercase tracking-[0.16em] text-text-primary">Quality and information security</h2>
-                <p className="pt-2 font-medium text-text-primary">{complianceStatement.heading}</p>
-                <p>{complianceStatement.body}</p>
+                {/* Mark on the left, statement on the right; stacked on narrow phones. */}
+                <div className="flex flex-col gap-4 pt-3 sm:flex-row sm:items-center sm:gap-6">
+                  <CertificationMark size="page" />
+                  <div className="space-y-1">
+                    <p>{complianceStatement.body}</p>
+                    <p>
+                      Certificates can be verified with {certification.body} at{' '}
+                      <a href={`mailto:${certification.verifyEmail}`} className="underline underline-offset-4 hover:text-text-primary">
+                        {certification.verifyEmail}
+                      </a>
+                      .
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

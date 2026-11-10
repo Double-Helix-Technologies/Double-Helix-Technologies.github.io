@@ -13,7 +13,7 @@ export const dynamic = 'force-static';
  * llmstxt.org convention (a Markdown file at the site root). Everything here is generated from the
  * same data files as the pages (`services.ts`, `work.ts`, `team.ts`, `partners.ts`, `seo.ts`), so
  * it cannot say anything the site does not say. Figures and quotes come from `work.ts` unchanged;
- * a client is named only where `client` is set; the ISO wording is the approved statement from
+ * a client is named only where `client` is set; the ISO wording is the certificate statement from
  * `ComplianceNotice.tsx`. Regenerated on every build.
  */
 
@@ -78,7 +78,7 @@ function buildLlmsTxt() {
     '',
     '## Quality and information security',
     '',
-    `${complianceStatement.heading} ${complianceStatement.body}`,
+    complianceStatement.body,
     '',
     '## Other pages',
     '',

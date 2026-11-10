@@ -1,14 +1,32 @@
 import { ClipboardCheck, LockKeyhole, ShieldCheck } from 'lucide-react';
 
 /**
- * Approved ISO wording (decision of 11 September 2026). Do not paraphrase: certification is in
- * progress and nothing here may imply that a certificate exists. Replace with certificate number,
- * scope and certification body once issued.
+ * Certificate facts, copied from the two BM Certification certificates issued on 10 November 2026.
+ * Keep them identical to the certificates: entity name, standards with their year, scope and dates.
+ * The public statement names only the entity and standards (owner decision, 10 November 2026); the
+ * scope stays in the structured data. Update after each surveillance audit or recertification;
+ * remove the mark and this statement if a certificate is suspended, withdrawn or expires.
+ */
+export const certification = {
+  body: 'BM Certification',
+  verifyEmail: 'info@bmcertification.com',
+  entity: 'SIA Double Helix Technologies',
+  scope: 'Design, development and maintenance of IT solutions.',
+  issued: '10 November 2026',
+  expires: '9 November 2029',
+  certificates: [
+    { standard: 'ISO 9001:2015', system: 'Quality management system', number: 'MSC-9-1626' },
+    { standard: 'ISO/IEC 27001:2022', system: 'Information security management system', number: 'MSC-27-1627' }
+  ]
+} as const;
+
+/**
+ * Public ISO wording, built from `certification`. Replaces the "certification in progress"
+ * statement (decision of 11 September 2026) now that both certificates are issued. Kept short at
+ * the owner's request (10 November 2026).
  */
 export const complianceStatement = {
-  heading: 'ISO 9001 and ISO 27001 certification is in progress.',
-  body:
-    'We operate a quality and information security management system aligned with ISO 9001 and ISO 27001. The certification audit is scheduled for the end of October 2026; we will publish the certificate details here once issued.'
+  body: `${certification.entity} is ISO 9001:2015 and ISO/IEC 27001:2022 certified.`
 } as const;
 
 export const complianceAreas = [
@@ -21,12 +39,12 @@ export const complianceAreas = [
     icon: LockKeyhole
   },
   {
-    label: 'Audit readiness',
+    label: 'Independently certified',
     icon: ShieldCheck
   }
 ];
 
-/** Standalone compliance section. Not currently rendered; the footer carries `complianceStatement` on every page. */
+/** Standalone compliance section. Not currently rendered; the statement is on /team/ and the mark in the footer. */
 export default function ComplianceNotice() {
   return (
     <section className="section pt-10 pb-12" aria-labelledby="compliance-heading">
@@ -36,11 +54,8 @@ export default function ComplianceNotice() {
             Compliance
           </p>
           <h2 id="compliance-heading" className="mx-auto max-w-2xl text-3xl md:text-4xl">
-            {complianceStatement.heading}
-          </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-text-secondary">
             {complianceStatement.body}
-          </p>
+          </h2>
 
           <div className="mt-8 flex flex-col items-center justify-center gap-4 md:flex-row md:gap-6">
             {complianceAreas.map(({ label, icon: Icon }) => (
