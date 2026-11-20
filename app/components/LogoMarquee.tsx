@@ -25,8 +25,11 @@ import { partners, type Partner } from '@/app/data/partners';
  * Biotech, Mainos and Krafthub have each approved publication of their logo. Add a customer here
  * only with the same confirmation; the list is `customers` in app/data/work.ts.
  */
-/** Temporarily hidden from the marquee at the owner's request (14 September 2026); they stay in `customers`. */
-const HIDDEN_FROM_MARQUEE = new Set(['Lifespin', 'Onyx Biotech']);
+/**
+ * Temporarily hidden from the marquee at the owner's request (14 September 2026); it stays in `customers`.
+ * Lifespin was hidden with it and is shown again since 20 November 2026 (owner's request).
+ */
+const HIDDEN_FROM_MARQUEE = new Set(['Onyx Biotech']);
 
 const logos: Partner[] = [
   ...customers.filter((customer) => !HIDDEN_FROM_MARQUEE.has(customer.name)).map((customer) => ({ ...customer, kind: 'partner' as const })),

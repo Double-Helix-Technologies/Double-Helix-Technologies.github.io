@@ -914,9 +914,11 @@ export const clientSolutions: ClientSolution[] = [
     moreOutcomes:
       'Barcode-linked kits, digital questionnaires and consent, identity data kept in a separate encrypted vault',
     sector: 'Diagnostics / laboratory testing services',
-    cardLabel: 'Diagnostics',
     status: 'completed',
-    // OWNER: client name, logo and testimonial are pending signed consent. Keep this case anonymous until then.
+    // Named with the client's written permission for its name, its logo and this case study (owner
+    // confirmation of 20 November 2026, see docs/lifespin-reference-2026-11-20.md).
+    // OWNER: the permission does not cover a testimonial. Add no `quote` until the client approves one.
+    client: { name: 'Lifespin' },
     primaryCategory: 'Patient-facing platform & personal data isolation',
     supportingThemes: [
       'Test kit activation',

@@ -17,7 +17,7 @@ export const dynamic = 'force-static';
  * `ComplianceNotice.tsx`. Regenerated on every build.
  */
 
-const HIDDEN_CUSTOMERS = new Set(['Lifespin', 'Onyx Biotech']); // same temporary exclusion as LogoMarquee
+const HIDDEN_CUSTOMERS = new Set(['Onyx Biotech']); // same temporary exclusion as LogoMarquee
 
 function caseEntry(solution: (typeof clientSolutions)[number]) {
   const headline = /[.!?]$/.test(solution.headline) ? solution.headline : `${solution.headline}.`;
