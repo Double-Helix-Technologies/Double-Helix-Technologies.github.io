@@ -20,6 +20,7 @@ import Wordmark from '@/app/components/Wordmark';
 import { buildMetadata, siteConfig } from '../lib/seo';
 import { certification, complianceStatement } from '@/app/components/ComplianceNotice';
 import CertificationMark from '@/app/components/CertificationMark';
+import EthicalHackerBadge, { ethicalHackerCertification, keepIssuerOnOneLine } from '@/app/components/EthicalHackerBadge';
 
 
 export const metadata: Metadata = buildMetadata({
@@ -161,7 +162,7 @@ export default function TeamPage() {
               ))}
             </div>
 
-            {/* Small print: company details and the ISO certificate statement (complianceStatement), side by side. The footer mark links to #certification. */}
+            {/* Small print: company details and the ISO certificate statement (complianceStatement), side by side, with a team member's CEH certification in its own row under the ISO statement. The footer mark links to #certification. */}
             <div className="mt-16 grid gap-8 border-t border-divider pt-8 text-sm text-text-secondary md:grid-cols-2 md:gap-12">
               <div className="space-y-1">
                 <h2 className="text-sm font-semibold uppercase tracking-[0.16em] text-text-primary">Company details</h2>
@@ -200,6 +201,16 @@ export default function TeamPage() {
                       </a>
                       .
                     </p>
+                  </div>
+                </div>
+                {/* A team member's personal certification, not the company's: its own row, clear of the ISO mark. The badge is centred under the 122 px mark so both statements start on the same line. */}
+                <div className="flex flex-col gap-4 pt-6 sm:flex-row sm:items-center sm:gap-6">
+                  <div className="flex shrink-0 sm:w-[122px] sm:justify-center">
+                    <EthicalHackerBadge />
+                  </div>
+                  <div className="space-y-1">
+                    <p>{keepIssuerOnOneLine(ethicalHackerCertification.statement)}</p>
+                    <p className="text-xs">{keepIssuerOnOneLine(ethicalHackerCertification.trademarkLegend)}</p>
                   </div>
                 </div>
               </div>
