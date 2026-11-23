@@ -7,8 +7,9 @@ import { SectionBackdrop } from './ui/section-backdrop';
 
 /**
  * Where the company has been seen: a six-tile mosaic rotating through the photographs flagged for
- * the homepage (the 2025 Hamburg and Rostock mission, the Rostock conference and the two LIAA
- * delegations of 2026) and one video, with a
+ * the homepage (the 2025 Hamburg and Rostock mission, the Rostock conference, the two LIAA
+ * delegations of 2026 and, since 23 November 2026, our own team picture from MEDICA 2026) and one
+ * video, with a
  * link to the full galleries on /events. Everything is read from `app/data/events.ts`
  * (`homepage: true` on a photo, the first video of the newest event), so this section cannot show
  * something the events page does not. The sentence names only organisations the photographs show.

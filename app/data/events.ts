@@ -102,6 +102,7 @@ const BERLIN = '/images/events/berlin-2026';
 const US = '/images/events/us-west-coast-2026';
 const ROSTOCK = '/images/events/rostock-2026';
 const HAMBURG = '/images/events/hamburg-rostock-2025';
+const MEDICA = '/images/events/medica-2026';
 
 /** Builds the two paths from one file name so the full and the thumbnail cannot drift apart. */
 function photo(
@@ -598,7 +599,77 @@ const usWestCoastDelegation: EventParticipation = {
   ]
 };
 
+/**
+ * MEDICA 2026, Messe Düsseldorf, 16 to 19 November 2026, held together with COMPAMED (dates and
+ * venue from the organiser). Double Helix Technologies exhibited Tiltera there (owner, 23 November
+ * 2026). The stand photograph shows a START-UP PARK banner and the stand label "17 B 45-08", and
+ * the organiser places the MEDICA START-UP PARK in hall 17; the summary's wording comes from that.
+ * The focus line restates the partner invitation shown on the stand's tablet.
+ * OWNER: confirm the summary and the focus line.
+ *
+ * The three photographs are our own. Before publication: on the stand picture the faces of two
+ * bystanders and a neighbouring exhibitor's name badge are blurred, the phone numbers and email
+ * addresses on the tablet are blurred, and the bottom edge, where a business card lay, is cropped
+ * off; the team picture is cropped at the bottom so that the thumbnail, which is cut from the
+ * centre, keeps the heads in frame; the mascot picture was supplied already retouched (no visitors
+ * in it) and is cropped to leave out a sign with garbled lettering and the banners above the
+ * entrance, one of which showed a wrong year. The team picture is flagged for the homepage mosaic
+ * at the owner's request (23 November 2026); it is portrait, and the mosaic cuts its 3:2 tile from
+ * the centre, which is what the crop at the bottom allows for. The homepage sentence does not
+ * mention MEDICA.
+ * OWNER: the alternative text of the team picture names nobody. Add the names if they should be
+ * there, as in the other galleries.
+ *
+ * RIGA COMM 2026 and Techritory 2026 were listed here as upcoming on 7 October 2026 and removed on
+ * 23 November 2026: the owner confirmed that we did not attend either.
+ */
+const medica2026: EventParticipation = {
+  slug: 'medica-2026',
+  name: 'MEDICA 2026',
+  status: 'past',
+  startDate: '2026-11-16',
+  endDate: '2026-11-19',
+  city: 'Düsseldorf',
+  country: 'Germany',
+  venue: 'Messe Düsseldorf',
+  summary:
+    'The international trade fair for medical technology, imaging, health IT, laboratory equipment and diagnostics, held together with COMPAMED. Double Helix Technologies exhibited in the MEDICA START-UP PARK and presented Tiltera, our platform for clinics, therapists and clients that keeps therapy going between sessions.',
+  focus: 'Scientific partners, clinics and therapists, and strategic investors for Tiltera.',
+  ctaLabel: 'View event',
+  ctaHref: 'https://www.medica-tradefair.com/',
+  externalEventUrl: 'https://www.medica-tradefair.com/',
+  photoCredit: 'Photos: Double Helix Technologies',
+  photos: [
+    photo(
+      MEDICA,
+      'tiltera-stand',
+      1273,
+      1600,
+      'The Tiltera stand at MEDICA: a poster reading "Tiltera. Continuity for mental health care.", Double Helix Technologies brochures, a tablet inviting partners, holographic stickers and a plush unicorn on the counter.',
+      'Tiltera stand, MEDICA START-UP PARK, Düsseldorf, November 2026'
+    ),
+    photo(
+      MEDICA,
+      'team-entrance',
+      1333,
+      1600,
+      'Two members of the Double Helix Technologies team standing on the large MEDICA logo on the floor of the entrance hall, with visitors and the MEDICA and COMPAMED banners behind them.',
+      'Double Helix Technologies at MEDICA, Messe Düsseldorf, November 2026',
+      true
+    ),
+    photo(
+      MEDICA,
+      'entrance-mascot',
+      1030,
+      1204,
+      'A glittering plush unicorn, the mascot of our stand, sitting on the MEDICA logo on the floor in front of the entrance gates.',
+      'Our stand mascot at the MEDICA entrance, Messe Düsseldorf, November 2026'
+    )
+  ]
+};
+
 export const eventParticipation: EventParticipation[] = [
+  medica2026,
   usWestCoastDelegation,
   berlinDelegation,
   rostockConference,
@@ -681,53 +752,6 @@ export const eventParticipation: EventParticipation[] = [
     ctaLabel: 'View event',
     ctaHref: 'https://www.b2match.com/e/global-innovation-summit-2026',
     externalEventUrl: 'https://www.b2match.com/e/global-innovation-summit-2026'
-  },
-  {
-    slug: 'riga-comm-2026',
-    name: 'RIGA COMM 2026',
-    status: 'upcoming',
-    startDate: '2026-10-08',
-    endDate: '2026-10-09',
-    city: 'Riga',
-    country: 'Latvia',
-    venue: 'International Exhibition Centre Ķīpsala',
-    summary:
-      'The Baltic business technology trade show and conference, bringing together ICT companies and the businesses that buy from them, with a programme on AI, cybersecurity and digital operations.',
-    focus: 'Meeting Baltic companies and public bodies that run laboratories and regulated workflows.',
-    ctaLabel: 'View event',
-    ctaHref: 'https://rigacomm.com/en/',
-    externalEventUrl: 'https://rigacomm.com/en/'
-  },
-  {
-    slug: 'techritory-2026',
-    name: 'Techritory 2026',
-    status: 'upcoming',
-    startDate: '2026-10-21',
-    endDate: '2026-10-22',
-    city: 'Riga',
-    country: 'Latvia',
-    summary:
-      'The ninth Techritory forum, organised by the Electronic Communications Office of Latvia, on Europe\'s digital security, sovereignty and competitiveness, with over 600 speakers and guests from policy and industry.',
-    focus: 'Secure data infrastructure and the policy context for health and research data in Europe.',
-    ctaLabel: 'View event',
-    ctaHref: 'https://www.techritory.com/',
-    externalEventUrl: 'https://www.techritory.com/'
-  },
-  {
-    slug: 'medica-2026',
-    name: 'MEDICA 2026',
-    status: 'upcoming',
-    startDate: '2026-11-16',
-    endDate: '2026-11-19',
-    city: 'Düsseldorf',
-    country: 'Germany',
-    venue: 'Messe Düsseldorf',
-    summary:
-      'The international trade fair for medical technology, imaging, health IT, laboratory equipment and diagnostics, with a 2026 programme on smart hospitals, AI in diagnostics, point-of-care testing and resilient health systems.',
-    focus: 'Laboratory and diagnostics vendors, health IT integration partners, and hospital groups across Europe.',
-    ctaLabel: 'View event',
-    ctaHref: 'https://www.medica-tradefair.com/',
-    externalEventUrl: 'https://www.medica-tradefair.com/'
   }
 ];
 
