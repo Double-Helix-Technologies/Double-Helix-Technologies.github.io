@@ -13,6 +13,8 @@ import { SectionBackdrop } from './ui/section-backdrop';
  * link to the full galleries on /events. Everything is read from `app/data/events.ts`
  * (`homepage: true` on a photo, the first video of the newest event), so this section cannot show
  * something the events page does not. The sentence names only organisations the photographs show.
+ * Since 23 November 2026 it also mentions MEDICA and is set one step smaller than the other
+ * sections' lead text (`text-base md:text-lg`), both at the owner's request.
  * The video is a YouTube Short, so the mosaic is two by three on desktop to stand beside the
  * portrait player. Added at the owner's request on 7 October 2026 to build credibility between the
  * client quotes and the invitation to talk; the rotation replaced a fixed six the same day.
@@ -34,11 +36,11 @@ export default function Media() {
             <h2 id="media-heading" className="section-heading mb-5 text-balance lg:text-6xl">
               In the room with the industry.
             </h2>
-            <p className="text-lg text-text-secondary md:text-xl">
+            <p className="text-base text-text-secondary md:text-lg">
               Since 2025 we have travelled with Latvia&apos;s official trade missions to Hamburg, Rostock, Berlin and the
               US West Coast, visiting BIOTRONIK, Campus Berlin-Buch, Illumina, Thermo Fisher Scientific, Element
-              Biosciences, UCLA and Caltech, and in June 2026 we presented at the National Conference on Health Economy
-              in Rostock, where Latvia was partner country.
+              Biosciences, UCLA and Caltech. In June 2026 we presented at the National Conference on Health Economy in
+              Rostock, where Latvia was partner country, and in November 2026 we exhibited at MEDICA in Düsseldorf.
             </p>
           </div>
           <Link

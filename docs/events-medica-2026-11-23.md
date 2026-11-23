@@ -8,7 +8,7 @@ Status: draft. Implemented at the owner's request (Alex Gusevs) on 23 November 2
 - MEDICA 2026 moves from upcoming to past, with a new summary, a focus line and a gallery of three photographs (`public/images/events/medica-2026/`).
 - No upcoming event is listed any more, so the "Upcoming events" column on `/events/` shows its existing placeholder ("No upcoming events announced yet.").
 
-Homepage: the team picture is in the photo mosaic of the media section, added at the owner's request the same day (`homepage: true` on the photo). As the newest event's picture it is the first of the six tiles in the server-rendered page. Not changed: the sentence of that section, which does not mention MEDICA, its credit line, which names LIAA and Photothek only, and the meta description of `/events/`, which still names only the two LIAA delegations' galleries.
+Homepage: the team picture is in the photo mosaic of the media section, added at the owner's request the same day (`homepage: true` on the photo). As the newest event's picture it is the first of the six tiles in the server-rendered page. The section's paragraph now ends "and in November 2026 we exhibited at MEDICA in Düsseldorf" and is set one step smaller than the other sections' lead text (18 px instead of 20 px on desktop), both at the owner's request the same day. Not changed: the section's credit line, which names LIAA and Photothek only, and the meta description of `/events/`, which still names only the two LIAA delegations' galleries.
 
 ## Facts behind the text
 

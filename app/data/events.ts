@@ -615,8 +615,8 @@ const usWestCoastDelegation: EventParticipation = {
  * in it) and is cropped to leave out a sign with garbled lettering and the banners above the
  * entrance, one of which showed a wrong year. The team picture is flagged for the homepage mosaic
  * at the owner's request (23 November 2026); it is portrait, and the mosaic cuts its 3:2 tile from
- * the centre, which is what the crop at the bottom allows for. The homepage sentence does not
- * mention MEDICA.
+ * the centre, which is what the crop at the bottom allows for. The homepage sentence mentions
+ * MEDICA since the same day.
  * OWNER: the alternative text of the team picture names nobody. Add the names if they should be
  * there, as in the other galleries.
  *
